@@ -1350,12 +1350,15 @@ a {
   border-radius: 15px;
   background-color: #fff;
   box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
+
+  p {
+    .unread {
+        font-weight: 500;
+        color: #333;
+    }
+  }
 }
 
-.unread {
-    font-weight: 500;
-    color: #333;
-}
 .convo-history-row.selected-convo {
   background-color: #2b2f4d;
   color: #fff;
