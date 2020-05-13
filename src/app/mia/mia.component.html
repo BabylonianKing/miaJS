@@ -1,0 +1,18 @@
+<div class="chat-container">
+    <chat-message *ngFor="let msg of messages"
+                  type="text"
+                  [message]="msg.text"
+                  [timestamp]="msg.date"
+                  [reply]="msg.reply">
+    </chat-message>
+    
+    <chat-message *ngIf="loading"
+        type="text"
+        message="...">
+    </chat-message>
+</div>
+
+<!-- IS THIS RIGHT? -->
+<chat-form (send)="handleUserMessage($event)">
+
+</chat-form>

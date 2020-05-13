@@ -1,11 +1,17 @@
-@import '../../main-styles.scss';
-
 /* ==========================================================================
    Start of custom Webflow CSS
    ========================================================================== */
+body {
+  margin: 0px;
+  min-height: 100%;
+  background-color: #f2f0ee;
+  font-family: Rubik, sans-serif;
+  color: #6f6f74;
+  font-size: 16px;
+}
 
 p {
-  margin-bottom: 10px;
+  margin: 0;
 }
 
 a {
@@ -308,16 +314,6 @@ a {
 .button-small-navbar._w-button {
   font-family: Rubik, sans-serif;
   cursor: pointer;
-}
-
-.body {
-  margin: 0;
-  min-height: 100%;
-  background-color: #f2f0ee;
-  font-family: Rubik, sans-serif;
-  color: #6f6f74;
-  font-size: 16px;
-  line-height: 1.65em;
 }
 
 .title-hero-center {
@@ -1353,8 +1349,8 @@ a {
 
   p {
     .unread {
-        font-weight: 500;
-        color: #333;
+      font-weight: 500;
+      color: #333;
     }
   }
 }
@@ -1662,6 +1658,12 @@ a {
   background-color: #fafafa;
 }
 
+.mia {
+  flex-grow: 1;
+  overflow: auto;
+  background-color: #FAFAFA;
+}
+
 .messages-footer {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1670,205 +1672,6 @@ a {
   padding: 15px 30px;
   background-color: #fafafa;
   box-shadow: 0 -10px 30px 0 rgba(0, 0, 0, 0.1);
-}
-
-.messages-container {
-  overflow: auto;
-  padding-top: 40px;
-  padding-bottom: 0px;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  background-color: #fafafa;
-}
-
-.message-org {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 10px;
-  padding: 0px 15px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-align: end;
-  -webkit-align-items: flex-end;
-  -ms-flex-align: end;
-  align-items: flex-end;
-}
-
-.message-user {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 0px 15px 10px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-  -ms-flex-pack: end;
-  justify-content: flex-end;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-  -ms-flex-align: start;
-  align-items: flex-start;
-}
-
-.message-bubble {
-  max-width: 60%;
-  margin-bottom: 5px;
-  padding: 20px 30px;
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 auto;
-  -ms-flex: 0 auto;
-  flex: 0 auto;
-  border-radius: 50px;
-  background-color: #fff;
-  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.1);
-  font-family: Rubik, sans-serif;
-  font-size: 16px;
-  line-height: 1.2em;
-}
-
-.message-bubble.org {
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 0px;
-  background-color: #fff;
-}
-
-.message-bubble.user {
-  margin-bottom: 5px;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 50px;
-  background-color: #FE7B67;
-  color: #fff;
-}
-
-.message-bubble.user.double-bottom {
-  border-radius: 0px 50px 50px;
-}
-
-.message-bubble.user.double-top {
-  border-bottom-right-radius: 50px;
-}
-
-.message-timestamp {
-  margin-top: 0px;
-  padding-right: 40px;
-  padding-bottom: 0px;
-  padding-left: 40px;
-  font-family: Rubik, sans-serif;
-  color: #a8a6a3;
-  font-size: 14px;
-  font-weight: 300;
-}
-
-.messages-footer-content {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-  max-height: 50px;
-  padding-right: 0px;
-  padding-left: 30px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 50px;
-  background-color: #f2f0ee;
-  -o-object-fit: none;
-  object-fit: none;
-}
-
-input {
-  margin: 0;
-  border: none;
-  background-color: transparent;
-  width: 100%;
-  height: 100%;
-  font-family: Rubik, sans-serif;
-}
-
-input:focus {
-  outline: none;
-  color: #333;
-}
-
-.messages-input-field-placeholder {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  font-family: Rubik, sans-serif;
-  color: rgba(51, 51, 51, 0.4);
-  font-size: 14px;
-  line-height: 14px;
-  font-weight: 400;
-}
-
-.messages-send-button {
-  position: relative;
-  z-index: 999;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  width: 55px;
-  min-width: 55px;
-  height: 55px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 50px;
-  background-color: #FE7B67;
-  box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.3);
-  font-family: 'Fa solid 900', sans-serif;
-  font-size: 18px;
-  color: #fff;
-  -o-object-fit: none;
-  object-fit: none;
-  padding: 0;
-  margin: 0;
-}
-
-button:focus {
-  outline: none;
-}
-
-button:active {
-  border-style: none;
-  box-shadow: none;
-}
-
-button:hover {
-  cursor: pointer;
-}
-
-.bold-text {
-  font-size: 20px;
 }
 
 .messages-header-left {
