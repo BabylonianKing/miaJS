@@ -1,4 +1,8 @@
 <h1 *ngIf="authenticationService.userData | async">Hello {{ (authenticationService.userData | async)?.email }}</h1>
+<div *ngIf="authenticationService.userData | async; then authenticated">
+    <!-- template will replace this div -->
+</div>
+
 
 <div *ngIf="!(authenticationService.userData | async)">
     <input type="text" [(ngModel)]="email" placeholder="email">
@@ -7,6 +11,24 @@
     <button (click)="signUp()">Sign Up</button>
 
     <button (click)="signIn()">Login</button>
+
+    <button (click)="authenticationService.googleSignin()">
+        <i class="fa fa-google"></i> Connect Google
+    </button>
+    <button (click)="authenticationService.facebookSignin()">
+        <i class="fa fa-facebook"></i> Connect Facebook
+    </button>
+    <button (click)="authenticationService.facebookSignin()">
+        <i class="fa fa-facebook"></i> Connect Facebook
+    </button>
 </div>
+<!-- User logged in -->
+<ng-template #authenticated>
+    <div *ngIf="authenticationService.userData | async as user">
+        <h3>Howdy, {{ user.displayName }}</h3>
+        <img  [src]="user.photoURL">
+        <p>UID: {{ user.uid }}</p>
+    </div>
+</ng-template>
 
 <button (click)="signOut()" *ngIf="authenticationService.userData | async">Logout</button>
