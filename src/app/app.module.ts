@@ -11,6 +11,15 @@ import { ConvoDashboardComponent } from './convo-dashboard/convo-dashboard.compo
 import { MiaComponent } from './mia/mia.component';
 import { ChatMessageComponent } from './mia/chat-message/chat-message.component';
 import { ChatFormComponent } from './mia/chat-form/chat-form.component';
+import { LoginComponent } from './login/login.component';
+
+/* Firebase services */
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { environment } from '../environments/environment';
+
+/* Auth service */
+import { AuthenticationService } from '../shared/services/authentication.service';
 
 @NgModule({
   declarations: [
@@ -19,16 +28,21 @@ import { ChatFormComponent } from './mia/chat-form/chat-form.component';
     ConvoDashboardComponent,
     MiaComponent,
     ChatMessageComponent,
-    ChatFormComponent
+    ChatFormComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
+
