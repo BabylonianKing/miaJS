@@ -40,6 +40,7 @@ exports.dialogflowWebhook = functions.https.onRequest(async (request, response) 
 
      // Do backend stuff here
      const db = admin.firestore();
+     // STORE USER_ID HERE TO UPDATE DB BASED ON USER
      const profile = db.collection('users').doc('jeffd23');
 
      const { firstname, lastname, age } = result.parameters;

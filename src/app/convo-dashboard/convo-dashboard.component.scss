@@ -1659,6 +1659,9 @@ a {
 }
 
 .mia {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   flex-grow: 1;
   overflow: auto;
   background-color: #FAFAFA;

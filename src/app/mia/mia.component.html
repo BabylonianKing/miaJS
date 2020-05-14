@@ -1,3 +1,7 @@
+<div class="chat-header">
+
+</div>
+
 <div class="chat-container">
     <chat-message *ngFor="let msg of messages"
                   type="text"
@@ -12,7 +16,8 @@
     </chat-message>
 </div>
 
-<!-- IS THIS RIGHT? -->
-<chat-form (send)="handleUserMessage($event)">
+<div class="chat-footer">
+    <chat-form (send)="handleUserMessage($event)">
 
-</chat-form>
+    </chat-form>
+</div>

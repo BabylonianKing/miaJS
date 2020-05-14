@@ -2,7 +2,18 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    flex-grow: 1;
     padding: 30px 15px;
-
     overflow: auto;
+}
+
+.chat-footer {
+    padding: 10px 15px;
+
+    box-shadow: 0 10px 10px rgba($color: #000000, $alpha: 0.1);
+
+}
+
+chat-form {
+    width: 100%;
 }

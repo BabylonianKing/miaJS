@@ -17,8 +17,11 @@ export class ChatFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // GOOD SO FAR (I THINK)
+  // Triggered on form submit
   sendForm(form: NgForm) {
+    // Sends event to MiaComponent
     this.send.emit(form.value);
+    // Resets form placeholder
+    form.reset();
   }
 }

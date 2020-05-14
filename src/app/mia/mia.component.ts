@@ -22,7 +22,7 @@ export class MiaComponent implements OnInit {
     this.addBotMessage('Hey I\'m Matilda. Let\'s find your dream job together!');
   }
 
-  //THIS IS WHERE IT FUCKS UP (NOT RECEIVING EVENT??)
+  // Get event from ChatFormComponent
   handleUserMessage(event) {
     console.log(event.message);
     const text = event.message;
