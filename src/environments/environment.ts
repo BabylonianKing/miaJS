@@ -12,11 +12,6 @@ export const environment = {
     storageBucket: "mia-test-sgwxam.appspot.com",
     messagingSenderId: "211114227453",
     appId: "1:211114227453:web:54ec075371fffe26abf094"
-<<<<<<< HEAD
-=======
-
-    
->>>>>>> 6bec45a2799aa6a9e4fc6b45f90c3a1f1d9c5648
   }
 };
 
