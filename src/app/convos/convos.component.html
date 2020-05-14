@@ -1,0 +1,31 @@
+
+  <div class="convos-header">
+    <div class="search-field">
+      <h4 class="messages-input-field-placeholder"><span class="search-icon"><strong></strong></span>
+        Enter for search...</h4>
+    </div>
+    <div class="convos-number">11 <strong class="bold-text-5"></strong></div>
+  </div>
+    <div class="convos-tools">
+      <div class="convos-tools-left">
+        <h4 class="convos-tools-heading">Sort By: <span class="sort-by-choice text-span-4">Latest First
+            <strong class="bold-text-4"></strong></span></h4>
+      </div>
+      <div class="convos-tools-right">
+        <h5 class="convos-tools-heading">Add New</h5><a href="/chat" class="add-convo-button fa w-button"><strong
+            class="bold-text-3"></strong></a>
+      </div>
+    </div>
+
+    <convo-card *ngFor="let item of items"
+                type="text"
+                [logo]=""
+                [jobTitle]="item.jobTitle"
+                [organization]="item.organization"
+                [timestamp]="item.timestamp"
+                [lastMessage]="item.lastMessage"
+                [isUnread]="item.isUnread">
+    </convo-card>
+
+   
+

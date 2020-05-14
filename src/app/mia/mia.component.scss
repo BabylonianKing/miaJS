@@ -1,3 +1,125 @@
+.messages-header {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: 50px;
+    padding: 40px 30px;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    border-style: none none solid;
+    border-width: 1px 1px 2px;
+    border-color: rgba(0, 0, 0, 0.1);
+    background-color: #fafafa;
+  }
+  
+  .messages-header-left {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  
+  .messages-header-right {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+  
+  .call-button.fa {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-size: 25px;
+  }
+  
+  .videocall-button.fa {
+    font-size: 25px;
+  }
+  
+  .messages-header-button {
+    margin-right: 25px;
+    color: rgba(51, 51, 51, 0.5);
+    font-size: 20px;
+    line-height: 30px;
+  }
+  
+  .messages-header-button.last {
+    margin-right: 0px;
+  }
+
+  .messages-header-jd {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-left: 5px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+  }
+  
+  .messages-header-job-title {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-family: Rubik, sans-serif;
+    font-size: 20px;
+    line-height: 1.3em;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .messages-header-details {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-family: Rubik, sans-serif;
+    color: rgba(51, 51, 51, 0.5);
+    font-weight: 400;
+  }
+
+  .org-logo {
+    margin-right: 10px;
+    border-radius: 100px;
+  }
+
+// GOOD
+.chat-footer {
+    padding: 20px 30px;
+
+    box-shadow: 0 10px 10px rgba($color: #000000, $alpha: 0.1);
+
+}
+
 .chat-container {
     display: flex;
     flex-direction: column;
@@ -5,13 +127,6 @@
     flex-grow: 1;
     padding: 30px 15px;
     overflow: auto;
-}
-
-.chat-footer {
-    padding: 10px 15px;
-
-    box-shadow: 0 10px 10px rgba($color: #000000, $alpha: 0.1);
-
 }
 
 chat-form {
