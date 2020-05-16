@@ -21,5 +21,4 @@ export class ConvosComponent implements OnInit {
       this.items = result;
     })
   }
-
 }
