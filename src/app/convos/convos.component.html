@@ -1,9 +1,6 @@
 
   <div class="convos-header">
-    <div class="search-field">
-      <h4 class="messages-input-field-placeholder"><span class="search-icon"><strong></strong></span>
-        Enter for search...</h4>
-    </div>
+      <input class="search-bar" type="text" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" placeholder="Search by name..." (keyup)="searchByOrg()">
     <div class="convos-number">11 <strong class="bold-text-5"></strong></div>
   </div>
     <div class="convos-tools">
@@ -17,6 +14,12 @@
       </div>
     </div>
 
+    <div class="no-search-result" *ngIf="items.length == 0">
+      <p>We couldn't find anything to match your search...</p>
+      <img src="assets/not-found.svg">
+    </div>
+
+
     <convo-card *ngFor="let item of items"
                 type="text"
                 [logo]=""
@@ -26,6 +29,5 @@
                 [lastMessage]="item.lastMessage"
                 [isUnread]="item.isUnread">
     </convo-card>
-
-   
+  
 

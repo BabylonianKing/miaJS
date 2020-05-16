@@ -19,7 +19,7 @@ export class MiaComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.addBotMessage('Hey I\'m Matilda. Let\'s find your dream job together!');
+    this.addBotMessage('Hey I\'m Matilda. Let\'s find your dream job together! Just say hi to get started.');
   }
 
   // Get event from ChatFormComponent
@@ -55,7 +55,7 @@ export class MiaComponent implements OnInit {
       text,
       sender: 'You',
       reply: true,
-      date: new Date()
+      date: new Date().toDateString()
     });
   }
 
@@ -63,7 +63,7 @@ export class MiaComponent implements OnInit {
     this.messages.push({
       text,
       sender: 'Bot',
-      date: new Date()
+      date: new Date().toDateString()
     });
   }
 

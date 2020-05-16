@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
 
-  constructor(public db: AngularFirestore) {}
+  constructor(
+    public db: AngularFirestore,
+    public authenticationService: AuthenticationService) { }
 
   getAvatars(){
       return this.db.collection('/avatar').valueChanges()
@@ -27,13 +30,13 @@ export class FirebaseService {
 
   getItems(){
     // SEE TUTORIAL FOR WHY .snapshotChanges(); return this.db.collection('items').snapshotChanges();
-    return this.db.collection('items').valueChanges();
+    return this.db.collection('items', ref => ref.where("uid", '==', "userKey")).valueChanges();
   }
 
-  searchUsers(searchValue){
+  searchOrganization(searchValue){
     return this.db.collection('items',ref => ref.where('nameToSearch', '>=', searchValue)
       .where('nameToSearch', '<=', searchValue + '\uf8ff'))
-      .snapshotChanges()
+      .valueChanges()
   }
 
   searchUsersByAge(value){

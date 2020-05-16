@@ -25,6 +25,8 @@ import { AuthenticationService } from '../shared/services/authentication.service
 
 /* DB CRUD service */
 import { FirebaseService } from '../shared/services/firebase.service';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { ConvoInfoComponent } from './convo-info/convo-info.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { FirebaseService } from '../shared/services/firebase.service';
     ChatFormComponent,
     ConvosComponent,
     ConvoCardComponent,
-    LoginComponent
+    LoginComponent,
+    SidebarComponent,
+    ConvoInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,7 @@ import { FirebaseService } from '../shared/services/firebase.service';
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService, FirebaseService],
   bootstrap: [AppComponent]
 })
 

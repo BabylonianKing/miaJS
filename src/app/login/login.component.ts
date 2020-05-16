@@ -12,7 +12,6 @@ export class LoginComponent {
   email: string;
   password: string;
 
-
   constructor(public authenticationService: AuthenticationService) {}
 
   signUp() {
