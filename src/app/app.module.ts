@@ -28,6 +28,9 @@ import { FirebaseService } from '../shared/services/firebase.service';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ConvoInfoComponent } from './convo-info/convo-info.component';
 
+// Cookier service
+import { CookieService } from 'ngx-cookie-service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +55,7 @@ import { ConvoInfoComponent } from './convo-info/convo-info.component';
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  providers: [AuthenticationService, FirebaseService],
+  providers: [AuthenticationService, FirebaseService, CookieService],
   bootstrap: [AppComponent]
 })
 

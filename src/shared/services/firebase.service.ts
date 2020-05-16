@@ -28,9 +28,9 @@ export class FirebaseService {
     return this.db.collection('items').doc(userKey).delete();
   }
 
-  getItems(){
+  getItems(userKey){
     // SEE TUTORIAL FOR WHY .snapshotChanges(); return this.db.collection('items').snapshotChanges();
-    return this.db.collection('items', ref => ref.where("uid", '==', "userKey")).valueChanges();
+    return this.db.collection('items', ref => ref.where("uid", '==', userKey)).valueChanges();
   }
 
   searchOrganization(searchValue){
