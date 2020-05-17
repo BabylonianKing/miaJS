@@ -24,8 +24,4 @@ export class LoginComponent {
     this.password = '';
   }
 
-  signOut() {
-    this.authenticationService.SignOut();
-  }
-
 }

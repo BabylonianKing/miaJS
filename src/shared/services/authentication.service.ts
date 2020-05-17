@@ -49,6 +49,10 @@ export class AuthenticationService {
     }
     console.log("User info returned.");
     console.log(this.authState.uid);
+    console.log(this.authState.photoURL);
+    console.log(this.authState.email);
+    console.log(this.authState.phoneNumber);
+    console.log(this.authState.displayName);
     return [
       {
         uid: this.authState.uid,
@@ -86,7 +90,7 @@ export class AuthenticationService {
         this.cookie.set("userID", this.authState.uid);
 
         // Navigate to dashboard on login
-        this.router.navigate(['/chat']);
+        this.router.navigate(['/profile']);
       })
       .catch(err => {
         console.log('Something is wrong:',err.message);
@@ -97,6 +101,10 @@ export class AuthenticationService {
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
+    // Setting cookie
+    this.cookie.set("userID", this.authState.uid)
+    // Navigate to dashboard
+    this.router.navigate(['/profile']);
     return this.updateUserData(credential.user);
   }
 
@@ -104,13 +112,21 @@ export class AuthenticationService {
   async facebookSignin() {
     const provider = new auth.FacebookAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
+    // Setting cookie
+    this.cookie.set("userID", this.authState.uid)
+    // Navigate to dashboard
+    this.router.navigate(['/profile']);
     return this.updateUserData(credential.user);
   }
 
   // Sign out
   async SignOut() {
     await this.afAuth.signOut();
-    return this.router.navigate(['/chat']);
+
+    console.log("Signed Out!");
+    console.log(this.authState);
+
+    return this.router.navigate(['/login']);
   }
 
   private updateUserData(user) {
