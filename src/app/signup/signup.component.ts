@@ -3,11 +3,11 @@ import { NgForm } from '@angular/forms';
 import { AuthenticationService } from '../../shared/services/authentication.service';
 
 @Component({
-  selector: 'login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
-export class LoginComponent {
+export class SignupComponent implements OnInit {
 
   email: string;
   password: string;
@@ -16,16 +16,12 @@ export class LoginComponent {
     public authenticationService: AuthenticationService,
   ) { }
 
-  public ngOnInit(): void {}
+  ngOnInit(): void {}
 
-  signIn() {
-    this.authenticationService.SignIn(this.email, this.password);
+  signUp() {
+    this.authenticationService.SignUp(this.email, this.password);
     this.email = ''; 
     this.password = '';
-  }
-
-  signOut() {
-    this.authenticationService.SignOut();
   }
 
 }

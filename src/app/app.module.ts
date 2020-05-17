@@ -30,6 +30,9 @@ import { ConvoInfoComponent } from './convo-info/convo-info.component';
 
 // Cookier service
 import { CookieService } from 'ngx-cookie-service';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { SignupPageComponent } from './signup-page/signup-page.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import { CookieService } from 'ngx-cookie-service';
     ConvoCardComponent,
     LoginComponent,
     SidebarComponent,
-    ConvoInfoComponent
+    ConvoInfoComponent,
+    LoginPageComponent,
+    SignupPageComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

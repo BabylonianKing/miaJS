@@ -1,0 +1,22 @@
+<div class="email-form">
+    <h2>Create your account</h2>
+    <form class="inputs" #loginForm="ngForm" (ngSubmit)="signUp()">
+      <input type="text" [(ngModel)]="email" name="email" placeholder="Email">
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Password">
+      <button type="submit" style="display: none"></button>
+    </form>
+    <p>Already have an account? <a routerLink="/login" routerLinkActive="active">Sign in</a></p>
+  </div>
+  <div class="or-block">
+    <p>or</p>
+  </div>
+  <div class="third-party-auth">
+    <button class="google" (click)="authenticationService.googleSignin()">
+      <i class="fa fa-google"></i> Google
+    </button>
+  
+    <button class="facebook" (click)="authenticationService.facebookSignin()">
+      <i class="fa fa-facebook"></i> Facebook
+    </button>
+  </div>
+  

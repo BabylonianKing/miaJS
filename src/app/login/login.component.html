@@ -1,34 +1,21 @@
-<h1 *ngIf="authenticationService.userData | async">Hello {{ (authenticationService.userData | async)?.email }}</h1>
-<div *ngIf="authenticationService.userData | async; then authenticated">
-    <!-- template will replace this div -->
+<div class="email-form">
+  <h2>Sign in to your account</h2>
+  <form class="inputs" #loginForm="ngForm" (ngSubmit)="signIn()">
+    <input type="text" [(ngModel)]="email" name="email" placeholder="Email">
+    <input type="password" [(ngModel)]="password" name="password" placeholder="Password">
+    <button type="submit" style="display: none"></button>
+  </form>
+  <p>Don't have an account? <a routerLink="/signup" routerLinkActive="active">Sign up</a></p>
 </div>
-
-
-<div *ngIf="!(authenticationService.userData | async)">
-    <input type="text" [(ngModel)]="email" placeholder="email">
-    <input type="password" [(ngModel)]="password" placeholder="password">
-
-    <button (click)="signUp()">Sign Up</button>
-
-    <button (click)="signIn()">Login</button>
-
-    <button (click)="authenticationService.googleSignin()">
-        <i class="fa fa-google"></i> Connect Google
-    </button>
-    <button (click)="authenticationService.facebookSignin()">
-        <i class="fa fa-facebook"></i> Connect Facebook
-    </button>
-    <button (click)="authenticationService.facebookSignin()">
-        <i class="fa fa-facebook"></i> Connect Facebook
-    </button>
+<div class="or-block">
+  <p>or</p>
 </div>
-<!-- User logged in -->
-<ng-template #authenticated>
-    <div *ngIf="authenticationService.userData | async as user">
-        <h3>Howdy, {{ user.displayName }}</h3>
-        <img  [src]="user.photoURL">
-        <p>UID: {{ user.uid }}</p>
-    </div>
-</ng-template>
+<div class="third-party-auth">
+  <button class="google" (click)="authenticationService.googleSignin()">
+    <i class="fa fa-google"></i> Google
+  </button>
 
-<button (click)="signOut()" *ngIf="authenticationService.userData | async">Logout</button>
+  <button class="facebook" (click)="authenticationService.facebookSignin()">
+    <i class="fa fa-facebook"></i> Facebook
+  </button>
+</div>
