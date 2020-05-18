@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { FirebaseService } from 'src/shared/services/firebase.service';
 import { AuthenticationService } from 'src/shared/services/authentication.service';
-import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'profile',
@@ -10,24 +11,37 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ProfileComponent implements OnInit {
 
-  avatar: string;
-  email: string;
+  valueHidden: boolean = false;
+  inputHidden: boolean = true;
 
   constructor(
     public firebaseService: FirebaseService,
     public afAuth: AuthenticationService,
-    private cookie: CookieService) { }
+    public ngZone: NgZone,
+    public router: Router) { }
 
   ngOnInit(): void {
-    const user = this.afAuth.authState;
-    console.log(user);
-    if (user) {
-      this.avatar = user.photoURL;
-      this.email = user.email;
-      console.log(this.avatar);
-      console.log(this.email);
-    }
   }
 
+  UpdateEmail(value) {
+    console.log(value);
+    const u = this.afAuth.userData;
+    const uid = u.uid;
+    this.firebaseService.updateEmail(uid, value)
+    .then(
+    res => {
+      this.router.navigate(['/profile']);
+    }
+  )
+  }
 
+  EditInput() {
+    this.valueHidden = true;
+    this.inputHidden = false;
+  }
+
+  ConfirmInput() {
+    this.valueHidden = false;
+    this.inputHidden = true;
+  }
 }

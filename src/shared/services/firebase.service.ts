@@ -11,12 +11,16 @@ export class FirebaseService {
     public db: AngularFirestore,
     public authenticationService: AuthenticationService) { }
 
+  updateEmail(userKey, value) {
+    return this.db.collection('users').doc(userKey).set({email: value});
+  }
+
   getAvatars(){
       return this.db.collection('/avatar').valueChanges()
   }
 
   getUser(userKey){
-    return this.db.collection('items').doc(userKey).snapshotChanges();
+    return this.db.collection('users').doc(userKey).snapshotChanges();
   }
 
   updateUser(userKey, value){

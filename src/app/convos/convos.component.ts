@@ -22,8 +22,9 @@ export class ConvosComponent implements OnInit {
 
   ngOnInit(): void {
     // Load conversations
-    const u = this.cookie.get("userID");
-    this.firebaseService.getItems(u)
+    const u = JSON.parse(localStorage.getItem('user'));
+    const uid = u.uid;
+    this.firebaseService.getItems(uid)
     .subscribe(result => {
       this.items = result;
     })

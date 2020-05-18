@@ -35,6 +35,7 @@ import { SignupPageComponent } from './signup-page/signup-page.component';
 import { SignupComponent } from './signup/signup.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ProfileComponent } from './profile-page/profile/profile.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ProfileComponent } from './profile-page/profile/profile.component';
     SignupPageComponent,
     SignupComponent,
     ProfilePageComponent,
-    ProfileComponent
+    ProfileComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

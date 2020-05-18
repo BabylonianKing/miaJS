@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/shared/models/user.model';
 
@@ -6,141 +6,114 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
-import { Observable } from 'rxjs';
-
-import { CookieService } from 'ngx-cookie-service';
-
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
-  userData: Observable<User>;
-  authState: any = null;
+  userData: any; // Save logged in user data
 
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router,
-    private cookie: CookieService
-  ) { 
-    this.afAuth.authState.subscribe( authState => {
-      this.authState = authState;
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+  ) {
+   /* Saving user data in localstorage when 
+    logged in and setting up null when logged out */
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.userData = user;
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user'));
+        console.log(this.userData);
+      } else {
+        localStorage.setItem('user', null);
+        JSON.parse(localStorage.getItem('user'));
+      }
     })
   }
 
-  // Check if user is authenticated
-  get isAuthenticated(): boolean {
-    return this.authState !== null;
+  // Sign in with email/password
+  SignIn(email, password) {
+    return this.afAuth.signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        this.ngZone.run(() => {
+          this.router.navigate(['/profile']);
+        });
+        this.SetUserData(result.user);
+        console.log(this.userData);
+      }).catch((error) => {
+        window.alert(error.message)
+      })
   }
 
-  // Check if user email is verified
-  get isEmailVerified(): boolean {
-  return this.isAuthenticated ? this.authState.emailVerified : false;
-  }
-
-  // Get current user' uID
-  get currentUserId(): string {
-    return this.isAuthenticated ? this.authState.uid : null;
-  }
-
-  get user(): any {
-    if ( ! this.isAuthenticated ) {
-      console.log("User info not returned.");
-      return [];
-    }
-    console.log("User info returned.");
-    console.log(this.authState.uid);
-    console.log(this.authState.photoURL);
-    console.log(this.authState.email);
-    console.log(this.authState.phoneNumber);
-    console.log(this.authState.displayName);
-    return [
-      {
-        uid: this.authState.uid,
-        displayName: this.authState.displayName,
-        email: this.authState.email,
-        phoneNumber: this.authState.phoneNumber,
-        photoURL: this.authState.photoURL,
-      }
-    ];
-  }
-
-  // Sign up with email
-  SignUp(email: string, password: string) {
+  // Sign up with email/password
+  SignUp(email, password) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
-       .then(userData => this.updateUserData(userData.user))
-       .then(() => {
-        // Setting cookie
-        this.cookie.set("userID", this.authState.uid)
-
-        // Navigate to dashboard
-        this.router.navigate(['/chat']);
-
+      .then((result) => {
+        /* Call the SendVerificaitonMail() function when new user sign 
+        up and returns promise */
+        // this.SendVerificationEmail();
+        this.SetUserData(result.user);
+      }).catch((error) => {
+        window.alert(error.message)
       })
-       .catch(error => console.log(error.message))
   }
 
-  // Sign in with email
-  SignIn(email: string, password: string) {
-    this.afAuth
-      .signInWithEmailAndPassword(email, password)
-      .then(res => {
-        console.log('Successfully signed in!', res);
-
-        // Setting cookie
-        this.cookie.set("userID", this.authState.uid);
-
-        // Navigate to dashboard on login
-        this.router.navigate(['/profile']);
-      })
-      .catch(err => {
-        console.log('Something is wrong:',err.message);
-      });
+  // Returns true when user is looged in and email is verified
+  get isLoggedIn(): boolean {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user !== null) {
+      console.log("USER SIGNED IN");
+    }
+    return (user !== null) ? true : false;
   }
 
   // Sign in with Google
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
-    // Setting cookie
-    this.cookie.set("userID", this.authState.uid)
     // Navigate to dashboard
     this.router.navigate(['/profile']);
-    return this.updateUserData(credential.user);
+    return this.SetUserData(credential.user);
   }
 
   // Sign in with Facebook
   async facebookSignin() {
     const provider = new auth.FacebookAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
-    // Setting cookie
-    this.cookie.set("userID", this.authState.uid)
     // Navigate to dashboard
     this.router.navigate(['/profile']);
-    return this.updateUserData(credential.user);
+    return this.SetUserData(credential.user);
   }
 
-  // Sign out
-  async SignOut() {
-    await this.afAuth.signOut();
-
-    console.log("Signed Out!");
-    console.log(this.authState);
-
-    return this.router.navigate(['/login']);
+  // Sign out 
+  SignOut() {
+    return this.afAuth.signOut().then(() => {
+      localStorage.removeItem('user');
+      this.router.navigate(['/login']);
+    })
   }
 
-  private updateUserData(user) {
-    // Sets user data to firestore on login
+  /* Setting up user data when sign in with username/password, 
+  sign up with username/password and sign in with social auth  
+  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
+  SetUserData(user) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-
-    const data: User = { 
-      uid: user.uid, 
-      email: user.email, 
-      photoURL: user.photoURL
-    } 
-
-    return userRef.set(data, { merge: true })
-
+    const userData: User = {
+      uid: user.uid,
+      displayName: user.displayName,
+      email: user.email,
+      status: user.status,
+      language: user.language,
+      location: user.location,
+      phone: user.phone,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified
+    }
+    return userRef.set(userData, {
+      merge: true
+    })
   }
 
 }
+

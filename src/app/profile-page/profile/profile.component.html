@@ -1,4 +1,4 @@
-<div class="root">
+<div class="root" *ngIf="afAuth.userData as user">
   <div class="header">
     <div class="banner">
       <img>
@@ -7,35 +7,43 @@
     </div>
     </div>
     <div class="profile-header">
-      <img class="avatar" src="{{ avatar }}">
-      <div class="profile-header-infos">
-        <h2>Lucas Azar</h2>
+      <img class="avatar" src="{{ user.photoURL }}">
+      <div class="profile-header-infos" >
+        <h2>{{(user.displayName) ? user.displayName: 'New User' }}</h2>
         <div class="sub-infos">
-          <p>Looking for a job in the tech sector</p>
-          <p>Montreal, Canada</p>
+          <p>{{ (user.status) ? user.status: 'Recently met Matilda'}}</p>
+          <p>{{ (user.location) ? user.location: 'Somewhere, Somewhere' }}</p>
         </div>
       </div>
     </div>
   </div>
   <div class="infos">
     <div class="info">
-      <div class="info-left">
-        <h2>Personal Meeting ID</h2>
-      </div>
-      <div class="info-right">
-        <div class="field">
-          <p>123-456-789</p>
-        </div>
-        <a>Edit</a>
-      </div>
-    </div>
-    <div class="info">
         <div class="info-left">
             <h2>Email</h2>
           </div>
       <div class="info-right">
+        <div class="field" >
+          <p [hidden]="valueHidden"> {{ user.email }}</p>
+
+
+          <form #newEmail="ngForm" (ngSubmit)="UpdateEmail(newEmail.value.email)">
+            <input [hidden]="inputHidden" placeholder="New email" type="email" name="email" id="new_email" ngModel>
+          </form>
+
+
+        </div>
+        <a (click)="EditInput()" [hidden]="valueHidden">Edit</a>
+        <a (click)="ConfirmInput()" [hidden]="inputHidden">Save</a>
+      </div>
+    </div>
+    <div class="info">
+      <div class="info-left">
+        <h2>Phone Number</h2>
+      </div>
+      <div class="info-right">
         <div class="field">
-          <p>{{ email }}</p>
+          <p>{{ user.phone }}</p>
         </div>
         <a>Edit</a>
       </div>
@@ -68,7 +76,7 @@
           </div>
       <div class="info-right">
         <div class="field">
-          <p>English</p>
+          <p>{{ user.language }}</p>
         </div>
         <a>Edit</a>
       </div>

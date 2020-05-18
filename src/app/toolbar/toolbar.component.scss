@@ -1,0 +1,94 @@
+@import "./src/styles.scss";
+
+.logo {
+    padding: 30px 20px;
+}
+
+.shortcuts {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    margin-bottom: 30px;
+    background-color: white;
+    border-radius: 15px;
+
+    .personal {
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .admin {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.site-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    background-color: white;
+    border-radius: 15px;
+
+    a {
+        margin-left: 0;
+    }
+
+    .signout {
+        border-top: $border-thin;
+        padding-top: 20px;
+        margin-top: 10px;
+
+        &:hover {
+            color: $red-dark;
+            cursor: pointer;
+        }
+    }
+}
+
+h3 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-family: $rubik;
+}
+
+a {
+    margin: 0;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    font-family: $rubik;
+    text-decoration: none;
+    color: $heading-gray;
+
+    &:hover {
+        color: $red-dark;
+        cursor: pointer;
+    }
+}
+
+a:last-child {
+    margin-bottom: 0;
+}
+
+.invite-friends {
+    position: absolute;
+    bottom: 30px;
+    left: 60px;
+    right: 60px;
+
+    button {
+        width: 100%;
+        padding: 10px 30px;
+        background-color: $red-dark;
+        border-radius: 50px;
+        border: none;
+        color: white;
+        font-size: 14px;
+
+        &:hover {
+            background-color: $blue-dark;
+            cursor: pointer;
+        }
+    }
+}

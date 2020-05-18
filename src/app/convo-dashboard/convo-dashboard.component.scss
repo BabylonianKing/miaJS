@@ -2,6 +2,8 @@
    Start of custom Webflow CSS
    ========================================================================== */
 
+@import "./src/styles.scss";
+
 body {
   margin: 0;
   min-height: 100%;
@@ -1319,21 +1321,27 @@ a {
   font-weight: 400;
 }
 
-.chat-container {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+.root {
   height: 100vh;
-  margin-left: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-  padding-left: 100px;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  width: 100vw;
+  display: flex;
+  align-items: stretch;
+  background-color: $background-gray;
+
+  toolbar {
+    position: relative;
+    width: 20%;
+    max-width: 250px;
+    padding: 30px;
+} 
+}
+
+.chat-container {
+  flex: 1;
+  padding: 30px;
+  padding-left: 0;
+  display: flex;
+  box-shadow: $box-shadow;
 }
 
 convos {
@@ -1388,8 +1396,8 @@ mia {
   flex-grow: 1;
   overflow: auto;
   background-color: white;
-  border-left: 2px solid rgba(0, 0 , 0, 0.1);
-  border-right: 2px solid rgba(0, 0 , 0, 0.1);
+  border-left: 2px solid rgba(0, 0, 0, 0.1);
+  border-right: 2px solid rgba(0, 0, 0, 0.1);
 }
 
 sidebar {

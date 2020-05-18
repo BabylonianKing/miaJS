@@ -8,12 +8,8 @@ import { AuthenticationService } from 'src/shared/services/authentication.servic
 })
 export class ProfilePageComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private afAuth: AuthenticationService) { }
 
   ngOnInit(): void {
-  }
-
-  signOut() {
-    this.authenticationService.SignOut();
   }
 }

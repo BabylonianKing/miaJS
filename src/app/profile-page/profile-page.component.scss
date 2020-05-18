@@ -7,63 +7,12 @@
     align-items: stretch;
     background-color: $background-gray;
 
-    .toolbar {
+    toolbar {
+        position: relative;
         width: 20%;
+        max-width: 250px;
         padding: 30px;
-
-        .shortcuts {
-            display: flex;
-            flex-direction: column;
-            padding: 30px;
-            margin-bottom: 30px;
-            background-color: white;
-            border-radius: 15px;
-
-            .personal {
-                margin-bottom: 20px;
-            }
-        }
-
-        .site-nav {
-            display: flex;
-            flex-direction: column;
-            padding: 30px;
-            background-color: white;
-            border-radius: 15px;
-
-            p {
-                margin-left: 0;
-            }
-
-            .signout {
-                border-top: $border-thin;
-                padding-top: 20px;
-                margin-top: 10px;
-
-                &:hover {
-                    color: $red-dark;
-                    cursor: pointer;
-                }
-            }
-        }
-
-        h3 {
-            margin: 0;
-            margin-bottom: 10px;
-            font-family: $rubik;
-        }
-
-        p {
-            margin: 0;
-            margin-left: 20px;
-            margin-bottom: 10px;
-            font-family: $rubik;
-        }
-
-        p:last-child {
-            margin-bottom: 0;
-        }
-    }
+    } 
 
     profile {
         flex: 1;
