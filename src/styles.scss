@@ -6,6 +6,10 @@ h1, h2, h3, h4, h5, h6, p {
     margin: 0;
 }
 
+button {
+    outline: none;
+}
+
 // Colour variables
 $background-gray: #F2F0EE;
 $background-purple: #2D2338;

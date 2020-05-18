@@ -9,7 +9,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
-  userData: any; // Save logged in user data
+  userData: User; // Save logged in user data
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -24,7 +24,6 @@ export class AuthenticationService {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user'));
-        console.log(this.userData);
       } else {
         localStorage.setItem('user', null);
         JSON.parse(localStorage.getItem('user'));
@@ -40,7 +39,6 @@ export class AuthenticationService {
           this.router.navigate(['/profile']);
         });
         this.SetUserData(result.user);
-        console.log(this.userData);
       }).catch((error) => {
         window.alert(error.message)
       })
@@ -103,10 +101,10 @@ export class AuthenticationService {
       uid: user.uid,
       displayName: user.displayName,
       email: user.email,
-      status: user.status,
-      language: user.language,
-      location: user.location,
-      phone: user.phone,
+      // status: user.status,
+      // language: user.language,
+      // location: user.location,
+      phoneNumber: user.phoneNumber,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified
     }

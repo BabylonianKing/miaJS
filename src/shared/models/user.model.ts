@@ -4,7 +4,7 @@ export interface User {
     status?: string;
     language?: string;
     email: string;
-    phone?: string;
+    phoneNumber: string;
     photoURL?: string;
     location?: string;
     emailVerified?: boolean;
