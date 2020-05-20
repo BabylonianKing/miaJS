@@ -27,7 +27,10 @@
                 [organization]="item.organization"
                 [timestamp]="item.timestamp"
                 [lastMessage]="item.lastMessage"
-                [isUnread]="item.isUnread">
+                [isUnread]="item.isUnread"
+                
+                (click)="item.isSelected = !item.isSelected"
+                [ngClass]="{ 'selected': item.isSelected }">
     </convo-card>
   
 

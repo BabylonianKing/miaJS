@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FirebaseService } from 'src/shared/services/firebase.service';
 import { AuthenticationService } from 'src/shared/services/authentication.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -13,6 +13,8 @@ export class ConvosComponent implements OnInit {
   items: Array<any>;
   searchValue: string="";
   org_filtered_items: Array<any>;
+
+  @Input() isSelected: boolean = false;
 
   constructor(
     public firebaseService: FirebaseService,
@@ -30,6 +32,9 @@ export class ConvosComponent implements OnInit {
     })
   }
   
+  // Don't use firebase service everytime (javascript filter)
+  // Subscribe only to uid, then use js filter on items array
+  
   searchByOrg() {
     let value = this.searchValue.toLowerCase();
     this.firebaseService.searchOrganization(value)
@@ -38,4 +43,9 @@ export class ConvosComponent implements OnInit {
       this.items = this.org_filtered_items;
     });
     }
+
+  //   selectConvo() {
+  //     console.log("Hello");
+  //     this.isSelected = true;
+  // }
 }

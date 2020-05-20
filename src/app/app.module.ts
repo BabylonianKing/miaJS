@@ -55,7 +55,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     SignupComponent,
     ProfilePageComponent,
     ProfileComponent,
-    ToolbarComponent
+    ToolbarComponent,
   ],
   imports: [
     BrowserModule,

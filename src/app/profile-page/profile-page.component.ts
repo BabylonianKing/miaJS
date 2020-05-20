@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/shared/services/authentication.service';
+import { FirebaseService } from 'src/shared/services/firebase.service';
 
 @Component({
   selector: 'profile-page',
@@ -8,8 +9,17 @@ import { AuthenticationService } from 'src/shared/services/authentication.servic
 })
 export class ProfilePageComponent implements OnInit {
 
-  constructor(private afAuth: AuthenticationService) { }
+  userInfos: Array<any>;
+
+  constructor(private afAuth: AuthenticationService,
+    public firebaseService: FirebaseService) { }
 
   ngOnInit(): void {
+    const user = JSON.parse(localStorage.getItem('user'));
+    this.firebaseService.getUserInfos(user.uid)
+    .subscribe(result => {
+      console.log(result);
+      this.userInfos = result;
+    })
   }
 }

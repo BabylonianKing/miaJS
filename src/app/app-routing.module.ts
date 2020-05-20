@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'chat', component: ConvoDashboardComponent},
   { path: 'login', component: LoginPageComponent},
   { path: 'signup', component: SignupPageComponent},
-  { path: 'profile', component: ProfilePageComponent, canActivate: [AuthenticationGuard]}
+  { path: 'profile', component: ProfilePageComponent, canActivate: [AuthenticationGuard]},
 ];
 
 @NgModule({

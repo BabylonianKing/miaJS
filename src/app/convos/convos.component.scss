@@ -162,6 +162,16 @@ convo-card {
   background-color: #fff;
   box-shadow: $box-shadow;
 
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.selected {
+    background-color: $background-purple;
+    box-shadow: none;
+    color: white;
+  }
+
   p {
     .unread {
       font-weight: 500;

@@ -38,7 +38,7 @@ export class AuthenticationService {
         this.ngZone.run(() => {
           this.router.navigate(['/profile']);
         });
-        this.SetUserData(result.user);
+        // this.SetUserData(result.user);
       }).catch((error) => {
         window.alert(error.message)
       })
