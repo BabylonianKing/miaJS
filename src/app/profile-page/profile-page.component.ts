@@ -20,7 +20,7 @@ export class ProfilePageComponent implements OnInit {
       this.firebaseService.getUserInfos(user.uid)
       .subscribe(result => {
         console.log(result)
-        this.userInfos = result
+        this.userInfos = result;
         
         
       })

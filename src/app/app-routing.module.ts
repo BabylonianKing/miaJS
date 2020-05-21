@@ -9,14 +9,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 import { SignupPageComponent } from './signup-page/signup-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
-import { AuthenticationGuard } from '../shared/guard/authentication.guard';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent},
   { path: 'chat', component: ConvoDashboardComponent},
   { path: 'login', component: LoginPageComponent},
   { path: 'signup', component: SignupPageComponent},
-  { path: 'profile', component: ProfilePageComponent, canActivate: [AuthenticationGuard]},
+  { path: 'profile', component: ProfilePageComponent},
 ];
 
 @NgModule({
