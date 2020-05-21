@@ -18,7 +18,7 @@
     <chat-message *ngFor="let msg of messages"
                   type="text"
                   [message]="msg.text"
-                  [timestamp]="msg.date"
+                  [timestamp]="msg.date.toDateString()"
                   [reply]="msg.reply">
     </chat-message>
     

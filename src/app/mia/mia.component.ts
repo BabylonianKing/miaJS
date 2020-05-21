@@ -1,7 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { firestore } from 'firebase';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  HttpClient
+} from '@angular/common/http';
+import {
+  AngularFirestore
+} from '@angular/fire/firestore';
+import {
+  firestore
+} from 'firebase';
 
 const dialogflowURL = 'https://us-central1-mia-test-sgwxam.cloudfunctions.net/dialogflowGateway';
 
@@ -21,9 +30,26 @@ export class MiaComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public db: AngularFirestore
-    ) { }
+  ) {}
 
   ngOnInit() {
+    const userId = JSON.parse(localStorage.getItem('user')).uid;
+
+    let conversationRef = this.db.collection("conversations").doc(userId).collection('conversationWithMatilda');
+    // conversationRef.orderBy('name').limit(10);
+
+    conversationRef.get()  
+    // get()
+    // .then(snapshot => {
+    //   snapshot.forEach(doc => {
+    //     this.messages.push(doc.text)
+    //   })
+       
+    // })
+
+
+
+
     this.addBotMessage('Hey I\'m Matilda. Let\'s find your dream job together! Just say hi to get started.');
   }
 
@@ -36,47 +62,56 @@ export class MiaComponent implements OnInit {
     this.loading = true;
 
     // Make the request
-    this.http.post<any>(
-      dialogflowURL,
-      {
-        sessionId: this.sessionId,
-        queryInput: {
-          text: {
-            text,
-            languageCode: 'en-US'
+    this.http.post < any > (
+        dialogflowURL, {
+          sessionId: this.sessionId,
+          queryInput: {
+            text: {
+              text,
+              languageCode: 'en-US'
+            }
           }
         }
-      }
-    )
-    .subscribe(res => {
-      const { fulfillmentText } = res;
-      this.addBotMessage(fulfillmentText);
-      this.loading = false;
-    });
+      )
+      .subscribe(res => {
+        const {
+          fulfillmentText
+        } = res;
+        this.addBotMessage(fulfillmentText);
+        this.loading = false;
+      });
   }
 
   addUserMessage(text) {
-    this.messages.push({
+    let data = {
       text,
       sender: 'You',
       reply: true,
-      date: new Date().toDateString()
-    });
+      date: new Date()
+    }
+    this.messages.push(data);
+
+    const userId = JSON.parse(localStorage.getItem('user')).uid;
+
     // Add message to DB (THIS WAY OF DOING THINGS REQUIRES MESSAGES TO BE ARCHIVED AS TO NOT GO OVER THE 1MB LIMIT FOR DOCS)
-    let ref = this.db.collection("conversations").doc("k3HsegZvOBeJiYX8d67I");
-    ref.update({messages: firestore.FieldValue.arrayUnion(text)});
+    let ref = this.db.collection("conversations").doc(userId).collection('conversationWithMatilda').doc(data.date.toString());
+    ref.set(data);
   }
 
   addBotMessage(text) {
-    this.messages.push({
+    let data = {
       text,
       sender: 'Bot',
-      date: new Date().toDateString()
-    });
+      date: new Date()
+    }
+    this.messages.push(data);
+    const userId = JSON.parse(localStorage.getItem('user')).uid;
+
 
     // Add message to DB (THIS WAY OF DOING THINGS REQUIRES MESSAGES TO BE ARCHIVED AS TO NOT GO OVER THE 1MB LIMIT FOR DOCS)
-    let ref = this.db.collection("conversations").doc("k3HsegZvOBeJiYX8d67I");
-    ref.update({messages: firestore.FieldValue.arrayUnion(text)});
+    let ref = this.db.collection("conversations").doc(userId).collection('conversationWithMatilda').doc(data.date.toString());
+    ref.set(data);
+
   }
 
 }
