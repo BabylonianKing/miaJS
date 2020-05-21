@@ -15,13 +15,18 @@ export class ProfilePageComponent implements OnInit {
     public firebaseService: FirebaseService) { }
 
   ngOnInit(): void {
-    
-    const user = JSON.parse(localStorage.getItem('user'));
-    this.firebaseService.getUserInfos(user.uid)
-    .subscribe(result => {
-      setTimeout(()=>{console.log(result);
-        this.userInfos = result;}, 1000)
+    setTimeout(() => {
+      const user = JSON.parse(localStorage.getItem('user'));
+      this.firebaseService.getUserInfos(user.uid)
+      .subscribe(result => {
+        console.log(result)
+        this.userInfos = result
+        
+        
+      })
+
       
-    })
+    }, 1000)
+
   }
 }
