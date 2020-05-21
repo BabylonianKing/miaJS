@@ -123,6 +123,3 @@ exports.updateUser = functions.firestore
 
   //     // perform desired operations ...
   //   });
-
-
-  exports.
