@@ -11,6 +11,7 @@ export class SignupComponent implements OnInit {
 
   email: string;
   password: string;
+  errorMessage: string;
 
   constructor(
     public authenticationService: AuthenticationService,
@@ -19,7 +20,11 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {}
 
   signUp() {
-    this.authenticationService.SignUp(this.email, this.password);
+    this.authenticationService.SignIn(this.email, this.password).then(error => {
+      console.log(error);
+      this.errorMessage = error;    
+    });
+    
     this.email = ''; 
     this.password = '';
   }

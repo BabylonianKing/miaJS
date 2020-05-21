@@ -11,6 +11,7 @@ export class LoginComponent {
 
   email: string;
   password: string;
+  errorMessage: string;
 
   constructor(
     public authenticationService: AuthenticationService,
@@ -19,7 +20,10 @@ export class LoginComponent {
   public ngOnInit(): void {}
 
   signIn() {
-    this.authenticationService.SignIn(this.email, this.password);
+    this.authenticationService.SignIn(this.email, this.password).then(error => {
+      console.log(error);
+      this.errorMessage = error;    
+    });
     this.email = ''; 
     this.password = '';
   }

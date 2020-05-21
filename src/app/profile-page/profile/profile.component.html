@@ -43,7 +43,7 @@
       </div>
       <div class="info-right">
         <div class="field" >
-          <p [hidden]="valueHidden"> {{ phone }}</p>
+          <p [hidden]="valueHidden"> {{ formatNumber(phone) }}</p>
 
 
           <form #newPhone="ngForm" (ngSubmit)="UpdateUser(newPhone.value)">

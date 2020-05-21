@@ -1,52 +1,109 @@
-import { Component, OnInit, NgZone, Input } from '@angular/core';
-import { FirebaseService } from 'src/shared/services/firebase.service';
-import { AuthenticationService } from 'src/shared/services/authentication.service';
-import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+  import {
+    Component,
+    OnInit,
+    NgZone,
+    Input
+  } from '@angular/core';
+  import {
+    FirebaseService
+  } from 'src/shared/services/firebase.service';
+  import {
+    AuthenticationService
+  } from 'src/shared/services/authentication.service';
+  import {
+    Router
+  } from '@angular/router';
+  import {
+    NgForm
+  } from '@angular/forms';
 
-@Component({
-  selector: 'profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
-})
-export class ProfileComponent implements OnInit {
+  @Component({
+    selector: 'profile',
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.scss']
+  })
+  export class ProfileComponent implements OnInit {
 
-  @Input() status: string;
-  @Input() phone: string;
-  @Input() location: string;
-  @Input() language: string;
+    @Input() status: string;
+    @Input() phone: string;
+    @Input() location: string;
+    @Input() language: string;
 
-  valueHidden: boolean = false;
-  inputHidden: boolean = true;
+    valueHidden: boolean = false;
+    inputHidden: boolean = true;
 
-  constructor(
-    public firebaseService: FirebaseService,
-    public afAuth: AuthenticationService,
-    public ngZone: NgZone,
-    public router: Router) { }
+    constructor(
+      public firebaseService: FirebaseService,
+      public afAuth: AuthenticationService,
+      public ngZone: NgZone,
+      public router: Router) {}
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {}
 
-  UpdateUser(value) {
-    console.log(value);
-    const u = this.afAuth.userData;
-    const uid = u.uid;
-    this.firebaseService.updateUser(uid, value)
-    .then(
-    res => {
-      this.router.navigate(['/profile']);
+    UpdateUser(value) {
+      console.log(value);
+      const u = this.afAuth.userData;
+      const uid = u.uid;
+      this.firebaseService.updateUser(uid, value)
+        .then(
+          res => {
+            this.router.navigate(['/profile']);
+          }
+        )
     }
-  )
-  }
 
-  EditInput() {
-    this.valueHidden = true;
-    this.inputHidden = false;
-  }
+    EditInput() {
+      this.valueHidden = true;
+      this.inputHidden = false;
+    }
 
-  ConfirmInput() {
-    this.valueHidden = false;
-    this.inputHidden = true;
+    ConfirmInput() {
+      this.valueHidden = false;
+      this.inputHidden = true;
+    }
+
+    formatNumber(tel) {
+      if (!tel) {
+        return '';
+      }
+
+      var value = tel.toString().trim().replace(/^\+/, '');
+
+      if (value.match(/[^0-9]/)) {
+        return "Please enter a valid phone number";
+      }
+
+      var country, city, number;
+
+      switch (value.length) {
+        case 10: // +1PPP####### -> C (PPP) ###-####
+          country = 1;
+          city = value.slice(0, 3);
+          number = value.slice(3);
+          break;
+
+        case 11: // +CPPP####### -> CCC (PP) ###-####
+          country = value[0];
+          city = value.slice(1, 4);
+          number = value.slice(4);
+          break;
+
+        case 12: // +CCCPP####### -> CCC (PP) ###-####
+          country = value.slice(0, 3);
+          city = value.slice(3, 5);
+          number = value.slice(5);
+          break;
+
+        default:
+          return tel;
+      }
+
+      if (country == 1) {
+        country = "";
+      }
+
+      number = number.slice(0, 3) + '-' + number.slice(3);
+
+      return (country + " (" + city + ") " + number).trim();
+    }
   }
-}
