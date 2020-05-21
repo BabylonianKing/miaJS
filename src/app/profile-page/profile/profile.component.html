@@ -28,7 +28,7 @@
 
 
           <form #newEmail="ngForm" (ngSubmit)="UpdateUser(newEmail.value)">
-            <input [hidden]="inputHidden" placeholder="New email" type="email" name="email" id="new_email" ngModel>
+            <input [hidden]="inputHidden" placeholder="New email" type="email" name="email" id="new_email" autocomplete="off" ngModel>
           </form>
 
 
@@ -47,7 +47,7 @@
 
 
           <form #newPhone="ngForm" (ngSubmit)="UpdateUser(newPhone.value)">
-            <input [hidden]="inputHidden" placeholder="New phone number" type="phone" name="phone" id="new_phone" ngModel>
+            <input [hidden]="inputHidden" placeholder="New phone number" type="tel" name="phone" id="new_phone" autocomplete="off" ngModel>
           </form>
 
 
@@ -88,7 +88,11 @@
 
 
           <form #newLanguage="ngForm" (ngSubmit)="UpdateUser(newLanguage.value)">
-            <input [hidden]="inputHidden" placeholder="New language" type="text" name="language" id="new_language" ngModel>
+            <input [hidden]="inputHidden" placeholder="New language" type="text" name="language" id="new_language" autocomplete="off" ngModel>
+            <!-- <select [hidden]="inputHidden" placeholder="New language" name="language" id="new_language" ngModel>
+              <option value="Enlish">English</option>
+              <option value="French">French</option>
+            </select> -->
           </form>
 
 

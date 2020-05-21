@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {}
 
   signUp() {
-    this.authenticationService.SignIn(this.email, this.password).then(error => {
+    this.authenticationService.SignUp(this.email, this.password).then(error => {
       console.log(error);
       this.errorMessage = error;    
     });

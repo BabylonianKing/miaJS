@@ -138,6 +138,12 @@
         input {
           font-size: 16px;
           font-family: $rubik;
+          border: none;
+          color: $red-dark;
+
+          &:focus {
+            outline: none;
+          } 
         }
 
         a {

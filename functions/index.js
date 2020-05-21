@@ -93,7 +93,7 @@ exports.createUser = functions.firestore
     // e.g. {'name': 'Marie', 'age': 66}
     const newValue = snap.data();
 
-    db.collection('users-info').doc(context.params.userId).set(newValue)
+    db.collection('user-infos').doc(context.params.userId).set(newValue)
 
   });
 
@@ -108,7 +108,7 @@ exports.updateUser = functions.firestore
     // ...or the previous value before this update
     //const previousValue = change.before.data();
 
-    db.collection('users-info').doc(context.params.userId).set(newValue, {merge: true})
+    db.collection('user-infos').doc(context.params.userId).set(newValue, {merge: true})
 
 
   });

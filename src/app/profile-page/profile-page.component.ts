@@ -14,6 +14,8 @@ export class ProfilePageComponent implements OnInit {
   constructor(private afAuth: AuthenticationService,
     public firebaseService: FirebaseService) { }
 
+  
+  // Timeout?
   ngOnInit(): void {
     setTimeout(() => {
       const user = JSON.parse(localStorage.getItem('user'));
