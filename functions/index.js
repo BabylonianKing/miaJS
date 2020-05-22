@@ -148,8 +148,6 @@ exports.updateUser = functions.firestore
   .onCreate((snap, context) => {
     // Get an object representing the document
     // e.g. {'name': 'Marie', 'age': 66}
-    const newValue = snap.data();
-
     db.collection('organizations').doc(context.params.orgId).set({orgId: context.params.orgId}, {merge: true})
 
   });
