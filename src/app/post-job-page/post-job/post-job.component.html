@@ -1,51 +1,41 @@
 <div class="root">
-  <div class="header">
-    <div class="banner">
-      <img>
-      <div class="edit-banner">
-        <p>Change Cover</p>
+  <div class="form-container">
+    <form #orgForm="ngForm" (ngSubmit)="sendForm(orgForm)">
+
+      <!-- Org Name -->
+      <div class="field">
+        <p class="field-title">Name</p>
+        <input type="text" required id="org_name" [ngModel] placeholder="Ex: Matilda">
       </div>
-    </div>
-    <div class="profile-header">
-      <img class="avatar" src="assets/mia.png">
-      <div class="profile-header-infos">
-        <h2>Matilda</h2>
-        <div class="sub-infos">
-          <p>We find the dream in your job</p>
-          <p>Montreal, Canada</p>
-        </div>
+
+      <!-- Org Logo -->
+      <div class="field">
+        <p class="field-title">Logo</p>
+        <input type="file" id="org_logo" [ngModel]>
       </div>
-    </div>
-  </div>
-  <div class="form">
-      <div class="form-left">
-        <h1>Create a job listing</h1>
+
+      <!-- Org Location -->
+      <div class="field">
+        <p class="field-title">Location</p>
+        <input type="search" required id="org_location" [ngModel] placeholder="Ex: Montreal, Canada">
       </div>
-      <div class="form-right">
-        <form>
-            <h2>Tell us more about your organization</h2>
-            <div class="field">
-                <h3 class="field-title">Organization Name</h3>
-                <input>
-            </div>
-            <div class="field">
-                <h3 class="field-title">Logo</h3>
-                <input>
-            </div>
-            <div class="field">
-                <h3 class="field-title">Head Office Location</h3>
-                <input>
-            </div>
-            <div class="field">
-                <h3 class="field-title">Bio</h3>
-                <input>
-            </div>
-            <div class="field">
-                <h3 class="field-title">Values</h3>
-                <input>
-            </div>
-            <button>Post</button>
-        </form>
+
+      <!-- Org Values -->
+      <div class="field">
+        <p class="field-title">Values</p>
+        <input type="text" id="org_values" [ngModel] placeholder="Ex: transparency, equal pay, innovation">
       </div>
+
+      <!-- Org Bio -->
+      <div class="field span">
+        <p class="field-title">Bio</p>
+        <textarea class="large" type="text" maxlength="5" id="org_bio" [ngModel]
+          placeholder="Ex: We believe..."></textarea>
+      </div>
+
+      <div class="field right">
+        <button class="submit-button" type="submit">Job details</button>
+      </div>
+    </form>
   </div>
 </div>

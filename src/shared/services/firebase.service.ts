@@ -12,9 +12,18 @@ export class FirebaseService {
     public authenticationService: AuthenticationService) { }
 
 
-  getAvatars(){
-      return this.db.collection('/avatar').valueChanges()
+  registerOrg(formValue) {
+    console.log(formValue)
+    return this.db.collection('organizations').add({
+      name: formValue.org_name,
+      nameToSearch: formValue.org_name.toLowerCase(),
+      logo: formValue.org_logo,
+      location: formValue.org_location,
+      values: formValue.org_values,
+      bio: formValue.org_bio
+    });
   }
+  
 
   getUserInfos(userKey) {
     return this.db.collection('user-infos', ref => ref.where("uid", '==', userKey)).valueChanges();

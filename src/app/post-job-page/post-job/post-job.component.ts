@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { FirebaseService } from 'src/shared/services/firebase.service';
 
 @Component({
   selector: 'post-job',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostJobComponent implements OnInit {
 
-  constructor() { }
+  constructor(public firebaseService: FirebaseService) { }
 
   ngOnInit(): void {
   }
+
+  sendForm(form: NgForm) {
+    console.log(form)
+    console.log("sumbitted")
+    this.firebaseService.registerOrg(form.value);
+
+    // form.reset();
+  } 
 
 }
