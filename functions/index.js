@@ -123,3 +123,26 @@ exports.updateUser = functions.firestore
 
   //     // perform desired operations ...
   //   });
+
+  
+  
+  
+  //TODO: Function for updating conversation cards. Should remove this and find a more elegant way later on....
+  exports.updateConversationCard= functions.firestore
+  .document('conversations/{userId}')
+  .onUpdate((change, context) => {
+    // Get an object representing the document
+    // e.g. {'name': 'Marie', 'age': 66}
+    const newValue = change.after.data();
+
+    // ...or the previous value before this update
+    //const previousValue = change.before.data();
+
+    db.collection('user-infos').doc(context.params.userId).set(newValue, {merge: true})
+
+
+  });
+
+
+
+  //TODO: Function for updating the cards, seeing the latest information.

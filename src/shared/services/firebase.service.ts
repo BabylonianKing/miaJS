@@ -36,6 +36,9 @@ export class FirebaseService {
   getItems(userKey){
     // SEE TUTORIAL FOR WHY .snapshotChanges(); return this.db.collection('items').snapshotChanges();
     return this.db.collection('items', ref => ref.where("uid", '==', userKey)).valueChanges();
+
+    //return this.db.collection('conversation-cards', ref => ref.where("uid", '==', userKey)).valueChanges();
+
   }
 
   searchOrganization(searchValue){

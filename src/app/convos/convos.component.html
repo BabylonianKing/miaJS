@@ -28,8 +28,9 @@
                 [timestamp]="item.timestamp"
                 [lastMessage]="item.lastMessage"
                 [isUnread]="item.isUnread"
+                [id] = "item.id"
                 
-                (click)="item.isSelected = !item.isSelected"
+                (click)="item.isSelected = !item.isSelected; changeChat(item.id)"
                 [ngClass]="{ 'selected': item.isSelected }">
     </convo-card>
   

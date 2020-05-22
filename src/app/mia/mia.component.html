@@ -18,7 +18,7 @@
     <chat-message *ngFor="let msg of messages"
                   type="text"
                   [message]="msg.text"
-                  [timestamp]="msg.date.toDateString()"
+                  [timestamp]="msg.date.toDate().toDateString()"
                   [reply]="msg.reply">
     </chat-message>
     
@@ -32,4 +32,5 @@
     <chat-form (send)="handleUserMessage($event)">
 
     </chat-form>
+    <button (click)="changeConversation()">Change Person Texting</button>
 </div>
