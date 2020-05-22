@@ -40,7 +40,6 @@ export class ConvosComponent implements OnInit {
         return
       } 
       snapshot.forEach(doc => {
-        console.log(doc.id)
         databaseOfUsers.push({id: doc.id, 
           jobTitle: doc.data().displayName, 
           // organization: "test Organization",
@@ -91,12 +90,15 @@ export class ConvosComponent implements OnInit {
     });
     }
 
-    changeChat(id) {
-      this.selectedUser.emit(id)
+    changeChat(item) {
+
+      //Ensuring that only one convo-card is highlighted at a time
+      this.items.forEach(function(part, index) {
+        this[index].isSelected = false;
+      }, this.items)
+      this.selectedUser.emit(item.id);
+      item.isSelected = !item.isSelected;
+
     }
 
-  //   selectConvo() {
-  //     console.log("Hello");
-  //     this.isSelected = true;
-  // }
 }

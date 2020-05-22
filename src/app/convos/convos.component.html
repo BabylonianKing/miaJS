@@ -30,7 +30,7 @@
                 [isUnread]="item.isUnread"
                 [id] = "item.id"
                 
-                (click)="item.isSelected = !item.isSelected; changeChat(item.id)"
+                (click)="changeChat(item)"
                 [ngClass]="{ 'selected': item.isSelected }">
     </convo-card>
   

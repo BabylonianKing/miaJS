@@ -32,7 +32,6 @@ export class MiaComponent implements OnInit {
 
     if (!this.currentTexterId) {
       this.currentTexterId = "conversationWithMatilda";
-
     }
   
 
@@ -41,19 +40,25 @@ export class MiaComponent implements OnInit {
         snapshot.forEach(doc => {
           this.messages.push(doc.data())
         })
-
       })
 
 
       let query = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId);
-      let observer = query.snapshotChanges().pipe(
-        map(actions => actions.map(a => {
-          console.log("Obtained Data")
-          const data = a.payload.doc.data();
-          return data  
-        }))
-      )
-      console.log(observer)
+      query.valueChanges().subscribe(data => {
+        // this.messages = [];
+        // this.messages.push(data.values);
+        this.messages = data
+
+      })
+      
+      // let observer = query.snapshotChanges().pipe(
+      //   map(actions => actions.map(a => {
+      //     console.log("Obtained Data")
+      //     const data = a.payload.doc.data();
+      //     return data  
+      //   }))
+      // )
+      // console.log(observer)
 
 
 
@@ -63,7 +68,6 @@ export class MiaComponent implements OnInit {
 
   //Prototyping function, changing from Chat with Matilda to chatting with another human. Hard-coded Lucas.
   changeConversation() {
-    console.log("Changing conversation");
     this.currentTexterId = JSON.parse(localStorage.getItem('currentTexter'))
 
     console.log(this.currentTexterId)
@@ -114,9 +118,10 @@ export class MiaComponent implements OnInit {
     // Add message to DB (THIS WAY OF DOING THINGS REQUIRES MESSAGES TO BE ARCHIVED AS TO NOT GO OVER THE 1MB LIMIT FOR DOCS)
     let ref = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId).doc(data.date.toString());
     ref.set(data);
-    ref.get().toPromise().then(doc => {
-      this.messages.push(doc.data())
-    })
+    //Should remove this code, creates duplicate texts on the client side
+    // ref.get().toPromise().then(doc => {
+    //   this.messages.push(doc.data())
+    // })
 
 
     //Creating a duplicate version on the receiver's end
