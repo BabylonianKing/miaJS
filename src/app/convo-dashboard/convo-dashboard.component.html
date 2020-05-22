@@ -1,7 +1,7 @@
 <div class="root">
   <toolbar></toolbar>
   <div class="chat-container">
-    <convos></convos>
+    <convos (selectedUser) = updateCurrentTexter($event)></convos>
     <mia></mia>
     <convo-info></convo-info>
   </div>

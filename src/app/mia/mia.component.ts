@@ -1,6 +1,7 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  ViewChild
 } from '@angular/core';
 import {
   HttpClient
@@ -23,10 +24,9 @@ export class MiaComponent implements OnInit {
 
   messages = [];
   loading = false;
-  currentTexterId = "conversationWithMatilda";
   userId = JSON.parse(localStorage.getItem('user')).uid;
-  //Later on, use
-  //currentTexterId = JSON.parse(localStorage.getItem('currentTexter')).uid;
+  
+  currentTexterId = JSON.parse(localStorage.getItem('currentTexter'));
 
 
   // Random ID to maintain session with server (TO BE SWITCHED WITH USER_ID)
@@ -39,6 +39,11 @@ export class MiaComponent implements OnInit {
 
   ngOnInit() { 
 
+    if (!this.currentTexterId) {
+      this.currentTexterId = "conversationWithMatilda";
+
+    }
+  
 
     let conversationRef = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId).get().toPromise()
       .then(snapshot => {
@@ -55,8 +60,11 @@ export class MiaComponent implements OnInit {
 
   //Prototyping function, changing from Chat with Matilda to chatting with another human. Hard-coded Lucas.
   changeConversation() {
-    this.messages = []
-    this.currentTexterId = "it3gcWfiUOcAS2K1g7ciiP7aSXw1";
+    console.log("Changing conversation");
+    this.currentTexterId = JSON.parse(localStorage.getItem('currentTexter'))
+
+    console.log(this.currentTexterId)
+    this.messages = [];
 
     let conversationRef = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId).get().toPromise()
       .then(snapshot => {
@@ -108,7 +116,6 @@ export class MiaComponent implements OnInit {
     })
 
 
-
     //Creating a duplicate version on the receiver's end
     //Same messages, except reply is the opposite type
     let receiverData = data
@@ -148,10 +155,12 @@ export class MiaComponent implements OnInit {
   handleUserMessage(event) {
     const text = event.message;
     this.addUserMessage(text);
-    this.loading = true;
 
     if (this.currentTexterId.localeCompare("conversationWithMatilda") == 0) {
       //i.e. if currentTexterId is matilda, execute the fulfillment
+
+      this.loading = true;
+
 
 
       // Make the request

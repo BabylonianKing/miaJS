@@ -16,7 +16,7 @@ export class ConvosComponent implements OnInit {
   org_filtered_items: Array<any>;
 
   @Input() isSelected: boolean = false;
-  @Output() selectedUserEvent = new EventEmitter();
+  @Output() selectedUser = new EventEmitter();
 
   constructor(
     public firebaseService: FirebaseService,
@@ -96,7 +96,7 @@ export class ConvosComponent implements OnInit {
     }
 
     changeChat(id) {
-      this.selectedUserEvent.emit(id)
+      this.selectedUser.emit(id)
     }
 
   //   selectConvo() {
