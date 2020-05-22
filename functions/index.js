@@ -128,18 +128,29 @@ exports.updateUser = functions.firestore
   
   
   //TODO: Function for updating conversation cards. Should remove this and find a more elegant way later on....
-  exports.updateConversationCard= functions.firestore
-  .document('conversations/{userId}')
-  .onUpdate((change, context) => {
+  // exports.updateConversationCard= functions.firestore
+  // .document('conversations/{userId}')
+  // .onUpdate((change, context) => {
+  //   // Get an object representing the document
+  //   // e.g. {'name': 'Marie', 'age': 66}
+  //   const newValue = change.after.data();
+
+  //   // ...or the previous value before this update
+  //   //const previousValue = change.before.data();
+
+  //   db.collection('user-infos').doc(context.params.userId).set(newValue, {merge: true})
+
+
+  // });
+
+  exports.createOrgId = functions.firestore
+  .document("organizations/{orgId}")
+  .onCreate((snap, context) => {
     // Get an object representing the document
     // e.g. {'name': 'Marie', 'age': 66}
-    const newValue = change.after.data();
+    const newValue = snap.data();
 
-    // ...or the previous value before this update
-    //const previousValue = change.before.data();
-
-    db.collection('user-infos').doc(context.params.userId).set(newValue, {merge: true})
-
+    db.collection('organizations').doc(context.params.orgId).set({orgId: context.params.orgId}, {merge: true})
 
   });
 

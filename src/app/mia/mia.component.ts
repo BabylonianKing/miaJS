@@ -50,10 +50,11 @@ export class MiaComponent implements OnInit {
         map(actions => actions.map(a => {
           console.log("Obtained Data")
           const data = a.payload.doc.data();
-          this.messages.push(data);
-  
+          return data  
         }))
       )
+      console.log(observer)
+
 
 
 

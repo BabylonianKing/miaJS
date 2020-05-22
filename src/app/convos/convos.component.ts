@@ -54,7 +54,6 @@ export class ConvosComponent implements OnInit {
 
     })
     
-    
     //To continue implementing, reading from conversation-cards, each person is a document, storing objects of people they talked to, including time element, most recent text, 
     //const user2Id = JSON.parse(localStorage.getItem('currentTexter')).uid;
 
@@ -70,9 +69,6 @@ export class ConvosComponent implements OnInit {
     //     this.items = conversations.array;
     //   }
     // })
-    
-
-
 
 
     //Should be removed later on
