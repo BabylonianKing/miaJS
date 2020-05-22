@@ -119,7 +119,7 @@ export class MiaComponent implements OnInit {
     //Creating a duplicate version on the receiver's end
     //Same messages, except reply is the opposite type
     let receiverData = data
-    receiverData.reply != receiverData.reply
+    receiverData.reply = false
 
     let refReceiver = this.db.collection("conversations").doc(this.currentTexterId).collection(this.userId).doc(receiverData.date.toString());
     refReceiver.set(receiverData);
