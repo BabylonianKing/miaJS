@@ -9,6 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 import { SignupPageComponent } from './signup-page/signup-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { PostJobPageComponent } from './post-job-page/post-job-page.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'login', component: LoginPageComponent},
   { path: 'signup', component: SignupPageComponent},
   { path: 'profile', component: ProfilePageComponent},
+  { path: 'post-job', component: PostJobPageComponent}
 ];
 
 @NgModule({

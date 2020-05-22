@@ -36,6 +36,8 @@ import { SignupComponent } from './signup/signup.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ProfileComponent } from './profile-page/profile/profile.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { PostJobPageComponent } from './post-job-page/post-job-page.component';
+import { PostJobComponent } from './post-job-page/post-job/post-job.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     ProfilePageComponent,
     ProfileComponent,
     ToolbarComponent,
+    PostJobPageComponent,
+    PostJobComponent,
   ],
   imports: [
     BrowserModule,
