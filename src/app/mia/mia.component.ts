@@ -1,17 +1,8 @@
-import {
-  Component,
-  OnInit,
-  ViewChild
-} from '@angular/core';
-import {
-  HttpClient
-} from '@angular/common/http';
-import {
-  AngularFirestore
-} from '@angular/fire/firestore';
-import {
-  firestore
-} from 'firebase';
+import {  Component,  OnInit,  ViewChild } from '@angular/core';
+import {  HttpClient } from '@angular/common/http';
+import {  AngularFirestore } from '@angular/fire/firestore';
+import {  firestore} from 'firebase';
+import { map } from 'rxjs/operators';
 
 const dialogflowURL = 'https://us-central1-mia-test-sgwxam.cloudfunctions.net/dialogflowGateway';
 
@@ -52,6 +43,17 @@ export class MiaComponent implements OnInit {
         })
 
       })
+
+
+      let query = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId);
+      let observer = query.snapshotChanges().pipe(
+        map(actions => actions.map(a => {
+          console.log("Obtained Data")
+          const data = a.payload.doc.data();
+          this.messages.push(data);
+  
+        }))
+      )
 
 
 
@@ -123,6 +125,9 @@ export class MiaComponent implements OnInit {
 
     let refReceiver = this.db.collection("conversations").doc(this.currentTexterId).collection(this.userId).doc(receiverData.date.toString());
     refReceiver.set(receiverData);
+
+
+
   }
 
   addBotMessage(text) {
