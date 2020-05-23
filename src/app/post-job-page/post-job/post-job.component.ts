@@ -9,7 +9,7 @@ import { FirebaseService } from 'src/shared/services/firebase.service';
 })
 export class PostJobComponent implements OnInit {
 
-  tab: number = 1;
+  tab: number = 0;
 
   constructor(public firebaseService: FirebaseService) { }
 

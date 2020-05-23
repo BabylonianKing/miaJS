@@ -152,6 +152,14 @@ exports.updateUser = functions.firestore
 
   });
 
+  exports.createJobId = functions.firestore
+  .document("organizations/{jobId}")
+  .onCreate((snap, context) => {
+    // Get an object representing the document
+    // e.g. {'name': 'Marie', 'age': 66}
+    db.collection('jobs').doc(context.params.jobId).set({jobId: context.params.jobId}, {merge: true})
+
+  });
 
 
   //TODO: Function for updating the cards, seeing the latest information.
