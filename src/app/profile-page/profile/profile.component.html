@@ -1,17 +1,34 @@
 <div class="root" *ngIf="afAuth.userData as user">
   <div class="header">
-    <div class="banner">
-      <img src="{{downloadURL}}">
+    <div class="banner" style="background-image: url({{downloadURL}});">
 
-    <div class="edit-banner">
-      <input type="file" (change)="uploadImage($event)" accept=".png, .jpg"/>
-        <p>Change Cover</p>
-    </div>
+      <div class="edit-banner">
+        <input id="banner" type="file" (change)="uploadImage($event)" accept=".png, .jpg" style="display: none;">
+        <label for="banner">Change Cover</label>
+      </div>
     </div>
     <div class="profile-header">
-      <img class="avatar" src="{{ user.photoURL }}">
-      <div class="profile-header-infos" >
-        <h2>{{(user.displayName) ? user.displayName: 'New User' }}</h2>
+      <div class="avatar" style="background-image: url({{user.photoURL}});">
+        <div class="avatar-hover">
+          <div class="edit-pic">
+          <input id="banner" type="file" (change)="uploadImage($event)" accept=".png, .jpg" style="display: none;">
+          <label for="banner">Change Cover</label>
+        </div>
+        </div>
+      </div>
+      <div class="profile-header-infos">
+        <div class="super-infos">
+        <h2 [hidden]="valueHidden">{{(user.displayName) ? user.displayName: 'New User' }}</h2>
+
+        <!-- TO BE MODIFIED!!!!!!!!!!!! -->
+        <form #newEmail="ngForm" (ngSubmit)="UpdateUser(newEmail.value)">
+          <input [hidden]="inputHidden" placeholder="New name" type="text" name="email" id="new_email"
+            autocomplete="off" ngModel>
+        </form>
+
+        <a (click)="EditInput()" [hidden]="valueHidden">Edit</a>
+        <a (click)="ConfirmInput()" [hidden]="inputHidden">Save</a>
+      </div>
         <div class="sub-infos">
           <p>{{ (status) ? status: 'Recently met Matilda'}}</p>
           <p>{{ (location) ? location: 'Somewhere, Somewhere' }}</p>
@@ -21,16 +38,17 @@
   </div>
   <div class="infos">
     <div class="info">
-        <div class="info-left">
-            <h2>Email</h2>
-          </div>
+      <div class="info-left">
+        <h2>Email</h2>
+      </div>
       <div class="info-right">
-        <div class="field" >
+        <div class="field">
           <p [hidden]="valueHidden"> {{ user.email }}</p>
 
 
           <form #newEmail="ngForm" (ngSubmit)="UpdateUser(newEmail.value)">
-            <input [hidden]="inputHidden" placeholder="New email" type="email" name="email" id="new_email" autocomplete="off" ngModel>
+            <input [hidden]="inputHidden" placeholder="New email" type="email" name="email" id="new_email"
+              autocomplete="off" ngModel>
           </form>
 
 
@@ -44,12 +62,13 @@
         <h2>Phone Number</h2>
       </div>
       <div class="info-right">
-        <div class="field" >
+        <div class="field">
           <p [hidden]="valueHidden"> {{ formatNumber(phone) }}</p>
 
 
           <form #newPhone="ngForm" (ngSubmit)="UpdateUser(newPhone.value)">
-            <input [hidden]="inputHidden" placeholder="New phone number" type="tel" name="phone" id="new_phone" autocomplete="off" ngModel>
+            <input [hidden]="inputHidden" placeholder="New phone number" type="tel" name="phone" id="new_phone"
+              autocomplete="off" ngModel>
           </form>
 
 
@@ -59,9 +78,9 @@
       </div>
     </div>
     <div class="info">
-        <div class="info-left">
-            <h2>Subscription Type</h2>
-          </div>
+      <div class="info-left">
+        <h2>Subscription Type</h2>
+      </div>
       <div class="info-right subscription-type">
         <div class="field">
           <p>Basic User</p>
@@ -70,9 +89,9 @@
       </div>
     </div>
     <div class="info">
-        <div class="info-left">
-            <h2>Time Zone</h2>
-          </div>
+      <div class="info-left">
+        <h2>Time Zone</h2>
+      </div>
       <div class="info-right">
         <div class="field">
           <p>EST</p>
@@ -81,16 +100,17 @@
       </div>
     </div>
     <div class="info">
-        <div class="info-left">
-            <h2>Language</h2>
-          </div>
+      <div class="info-left">
+        <h2>Language</h2>
+      </div>
       <div class="info-right">
         <div class="field">
           <p [hidden]="valueHidden"> {{ language }}</p>
 
 
           <form #newLanguage="ngForm" (ngSubmit)="UpdateUser(newLanguage.value)">
-            <input [hidden]="inputHidden" placeholder="New language" type="text" name="language" id="new_language" autocomplete="off" ngModel>
+            <input [hidden]="inputHidden" placeholder="New language" type="text" name="language" id="new_language"
+              autocomplete="off" ngModel>
             <!-- <select [hidden]="inputHidden" placeholder="New language" name="language" id="new_language" ngModel>
               <option value="Enlish">English</option>
               <option value="French">French</option>
@@ -104,9 +124,9 @@
       </div>
     </div>
     <div class="info">
-        <div class="info-left">
-            <h2>Password</h2>
-          </div>
+      <div class="info-left">
+        <h2>Password</h2>
+      </div>
       <div class="info-right">
         <div class="field">
           <p>********</p>

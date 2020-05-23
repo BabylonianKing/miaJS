@@ -20,35 +20,42 @@
       height: 200px;
       background-color: $red-light;
       border-radius: 15px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
 
       img {
         background-size: contain;
-        
+
       }
 
       .edit-banner {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          padding: 5px 15px;
-          background-color: rgba(black, 0.15);
-          border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 5px 15px;
+        background-color: rgba(black, 0.15);
+        border-radius: 7px;
 
-          p {
-              font-family: $rubik;
-              font-weight: 400;
-              font-size: 12px;
-              color: white;
-              
-          }
+        label {
+          font-family: $rubik;
+          font-weight: 400;
+          font-size: 12px;
+          color: white;
 
           &:hover {
-            background-color: rgba(black, 0.10);
             cursor: pointer;
           }
+
+        }
+
+        &:hover {
+          background-color: rgba(black, 0.10);
+          cursor: pointer;
+        }
       }
     }
 
@@ -67,9 +74,68 @@
         border-radius: 15px;
         background-color: white;
         margin-right: 20px;
-      }
+        position: relative;
+        background-size: cover;
 
-      .profile-header-infos {
+        &:hover {
+
+          cursor: pointer;
+
+          .avatar-hover {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .edit-pic {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              padding: 5px 15px;
+              background-color: $red-dark;
+              border-radius: 7px;
+
+              label {
+                font-family: $rubik;
+                font-weight: 400;
+                font-size: 12px;
+                color: white;
+
+                &:hover {
+                  cursor: pointer;
+                }
+
+              }
+
+              &:hover {
+                background-color: lighten($red-dark, 5%);
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .avatar-hover {
+      display: none;
+      position: absolute;
+      bottom: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      border-radius: 15px;
+      background-color: transparentize($red-light, 0.8);
+      color: white;
+
+
+    }
+
+    .profile-header-infos {
+
+      .super-infos {
+
+        display: flex;
+        align-items: center;
 
         h2 {
           font-family: $rubik;
@@ -78,94 +144,123 @@
           color: $heading-gray;
           line-height: 32px;
           margin-bottom: 5px;
-        }
-
-        .sub-infos {
-          display: flex;
-
-          p {
-            margin-right: 20px;
-            font-family: $rubik;
-            font-weight: 300;
-            font-size: 16px;
-            color: $paragraph-gray;
-          }
-        }
-      }
-    }
-  }
-
-  .infos {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin-top: 120px;
-
-    .info {
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 0;
-      margin-left: 30px;
-      margin-right: 100px;
-      border-bottom: $border-thin;
-      font-family: $rubik;
-
-      .info-left {
-
-        min-width: 250px;
-        margin-right: 100px;
-
-        h2 {
-          font-weight: 300;
-          font-size: 22px;
-          color: $paragraph-gray;
-        }
-      }
-
-      .info-right {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-grow: 1;
-        font-size: 16px;
-
-        &.subscription-type {
-          justify-content: start;
-        }
-
-        .field {
           margin-right: 10px;
-          color: $heading-gray;
         }
 
         input {
-          font-size: 16px;
+          font-size: 32px;
+          line-height: 32px;
+          margin-bottom: 5px;
+          margin-right: 10px;
+          font-weight: 500;
           font-family: $rubik;
           border: none;
           color: $red-dark;
-
+  
           &:focus {
             outline: none;
-          } 
+          }
         }
-
+  
         a {
           text-decoration: none;
           user-select: none;
           color: $red-dark;
-
+          font-family: $rubik;
+  
           &:hover {
             color: $blue-dark;
             cursor: pointer;
           }
         }
+
+      }
+
+      .sub-infos {
+        display: flex;
+
+        p {
+          margin-right: 20px;
+          font-family: $rubik;
+          font-weight: 300;
+          font-size: 16px;
+          color: $paragraph-gray;
+        }
+      }
+    }
+  }
+}
+
+.infos {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 120px;
+
+  .info {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    margin-left: 30px;
+    margin-right: 100px;
+    border-bottom: $border-thin;
+    font-family: $rubik;
+
+    .info-left {
+
+      min-width: 250px;
+      margin-right: 100px;
+
+      h2 {
+        font-weight: 300;
+        font-size: 22px;
+        color: $paragraph-gray;
       }
     }
 
-    .info:last-child {
-      border: none;
+    .info-right {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-grow: 1;
+      font-size: 16px;
+
+      &.subscription-type {
+        justify-content: start;
+      }
+
+      .field {
+        margin-right: 10px;
+        color: $heading-gray;
+      }
+
+      input {
+        font-size: 16px;
+        font-family: $rubik;
+        border: none;
+        color: $red-dark;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      a {
+        text-decoration: none;
+        user-select: none;
+        color: $red-dark;
+
+        &:hover {
+          color: $blue-dark;
+          cursor: pointer;
+        }
+      }
     }
+  }
+
+  .info:last-child {
+    border: none;
   }
 }

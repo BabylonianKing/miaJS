@@ -25,7 +25,6 @@ import { AuthenticationService } from '../shared/services/authentication.service
 
 /* DB CRUD service */
 import { FirebaseService } from '../shared/services/firebase.service';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { ConvoInfoComponent } from './convo-info/convo-info.component';
 
 // Cookier service
@@ -50,7 +49,6 @@ import { PostJobComponent } from './post-job-page/post-job/post-job.component';
     ConvosComponent,
     ConvoCardComponent,
     LoginComponent,
-    SidebarComponent,
     ConvoInfoComponent,
     LoginPageComponent,
     SignupPageComponent,
