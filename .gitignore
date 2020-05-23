@@ -46,4 +46,4 @@ testem.log
 Thumbs.db
 
 # API Keys
-/functions/service-account.json
+# /functions/service-account.json
