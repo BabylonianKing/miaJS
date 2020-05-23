@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FirebaseService } from 'src/shared/services/firebase.service';
+import {AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'post-job',
@@ -11,7 +12,8 @@ export class PostJobComponent implements OnInit {
 
   tab: number = 0;
 
-  constructor(public firebaseService: FirebaseService) { }
+  constructor(public firebaseService: FirebaseService,
+    public afStorage: AngularFireStorage) { }
 
   ngOnInit(): void {
     this.showTab(this.tab);
@@ -39,5 +41,20 @@ export class PostJobComponent implements OnInit {
     this.tab ++;
     this.showTab(this.tab);
   }
+
+  uploadImage(event) {
+    let userId = JSON.parse(localStorage.getItem('user')).uid;
+    this.afStorage.upload(`/coverImages/${userId}`, event.target.files[0]);
+
+    let ref = this.afStorage.ref(userId);
+    // the put method creates an AngularFireUploadTask
+    // and kicks off the upload
+    ref.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
+    
+
+
+
+  }
+
 
 }

@@ -11,7 +11,7 @@
         <!-- Org Logo -->
         <div class="field">
           <p class="field-title">Logo</p>
-          <input type="file" id="org_logo" [ngModel]>
+          <input type="file" id="org_logo" accept=".png, .jpg" (change)="uploadImage($event)" [ngModel]>
         </div>
 
         <!-- Org Location -->
