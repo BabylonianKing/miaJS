@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthenticationService } from './authentication.service';
+import { AngularFireStorage} from "@angular/fire/storage";
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,8 @@ export class FirebaseService {
 
   constructor(
     public db: AngularFirestore,
-    public authenticationService: AuthenticationService) { }
+    public authenticationService: AuthenticationService,
+    public afStorage: AngularFireStorage) { }
 
 
   registerOrg(formValue) {
@@ -47,6 +50,21 @@ export class FirebaseService {
     return this.db.collection('items', ref => ref.where("uid", '==', userKey)).valueChanges();
 
     //return this.db.collection('conversation-cards', ref => ref.where("uid", '==', userKey)).valueChanges();
+
+  }
+
+  upload(event) {
+    let userId = JSON.parse(localStorage.getItem('user')).uid;
+    this.afStorage.upload(`/coverImages/${userId}`, event.target.files[0]);
+
+    let ref = this.afStorage.ref(userId);
+    // the put method creates an AngularFireUploadTask
+    // and kicks off the upload
+    let uploadProgress = ref.put(event.target.files[0]).percentageChanges();
+    console.log('image uploaded')
+    
+
+
 
   }
 

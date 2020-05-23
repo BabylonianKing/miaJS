@@ -16,6 +16,7 @@
   import {
     NgForm
   } from '@angular/forms';
+import { AngularFireStorage } from '@angular/fire/storage';
 
   @Component({
     selector: 'profile',
@@ -31,14 +32,24 @@
 
     valueHidden: boolean = false;
     inputHidden: boolean = true;
+    downloadURL: string;
+    uploadProgress;
 
     constructor(
       public firebaseService: FirebaseService,
       public afAuth: AuthenticationService,
       public ngZone: NgZone,
-      public router: Router) {}
+      public router: Router,
+      public afStorage: AngularFireStorage) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+
+      let userId = JSON.parse(localStorage.getItem('user')).uid;
+
+      this.afStorage.ref(`/coverImages/${userId}`).getDownloadURL().toPromise().then(data => this.downloadURL = data)
+
+
+    }
 
     UpdateUser(value) {
       console.log(value);
@@ -50,6 +61,22 @@
             this.router.navigate(['/profile']);
           }
         )
+    }
+
+
+
+    uploadImage(event) {
+      let userId = JSON.parse(localStorage.getItem('user')).uid;
+      this.afStorage.upload(`/coverImages/${userId}`, event.target.files[0]);
+  
+      let ref = this.afStorage.ref(userId);
+      // the put method creates an AngularFireUploadTask
+      // and kicks off the upload
+      ref.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
+      
+  
+  
+  
     }
 
     EditInput() {

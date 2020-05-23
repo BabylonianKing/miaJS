@@ -21,6 +21,11 @@
       background-color: $red-light;
       border-radius: 15px;
 
+      img {
+        background-size: contain;
+        
+      }
+
       .edit-banner {
           display: flex;
           align-items: center;

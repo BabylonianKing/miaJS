@@ -1,8 +1,10 @@
 <div class="root" *ngIf="afAuth.userData as user">
   <div class="header">
     <div class="banner">
-      <img>
+      <img src="{{downloadURL}}">
+
     <div class="edit-banner">
+      <input type="file" (change)="uploadImage($event)" accept=".png, .jpg"/>
         <p>Change Cover</p>
     </div>
     </div>
