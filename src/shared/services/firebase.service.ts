@@ -14,15 +14,28 @@ export class FirebaseService {
     public authenticationService: AuthenticationService,
     public afStorage: AngularFireStorage) { }
 
+    postJob(formValue) {
+      return this.db.collection('jobs').add({
+        jobTitle: formValue.job_title,
+        titleToSearch: formValue.job_title.toLowerCase(),
+        jobType: formValue.job_type,
+        location: formValue.job_location,
+        salary: {low: formValue.job_salary_low, high: formValue.job_salary_high},
+        requirements: formValue.job_requirements,
+        responsibilities: formValue.job_responsibilities,
+        jobDescription: formValue.job_description
+      });
+    }
+
 
   registerOrg(formValue) {
     console.log(formValue)
     return this.db.collection('organizations').add({
       name: formValue.org_name,
       nameToSearch: formValue.org_name.toLowerCase(),
-      logo: formValue.org_logo,
+      logo: formValue.org_logo || "",
       location: formValue.org_location,
-      values: formValue.org_values,
+      values: formValue.org_values || "",
       bio: formValue.org_bio
     });
   }

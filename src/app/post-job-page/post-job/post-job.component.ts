@@ -9,17 +9,35 @@ import { FirebaseService } from 'src/shared/services/firebase.service';
 })
 export class PostJobComponent implements OnInit {
 
+  tab: number = 1;
+
   constructor(public firebaseService: FirebaseService) { }
 
   ngOnInit(): void {
+    this.showTab(this.tab);
   }
 
-  sendForm(form: NgForm) {
-    console.log(form)
-    console.log("sumbitted")
-    this.firebaseService.registerOrg(form.value);
+  showTab(n) {
+    // This function will display the specified tab of the form ...
+    let x = document.getElementsByClassName("tab") as HTMLCollectionOf<HTMLElement>;
+    x[n].style.display = "block";
+  }
+  
 
-    // form.reset();
-  } 
+  sendOrgForm(form: NgForm) {
+    this.firebaseService.registerOrg(form.value);
+    let x = document.getElementsByClassName("tab") as HTMLCollectionOf<HTMLElement>;
+    x[this.tab].style.display = "none";
+    this.tab ++;
+    this.showTab(this.tab);
+  }
+
+  sendJobForm(form: NgForm) {
+    this.firebaseService.postJob(form.value);
+    let x = document.getElementsByClassName("tab") as HTMLCollectionOf<HTMLElement>;
+    x[this.tab].style.display = "none";
+    this.tab ++;
+    this.showTab(this.tab);
+  }
 
 }
