@@ -1,18 +1,18 @@
 <div class="root" *ngIf="afAuth.userData as user">
   <div class="header">
-    <div class="banner" style="background-image: url({{downloadURL}});">
+    <div class="banner" style="background-image: url({{coverDownloadURL}});">
 
       <div class="edit-banner">
-        <input id="banner" type="file" (change)="uploadImage($event)" accept=".png, .jpg" style="display: none;">
+        <input id="banner" type="file" (change)="uploadBanner($event)" accept=".png, .jpg" style="display: none;">
         <label for="banner">Change Cover</label>
       </div>
     </div>
     <div class="profile-header">
-      <div class="avatar" style="background-image: url({{user.photoURL}});">
+      <div class="avatar" style="background-image: url({{profileDownloadURL}});">
         <div class="avatar-hover">
           <div class="edit-pic">
-          <input id="banner" type="file" (change)="uploadImage($event)" accept=".png, .jpg" style="display: none;">
-          <label for="banner">Change Picture</label>
+          <input id="profile" type="file" (change)="uploadProfile($event)" accept=".png, .jpg" style="display: none;">
+          <label for="profile">Change Picture</label>
         </div>
         </div>
       </div>

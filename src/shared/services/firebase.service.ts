@@ -23,7 +23,8 @@ export class FirebaseService {
         salary: {low: formValue.job_salary_low, high: formValue.job_salary_high},
         requirements: formValue.job_requirements,
         responsibilities: formValue.job_responsibilities,
-        jobDescription: formValue.job_description
+        jobDescription: formValue.job_description,
+        orgId: JSON.parse(localStorage.getItem('orgId'))
       });
     }
 
@@ -37,7 +38,13 @@ export class FirebaseService {
       location: formValue.org_location,
       values: formValue.org_values || "",
       bio: formValue.org_bio
-    });
+    })
+    .then(function(docRef) {
+      localStorage.setItem('orgId', JSON.stringify(docRef.id));
+    })
+    .catch(function(error) {
+      console.log(`Error retrievin document Id, ${error}`)
+    })
   }
   
 

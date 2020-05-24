@@ -32,7 +32,8 @@ import { AngularFireStorage } from '@angular/fire/storage';
 
     valueHidden: boolean = false;
     inputHidden: boolean = true;
-    downloadURL: string;
+    coverDownloadURL: string;
+    profileDownloadURL: string;
     uploadProgress;
 
     constructor(
@@ -46,7 +47,17 @@ import { AngularFireStorage } from '@angular/fire/storage';
 
       let userId = JSON.parse(localStorage.getItem('user')).uid;
 
-      this.afStorage.ref(`/coverImages/${userId}`).getDownloadURL().toPromise().then(data => this.downloadURL = data)
+      this.afStorage.ref(`/coverImages/${userId}`).getDownloadURL().toPromise().then(data => this.coverDownloadURL = data)
+
+      this.afStorage.ref(`/profileImages/${userId}`).getDownloadURL().toPromise().then(data => {
+        this.profileDownloadURL = data;
+        if (!this.profileDownloadURL) {
+          this.profileDownloadURL = this.afAuth.userData.photoURL
+        }
+      
+      })
+      //I did not change photoURL in the database
+
 
 
     }
@@ -65,7 +76,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 
 
 
-    uploadImage(event) {
+    uploadBanner(event) {
       let userId = JSON.parse(localStorage.getItem('user')).uid;
       this.afStorage.upload(`/coverImages/${userId}`, event.target.files[0]);
   
@@ -73,10 +84,17 @@ import { AngularFireStorage } from '@angular/fire/storage';
       // the put method creates an AngularFireUploadTask
       // and kicks off the upload
       ref.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
-      
+    }
+
+    uploadProfile(event) {
+
+      let userId = JSON.parse(localStorage.getItem('user')).uid;
+      this.afStorage.upload(`/profileImages/${userId}`, event.target.files[0]);
   
-  
-  
+      let ref = this.afStorage.ref(userId);
+      // the put method creates an AngularFireUploadTask
+      // and kicks off the upload
+      ref.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
     }
 
     EditInput() {

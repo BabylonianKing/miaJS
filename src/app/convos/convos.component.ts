@@ -33,7 +33,7 @@ export class ConvosComponent implements OnInit {
     //Fetching each document in collection, loading all users as cards, including the user itself.
     let databaseOfUsers = []
 
-    let usersRef = this.db.collection("users").get().toPromise()
+    let usersRef = this.db.collection("conversation-cards").get().toPromise()
     .then(snapshot => {
       if (snapshot.empty) {
         console.log("User databse is empty");

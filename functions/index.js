@@ -152,14 +152,31 @@ exports.updateUser = functions.firestore
 
   });
 
+
+  //Create JobId within the document, update the conversation card with a new job
   exports.createJobId = functions.firestore
-  .document("organizations/{jobId}")
+  .document("jobs/{jobId}")
   .onCreate((snap, context) => {
     // Get an object representing the document
     // e.g. {'name': 'Marie', 'age': 66}
-    db.collection('jobs').doc(context.params.jobId).set({jobId: context.params.jobId}, {merge: true})
+    db.collection('jobs').doc(context.params.jobId).set({jobId: context.params.jobId}, {merge: true});
 
   });
 
+
+  exports.updateConversationCards = functions.firestore
+  .document("jobs/{jobId}")
+  .onCreate((snap, context) => {
+    // Get an object representing the document
+    // e.g. {'name': 'Marie', 'age': 66}
+    //Update the converstion cards
+    db.collection('conversation-cards').doc(context.params.jobId).set({jobId: context.params.jobId, 
+      jobTitle: db.collection('jobs').doc(context.params.jobId).jobTitle,
+      location: db.collection('jobs').doc(context.params.jobId).location,
+      orgId: db.collection('jobs').doc(context.params.jobId).orgId,
+
+    }, {merge: true})
+
+  });
 
   //TODO: Function for updating the cards, seeing the latest information.
