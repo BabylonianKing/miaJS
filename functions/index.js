@@ -160,20 +160,22 @@ exports.updateUser = functions.firestore
     // Get an object representing the document
     // e.g. {'name': 'Marie', 'age': 66}
     db.collection('jobs').doc(context.params.jobId).set({jobId: context.params.jobId}, {merge: true});
-
   });
 
 
   exports.updateConversationCards = functions.firestore
   .document("jobs/{jobId}")
-  .onCreate((snap, context) => {
+  .onWrite((change, context) => {
     // Get an object representing the document
     // e.g. {'name': 'Marie', 'age': 66}
     //Update the converstion cards
+    //jobData = change.after.data()
+    let jobData = change.after.data()
+
     db.collection('conversation-cards').doc(context.params.jobId).set({jobId: context.params.jobId, 
-      jobTitle: db.collection('jobs').doc(context.params.jobId).jobTitle,
-      location: db.collection('jobs').doc(context.params.jobId).location,
-      orgId: db.collection('jobs').doc(context.params.jobId).orgId,
+      jobTitle: jobData.jobTitle,
+      location: jobData.location,
+      orgId: jobData.orgId,
 
     }, {merge: true})
 
