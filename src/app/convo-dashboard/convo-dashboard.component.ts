@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import {Router} from "@angular/router"
 import { MiaComponent } from '../mia/mia.component';
+import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 
 @Component({
   selector: 'convo-dashboard',
@@ -14,7 +15,7 @@ export class ConvoDashboardComponent implements OnInit {
   @Input() isUnread: boolean = false;
   @ViewChild(MiaComponent) child: MiaComponent;
 
-  constructor() { }
+  constructor(public sideNavService: MenuToggleService) { }
 
   ngOnInit(): void {
   }

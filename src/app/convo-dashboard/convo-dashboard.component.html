@@ -1,8 +1,10 @@
 <div class="root">
-  <toolbar></toolbar>
+  <toolbar [ngClass]="{'hidden': sideNavService.hideSideNav }"></toolbar>
   <div class="chat-container">
-    <convos (selectedUser) = updateCurrentTexter($event)></convos>
-    <mia></mia>
-    <convo-info></convo-info>
+    <div class="chat-components-container">
+      <convos (selectedUser)=updateCurrentTexter($event)></convos>
+      <mia></mia>
+      <convo-info></convo-info>
+    </div>
   </div>
 </div>

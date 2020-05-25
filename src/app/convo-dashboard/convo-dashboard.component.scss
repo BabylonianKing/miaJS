@@ -1333,15 +1333,25 @@ a {
     width: 20%;
     max-width: 250px;
     padding: 30px;
+    padding-right: 0;
+    transition: margin-left 0.3s ease-in-out;
+
+    &.hidden {
+        margin-left: -280px;
+    }
 } 
 }
 
 .chat-container {
   flex: 1;
   padding: 30px;
-  padding-left: 0;
   display: flex;
-  box-shadow: $box-shadow;
+
+  .chat-components-container {
+    display: flex;
+    box-shadow: $box-shadow;
+    border-radius: 15px;
+  }
 }
 
 convos {

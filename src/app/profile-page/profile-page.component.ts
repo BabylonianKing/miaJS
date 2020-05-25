@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'src/shared/services/authentication.service';
 import { FirebaseService } from 'src/shared/services/firebase.service';
+import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 
 @Component({
   selector: 'profile-page',
@@ -11,8 +12,10 @@ export class ProfilePageComponent implements OnInit {
 
   userInfos: Array<any>;
 
-  constructor(private afAuth: AuthenticationService,
-    public firebaseService: FirebaseService) { }
+  constructor(
+    private afAuth: AuthenticationService,
+    public firebaseService: FirebaseService,
+    public sideNavService: MenuToggleService) { }
 
   
   // Timeout?

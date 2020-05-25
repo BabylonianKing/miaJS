@@ -1,9 +1,10 @@
 <div class="root">
-  <toolbar></toolbar>
+  <toolbar [ngClass]="{'hidden': sideNavService.hideSideNav }"></toolbar>
   <profile *ngFor="let info of userInfos"
   type="text"
   [status]="info.status"
   [location]="info.location"
   [phone]="info.phone"
-  [language]="info.language"></profile>
+  [language]="info.language">
+</profile>
 </div>
