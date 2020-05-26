@@ -1,7 +1,7 @@
 import {  Component,  OnInit,  ViewChild } from '@angular/core';
 import {  HttpClient } from '@angular/common/http';
 import {  AngularFirestore } from '@angular/fire/firestore';
-import {  firestore} from 'firebase';
+import { firestore } from 'firebase';
 import { map } from 'rxjs/operators';
 
 const dialogflowURL = 'https://us-central1-mia-test-sgwxam.cloudfunctions.net/dialogflowGateway';
@@ -17,7 +17,7 @@ export class MiaComponent implements OnInit {
   loading = false;
   userId = JSON.parse(localStorage.getItem('user')).uid;
   
-  currentTexterId = JSON.parse(localStorage.getItem('currentTexter'));
+  currentTexterId;
 
 
   // Random ID to maintain session with server (TO BE SWITCHED WITH USER_ID)
@@ -29,12 +29,13 @@ export class MiaComponent implements OnInit {
   ) {}
 
   ngOnInit() { 
+    this.currentTexterId = JSON.parse(localStorage.getItem('currentTexter'))
 
     if (!this.currentTexterId) {
       this.currentTexterId = "conversationWithMatilda";
     }
   
-
+    //Load conversation history on init
     let conversationRef = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId).get().toPromise()
       .then(snapshot => {
         snapshot.forEach(doc => {
@@ -42,14 +43,19 @@ export class MiaComponent implements OnInit {
         })
       })
 
-
+      //Loading message changes on the database
       let query = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId);
       query.valueChanges().subscribe(data => {
         // this.messages = [];
         // this.messages.push(data.values);
         this.messages = data
 
+        // this.db.collection("conversation-cards").doc(this.userId).collection(this.currentTexterId).set(data[-1]
+
+
       })
+
+
       
       // let observer = query.snapshotChanges().pipe(
       //   map(actions => actions.map(a => {
@@ -73,6 +79,8 @@ export class MiaComponent implements OnInit {
     console.log(this.currentTexterId)
     this.messages = [];
 
+
+    //Load conversation if you changed the card
     let conversationRef = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId).get().toPromise()
       .then(snapshot => {
         snapshot.forEach(doc => {
@@ -80,6 +88,15 @@ export class MiaComponent implements OnInit {
         })
 
       })
+
+            //Loading message changes on the database
+            let query = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId);
+            query.valueChanges().subscribe(data => {
+              // this.messages = [];
+              // this.messages.push(data.values);
+              this.messages = data
+      
+            })
 
 
 
@@ -123,14 +140,14 @@ export class MiaComponent implements OnInit {
     //   this.messages.push(doc.data())
     // })
 
+    //No need for duplicates, since it is a bot all the time
+    // //Creating a duplicate version on the receiver's end
+    // //Same messages, except reply is the opposite type
+    // let receiverData = data
+    // receiverData.reply = false
 
-    //Creating a duplicate version on the receiver's end
-    //Same messages, except reply is the opposite type
-    let receiverData = data
-    receiverData.reply = false
-
-    let refReceiver = this.db.collection("conversations").doc(this.currentTexterId).collection(this.userId).doc(receiverData.date.toString());
-    refReceiver.set(receiverData);
+    // let refReceiver = this.db.collection("conversations").doc(this.currentTexterId).collection(this.userId).doc(receiverData.date.toString());
+    // refReceiver.set(receiverData);
 
 
 
@@ -146,11 +163,12 @@ export class MiaComponent implements OnInit {
 
 
     // Add message to DB (THIS WAY OF DOING THINGS REQUIRES MESSAGES TO BE ARCHIVED AS TO NOT GO OVER THE 1MB LIMIT FOR DOCS)
-    let ref = this.db.collection("conversations").doc(this.userId).collection('conversationWithMatilda').doc(data.date.toString());
+    let ref = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId).doc(data.date.toString());
     ref.set(data);
-    ref.get().toPromise().then(doc => {
-      this.messages.push(doc.data())
-    })
+    // ref.get().toPromise().then(doc => {
+    //   this.messages.push(doc.data())
+      
+    // })
 
   }
   ensureNotNull(variable) {
@@ -165,13 +183,13 @@ export class MiaComponent implements OnInit {
   // Get event from ChatFormComponent
   handleUserMessage(event) {
     const text = event.message;
+    
+    //Code commented below, since removing messaging functionality
     this.addUserMessage(text);
 
-    if (this.currentTexterId.localeCompare("conversationWithMatilda") == 0) {
       //i.e. if currentTexterId is matilda, execute the fulfillment
 
       this.loading = true;
-
 
 
       // Make the request
@@ -193,7 +211,7 @@ export class MiaComponent implements OnInit {
           this.addBotMessage(fulfillmentText);
           this.loading = false;
         });
-    }
+    
 
 
   }
