@@ -44,13 +44,22 @@ export class AuthenticationService {
       })
   }
 
+  // Send email verfificaiton when new user sign up
+  SendVerificationEmail() {
+    return this.afAuth.currentUser
+    .then(u => u.sendEmailVerification())
+    .then(() => {
+      this.router.navigate(['login']);
+    })
+  }
+  
   // Sign up with email/password
   SignUp(email, password) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
-        // this.SendVerificationEmail();
+        this.SendVerificationEmail();
         this.SetUserData(result.user);
       }).catch((error) => {
         return (error.message)

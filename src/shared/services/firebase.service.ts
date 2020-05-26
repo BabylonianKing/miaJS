@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthenticationService } from './authentication.service';
 import { AngularFireStorage} from "@angular/fire/storage";
+import { AngularFireAuth } from "@angular/fire/auth";
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -12,8 +13,11 @@ export class FirebaseService {
   constructor(
     public db: AngularFirestore,
     public authenticationService: AuthenticationService,
-    public afStorage: AngularFireStorage) { }
+    public afStorage: AngularFireStorage,
+    private afAuth: AngularFireAuth) { }
 
+
+  
     postJob(formValue) {
       return this.db.collection('jobs').add({
         jobTitle: formValue.job_title,
@@ -48,12 +52,19 @@ export class FirebaseService {
   }
   
 
+
+
   getUserInfos(userKey) {
     return this.db.collection('user-infos', ref => ref.where("uid", '==', userKey)).valueChanges();
   }
 
   getUser(userKey){
     return this.db.collection('users').doc(userKey).snapshotChanges();
+  }
+
+  updateEmail(email) {
+    this.afAuth.currentUser
+    .then(u => u.updateEmail(email));
   }
 
   updateUser(userKey, value){

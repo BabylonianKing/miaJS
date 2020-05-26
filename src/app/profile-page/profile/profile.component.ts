@@ -62,6 +62,11 @@ import { AngularFireStorage } from '@angular/fire/storage';
 
     }
 
+    // UpdateEmail(email) {
+    //   console.log('changing email')
+    //   this.firebaseService.updateEmail(email);
+    // }
+
     UpdateUser(value) {
       console.log(value);
       const u = this.afAuth.userData;
