@@ -28,6 +28,13 @@ export class ConvosComponent implements OnInit {
   items: Array < any > ;
   searchValue: string = "";
   org_filtered_items: Array < any > ;
+  userId = JSON.parse(localStorage.getItem('user')).uid;
+  id;
+  jobTitle;
+  organization;
+  location;
+  lastMessage;
+
 
   @Input() isSelected: boolean = false;
   @Output() selectedUser = new EventEmitter();
@@ -41,7 +48,6 @@ export class ConvosComponent implements OnInit {
 
   ngOnInit(): void {
     // Load conversations
-    const userId = JSON.parse(localStorage.getItem('user')).uid;
 
     //Temporary solution, ability to text all users in database
     //Fetching each document in collection, loading all users as cards, including the user itself.
@@ -56,31 +62,48 @@ export class ConvosComponent implements OnInit {
           return
         }
         snapshot.forEach(doc => {
-          
-          let orgId = doc.data().orgId
-          let orgData;
-          try {
-            console.log(orgId)
-            this.db.collection("organizations").doc(orgId).get().toPromise().then(document => {
-              orgData = document.data()
-              console.log(document.data())
-            }).then(random => {
-              databaseOfUsers.push({
-                //id will be the job id
-                id: doc.id,
-                jobTitle: doc.data().jobTitle,
-                organization: orgData.name,
-                location: orgData.location
-                // lastMessage: "Hello",
-                // isRead: true
+
+            let orgId = doc.data().orgId
+            let orgData;
+            try {
+              console.log(orgId)
+              this.db.collection("organizations").doc(orgId).get().toPromise().then(document => {
+                orgData = document.data()
+                console.log(document.data())
+              }).then(random => {
+                this.id = doc.id
+                this.jobTitle = doc.data().jobTitle
+                this.organization = orgData.name
+                this.location = orgData.location
+
+
+                // this.db.collection("conversations").doc(this.userId).collection(doc.data().jobId).   get().toPromise()
+                // .then()
+                
+
+                databaseOfUsers.push({
+                  //id will be the job id
+                  id: this.id,
+                  jobTitle: this.jobTitle,
+                  organization: this.organization,
+                  location: this.location
+                  // lastMessage: this.lastMessage,
+                  // isRead: true
+                })
+
+
               })
+            } catch (error) {
+              console.log(`An error occurred, ${error}`)
             }
-            )
-          } catch (error) {
-            console.log(`An error occurred, ${error}`)
+
+
+
           }
 
-        })
+
+
+        )
         //Updating the items with the rry
         this.items = databaseOfUsers
 
