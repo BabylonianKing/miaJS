@@ -1,6 +1,7 @@
 import {  Component,  OnInit,  ViewChild } from '@angular/core';
 import {  HttpClient } from '@angular/common/http';
 import {  AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { firestore } from 'firebase';
 import { map } from 'rxjs/operators';
 
@@ -16,8 +17,11 @@ export class MiaComponent implements OnInit {
   messages = [];
   loading = false;
   userId = JSON.parse(localStorage.getItem('user')).uid;
-  
+  jobTitle;
   currentTexterId;
+  organization;
+  location;
+  imageURL;
 
 
   // Random ID to maintain session with server (TO BE SWITCHED WITH USER_ID)
@@ -25,11 +29,25 @@ export class MiaComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    public db: AngularFirestore
+    public db: AngularFirestore,
+    public afStorage: AngularFireStorage
   ) {}
 
   ngOnInit() { 
-    this.currentTexterId = JSON.parse(localStorage.getItem('currentTexter'))
+    this.currentTexterId = JSON.parse(localStorage.getItem('currentTexter')).jobId
+    this.jobTitle = JSON.parse(localStorage.getItem('currentTexter')).jobTitle
+    this.organization = JSON.parse(localStorage.getItem('currentTexter')).organization
+    this.location = JSON.parse(localStorage.getItem('currentTexter')).location
+    this.afStorage.ref(`/orgImages/${JSON.parse(localStorage.getItem('currentTexter')).orgId}`).getDownloadURL().toPromise().then(data => {
+      //If there isn't an image, use the webflow image
+      this.imageURL = data
+
+      if (!this.imageURL) {
+        this.imageURL = "https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164c953e8a56201c055c_icons8-target-50.png"
+      }
+
+    })
+
 
     if (!this.currentTexterId) {
       this.currentTexterId = "conversationWithMatilda";
@@ -74,7 +92,22 @@ export class MiaComponent implements OnInit {
 
   //Prototyping function, changing from Chat with Matilda to chatting with another human. Hard-coded Lucas.
   changeConversation() {
-    this.currentTexterId = JSON.parse(localStorage.getItem('currentTexter'))
+    this.currentTexterId = JSON.parse(localStorage.getItem('currentTexter')).jobId
+    this.jobTitle = JSON.parse(localStorage.getItem('currentTexter')).jobTitle
+    this.organization = JSON.parse(localStorage.getItem('currentTexter')).organization
+    this.location = JSON.parse(localStorage.getItem('currentTexter')).location
+
+    this.imageURL = null
+
+    this.afStorage.ref(`/orgImages/${JSON.parse(localStorage.getItem('currentTexter')).orgId}`).getDownloadURL().toPromise().then(data => {
+      //If there isn't an image, use the webflow image
+      this.imageURL = data
+
+      if (!this.imageURL) {
+        this.imageURL = "https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164c953e8a56201c055c_icons8-target-50.png"
+      }
+
+    })
 
     console.log(this.currentTexterId)
     this.messages = [];

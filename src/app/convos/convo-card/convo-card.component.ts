@@ -12,6 +12,8 @@ export class ConvoCardComponent implements OnInit {
   @Input() organization: string;
   @Input() timestamp: string;
   @Input() lastMessage: string;
+  @Input() imageURL: string;
+  @Input() jobId: string;
   @Input() isUnread: boolean = false;
 
   constructor() { }

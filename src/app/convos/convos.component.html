@@ -28,7 +28,8 @@
                 [timestamp]="item.timestamp"
                 [lastMessage]="item.lastMessage"
                 [isUnread]="item.isUnread"
-                [id] = "item.id"
+                [jobId] = "item.jobId"
+                [imageURL] = "item.imageURL"
                 
                 (click)="changeChat(item)"
                 [ngClass]="{ 'selected': item.isSelected }">

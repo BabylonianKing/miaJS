@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  AngularFireStorage
+} from '@angular/fire/storage';
+
+
 
 @Component({
   selector: 'convo-info',
@@ -7,11 +15,54 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConvoInfoComponent implements OnInit {
 
+  jobTitle;
+  currentTexterId;
+  organization;
+  location;
+  companyImageURL: string;
+  orgId;
 
-  constructor() { }
+
+  constructor(public afStorage: AngularFireStorage) {}
 
   ngOnInit(): void {
 
+    this.currentTexterId = JSON.parse(localStorage.getItem('currentTexter')).jobId
+    this.jobTitle = JSON.parse(localStorage.getItem('currentTexter')).jobTitle
+    this.organization = JSON.parse(localStorage.getItem('currentTexter')).organization
+    this.location = JSON.parse(localStorage.getItem('currentTexter')).location
+    this.orgId = JSON.parse(localStorage.getItem('orgId'))
+
+    this.updateCompanyImage()
+
+
+
   }
+
+  updateCompanyImage() {
+    this.afStorage.ref(`/orgImages/${this.orgId}`).getDownloadURL().toPromise().then(data => this.companyImageURL = data)
+
+    if (!this.companyImageURL) {
+      this.companyImageURL = "https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164c953e8a56201c055c_icons8-target-50.png"
+    }
+
+    // getDownloadURL().toPromise().then(data => this.companyImageURL = data)
+
+
+  }
+
+  //Redundant code, would be better if you made a global function that can be called anywhere
+
+  changeConversation() {
+    this.currentTexterId = JSON.parse(localStorage.getItem('currentTexter')).jobId
+    this.jobTitle = JSON.parse(localStorage.getItem('currentTexter')).jobTitle
+    this.organization = JSON.parse(localStorage.getItem('currentTexter')).organization
+    this.location = JSON.parse(localStorage.getItem('currentTexter')).location
+    this.orgId = JSON.parse(localStorage.getItem('currentTexter')).orgId
+
+    this.updateCompanyImage()
+
+  }
+
 
 }

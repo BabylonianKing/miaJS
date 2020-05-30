@@ -11,6 +11,7 @@ import {AngularFireStorage } from '@angular/fire/storage';
 export class PostJobComponent implements OnInit {
 
   tab: number = 0;
+  event;
 
   constructor(public firebaseService: FirebaseService,
     public afStorage: AngularFireStorage) { }
@@ -27,11 +28,27 @@ export class PostJobComponent implements OnInit {
   
 
   sendOrgForm(form: NgForm) {
-    this.firebaseService.registerOrg(form.value);
+    this.firebaseService.registerOrg(form.value).then(data => {    if (this.event) {
+      let orgId = JSON.parse(localStorage.getItem('orgId'));
+      this.afStorage.upload(`/orgImages/${orgId}`, this.event.target.files[0]);
+  
+      let ref = this.afStorage.ref(orgId);
+      // the put method creates an AngularFireUploadTask
+      // and kicks off the upload
+
+      // ref.put(this.event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
+      
+    }})
+    
+    ;
     let x = document.getElementsByClassName("tab") as HTMLCollectionOf<HTMLElement>;
     x[this.tab].style.display = "none";
     this.tab ++;
     this.showTab(this.tab);
+
+
+    //If there is an image uploaded, upload that image to the Firestore storage
+
   }
 
   sendJobForm(form: NgForm) {
@@ -43,15 +60,7 @@ export class PostJobComponent implements OnInit {
   }
 
   uploadImage(event) {
-    let userId = JSON.parse(localStorage.getItem('user')).uid;
-    this.afStorage.upload(`/coverImages/${userId}`, event.target.files[0]);
-
-    let ref = this.afStorage.ref(userId);
-    // the put method creates an AngularFireUploadTask
-    // and kicks off the upload
-    ref.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
-    
-
+    this.event = event;
 
 
   }

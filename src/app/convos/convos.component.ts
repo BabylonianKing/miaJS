@@ -17,6 +17,9 @@ import {
 import {
   AngularFirestore
 } from '@angular/fire/firestore';
+import {
+  AngularFireStorage
+} from '@angular/fire/storage';
 
 @Component({
   selector: 'convos',
@@ -29,11 +32,12 @@ export class ConvosComponent implements OnInit {
   searchValue: string = "";
   org_filtered_items: Array < any > ;
   userId = JSON.parse(localStorage.getItem('user')).uid;
-  id;
+  jobId;
   jobTitle;
   organization;
   location;
   lastMessage;
+  imageURL: string;
 
 
   @Input() isSelected: boolean = false;
@@ -43,7 +47,8 @@ export class ConvosComponent implements OnInit {
     public firebaseService: FirebaseService,
     private afAuth: AuthenticationService,
     private cookie: CookieService,
-    public db: AngularFirestore
+    public db: AngularFirestore,
+    public afStorage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {
@@ -61,41 +66,58 @@ export class ConvosComponent implements OnInit {
           console.log("User databse is empty");
           return
         }
+
         snapshot.forEach(doc => {
+            //Reset the image url to null  
+            this.afStorage.ref(`/orgImages/${doc.data().orgId}`).getDownloadURL().toPromise().then(data => {
+              let orgId = doc.data().orgId
 
-            let orgId = doc.data().orgId
-            let orgData;
-            try {
-              console.log(orgId)
-              this.db.collection("organizations").doc(orgId).get().toPromise().then(document => {
-                orgData = document.data()
-                console.log(document.data())
-              }).then(random => {
-                this.id = doc.id
-                this.jobTitle = doc.data().jobTitle
-                this.organization = orgData.name
-                this.location = orgData.location
+              //If there isn't an image, use the webflow image
+
+              if (!this.imageURL) {
+                this.imageURL = "https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164c953e8a56201c055c_icons8-target-50.png"
+              }
+
+              let orgData;
+              try {
+                this.db.collection("organizations").doc(orgId).get().toPromise().then(document => {
+                  orgData = document.data()
+                  console.log(document.data())
+                }).then(random => {
+                  this.jobId = doc.id
+                  this.jobTitle = doc.data().jobTitle
+                  this.organization = orgData.name
+                  this.location = orgData.location
 
 
-                // this.db.collection("conversations").doc(this.userId).collection(doc.data().jobId).   get().toPromise()
-                // .then()
-                
+                  // this.db.collection("conversations").doc(this.userId).collection(doc.data().jobId).   get().toPromise()
+                  // .then()
+                  //Putting it here to ensure that image loads properly
+                  this.imageURL = data;
+                  console.log("Image url:" + this.imageURL)
+                  console.log("Job id" + this.jobId)
+                  databaseOfUsers.push({
+                    //id will be the job id
+                    jobId: this.jobId,
+                    jobTitle: this.jobTitle,
+                    organization: this.organization,
+                    location: this.location,
+                    imageURL: this.imageURL,
+                    orgId: orgId
 
-                databaseOfUsers.push({
-                  //id will be the job id
-                  id: this.id,
-                  jobTitle: this.jobTitle,
-                  organization: this.organization,
-                  location: this.location
-                  // lastMessage: this.lastMessage,
-                  // isRead: true
+                    // lastMessage: this.lastMessage,
+                    // isRead: true
+                  })
+
+
                 })
+              } catch (error) {
+                console.log(`An error occurred, ${error}`)
+              }
 
+              this.imageURL = null
 
-              })
-            } catch (error) {
-              console.log(`An error occurred, ${error}`)
-            }
+            })
 
 
 
@@ -153,7 +175,7 @@ export class ConvosComponent implements OnInit {
     this.items.forEach(function (part, index) {
       this[index].isSelected = false;
     }, this.items)
-    this.selectedUser.emit(item.id);
+    this.selectedUser.emit(item);
     item.isSelected = !item.isSelected;
 
   }
