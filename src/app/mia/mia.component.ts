@@ -4,6 +4,7 @@ import {  AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { firestore } from 'firebase';
 import { map } from 'rxjs/operators';
+import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 
 const dialogflowURL = 'https://us-central1-mia-test-sgwxam.cloudfunctions.net/dialogflowGateway';
 
@@ -30,7 +31,8 @@ export class MiaComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public db: AngularFirestore,
-    public afStorage: AngularFireStorage
+    public afStorage: AngularFireStorage,
+    public sideNavService: MenuToggleService
   ) {}
 
   ngOnInit() { 

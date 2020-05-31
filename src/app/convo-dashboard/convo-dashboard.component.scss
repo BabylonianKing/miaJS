@@ -1337,9 +1337,9 @@ a {
     transition: margin-left 0.3s ease-in-out;
 
     &.hidden {
-        margin-left: -280px;
+      margin-left: -280px;
     }
-} 
+  }
 }
 
 .chat-container {
@@ -1398,6 +1398,11 @@ convo-info {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+
+  &.hidden {
+    display: none;
+    background-color: blue;
+  }
 }
 
 mia {

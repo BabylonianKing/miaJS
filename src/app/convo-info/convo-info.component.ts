@@ -1,10 +1,6 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-import {
-  AngularFireStorage
-} from '@angular/fire/storage';
+import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { MenuToggleService } from 'src/shared/services/menu-toggle.service'; 
 
 
 
@@ -23,7 +19,9 @@ export class ConvoInfoComponent implements OnInit {
   orgId;
 
 
-  constructor(public afStorage: AngularFireStorage) {}
+  constructor(
+    public afStorage: AngularFireStorage,
+    public sideNavService: MenuToggleService) {}
 
   ngOnInit(): void {
 
