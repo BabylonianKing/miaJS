@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookmarksComponent implements OnInit {
 
+  jobTitle;
+  currentTexterId;
+  organization;
+  location;
+  companyImageURL: string;
+  orgId;
+
   constructor() { }
 
   ngOnInit(): void {

@@ -38,7 +38,9 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { PostJobPageComponent } from './post-job-page/post-job-page.component';
 import { PostJobComponent } from './post-job-page/post-job/post-job.component';
 import { AboutComponent } from './about/about.component';
-import { BookmarksComponent } from './bookmarks/bookmarks.component';
+import { BookmarksPageComponent } from './bookmarks-page/bookmarks-page.component';
+import { BookmarksComponent } from './bookmarks-page/bookmarks/bookmarks.component';
+import { ChatPageComponent } from './chat-page/chat-page.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,9 @@ import { BookmarksComponent } from './bookmarks/bookmarks.component';
     PostJobPageComponent,
     PostJobComponent,
     AboutComponent,
+    BookmarksPageComponent,
     BookmarksComponent,
+    ChatPageComponent
   ],
   imports: [
     BrowserModule,

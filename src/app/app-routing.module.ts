@@ -11,17 +11,17 @@ import { SignupPageComponent } from './signup-page/signup-page.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { PostJobPageComponent } from './post-job-page/post-job-page.component';
 import { AboutComponent } from './about/about.component';
-import { BookmarksComponent } from './bookmarks/bookmarks.component';
+import { BookmarksPageComponent } from './bookmarks-page/bookmarks-page.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent},
   { path: 'about', component: AboutComponent},
   { path: 'chat', component: ConvoDashboardComponent},
   { path: 'login', component: LoginPageComponent},
-  { path: 'bookmarks', component: BookmarksComponent},
   { path: 'signup', component: SignupPageComponent},
   { path: 'profile', component: ProfilePageComponent},
-  { path: 'post-job', component: PostJobPageComponent}
+  { path: 'post-job', component: PostJobPageComponent},
+  { path: 'bookmarks', component: BookmarksPageComponent}
 ];
 
 @NgModule({
