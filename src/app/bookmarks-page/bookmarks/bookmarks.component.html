@@ -3,16 +3,22 @@
         <input class="search-bar" type="text" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" placeholder="Search by name..." (keyup)="searchByOrg()">
     </div>
     <div class="bookmarks">
-        <bookmark-card></bookmark-card>
-        <bookmark-card></bookmark-card>
-        <bookmark-card></bookmark-card>
-        <bookmark-card></bookmark-card>
-        <bookmark-card></bookmark-card>
-        <bookmark-card></bookmark-card>
-        <bookmark-card></bookmark-card>
-        <bookmark-card></bookmark-card>
-        <bookmark-card></bookmark-card>
-        <bookmark-card></bookmark-card>
-        <bookmark-card></bookmark-card>
+        <bookmark-card *ngFor="let item of items"
+        type="text"
+        [logo]=""
+        [jobTitle]="item.jobTitle"
+        [organization]="item.organization"
+        [timestamp]="item.timestamp"
+        [lastMessage]="item.lastMessage"
+        [jobId] = "item.jobId"
+        [jobDescription] = "item.jobDescription"
+        [requirements] = "item.requirements"
+        [jobType] = "item.jobType"
+        [responsabilities] = "item.responsabilities"
+        [imageURL] = "item.imageURL"
+        [location] = "item.location"
+        [lowSalary] = "item.lowSalary"
+        [highSalary] = "item.highSalary"
+></bookmark-card>
     </div>
 </div>
