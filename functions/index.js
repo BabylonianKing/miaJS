@@ -1,4 +1,14 @@
 const functions = require('firebase-functions');
+const algoliasearch = require('algoliasearch');
+const ALGOLIA_ID = functions.config().algolia.app_id;
+const ALGOLIA_ADMIN_KEY = functions.config().algolia.api_key;
+const ALGOLIA_SEARCH_KEY = functions.config().algolia.search_key;
+
+const ALGOLIA_INDEX_NAME = 'jobs';
+const client = algoliasearch(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
+
+
+
 const cors = require('cors')({
   origin: true
 });
@@ -108,77 +118,107 @@ exports.updateUser = functions.firestore
     // ...or the previous value before this update
     //const previousValue = change.before.data();
 
-    db.collection('user-infos').doc(context.params.userId).set(newValue, {merge: true})
+    db.collection('user-infos').doc(context.params.userId).set(newValue, {
+      merge: true
+    })
 
 
   });
 
 //Deleting information
-  // exports.deleteUser = functions.firestore
-  //   .document('users/{userID}')
-  //   .onDelete((snap, context) => {
-  //     // Get an object representing the document prior to deletion
-  //     // e.g. {'name': 'Marie', 'age': 66}
-  //     const deletedValue = snap.data();
+// exports.deleteUser = functions.firestore
+//   .document('users/{userID}')
+//   .onDelete((snap, context) => {
+//     // Get an object representing the document prior to deletion
+//     // e.g. {'name': 'Marie', 'age': 66}
+//     const deletedValue = snap.data();
 
-  //     // perform desired operations ...
-  //   });
-
-  
-  
-  
-  //TODO: Function for updating conversation cards. Should remove this and find a more elegant way later on....
-  // exports.updateConversationCard= functions.firestore
-  // .document('conversations/{userId}')
-  // .onUpdate((change, context) => {
-  //   // Get an object representing the document
-  //   // e.g. {'name': 'Marie', 'age': 66}
-  //   const newValue = change.after.data();
-
-  //   // ...or the previous value before this update
-  //   //const previousValue = change.before.data();
-
-  //   db.collection('user-infos').doc(context.params.userId).set(newValue, {merge: true})
+//     // perform desired operations ...
+//   });
 
 
-  // });
 
-  exports.createOrgId = functions.firestore
+
+//TODO: Function for updating conversation cards. Should remove this and find a more elegant way later on....
+// exports.updateConversationCard= functions.firestore
+// .document('conversations/{userId}')
+// .onUpdate((change, context) => {
+//   // Get an object representing the document
+//   // e.g. {'name': 'Marie', 'age': 66}
+//   const newValue = change.after.data();
+
+//   // ...or the previous value before this update
+//   //const previousValue = change.before.data();
+
+//   db.collection('user-infos').doc(context.params.userId).set(newValue, {merge: true})
+
+
+// });
+
+exports.createOrgId = functions.firestore
   .document("organizations/{orgId}")
   .onCreate((snap, context) => {
     // Get an object representing the document
     // e.g. {'name': 'Marie', 'age': 66}
-    db.collection('organizations').doc(context.params.orgId).set({orgId: context.params.orgId}, {merge: true})
+    db.collection('organizations').doc(context.params.orgId).set({
+      orgId: context.params.orgId
+    }, {
+      merge: true
+    })
 
   });
 
 
-  //Create JobId within the document, update the conversation card with a new job
-  exports.createJobId = functions.firestore
+//Create JobId within the document, update the conversation card with a new job
+exports.createJobId = functions.firestore
   .document("jobs/{jobId}")
   .onCreate((snap, context) => {
     // Get an object representing the document
     // e.g. {'name': 'Marie', 'age': 66}
-    db.collection('jobs').doc(context.params.jobId).set({jobId: context.params.jobId}, {merge: true});
+    db.collection('jobs').doc(context.params.jobId).set({
+      jobId: context.params.jobId
+    }, {
+      merge: true
+    });
+
+    //Algolia Integration
+    const job = snap.data();
+    // Add an 'objectID' field which Algolia requires
+    job.objectID = context.params.jobId;
+
+    // Write to the algolia index
+    const index = client.initIndex(ALGOLIA_INDEX_NAME);
+    return index.saveObject(note);
   });
 
 
-  exports.updateConversationCards = functions.firestore
+exports.updateConversationCards = functions.firestore
   .document("jobs/{jobId}")
   .onWrite((change, context) => {
     // Get an object representing the document
-    // e.g. {'name': 'Marie', 'age': 66}
-    //Update the converstion cards
-    //jobData = change.after.data()
     let jobData = change.after.data()
 
-    db.collection('conversation-cards').doc(context.params.jobId).set({jobId: context.params.jobId, 
+    db.collection('conversation-cards').doc(context.params.jobId).set({
+      jobId: context.params.jobId,
       jobTitle: jobData.jobTitle,
       location: jobData.location,
       orgId: jobData.orgId,
 
-    }, {merge: true})
+    }, {
+      merge: true
+    })
+
+
+    //Algolia Integration
+    // Add an 'objectID' field which Algolia requires
+    jobData.objectID = context.params.jobId;
+
+    // Write to the algolia index
+    const index = client.initIndex(ALGOLIA_INDEX_NAME);
+    return index.saveObject(jobData);
+
+
 
   });
 
-  //TODO: Function for updating the cards, seeing the latest information.
+//TODO: Function for updating the cards, seeing the latest information.
