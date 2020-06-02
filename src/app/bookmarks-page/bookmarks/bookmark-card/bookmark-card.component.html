@@ -7,10 +7,7 @@
         </div>
     </div>
     <div class="jd">
-        <p>Job Description: {{ jobDescription }}</p>
-        <p>Job Type: {{ jobType }}</p>
-        <p>Requirements: {{requirements }}</p>
-        <p>Responsabilities: {{responsabilities }} </p>
+        <p>{{ jobDescription || "This job does not have a job description." }}</p>
     </div>
     <div class="salary">
         <p>Salary: {{ lowSalary }}$ - {{ highSalary }}$</p>
