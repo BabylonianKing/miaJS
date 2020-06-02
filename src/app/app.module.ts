@@ -41,6 +41,7 @@ import { AboutComponent } from './about/about.component';
 import { BookmarksPageComponent } from './bookmarks-page/bookmarks-page.component';
 import { BookmarksComponent } from './bookmarks-page/bookmarks/bookmarks.component';
 import { ChatPageComponent } from './chat-page/chat-page.component';
+import { BookmarkCardComponent } from './bookmarks-page/bookmarks/bookmark-card/bookmark-card.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { ChatPageComponent } from './chat-page/chat-page.component';
     AboutComponent,
     BookmarksPageComponent,
     BookmarksComponent,
-    ChatPageComponent
+    ChatPageComponent,
+    BookmarkCardComponent
   ],
   imports: [
     BrowserModule,

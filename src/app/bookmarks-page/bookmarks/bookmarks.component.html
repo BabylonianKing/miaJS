@@ -1,99 +1,18 @@
 <div class="root">
     <div class="header">
-
+        <input class="search-bar" type="text" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" placeholder="Search by name..." (keyup)="searchByOrg()">
     </div>
     <div class="bookmarks">
-        <div class="bookmark-card">
-            <div class="card-header">
-                <img src="assets/mia.png">
-                <div class="infos">
-                    <p class="title">Software Engineer</p>
-                    <p class="org">Shopify - Montreal, Canada</p>
-                </div>
-            </div>
-            <div class="jd">
-                <p>We are looking for a full-stack developer to build the most popular e-commerce platform in the world blah blah blah</p>
-            </div>
-            <div class="salary">
-                <p>Salary: Min - Max</p>
-            </div>
-            <div class="buttons">
-                <button class="button">See More</button>
-                <button class="button">Apply Now</button>
-            </div>
-        </div>
-        <div class="bookmark-card">
-            <div class="card-header">
-                <img src="assets/mia.png">
-                <div class="infos">
-                    <p class="title">Software Engineer</p>
-                    <p class="org">Shopify - Montreal, Canada</p>
-                </div>
-            </div>
-            <div class="jd">
-                <p>We are looking for a full-stack developer to build the most popular e-commerce platform in the world blah blah blah</p>
-            </div>
-            <div class="salary">
-                <p>Salary: Min - Max</p>
-            </div>
-            <div class="buttons">
-                <button class="button">See More</button>
-                <button class="button">Apply Now</button>
-            </div>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
-        <div class="bookmark-card">
-            <h1>Card</h1>
-        </div>
+        <bookmark-card></bookmark-card>
+        <bookmark-card></bookmark-card>
+        <bookmark-card></bookmark-card>
+        <bookmark-card></bookmark-card>
+        <bookmark-card></bookmark-card>
+        <bookmark-card></bookmark-card>
+        <bookmark-card></bookmark-card>
+        <bookmark-card></bookmark-card>
+        <bookmark-card></bookmark-card>
+        <bookmark-card></bookmark-card>
+        <bookmark-card></bookmark-card>
     </div>
 </div>
