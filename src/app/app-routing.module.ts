@@ -12,11 +12,14 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { PostJobPageComponent } from './post-job-page/post-job-page.component';
 import { AboutComponent } from './about/about.component';
 import { BookmarksPageComponent } from './bookmarks-page/bookmarks-page.component';
+import { MatildaDashboardComponent } from './matilda-dashboard/matilda-dashboard.component';
+
 
 const routes: Routes = [
   { path: '', component: MainPageComponent},
   { path: 'about', component: AboutComponent},
   { path: 'chat', component: ConvoDashboardComponent},
+  { path: 'matilda-chat', component: MatildaDashboardComponent},  
   { path: 'login', component: LoginPageComponent},
   { path: 'signup', component: SignupPageComponent},
   { path: 'profile', component: ProfilePageComponent},

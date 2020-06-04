@@ -42,7 +42,7 @@ export class MiaComponent implements OnInit {
     this.location = JSON.parse(localStorage.getItem('currentTexter')).location
     this.afStorage.ref(`/orgImages/${JSON.parse(localStorage.getItem('currentTexter')).orgId}`).getDownloadURL().toPromise().then(data => {
       //If there isn't an image, use the webflow image
-      this.imageURL = data
+      // this.imageURL = data
 
       if (!this.imageURL) {
         this.imageURL = "https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164c953e8a56201c055c_icons8-target-50.png"
