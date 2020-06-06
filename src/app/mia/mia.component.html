@@ -17,8 +17,12 @@
                   type="text"
                   [message]="msg.text"
                   [timestamp]="msg.date.toDate().toDateString()"
-                  [reply]="msg.reply">
+                  [reply]="msg.reply"
+                  [jobImageURL] = "msg.url"
+                  [richCard] = "msg.richCard">
+                  
     </chat-message>
+
     
     <chat-message *ngIf="loading"
         type="text"

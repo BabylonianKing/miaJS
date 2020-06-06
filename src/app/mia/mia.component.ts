@@ -1,10 +1,26 @@
-import {  Component,  OnInit,  ViewChild } from '@angular/core';
-import {  HttpClient } from '@angular/common/http';
-import {  AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { firestore } from 'firebase';
-import { map } from 'rxjs/operators';
-import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
+import {
+  Component,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import {
+  HttpClient
+} from '@angular/common/http';
+import {
+  AngularFirestore
+} from '@angular/fire/firestore';
+import {
+  AngularFireStorage
+} from '@angular/fire/storage';
+import {
+  firestore
+} from 'firebase';
+import {
+  map
+} from 'rxjs/operators';
+import {
+  MenuToggleService
+} from 'src/shared/services/menu-toggle.service';
 
 const dialogflowURL = 'https://us-central1-mia-test-sgwxam.cloudfunctions.net/dialogflowGateway';
 
@@ -23,6 +39,7 @@ export class MiaComponent implements OnInit {
   organization;
   location;
   imageURL;
+  richCard;
 
 
   // Random ID to maintain session with server (TO BE SWITCHED WITH USER_ID)
@@ -35,7 +52,7 @@ export class MiaComponent implements OnInit {
     public sideNavService: MenuToggleService
   ) {}
 
-  ngOnInit() { 
+  ngOnInit() {
     this.currentTexterId = JSON.parse(localStorage.getItem('currentTexter')).jobId
     this.jobTitle = JSON.parse(localStorage.getItem('currentTexter')).jobTitle
     this.organization = JSON.parse(localStorage.getItem('currentTexter')).organization
@@ -51,10 +68,14 @@ export class MiaComponent implements OnInit {
     })
 
 
-    if (!this.currentTexterId) {
-      this.currentTexterId = "conversationWithMatilda";
-    }
-  
+
+    //Quick-fix for MVP
+    this.currentTexterId = "Matilda";
+
+    // if (!this.currentTexterId) {
+    //   this.currentTexterId = "conversationWithMatilda";
+    // }
+
     //Load conversation history on init
     let conversationRef = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId).get().toPromise()
       .then(snapshot => {
@@ -63,28 +84,28 @@ export class MiaComponent implements OnInit {
         })
       })
 
-      //Loading message changes on the database
-      let query = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId);
-      query.valueChanges().subscribe(data => {
-        // this.messages = [];
-        // this.messages.push(data.values);
-        this.messages = data
+    //Loading message changes on the database
+    let query = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId);
+    query.valueChanges().subscribe(data => {
+      // this.messages = [];
+      // this.messages.push(data.values);
+      this.messages = data
 
-        // this.db.collection("conversation-cards").doc(this.userId).collection(this.currentTexterId).set(data[-1]
-
-
-      })
+      // this.db.collection("conversation-cards").doc(this.userId).collection(this.currentTexterId).set(data[-1]
 
 
-      
-      // let observer = query.snapshotChanges().pipe(
-      //   map(actions => actions.map(a => {
-      //     console.log("Obtained Data")
-      //     const data = a.payload.doc.data();
-      //     return data  
-      //   }))
-      // )
-      // console.log(observer)
+    })
+
+
+
+    // let observer = query.snapshotChanges().pipe(
+    //   map(actions => actions.map(a => {
+    //     console.log("Obtained Data")
+    //     const data = a.payload.doc.data();
+    //     return data  
+    //   }))
+    // )
+    // console.log(observer)
 
 
 
@@ -124,14 +145,14 @@ export class MiaComponent implements OnInit {
 
       })
 
-            //Loading message changes on the database
-            let query = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId);
-            query.valueChanges().subscribe(data => {
-              // this.messages = [];
-              // this.messages.push(data.values);
-              this.messages = data
-      
-            })
+    //Loading message changes on the database
+    let query = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId);
+    query.valueChanges().subscribe(data => {
+      // this.messages = [];
+      // this.messages.push(data.values);
+      this.messages = data
+
+    })
 
 
 
@@ -188,12 +209,47 @@ export class MiaComponent implements OnInit {
 
   }
 
-  addBotMessage(text) {
-    let data = {
-      text,
-      sender: 'Bot',
-      date: new Date()
+  addBotMessage(response) {
+    let title;
+    let subtitle;
+    let text;
+    let url;
+
+    let data;
+
+    //If it is a normal response, not a card response
+    if (response.fulfillmentText != "") {
+      text = response.fulfillmentText
     }
+
+    //Card response
+    else {
+      title = response.fulfillmentMessages[0].card.title
+      subtitle = response.fulfillmentMessages[0].card.subtitle
+      text = response.fulfillmentMessages[0].message
+      url = response.fulfillmentMessages[0].card.imageUri
+    }
+
+    if (url != null) {
+      data = {
+        text: text,
+        title: title,
+        subtitle: subtitle,
+        sender: 'Bot',
+        date: new Date(),
+        url: url,
+        richCard: true
+      }
+
+    } else {
+      data = {
+        text: text,
+        sender: 'Bot',
+        date: new Date(),
+        richCard: false
+      }
+    }
+
     // this.messages.push(data);
 
 
@@ -202,7 +258,7 @@ export class MiaComponent implements OnInit {
     ref.set(data);
     // ref.get().toPromise().then(doc => {
     //   this.messages.push(doc.data())
-      
+
     // })
 
   }
@@ -218,35 +274,34 @@ export class MiaComponent implements OnInit {
   // Get event from ChatFormComponent
   handleUserMessage(event) {
     const text = event.message;
-    
+
     //Code commented below, since removing messaging functionality
     this.addUserMessage(text);
 
-      //i.e. if currentTexterId is matilda, execute the fulfillment
+    //i.e. if currentTexterId is matilda, execute the fulfillment
 
-      this.loading = true;
+    this.loading = true;
 
 
-      // Make the request
-      this.http.post < any > (
-          dialogflowURL, {
-            sessionId: this.sessionId,
-            queryInput: {
-              text: {
-                text,
-                languageCode: 'en-US'
-              }
+    // Make the request
+    this.http.post < any > (
+        dialogflowURL, {
+          sessionId: this.sessionId,
+          queryInput: {
+            text: {
+              text,
+              languageCode: 'en-US'
             }
           }
-        )
-        .subscribe(res => {
-          const {
-            fulfillmentText
-          } = res;
-          this.addBotMessage(fulfillmentText);
-          this.loading = false;
-        });
-    
+        }
+      )
+      .subscribe(res => {
+        console.log(res)
+
+        this.addBotMessage(res);
+        this.loading = false;
+      });
+
 
 
   }

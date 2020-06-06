@@ -91,6 +91,16 @@ import { AngularFireStorage } from '@angular/fire/storage';
       ref.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
     }
 
+    uploadResume(event) {
+      let userId = JSON.parse(localStorage.getItem('user')).uid;
+      this.afStorage.upload(`/resume/${userId}`, event.target.files[0]);
+  
+      let ref = this.afStorage.ref(userId);
+      // the put method creates an AngularFireUploadTask
+      // and kicks off the upload
+      ref.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
+    }
+
     uploadProfile(event) {
 
       let userId = JSON.parse(localStorage.getItem('user')).uid;

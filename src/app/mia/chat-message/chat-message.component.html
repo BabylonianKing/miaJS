@@ -1,6 +1,19 @@
 <div class="message-container" [ngClass]=" {'user': reply} ">
     <div class="message-bubble" [ngClass]=" {'user': reply} ">
+        
+
         <p class="message">{{ message }}</p>
+
+
+        <div *ngIf="richCard">
+            <img src="{{ jobImageURL }}">
+            <button (click)="openExternalPage()">Apply</button>
+            <button (click)="bookmarkJob()">Bookmark</button>
+
+        </div>
+
+
+
     </div>
     <p class="message-timestamp">{{ timestamp }}</p>
 </div>
