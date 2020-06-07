@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -24,8 +24,10 @@
     "@angular/router": "~9.1.6",
     "algoliasearch": "^4.2.0",
     "bulma": "^0.8.2",
+    "express": "^4.17.1",
     "firebase": "^7.14.3",
     "ngx-cookie-service": "^3.0.4",
+    "path": "^0.12.7",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
