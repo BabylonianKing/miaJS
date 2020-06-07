@@ -1,3 +1,25 @@
+.richCard {
+    
+}
+.click-button {
+    border-color: #E66551;
+    border-radius: 30px;
+    padding: 10px;
+    flex: 1;
+    font-size: 12px;
+    align-self: center;
+
+
+
+}
+
+.click-button:hover {
+    color: white;
+    background-color: #E66551;
+
+    cursor: pointer;
+}
+
 .message-container {
     display: flex;
     flex-direction: column;

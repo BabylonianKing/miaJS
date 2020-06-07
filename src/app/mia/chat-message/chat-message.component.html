@@ -5,10 +5,11 @@
         <p class="message">{{ message }}</p>
 
 
-        <div *ngIf="richCard">
+        <div *ngIf="richCard" class="richCard">
             <img src="{{ jobImageURL }}">
-            <button (click)="openExternalPage()">Apply</button>
-            <button (click)="bookmarkJob()">Bookmark</button>
+            <button class="click-button" (click)="openExternalPage()">Apply</button>
+            <button class="click-button" (click)="bookmarkJob()">Bookmark</button>
+            <button class="click-button" (click)="bookmarkJob()">See More</button>
 
         </div>
 

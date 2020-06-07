@@ -1,75 +1,80 @@
 @import "./src/styles.scss";
 
 .bookmark-card {
-    box-sizing: border-box;
-    height: 100%;
-    position: relative;
-    border-radius: 15px;
-    box-shadow: $box-shadow;
-    padding: 20px 30px;
-    font-family: $rubik;
-    margin: 30px 0;
+  box-sizing: border-box;
+  height: 100%;
+  position: relative;
+  border-radius: 15px;
+  box-shadow: $box-shadow;
+  padding: 20px 30px;
+  font-family: $rubik;
+  margin: 30px 0;
 
-    &:hover {
-      border: 3px solid $red-light;
-      cursor: pointer;
+  &:hover {
+    border: 3px solid $red-light;
+    cursor: pointer;
+  }
+
+  .card-header {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+
+    img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
     }
 
-    .card-header {
+    .infos {
       display: flex;
-      margin-bottom: 20px;
-      align-items: center;
+      flex-direction: column;
 
-      img {
-        width: 50px;
-        height: 50px;
-        margin-right: 10px;
+      .title {
+        font-family: $arvo;
+        font-weight: bold;
+        font-size: 18px;
       }
 
-      .infos {
-        display: flex;
-        flex-direction: column;
-
-        .title {
-            font-family: $arvo;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        .org {
-            font-size: 14px;
-        }
+      .org {
+        font-size: 14px;
       }
-    }
-
-    .jd {
-      margin-bottom: 20px;
-
-      p {
-        word-wrap: break-word;
-        text-overflow: ellipsis;
-      }
-    }
-
-    .buttons {
-      box-sizing: border-box;
-      width: 100%;
-      position: absolute;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 10px;
-      bottom: 20px;
-      left: 0;
-      right: 0;
-      padding: 0 30px;
-
-      .button {
-          flex: 1;
-          padding: 10px 20px;
-          border-radius: 50px;
-          border: 2px solid $red-dark;
-          color: $red-dark;
-          font-size: 14px;
-        }
     }
   }
+
+  .jd {
+    margin-bottom: 20px;
+
+    p {
+      word-wrap: break-word;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .buttons {
+    box-sizing: border-box;
+    width: 100%;
+    position: absolute;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    padding: 0 30px;
+
+    .button {
+      flex: 1;
+      padding: 10px 20px;
+      border-radius: 50px;
+      border: 2px solid $red-dark;
+      color: $red-dark;
+      font-size: 14px;
+    }
+
+    .button:hover {
+      color: white;
+      background-color: $red-dark;
+    }
+  }
+}
