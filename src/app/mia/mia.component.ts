@@ -1,6 +1,4 @@
-import {
-  Component,
-  OnInit,
+import { Component, OnInit,
   ViewChild
 } from '@angular/core';
 import {

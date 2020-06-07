@@ -1,21 +1,4 @@
-.click-button {
-    border-color: #E66551;
-    border-radius: 30px;
-    padding: 10px;
-    flex: 1;
-    font-size: 12px;
-    align-self: center;
-
-
-
-}
-
-.click-button:hover {
-    color: white;
-    background-color: #E66551;
-
-    cursor: pointer;
-}
+@import "./src/styles.scss";
 
 .message-container {
     display: flex;
@@ -65,5 +48,41 @@
         font-size: 12px;
         line-height: 1.3em;
         color: #999;
+    }
+}
+
+
+.rich-card {
+    width: 200px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    padding: 40px 30px;
+    box-shadow: $box-shadow;
+    border-radius: 15px;
+    margin: 20px 0;
+
+    img {
+        height: 100px;
+        width: 100px;
+        margin-bottom: 20px;
+    }
+
+    .job-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    button {
+        flex: 1;
+      padding: 10px 20px;
+      border-radius: 50px;
+      border: 2px solid $red-dark;
+      color: $red-dark;
+      font-size: 14px;
     }
 }
