@@ -1,19 +1,28 @@
 <div class="bookmark-card">
-    <div class="card-header">
-        <img src="{{ imageURL }}">
-        <div class="infos">
-            <p class="title">{{ jobTitle }}</p>
-            <p class="org">{{ organization }} - {{ location }}</p>
+   <div class="header">
+            <div class="header-left">
+                <img src="{{ imageURL }}">
+                <div class="job-infos">
+                    <h3>Junior Developer</h3>
+                    <h5>Shopify - Montreal, Canada</h5>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="jd">
-        <p>{{ jobDescription || "This job does not have a job description." }}</p>
-    </div>
-    <div class="salary">
-        <p>Salary: {{ lowSalary }}$ - {{ highSalary }}$</p>
-    </div>
-    <div class="buttons">
-        <button class="button">See More</button>
-        <button class="button">Apply Now {{ applicationLink }} </button>
-    </div>
+        <div class="job-description">
+            <h6>Job Description</h6>
+            <p>Join the most popular e-commerce platform in the world. Build products that empower people to start businesses and...</p>
+        </div>
+        <div class="more-infos">
+            <div class="salary">
+                <h6>Salary</h6>
+                <p>$82,000</p>
+            </div>
+            <div class="job-type">
+                <h6>Job Type</h6>
+                <p>Full-time</p>
+            </div>
+        </div>
+        <div class="buttons">
+            <button>Learn more</button>
+        </div>
 </div>

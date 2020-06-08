@@ -3,16 +3,147 @@
         <p class="message">{{ message }}</p>
     </div>
     <p class="message-timestamp">{{ timestamp }}</p>
-    <div *ngIf="richCard" class="rich-card">
-        <img src="{{ jobImageURL }}">
-        <div class="job-info">
-           <h2>Job Title</h2>
-           <h4>Job Location</h4>
-           <p>Job description...</p>
-        </div>
-        <button class="click-button" (click)="openExternalPage()">Apply</button>
-        <button class="click-button" (click)="bookmarkJob()">Bookmark</button>
-        <button class="click-button" (click)="bookmarkJob()">See More</button>
 
+    <div class="cards-carousel">
+    <div *ngIf="richCard" class="rich-card">
+        <div class="header">
+            <div class="header-left">
+                <img src="{{ jobImageURL }}">
+                <div class="job-infos">
+                    <h3>Junior Developer</h3>
+                    <h5>Shopify - Montreal, Canada</h5>
+                </div>
+            </div>
+        </div>
+        <div class="job-description">
+            <h6>Job Description</h6>
+            <p>Join the most popular e-commerce platform in the world. Build products that empower people to start businesses and...</p>
+        </div>
+        <div class="more-infos">
+            <div class="salary">
+                <h6>Salary</h6>
+                <p>$82,000</p>
+            </div>
+            <div class="job-type">
+                <h6>Job Type</h6>
+                <p>Full-time</p>
+            </div>
+        </div>
+        <div class="buttons">
+            <button (click)="bookmarkJob()">Learn more</button>
+        </div>
     </div>
+    <div *ngIf="richCard" class="rich-card">
+        <div class="header">
+            <div class="header-left">
+                <img src="{{ jobImageURL }}">
+                <div class="job-infos">
+                    <h3>Junior Developer</h3>
+                    <h5>Shopify - Montreal, Canada</h5>
+                </div>
+            </div>
+        </div>
+        <div class="job-description">
+            <h6>Job Description</h6>
+            <p>Join the most popular e-commerce platform in the world. Build products that empower people to start businesses and...</p>
+        </div>
+        <div class="more-infos">
+            <div class="salary">
+                <h6>Salary</h6>
+                <p>$82,000</p>
+            </div>
+            <div class="job-type">
+                <h6>Job Type</h6>
+                <p>Full-time</p>
+            </div>
+        </div>
+        <div class="buttons">
+            <button (click)="bookmarkJob()">Learn more</button>
+        </div>
+    </div>
+    <div *ngIf="richCard" class="rich-card">
+        <div class="header">
+            <div class="header-left">
+                <img src="{{ jobImageURL }}">
+                <div class="job-infos">
+                    <h3>Junior Developer</h3>
+                    <h5>Shopify - Montreal, Canada</h5>
+                </div>
+            </div>
+        </div>
+        <div class="job-description">
+            <h6>Job Description</h6>
+            <p>Join the most popular e-commerce platform in the world. Build products that empower people to start businesses and...</p>
+        </div>
+        <div class="more-infos">
+            <div class="salary">
+                <h6>Salary</h6>
+                <p>$82,000</p>
+            </div>
+            <div class="job-type">
+                <h6>Job Type</h6>
+                <p>Full-time</p>
+            </div>
+        </div>
+        <div class="buttons">
+            <button (click)="bookmarkJob()">Learn more</button>
+        </div>
+    </div>
+    <div *ngIf="richCard" class="rich-card">
+        <div class="header">
+            <div class="header-left">
+                <img src="{{ jobImageURL }}">
+                <div class="job-infos">
+                    <h3>Junior Developer</h3>
+                    <h5>Shopify - Montreal, Canada</h5>
+                </div>
+            </div>
+        </div>
+        <div class="job-description">
+            <h6>Job Description</h6>
+            <p>Join the most popular e-commerce platform in the world. Build products that empower people to start businesses and...</p>
+        </div>
+        <div class="more-infos">
+            <div class="salary">
+                <h6>Salary</h6>
+                <p>$82,000</p>
+            </div>
+            <div class="job-type">
+                <h6>Job Type</h6>
+                <p>Full-time</p>
+            </div>
+        </div>
+        <div class="buttons">
+            <button (click)="bookmarkJob()">Learn more</button>
+        </div>
+    </div>
+    <div *ngIf="richCard" class="rich-card">
+        <div class="header">
+            <div class="header-left">
+                <img src="{{ jobImageURL }}">
+                <div class="job-infos">
+                    <h3>Junior Developer</h3>
+                    <h5>Shopify - Montreal, Canada</h5>
+                </div>
+            </div>
+        </div>
+        <div class="job-description">
+            <h6>Job Description</h6>
+            <p>Join the most popular e-commerce platform in the world. Build products that empower people to start businesses and...</p>
+        </div>
+        <div class="more-infos">
+            <div class="salary">
+                <h6>Salary</h6>
+                <p>$82,000</p>
+            </div>
+            <div class="job-type">
+                <h6>Job Type</h6>
+                <p>Full-time</p>
+            </div>
+        </div>
+        <div class="buttons">
+            <button (click)="bookmarkJob()">Learn more</button>
+        </div>
+    </div>
+</div>
 </div>
