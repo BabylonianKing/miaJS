@@ -60,6 +60,7 @@
     padding: 30px;
 
 .rich-card {
+    position: relative;
     font-family: $rubik;
     width: 300px;
     display: flex;
@@ -67,6 +68,32 @@
     background-color: white;
     box-shadow: $box-shadow;
     border-radius: 15px;
+
+    &:hover {
+        
+        .bookmark {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 100px;
+            z-index: 999;
+            width: 50px;
+            height: 50px;
+            background-color: white;
+            box-shadow: $box-shadow;
+            position: absolute;
+            right: -10px;
+            top: -15px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .bookmark {
+        display: none;
+    }
 
     .header {
         display: flex;
@@ -82,6 +109,13 @@
                 width: 50px;
                 border-radius: 50px;
                 margin-right: 10px;
+            }
+
+            .job-infos {
+                
+                h5 {
+                    font-weight: 400;
+                }
             }
         }
 
@@ -133,6 +167,7 @@
     .buttons {
         flex-grow: 1;
         display: flex;
+        flex-direction: column;
         padding: 20px;
 
         button {
@@ -147,11 +182,26 @@
             max-height: 40px;
             flex-grow: 1;
             font-size: 12px;
+            margin-bottom: 10px;
 
             &:hover {
                 background-color: rgba(230, 101, 81, 0.8);
                 color: white;
                 cursor: pointer;
+            }
+        }
+
+        .save-or-apply {
+            display: flex;
+
+            .save {
+                width: 20%;
+                border-radius: 10px 0 0 10px;
+            }
+
+            .apply {
+                width: 80%;
+                border-radius: 0 10px 10px 0;
             }
         }
     }
