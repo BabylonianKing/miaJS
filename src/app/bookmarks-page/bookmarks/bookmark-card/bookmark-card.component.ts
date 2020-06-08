@@ -21,11 +21,16 @@ export class BookmarkCardComponent implements OnInit {
   @Input() responsabilities: string;
   @Input() jobType: string;
   @Input() requirements: string;
-  @Input() applicationLink: string;
+  @Input() applicationURL: string;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  open() {
+    window.open(this.applicationURL, "_blank")
+
   }
 
 }

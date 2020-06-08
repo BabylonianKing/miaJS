@@ -3,26 +3,28 @@
             <div class="header-left">
                 <img src="{{ imageURL }}">
                 <div class="job-infos">
-                    <h3>Junior Developer</h3>
-                    <h5>Shopify - Montreal, Canada</h5>
+                    <h3>{{jobTitle}}</h3>
+                    <h5>{{ organization }} - {{ location }}</h5>
                 </div>
             </div>
         </div>
         <div class="job-description">
             <h6>Job Description</h6>
-            <p>Join the most popular e-commerce platform in the world. Build products that empower people to start businesses and...</p>
+            <p>{{jobDescription}}</p>
         </div>
         <div class="more-infos">
             <div class="salary">
                 <h6>Salary</h6>
-                <p>$82,000</p>
+                <p>{{ highSalary }}</p>
             </div>
             <div class="job-type">
                 <h6>Job Type</h6>
-                <p>Full-time</p>
+                <p>{{ jobType }}</p>
             </div>
         </div>
         <div class="buttons">
             <button>Learn more</button>
+            <button (click)="open()">Apply Now</button>
+
         </div>
 </div>
