@@ -36,9 +36,10 @@
         </div>
     </div>
     <div *ngIf="richCard" class="rich-card">
+        <div class="bookmark-icon"><img src="assets/banner-dark.svg"></div>
         <div class="header">
             <div class="header-left">
-                <img src="{{ jobImageURL }}">
+                <!-- <img src="{{ jobImageURL }}"> -->
                 <div class="job-infos">
                     <h3>Junior Developer</h3>
                     <h5>Shopify - Montreal, Canada</h5>
@@ -61,10 +62,7 @@
         </div>
         <div class="buttons">
             <button (click)="bookmarkJob()">Learn more</button>
-            <div class="save-or-apply">
-                <button class="save">❤️</button>
-                <button class="apply" (click)="bookmarkJob()">Apply now</button>
-            </div>
+            <button (click)="bookmarkJob()">Apply now</button>
         </div>
     </div>
     <div *ngIf="richCard" class="rich-card">

@@ -64,9 +64,22 @@
     line-height: 30px;
   }
   
-  .messages-header-button.last {
-    margin-right: 0px;
-  }
+  .icon {
+    height: 16px;
+    width: 16px;
+    border-radius: 2px;
+    padding: 5px;
+
+    &:hover {
+        background-color: #D3D1D1;
+        cursor: pointer;
+    }
+    
+    img {
+        max-height: 100%;
+        max-width: 100%;
+    }
+}
 
   .messages-header-jd {
     display: -webkit-box;

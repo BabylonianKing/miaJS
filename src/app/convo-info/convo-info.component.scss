@@ -15,22 +15,23 @@
     align-items: stretch;
   }
   
-  .x {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-align: end;
-    -webkit-align-items: flex-end;
-    -ms-flex-align: end;
-    align-items: flex-end;
-    font-size: 35px;
-  }
+  .icon {
+    align-self: flex-end;
+    height: 16px;
+    width: 16px;
+    border-radius: 2px;
+    padding: 5px;
+
+    &:hover {
+        background-color: #D3D1D1;
+        cursor: pointer;
+    }
+    
+    img {
+        max-height: 100%;
+        max-width: 100%;
+    }
+}
   
   .org-profile {
     display: -webkit-box;
