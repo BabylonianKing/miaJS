@@ -1,6 +1,6 @@
 <div class="header">
     <img src="assets/horizontal_black.png" style="width: 150px;">
-    <div class="icon" (click)="sideNavService.toggleSideNav()"><img src="assets/left-arrow.svg" alt=""></div>
+    <div class="icon" (click)="sideNavService.toggleSideNav()" [ngClass]="{'rotate': sideNavService.hideSideNav }"><img src="assets/left-arrow.svg" alt=""></div>
   </div>
   <div class="shortcuts">
     <div class="personal">
@@ -17,9 +17,9 @@
     </div>
   </div>
   <div class="site-nav">
-    <a routerLink="/signup" routerLinkActive="active">Live Training</a>
+    <!-- <a routerLink="/signup" routerLinkActive="active">Live Training</a>
     <a routerLink="/signup" routerLinkActive="active">Video Tutorials</a>
-    <a routerLink="/signup" routerLinkActive="active">Blog</a>
+    <a routerLink="/signup" routerLinkActive="active">Blog</a> -->
     <a class="signout" (click)="signOut()">Log Out</a>
   </div>
   <div class="invite-friends">
