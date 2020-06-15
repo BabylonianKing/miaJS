@@ -18,5 +18,4 @@ export class MenuToggleService {
     this.hideConvoInfos = !this.hideConvoInfos;
     console.log("Hello")
   }
-
 }

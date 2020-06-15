@@ -57,7 +57,7 @@ export class BookmarksComponent implements OnInit {
     let databaseOfUsers = []
 
 
-    let usersRef = this.db.collection("failure").get().toPromise()
+    let usersRef = this.db.collection("jobs").get().toPromise()
       .then(snapshot => {
         if (snapshot.empty) {
           console.log("User databse is empty");
@@ -82,7 +82,7 @@ export class BookmarksComponent implements OnInit {
             let applicationURL = doc.data().applicationURL
             let imageURL = "https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164c953e8a56201c055c_icons8-target-50.png"
 
-            console.log(doc.data().orgName)
+            // console.log(doc.data().orgName)
             databaseOfUsers.push({
     
               jobId: jobId,
@@ -201,7 +201,15 @@ export class BookmarksComponent implements OnInit {
   }
 
   searchByOrg() {
-    console.log("SearchByOrg()")
+    let value = this.searchValue.toLowerCase();
+    const filteredJobs = this.items.filter(job => {
+      return (
+        job.jobTitle.includes(value) ||
+        job.organization.includes(value)
+      );
+    });
+    console.log(typeof value);
+    this.items = filteredJobs;
   }
 
 }

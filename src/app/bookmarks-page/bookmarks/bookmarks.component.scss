@@ -35,13 +35,14 @@
 
   .bookmarks {
     box-sizing: border-box;
+    margin-top: 30px;
     padding: 0 30px;
     flex-grow: 1;
     display: grid;
     overflow: auto;
 
     grid-template-columns: repeat(auto-fill, minmax(300px, 300px));
-    grid-auto-rows: repeat(auto-fill, minmax(auto, auto));
+    grid-auto-rows: repeat(auto-fill, minmax(400px, 400px));
     column-gap: 25px;
     row-gap: 25px;
     // grid-template-rows: 33% 33% 33%;

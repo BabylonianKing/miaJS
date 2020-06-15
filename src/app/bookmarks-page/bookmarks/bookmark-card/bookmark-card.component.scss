@@ -10,97 +10,124 @@
   border-radius: 15px;
 
   .header {
-      display: flex;
-      justify-content: space-between;
-      padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
 
-      .header-left {
-          display: flex;
-          align-items: center;
+    .header-left {
+        display: flex;
+        align-items: center;
 
-          img {
-              height: 50px;
-              width: 50px;
-              border-radius: 50px;
-              margin-right: 10px;
-          }
+        img {
+            height: 50px;
+            width: 50px;
+            border-radius: 50px;
+            margin-right: 10px;
+        }
 
-          .job-infos {
-                
+        .job-infos {
+            
             h5 {
                 font-weight: 400;
             }
         }
-      }
+    }
 
-      
-  }
+    
+}
 
-  .job-description {
-      display: flex;
-      flex-direction: column;
-      justify-content: start;
-      padding: 20px;
-      color: $paragraph-gray;
+.job-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 20px;
+    color: $paragraph-gray;
 
-      h6 {
-          letter-spacing: 1px;
-          text-transform: uppercase;
-          color: $red-dark;
-          margin-bottom: 5px;
-      }
-  }
+    h6 {
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: $red-dark;
+        margin-bottom: 5px;
+    }
 
-  .more-infos {
-      display: flex;
+    p {
+        max-height: 200px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
 
-      .salary {
-          padding: 20px;
-          width: 50%;
+.more-infos {
+    display: flex;
 
-          h6 {
-              letter-spacing: 1px;
-              text-transform: uppercase;
-              color: $red-dark;
-              margin-bottom: 5px;
-          }
-      }
+    .salary {
+        padding: 20px;
+        width: 50%;
 
-      .job-type {
-          padding: 20px;
-          width: 50%;
+        h6 {
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: $red-dark;
+            margin-bottom: 5px;
+        }
+    }
 
-          h6 {
-              text-transform: uppercase;
-              color: $red-dark;
-              margin-bottom: 5px;
-          }
-      }
-  }
+    .job-type {
+        padding: 20px;
+        width: 50%;
 
-  .buttons {
-      flex-grow: 1;
-      display: flex;
-      padding: 20px;
+        h6 {
+            text-transform: uppercase;
+            color: $red-dark;
+            margin-bottom: 5px;
+        }
+    }
+}
 
-      button {
-          display: flex;
-          align-items: center;
-          background-color: rgba(230, 101, 81, 0.2);
-          padding: 10px 15px;
-          text-align: left;
-          color: $red-dark;
-          border: none;
-          border-radius: 10px;
-          max-height: 40px;
-          flex-grow: 1;
-          font-size: 12px;
+.buttons {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 
-          &:hover {
-              background-color: rgba(230, 101, 81, 0.8);
-              color: white;
-              cursor: pointer;
-          }
-      }
-  }
+    button {
+        display: flex;
+        align-items: center;
+        background-color: rgba(230, 101, 81, 0.2);
+        padding: 10px 15px;
+        text-align: left;
+        color: $red-dark;
+        border: none;
+        border-radius: 10px;
+        max-height: 40px;
+        flex-grow: 1;
+        font-size: 12px;
+        margin-bottom: 10px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &:hover {
+            background-color: rgba(230, 101, 81, 0.8);
+            color: white;
+            cursor: pointer;
+        }
+    }
+
+    .save-or-apply {
+        display: flex;
+
+        .save {
+            width: 20%;
+            border-radius: 10px 0 0 10px;
+        }
+
+        .apply {
+            width: 80%;
+            border-radius: 0 10px 10px 0;
+        }
+    }
+}
 }

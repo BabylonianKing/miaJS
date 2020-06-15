@@ -1,30 +1,29 @@
 <div class="bookmark-card">
-   <div class="header">
-            <div class="header-left">
-                <img src="{{ imageURL }}">
-                <div class="job-infos">
-                    <h3>{{jobTitle}}</h3>
-                    <h5>{{ organization }} - {{ location }}</h5>
-                </div>
+    <div class="header">
+        <div class="header-left">
+            <!-- <img src="{{ jobImageURL }}"> -->
+            <div class="job-infos">
+                <h3>{{ jobTitle }}</h3>
+                <h5>{{ organization }} - {{ location }}</h5>
             </div>
         </div>
-        <div class="job-description">
-            <h6>Job Description</h6>
-            <p>{{jobDescription}}</p>
+    </div>
+    <div class="job-description">
+        <h6>Job Description</h6>
+        <p>{{ jobDescription }}</p>
+    </div>
+    <div class="more-infos">
+        <div class="salary">
+            <h6>Salary</h6>
+            <p>{{ lowSalary }}</p>
         </div>
-        <div class="more-infos">
-            <div class="salary">
-                <h6>Salary</h6>
-                <p>{{ highSalary }}</p>
-            </div>
-            <div class="job-type">
-                <h6>Job Type</h6>
-                <p>{{ jobType }}</p>
-            </div>
+        <div class="job-type">
+            <h6>Job Type</h6>
+            <p>{{ jobType }}</p>
         </div>
-        <div class="buttons">
-            <button>Learn more</button>
-            <button (click)="open()">Apply Now</button>
-
-        </div>
+    </div>
+    <div class="buttons">
+        <button >Learn more</button>
+        <button>Apply now</button>
+    </div>
 </div>
