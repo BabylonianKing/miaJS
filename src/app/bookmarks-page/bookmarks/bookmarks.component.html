@@ -3,7 +3,7 @@
         <input class="search-bar" type="text" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" placeholder="Search by name..." (keyup)="searchByOrg()">
     </div>
     <div class="bookmarks">
-        <bookmark-card *ngFor="let item of items"
+        <bookmark-card *ngFor="let item of filteredJobs || items"
         type="text"
         [logo]=""
         [jobTitle]="item.jobTitle"

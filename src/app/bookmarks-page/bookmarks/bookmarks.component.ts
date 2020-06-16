@@ -55,6 +55,7 @@ export class BookmarksComponent implements OnInit {
   ngOnInit(): void {
 
     let databaseOfUsers = []
+    let filteredJobs = []
 
 
     let usersRef = this.db.collection("jobs").get().toPromise()
@@ -200,16 +201,16 @@ export class BookmarksComponent implements OnInit {
 
   }
 
+  filteredJobs: any = null;
+
   searchByOrg() {
-    let value = this.searchValue.toLowerCase();
-    const filteredJobs = this.items.filter(job => {
+    const value = this.searchValue.toLowerCase();
+    console.log(value);
+    this.filteredJobs = this.items.filter(job => {
       return (
-        job.jobTitle.includes(value) ||
-        job.organization.includes(value)
+        job.jobTitle.toLowerCase().includes(value) ||
+        job.organization.toLowerCase().includes(value)
       );
     });
-    console.log(typeof value);
-    this.items = filteredJobs;
   }
-
 }
