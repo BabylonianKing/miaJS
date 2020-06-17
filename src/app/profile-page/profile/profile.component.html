@@ -138,9 +138,10 @@
         <div class="field">
           <!-- <input type="file" id="org_logo" accept=".png, .jpg" (change)="uploadImage($event)" [ngModel]> -->
           <!-- You have to change the (change) event -->
-          <input id="resume" type="file" accept=".pdf, .png, .jpg" [ngModel] (change)="uploadResume($event)">
+          <input id="resume" type="file" accept=".pdf, .png, .jpg" [ngModel] (change)="uploadResume($event)" *ngIf= "!showResumeUploaded">
+          <div *ngIf="showResumeUploaded">Resume Uploaded</div>
         </div>
-        <label (click)="uploadResume($event)"for="resume">Upload</label>
+        <label for="resume">Upload</label>
       </div>
     </div>
   </div>
