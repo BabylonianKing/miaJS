@@ -65,7 +65,7 @@
       position: absolute;
       display: flex;
       align-items: flex-end;
-      top: 60%;
+      top: 65%;
       padding-left: 30px;
 
       .avatar {
@@ -76,6 +76,7 @@
         margin-right: 20px;
         position: relative;
         background-size: cover;
+        background-position: center;
 
         &:hover {
 

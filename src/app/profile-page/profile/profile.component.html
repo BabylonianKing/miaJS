@@ -29,10 +29,10 @@
         <a (click)="EditInput()" [hidden]="valueHidden">Edit</a>
         <a (click)="ConfirmInput()" [hidden]="inputHidden">Save</a>
       </div>
-        <div class="sub-infos">
+        <!-- <div class="sub-infos">
           <p>{{ (status) ? status: 'Recently met Matilda'}}</p>
           <p>{{ (location) ? location: 'Somewhere, Somewhere' }}</p>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -77,7 +77,7 @@
         <a (click)="ConfirmInput()" [hidden]="inputHidden">Save</a>
       </div>
     </div>
-    <div class="info">
+    <!-- <div class="info">
       <div class="info-left">
         <h2>Subscription Type</h2>
       </div>
@@ -87,8 +87,8 @@
         </div>
         <a>Upgrade</a>
       </div>
-    </div>
-    <div class="info">
+    </div> -->
+    <!-- <div class="info">
       <div class="info-left">
         <h2>Time Zone</h2>
       </div>
@@ -98,8 +98,8 @@
         </div>
         <a>Edit</a>
       </div>
-    </div>
-    <div class="info">
+    </div> -->
+    <!-- <div class="info">
       <div class="info-left">
         <h2>Language</h2>
       </div>
@@ -111,10 +111,6 @@
           <form #newLanguage="ngForm" (ngSubmit)="UpdateUser(newLanguage.value)">
             <input [hidden]="inputHidden" placeholder="New language" type="text" name="language" id="new_language"
               autocomplete="off" ngModel>
-            <!-- <select [hidden]="inputHidden" placeholder="New language" name="language" id="new_language" ngModel>
-              <option value="Enlish">English</option>
-              <option value="French">French</option>
-            </select> -->
           </form>
 
 
@@ -122,7 +118,7 @@
         <a (click)="EditInput()" [hidden]="valueHidden">Edit</a>
         <a (click)="ConfirmInput()" [hidden]="inputHidden">Save</a>
       </div>
-    </div>
+    </div> -->
     <div class="info">
       <div class="info-left">
         <h2>Password</h2>
