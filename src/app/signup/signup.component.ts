@@ -22,7 +22,7 @@ export class SignupComponent implements OnInit {
   signUp() {
     this.authenticationService.SignUp(this.email, this.password).then(error => {
       console.log(error);
-      this.errorMessage = error;    
+      // this.errorMessage = error;    
     });
     
     this.email = ''; 

@@ -119,4 +119,11 @@ export class FirebaseService {
       avatar: avatar
     });
   }
+
+  // CARDS & BOOKMARKS
+
+  bookmarkJob(job) {
+
+
+  }
 }

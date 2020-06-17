@@ -17,6 +17,7 @@
     NgForm
   } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { UserProfileService } from 'src/shared/services/user-profile.service';
 
   @Component({
     selector: 'profile',
@@ -38,6 +39,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 
     constructor(
       public firebaseService: FirebaseService,
+      public profileService: UserProfileService,
       public afAuth: AuthenticationService,
       public ngZone: NgZone,
       public router: Router,

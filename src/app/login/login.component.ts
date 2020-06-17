@@ -22,7 +22,7 @@ export class LoginComponent {
   signIn() {
     this.authenticationService.SignIn(this.email, this.password).then(error => {
       console.log(error);
-      this.errorMessage = error;    
+      // this.errorMessage = error;    
     });
     this.email = ''; 
     this.password = '';

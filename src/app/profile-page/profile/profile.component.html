@@ -43,18 +43,18 @@
       </div>
       <div class="info-right">
         <div class="field">
-          <p [hidden]="valueHidden"> {{ user.email }}</p>
+          <p [hidden]="profileService.editingEmail"> {{ user.email }}</p>
 
 
-          <form #newEmail="ngForm" (ngSubmit)="UpdateUser(newEmail.value)">
-            <input [hidden]="inputHidden" placeholder="New email" type="email" name="email" id="new_email"
+          <form #newEmail="ngForm" (ngSubmit)="profileService.editEmail(newEmail.value)">
+            <input [hidden]="!profileService.editingEmail" placeholder="New email" type="email" name="email" id="new_email"
               autocomplete="off" ngModel>
           </form>
 
 
         </div>
-        <a (click)="EditInput()" [hidden]="valueHidden">Edit</a>
-        <a (click)="ConfirmInput()" [hidden]="inputHidden">Save</a>
+        <a (click)="profileService.editingEmail = !profileService.editingEmail" [hidden]="profileService.editingEmail">Edit</a>
+        <a (click)="profileService.editingEmail = !profileService.editingEmail" [hidden]="!profileService.editingEmail">Save</a>
       </div>
     </div>
     <div class="info">

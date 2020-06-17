@@ -8,5 +8,10 @@ export class UserProfileService {
   
   constructor() { }
 
-  
+  // EDIT EMAIL
+  editingEmail: boolean = false;
+
+  editEmail(newEmail) {
+
+  }
 }

@@ -40,7 +40,7 @@ export class AuthenticationService {
         });
         // this.SetUserData(result.user);
       }).catch((error) => {
-        return (error.message)
+        window.alert(error.message);
       })
   }
 
@@ -62,7 +62,7 @@ export class AuthenticationService {
         this.SendVerificationEmail();
         this.SetUserData(result.user);
       }).catch((error) => {
-        return (error.message)
+        window.alert(error.message);
       })
   }
 
