@@ -17,6 +17,7 @@
     NgForm
   } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { NONE_TYPE } from '@angular/compiler';
 
   @Component({
     selector: 'profile',
@@ -35,6 +36,9 @@ import { AngularFireStorage } from '@angular/fire/storage';
     coverDownloadURL: string;
     profileDownloadURL: string;
     uploadProgress;
+    showResumeUploaded = false;
+    userId: string = JSON.parse(localStorage.getItem('user')).uid;
+    resumeEvent;
 
     constructor(
       public firebaseService: FirebaseService,
@@ -44,15 +48,26 @@ import { AngularFireStorage } from '@angular/fire/storage';
       public afStorage: AngularFireStorage) {}
 
     ngOnInit(): void {
+      this.userId = JSON.parse(localStorage.getItem('user')).uid;
+      
 
-      let userId = JSON.parse(localStorage.getItem('user')).uid;
+      this.afStorage.ref(`/coverImages/${this.userId}`).getDownloadURL().toPromise().then(data => this.coverDownloadURL = data)
 
-      this.afStorage.ref(`/coverImages/${userId}`).getDownloadURL().toPromise().then(data => this.coverDownloadURL = data)
-
-      this.afStorage.ref(`/profileImages/${userId}`).getDownloadURL().toPromise().then(data => {
+      this.afStorage.ref(`/profileImages/${this.userId}`).getDownloadURL().toPromise().then(data => {
         this.profileDownloadURL = data;
         if (!this.profileDownloadURL) {
           this.profileDownloadURL = this.afAuth.userData.photoURL
+        }
+      
+      })
+
+      this.afStorage.ref(`/resume/${this.userId}`).getDownloadURL().toPromise().then(data => {
+        console.log(data)
+        if (data) {
+          this.showResumeUploaded = true
+          console.log("Resume is in the database")
+        } else {
+          console.log("No resume in database")
         }
       
       })
@@ -91,14 +106,17 @@ import { AngularFireStorage } from '@angular/fire/storage';
       ref.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
     }
 
+    
+
     uploadResume(event) {
       let userId = JSON.parse(localStorage.getItem('user')).uid;
+
       this.afStorage.upload(`/resume/${userId}`, event.target.files[0]);
   
-      let ref = this.afStorage.ref(userId);
+      let reference = this.afStorage.ref(userId);
       // the put method creates an AngularFireUploadTask
       // and kicks off the upload
-      ref.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
+      reference.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
     }
 
     uploadProfile(event) {
