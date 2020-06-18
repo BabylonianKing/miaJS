@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Chat } from 'src/shared/models/chat.model';
 import { Router} from '@angular/router';
 
@@ -18,10 +18,11 @@ export class ChatMessageComponent implements OnInit {
 @Input() imageUrl: string;
 @Input() reply: boolean;
 @Input() jobImageURL: string;
-
 @Input() richCard: boolean;
 @Input() jobTitle: string;
 @Input() jobSubtitle: boolean;
+
+@Output() learnMoreDescriptionEmitter = new EventEmitter<string>(); 
 
 
 
@@ -39,6 +40,7 @@ export class ChatMessageComponent implements OnInit {
     console.log("Job bookmarked")
   }
   learnMore() {
+    this.learnMoreDescriptionEmitter.emit(this.learnMoreDescription)
     console.log(this.learnMoreDescription)
   }
 

@@ -155,7 +155,20 @@ export class MiaComponent implements OnInit {
 
     })
 
+  }
 
+  addLearnMoreMessage(text) {
+
+    let data;
+    data = {
+      text: text,
+      sender: 'Bot',
+      date: new Date(),
+      richCard: false
+    }
+
+    let ref = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId).doc(data.date.toString());
+    ref.set(data);
 
   }
 
@@ -243,10 +256,6 @@ export class MiaComponent implements OnInit {
         learnMoreDescription: response.fulfillmentMessages[0].card.buttons[1].postback }
     }
 
-    console.log(response)
-    console.log(data)
-
-
 
 
     // Add message to DB (THIS WAY OF DOING THINGS REQUIRES MESSAGES TO BE ARCHIVED AS TO NOT GO OVER THE 1MB LIMIT FOR DOCS)
@@ -292,7 +301,6 @@ export class MiaComponent implements OnInit {
         }
       )
       .subscribe(res => {
-        console.log(res)
         this.addBotMessage(res);
         this.loading = false;
       });
