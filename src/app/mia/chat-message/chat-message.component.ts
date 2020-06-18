@@ -13,9 +13,17 @@ export class ChatMessageComponent implements OnInit {
 @Input() message: string;
 @Input() timestamp: string;
 // Style (Bot vs. User Bubble)
+@Input() learnMoreDescription: string;
+@Input() applyNowUrl: string;
+@Input() imageUrl: string;
 @Input() reply: boolean;
 @Input() jobImageURL: string;
+
 @Input() richCard: boolean;
+@Input() jobTitle: string;
+@Input() jobSubtitle: boolean;
+
+
 
 
   constructor(private router: Router) { }
@@ -29,6 +37,14 @@ export class ChatMessageComponent implements OnInit {
 
   bookmarkJob() {
     console.log("Job bookmarked")
+  }
+  learnMore() {
+    console.log(this.learnMoreDescription)
+  }
+
+  apply() {
+    window.open(this.applyNowUrl, "_blank")
+
   }
 
 }

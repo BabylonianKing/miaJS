@@ -149,6 +149,12 @@
             color: $red-dark;
             margin-bottom: 5px;
         }
+        p {
+            max-height: 200px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
     }
 
     .more-infos {

@@ -38,6 +38,7 @@ export class MiaComponent implements OnInit {
   location;
   imageURL;
   richCard;
+  richCardContent;
 
 
   // Random ID to maintain session with server (TO BE SWITCHED WITH USER_ID)
@@ -51,11 +52,13 @@ export class MiaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.currentTexterId = JSON.parse(localStorage.getItem('currentTexter')).jobId
-    this.jobTitle = JSON.parse(localStorage.getItem('currentTexter')).jobTitle
-    this.organization = JSON.parse(localStorage.getItem('currentTexter')).organization
-    this.location = JSON.parse(localStorage.getItem('currentTexter')).location
-    this.afStorage.ref(`/orgImages/${JSON.parse(localStorage.getItem('currentTexter')).orgId}`).getDownloadURL().toPromise().then(data => {
+    this.currentTexterId = "Matilda"
+
+    
+    // this.jobTitle = JSON.parse(localStorage.getItem('currentTexter')).jobTitle
+    // this.organization = JSON.parse(localStorage.getItem('currentTexter')).organization
+    // this.location = JSON.parse(localStorage.getItem('currentTexter')).location
+    this.afStorage.ref(`/orgImages/${this.currentTexterId}`).getDownloadURL().toPromise().then(data => {
       //If there isn't an image, use the webflow image
       // this.imageURL = data
 
@@ -113,6 +116,7 @@ export class MiaComponent implements OnInit {
 
   //Prototyping function, changing from Chat with Matilda to chatting with another human. Hard-coded Lucas.
   changeConversation() {
+
     this.currentTexterId = JSON.parse(localStorage.getItem('currentTexter')).jobId
     this.jobTitle = JSON.parse(localStorage.getItem('currentTexter')).jobTitle
     this.organization = JSON.parse(localStorage.getItem('currentTexter')).organization
@@ -130,7 +134,6 @@ export class MiaComponent implements OnInit {
 
     })
 
-    console.log(this.currentTexterId)
     this.messages = [];
 
 
@@ -176,6 +179,7 @@ export class MiaComponent implements OnInit {
 
 
   addUserMessage(text) {
+
     let data = {
       text,
       sender: 'Human',
@@ -208,47 +212,41 @@ export class MiaComponent implements OnInit {
   }
 
   addBotMessage(response) {
-    let title;
-    let subtitle;
-    let text;
-    let url;
-
+    let userId = JSON.parse(localStorage.getItem('user')).uid;
     let data;
 
     //If it is a normal response, not a card response
     if (response.fulfillmentText != "") {
-      text = response.fulfillmentText
-    }
+      
+      this.richCard = false
 
-    //Card response
-    else {
-      title = response.fulfillmentMessages[0].card.title
-      subtitle = response.fulfillmentMessages[0].card.subtitle
-      text = response.fulfillmentMessages[0].message
-      url = response.fulfillmentMessages[0].card.imageUri
-    }
-
-    if (url != null) {
       data = {
-        text: text,
-        title: title,
-        subtitle: subtitle,
-        sender: 'Bot',
-        date: new Date(),
-        url: url,
-        richCard: true
-      }
-
-    } else {
-      data = {
-        text: text,
+        text: response.fulfillmentText,
         sender: 'Bot',
         date: new Date(),
         richCard: false
       }
     }
 
-    // this.messages.push(data);
+    //Card response
+    else {
+      this.richCard = true
+      data = {
+        sender: 'Bot',
+        date: new Date(),
+        richCard: true,
+        title: response.fulfillmentMessages[0].card.title,
+        subtitle: response.fulfillmentMessages[0].card.subtitle,
+        // text: response.fulfillmentMessages[0].message,
+        imageUrl: response.fulfillmentMessages[0].card.imageUri,
+        applyNowUrl: response.fulfillmentMessages[0].card.buttons[0].postback,
+        learnMoreDescription: response.fulfillmentMessages[0].card.buttons[1].postback }
+    }
+
+    console.log(response)
+    console.log(data)
+
+
 
 
     // Add message to DB (THIS WAY OF DOING THINGS REQUIRES MESSAGES TO BE ARCHIVED AS TO NOT GO OVER THE 1MB LIMIT FOR DOCS)
@@ -295,7 +293,6 @@ export class MiaComponent implements OnInit {
       )
       .subscribe(res => {
         console.log(res)
-
         this.addBotMessage(res);
         this.loading = false;
       });
