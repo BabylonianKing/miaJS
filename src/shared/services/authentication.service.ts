@@ -12,7 +12,7 @@ export class AuthenticationService {
   userData: User; // Save logged in user data
 
   constructor(
-    private afAuth: AngularFireAuth,
+    public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning

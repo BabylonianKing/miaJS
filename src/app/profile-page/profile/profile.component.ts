@@ -13,9 +13,7 @@
   import {
     Router
   } from '@angular/router';
-  import {
-    NgForm
-  } from '@angular/forms';
+  import { NgForm } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { NONE_TYPE } from '@angular/compiler';
@@ -88,12 +86,10 @@ import { NONE_TYPE } from '@angular/compiler';
       console.log(value);
       const u = this.afAuth.userData;
       const uid = u.uid;
-      this.firebaseService.updateUser(uid, value)
-        .then(
-          res => {
-            this.router.navigate(['/profile']);
-          }
-        )
+      // this.firebaseService.updateUser(uid, value)
+      // return this.afAuth.afAuth.currentUser
+      // .then((u) => u.updateEmail(value))
+      // .then(res => { this.router.navigate(['/profile']); })
     }
 
 

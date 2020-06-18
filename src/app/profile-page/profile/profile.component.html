@@ -18,16 +18,14 @@
       </div>
       <div class="profile-header-infos">
         <div class="super-infos">
-        <h2 [hidden]="valueHidden">{{(user.displayName) ? user.displayName: 'New User' }}</h2>
+          <h2 [hidden]="profileService.editingName">{{(user.displayName) ? user.displayName: 'New User' }}</h2>
 
-        <!-- TO BE MODIFIED!!!!!!!!!!!! -->
-        <form #newEmail="ngForm" (ngSubmit)="UpdateUser(newEmail.value)">
-          <input [hidden]="inputHidden" placeholder="New name" type="text" name="email" id="new_email"
-            autocomplete="off" ngModel>
-        </form>
+          <form #newName="ngForm" (submit)="profileService.editName(newName.value)">
+            <input [hidden]="!profileService.editingName" placeholder="New name" type="text" name="displayName" autocomplete="off" ngModel>
+          </form>
 
-        <a (click)="EditInput()" [hidden]="valueHidden">Edit</a>
-        <a (click)="ConfirmInput()" [hidden]="inputHidden">Save</a>
+          <a (click)="profileService.editingName = !profileService.editingName" [hidden]="profileService.editingName">Edit</a>
+          <a (click)="profileService.editingName = !profileService.editingName" [hidden]="!profileService.editingName">Save</a>
       </div>
         <!-- <div class="sub-infos">
           <p>{{ (status) ? status: 'Recently met Matilda'}}</p>
@@ -45,12 +43,9 @@
         <div class="field">
           <p [hidden]="profileService.editingEmail"> {{ user.email }}</p>
 
-
-          <form #newEmail="ngForm" (ngSubmit)="profileService.editEmail(newEmail.value)">
-            <input [hidden]="!profileService.editingEmail" placeholder="New email" type="email" name="email" id="new_email"
-              autocomplete="off" ngModel>
+          <form #newEmail="ngForm" (submit)="profileService.editEmail(newEmail.value.email)">
+            <input [hidden]="!profileService.editingEmail" placeholder="New email" type="email" name="email" autocomplete="off" ngModel>
           </form>
-
 
         </div>
         <a (click)="profileService.editingEmail = !profileService.editingEmail" [hidden]="profileService.editingEmail">Edit</a>
@@ -66,7 +61,7 @@
           <p [hidden]="valueHidden"> {{ formatNumber(phone) }}</p>
 
 
-          <form #newPhone="ngForm" (ngSubmit)="UpdateUser(newPhone.value)">
+          <form #newPhone="ngForm" (submit)="UpdateUser(newPhone.value)">
             <input [hidden]="inputHidden" placeholder="New phone number" type="tel" name="phone" id="new_phone"
               autocomplete="off" ngModel>
           </form>
@@ -125,9 +120,15 @@
       </div>
       <div class="info-right">
         <div class="field">
-          <p>********</p>
+          <p [hidden]="profileService.editingPassword">**********</p>
+
+          <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
+            <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
+          </form>
+
         </div>
-        <a>Edit</a>
+        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
+        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
       </div>
     </div>
     <div class="info">

@@ -22,7 +22,7 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       const user = JSON.parse(localStorage.getItem('user'));
-      this.firebaseService.getUserInfos(user.uid)
+      this.firebaseService.getUserInfos(user.uid) 
       .subscribe(result => {
         console.log(result)
         this.userInfos = result;

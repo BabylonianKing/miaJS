@@ -67,11 +67,6 @@ export class FirebaseService {
     .then(u => u.updateEmail(email));
   }
 
-  updateUser(userKey, value){
-    // value.nameToSearch = value.name.toLowerCase();
-    return this.db.collection('user-infos').doc(userKey).update(value);
-  }
-
   deleteUser(userKey){
     return this.db.collection('items').doc(userKey).delete();
   }
