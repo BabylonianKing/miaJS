@@ -48,6 +48,9 @@ import { NONE_TYPE } from '@angular/compiler';
       public afStorage: AngularFireStorage) {}
 
     ngOnInit(): void {
+
+      this.firebaseService.pathRefresh();
+
       this.userId = JSON.parse(localStorage.getItem('user')).uid;
       
 
@@ -126,16 +129,6 @@ import { NONE_TYPE } from '@angular/compiler';
       // the put method creates an AngularFireUploadTask
       // and kicks off the upload
       ref.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
-    }
-
-    EditInput() {
-      this.valueHidden = true;
-      this.inputHidden = false;
-    }
-
-    ConfirmInput() {
-      this.valueHidden = false;
-      this.inputHidden = true;
     }
 
     formatNumber(tel) {

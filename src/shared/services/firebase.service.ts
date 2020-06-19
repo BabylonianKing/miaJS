@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AuthenticationService } from './authentication.service';
 import { AngularFireStorage} from "@angular/fire/storage";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,27 @@ export class FirebaseService {
     public afStorage: AngularFireStorage,
     private afAuth: AngularFireAuth) { }
 
+    uid: string;
+    displayName: string;
+    email: string;
 
+    userRef: AngularFirestoreDocument<any>;
+    userRefData: Observable<any>;
+
+    pathRefresh() {
+      this.afAuth.authState.subscribe((user) => { // Need authState to load before all of this
+        if (user) {
+          this.uid = user.uid
+          this.userRef = this.db.doc(`users/${this.uid}`);
+          this.userRefData = this.userRef.valueChanges()
+     
+          this.userRefData.subscribe(data => {
+            this.email = data.email;
+            this.displayName = data.displayName;
+          });
+        }
+      });
+    }
   
     postJob(formValue) {
       return this.db.collection('jobs').add({
@@ -50,6 +70,7 @@ export class FirebaseService {
       console.log(`Error retrievin document Id, ${error}`)
     })
   }
+  
   
 
 
@@ -89,9 +110,6 @@ export class FirebaseService {
     let uploadProgress = ref.put(event.target.files[0]).percentageChanges();
     console.log('image uploaded')
     
-
-
-
   }
 
   searchOrganization(searchValue){
@@ -116,9 +134,4 @@ export class FirebaseService {
   }
 
   // CARDS & BOOKMARKS
-
-  bookmarkJob(job) {
-
-
-  }
 }

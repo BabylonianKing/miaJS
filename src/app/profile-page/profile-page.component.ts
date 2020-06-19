@@ -26,8 +26,6 @@ export class ProfilePageComponent implements OnInit {
       .subscribe(result => {
         console.log(result)
         this.userInfos = result;
-        
-        
       })
 
       

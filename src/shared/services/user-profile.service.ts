@@ -22,9 +22,9 @@ export class UserProfileService {
   editingName: boolean = false;
 
   editName(name) {
-    console.log("Hi")
     const uid = this.afAuth.userData.uid;
-    this.updateUser(uid, name);
+    this.updateUser(uid, name)
+    .then(() => this.editingName = false)
   }
 
   // CHANGE EMAIL
@@ -37,6 +37,13 @@ export class UserProfileService {
   }
 
   // CHANGE PHONE
+  editingPhone: boolean = false;
+
+  editPhone(phone) {
+    const uid = this.afAuth.userData.uid;
+    this.updateUser(uid, phone)
+    .then(() => this.editingPhone = false)
+  }
 
   // CHANGE PASSWORD
   editingPassword: boolean = false;
