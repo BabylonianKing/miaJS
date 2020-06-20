@@ -126,6 +126,7 @@ a:last-child {
 
     button {
         width: 100%;
+        margin-bottom: 10px;
         padding: 10px 30px;
         background-color: $red-dark;
         border-radius: 50px;
@@ -136,6 +137,10 @@ a:last-child {
         &:hover {
             background-color: $blue-dark;
             cursor: pointer;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
         }
     }
 }

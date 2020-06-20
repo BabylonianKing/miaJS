@@ -32,4 +32,5 @@ export class ProfilePageComponent implements OnInit {
     }, 1000)
 
   }
+
 }
