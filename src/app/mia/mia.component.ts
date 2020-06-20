@@ -98,19 +98,6 @@ export class MiaComponent implements OnInit {
     })
 
 
-
-    // let observer = query.snapshotChanges().pipe(
-    //   map(actions => actions.map(a => {
-    //     console.log("Obtained Data")
-    //     const data = a.payload.doc.data();
-    //     return data  
-    //   }))
-    // )
-    // console.log(observer)
-
-
-
-
     // this.addBotMessage('Hey I\'m Matilda. Let\'s find your dream job together! Just say hi to get started.');
   }
 
@@ -172,25 +159,6 @@ export class MiaComponent implements OnInit {
 
   }
 
-  // addUserMessageWithOtherUser(text) {
-  //   let data = {
-  //     text,
-  //     sender: 'You',
-  //     reply: true,
-  //     date: new Date()
-  //   }
-  //   // this.messages.push(data);
-
-
-  //   // Add message to DB (THIS WAY OF DOING THINGS REQUIRES MESSAGES TO BE ARCHIVED AS TO NOT GO OVER THE 1MB LIMIT FOR DOCS)
-  //   let ref = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId).doc(data.date.toString());
-  //   ref.set(data);
-  //   ref.get().toPromise().then(doc => {
-  //     this.messages.push(doc.data())
-  //   })
-  // }
-
-
   addUserMessage(text) {
 
     let data = {
@@ -206,22 +174,7 @@ export class MiaComponent implements OnInit {
     // Add message to DB (THIS WAY OF DOING THINGS REQUIRES MESSAGES TO BE ARCHIVED AS TO NOT GO OVER THE 1MB LIMIT FOR DOCS)
     let ref = this.db.collection("conversations").doc(this.userId).collection(this.currentTexterId).doc(data.date.toString());
     ref.set(data);
-    //Should remove this code, creates duplicate texts on the client side
-    // ref.get().toPromise().then(doc => {
-    //   this.messages.push(doc.data())
-    // })
-
-    //No need for duplicates, since it is a bot all the time
-    // //Creating a duplicate version on the receiver's end
-    // //Same messages, except reply is the opposite type
-    // let receiverData = data
-    // receiverData.reply = false
-
-    // let refReceiver = this.db.collection("conversations").doc(this.currentTexterId).collection(this.userId).doc(receiverData.date.toString());
-    // refReceiver.set(receiverData);
-
-
-
+    
   }
 
   addBotMessage(response) {
@@ -284,7 +237,6 @@ export class MiaComponent implements OnInit {
     this.addUserMessage(text);
 
     //i.e. if currentTexterId is matilda, execute the fulfillment
-
     this.loading = true;
 
 

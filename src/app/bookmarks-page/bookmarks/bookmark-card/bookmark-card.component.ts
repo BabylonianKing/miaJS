@@ -28,9 +28,12 @@ export class BookmarkCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  open() {
+  apply() {
     window.open(this.applicationURL, "_blank")
+  }
 
+  learnMore() {
+    console.log(this.jobDescription)
   }
 
 }
