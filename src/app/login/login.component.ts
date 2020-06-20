@@ -20,10 +20,7 @@ export class LoginComponent {
   public ngOnInit(): void {}
 
   signIn() {
-    this.authenticationService.SignIn(this.email, this.password).then(error => {
-      console.log(error);
-      // this.errorMessage = error;    
-    });
+    this.authenticationService.SignIn(this.email, this.password);
     this.email = ''; 
     this.password = '';
   }
