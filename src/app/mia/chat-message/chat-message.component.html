@@ -1,6 +1,6 @@
 <div class="message-container" [ngClass]=" {'user': reply} ">
     <div class="message-bubble" [ngClass]=" {'user': reply} ">
-        <p class="message">{{ message }}</p>
+        <p class="message">{{ message ? message: "Here is a job I found for you," }}</p>
     </div>
     <p class="message-timestamp">{{ timestamp }}</p>
 
