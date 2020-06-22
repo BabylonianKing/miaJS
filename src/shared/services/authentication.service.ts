@@ -49,7 +49,7 @@ export class AuthenticationService {
     return this.afAuth.currentUser
     .then(u => u.sendEmailVerification())
     .then(() => {
-      this.router.navigate(['login']);
+      this.router.navigate(['profile']);
     })
   }
   

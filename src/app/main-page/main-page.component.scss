@@ -295,7 +295,7 @@ a {
 }
 
 .button-small-navbar {
-  padding: 11px 30px;
+  padding: 10px 30px;
   border-radius: 50px;
   background-color: #e66551;
   color: #fff;
@@ -385,7 +385,7 @@ body {
 }
 
 .button {
-  padding: 20px 45px;
+  padding: 10px 30px;
   border-radius: 50px;
   background-color: #fe7b67;
   line-height: 1.4em;
@@ -393,6 +393,7 @@ body {
 }
 
 .button.blue {
+  color: white;
   background-color: #4c69e3;
 }
 
@@ -421,6 +422,10 @@ body {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+
+  img {
+    width: 80%;
+  }
 }
 
 .content {

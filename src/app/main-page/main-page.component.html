@@ -3,18 +3,17 @@
     <div class="navbar-w-nav">
       <div class="block-navbar">
         <div class="nav-left w-clearfix"><a href="/" class="brand _w-nav-brand w-inline-block"><img
-              src="https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea9b4b3908c052ff47a5a19_Logo-Black.png"
-              width="100" alt="Mia logo"
-              srcset="https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea9b4b3908c052ff47a5a19_Logo-Black-p-500.png 500w, https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea9b4b3908c052ff47a5a19_Logo-Black-p-800.png 800w, https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea9b4b3908c052ff47a5a19_Logo-Black-p-1080.png 1080w, https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea9b4b3908c052ff47a5a19_Logo-Black.png 1544w"
+            src="/assets/horizontal_black.png"
+              width="200" alt="Matilda logo"
               sizes="(max-width: 479px) 95.8125px, (max-width: 767px) 20vw, 100px" class="logo" /></a>
           <div data-collapse="medium" data-animation="default" data-duration="400" role="banner"
             class="nav-menu _w-nav-menu w-nav">
             <div class="w-container">
-              <nav role="navigation" class="w-nav-menu"><a href="/"
+              <!-- <nav role="navigation" class="w-nav-menu"><a href="/"
                   class="nav-link _w-nav-link dark w-nav-link">Home</a><a href="/resources"
                   class="nav-link _w-nav-link dark w-nav-link">Resources</a><a href="/about"
                   class="nav-link _w-nav-link dark w-nav-link">About</a><a href="/contact"
-                  class="nav-link _w-nav-link dark w-nav-link">Contact</a></nav>
+                  class="nav-link _w-nav-link dark w-nav-link">Contact</a></nav> -->
               <div class="w-nav-button">
                 <div class="w-icon-nav-menu"></div>
               </div>
@@ -25,8 +24,7 @@
           <div class="nav-link-block _w-inline-block">
             <a class="link-text dark" routerLink="/login" routerLinkActive="active">Sign In</a>
             </div>
-              <a href="/chat"
-            class="button-small-navbar _w-button w-button">Find an organization</a>
+              <a routerLink="/signup" routerLinkActive="active" class="button-small-navbar _w-button w-button">Create an account</a>
         </div>
       </div>
       <div class="_w-nav-overlay"></div>
@@ -37,38 +35,34 @@
       <div class="navbar-w-nav">
         <div class="block-navbar">
           <div class="nav-left w-clearfix"><a href="/" class="brand _w-nav-brand w-inline-block"><img
-                src="https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea9a77998be45b2836cc286_Asset%203.png"
-                width="100" alt="Mia logo"
-                srcset="https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea9a77998be45b2836cc286_Asset%203-p-500.png 500w, https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea9a77998be45b2836cc286_Asset%203-p-800.png 800w, https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea9a77998be45b2836cc286_Asset%203-p-1080.png 1080w, https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea9a77998be45b2836cc286_Asset%203.png 1544w"
+                src="/assets/horizontal-black.png"
+                width="100" alt="Matilda logo"
                 sizes="(max-width: 479px) 95.8125px, (max-width: 767px) 20vw, 100px" class="logo" /></a>
             <div data-collapse="medium" data-animation="default" data-duration="400" role="banner"
               class="nav-menu _w-nav-menu w-nav">
               <div class="w-container">
-                <nav role="navigation" class="w-nav-menu"><a href="/" aria-current="page"
+                <!-- <nav role="navigation" class="w-nav-menu"><a href="/" aria-current="page"
                     class="nav-link _w-nav-link w-nav-link w--current">Home</a><a href="/resources"
                     class="nav-link _w-nav-link w-nav-link">Resources</a><a href="/about"
                     class="nav-link _w-nav-link w-nav-link">About</a><a href="/contact"
-                    class="nav-link _w-nav-link w-nav-link">Contact</a></nav>
+                    class="nav-link _w-nav-link w-nav-link">Contact</a></nav> -->
                 <div class="w-nav-button">
                   <div class="w-icon-nav-menu"></div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="nav-right">
-            <div class="nav-link-block _w-inline-block"><a href="/dashboards/dashboard-utilisateur"
-                class="link-text">Sign In</a></div><a href="/chat" class="button-small-navbar _w-button w-button">Find
-              an organization</a>
-          </div>
+          <!-- <div class="nav-right">
+            <div class="nav-link-block _w-inline-block"><a href="/dashboards/dashboard-utilisateur" class="link-text">Sign In</a>
+            </div><a href="/chat" class="button-small-navbar _w-button w-button">Find an organization</a>
+          </div> -->
         </div>
       </div>
     </div>
     <div class="hero-text-block">
       <h1 class="title-hero-center">The <span class="red text-span-3">easy</span> way to get involved</h1>
-      <p class="paragraph-hero-center">Mia is a conversational agent who helps you quickly find an organization that
-        needs volunteers. Say hi, it&#x27;s that simple.</p>
-      <div class="_w-layout-grid grid-buttons"><a href="/chat" class="button blue _w-button w-button">Find an
-          organization</a></div>
+      <p class="paragraph-hero-center">Matilda is a conversational agent who helps you quickly find a position that fits your needs. Say hi, it&#x27;s that simple.</p>
+      <div class="_w-layout-grid grid-buttons"><a routerLink="/signup" routerLinkActive="active" class="button blue _w-button w-button">Create an account</a></div>
     </div>
     <div class="hero-img-block">
       <div class="illustration-hero-overflow"><img
@@ -79,13 +73,13 @@
   <div class="section">
     <div class="content">
       <div class="subtitle">Features</div>
-      <h2 class="title-center">Maximize your impact by finding the organization that fits you best</h2>
+      <h2 class="title-center">Maximize your impact by finding the organization that fits you best.</h2>
       <div class="_w-layout-grid grid-4-columns"><a href="#"
           class="link-block-feature _w-inline-block w-inline-block"><img
             src="https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164c1c3f7a6b4745ef8a_icons8-mission-50.png"
             width="52" height="52" alt="" class="icon-feature" />
           <h5 class="title-feature">Diversity</h5>
-          <p class="paragraph-feature">Find various organizations in need of volunteers, and choose your mission.</p>
+          <p class="paragraph-feature">Find a variety of roles that fit your skills and experience.</p>
         </a><a href="#" class="link-block-feature _w-inline-block w-inline-block"><img
             src="https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164c953e8a56201c055c_icons8-target-50.png"
             width="52" height="52" alt="" class="icon-feature" />
@@ -100,17 +94,17 @@
             src="https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164ca75e3425c3420f14_icons8-checked-50.png"
             width="52" height="52" alt="" class="icon-feature" />
           <h5 class="title-feature">Speed</h5>
-          <p class="paragraph-feature">Get a reply in no time and start helping your community today!</p>
-        </a><a id="w-node-cf16d106d1b2-8eb0d952" href="/chat" class="link-block-feature-red w-inline-block">
+          <p class="paragraph-feature">Get a reply in no time and start doing meaningful work today!</p>
+        </a><a id="w-node-cf16d106d1b2-8eb0d952" routerLink="/signup" routerLinkActive="active" class="link-block-feature-red w-inline-block">
           <div class="text-feature">
             <h5 class="title-feature white">Say hi, it&#x27;s that easy.</h5>
-            <p class="paragraph-feature white">Start chatting with Mia to find an organization within minutes.</p>
-            <div class="learn-more-white">Chat</div>
+            <p class="paragraph-feature white">Start chatting with Matilda to find an organization within minutes.</p>
+            <div class="learn-more-white">Create an account</div>
           </div>
         </a><a id="w-node-b431c0e55a20-8eb0d952" href="#" class="link-block-feature-orange w-inline-block">
           <div class="text-feature">
             <h5 class="title-feature white">First time?</h5>
-            <p class="paragraph-feature white">Consult our blog to learn about volunteering best practices.</p>
+            <p class="paragraph-feature white">Consult our blog to learn about job search best practices.</p>
             <div class="learn-more-white">Learn more</div>
           </div>
         </a></div>
@@ -121,9 +115,8 @@
     <div class="content-footer">
       <div class="_w-layout-grid grid-footer">
         <div class="column-footer"><a href="/" class="brand-footer _w-nav-brand w-inline-block"><img
-              src="https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea9a77998be45b2836cc286_Asset%203.png"
+              src=""
               width="100"
-              srcset="https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea9a77998be45b2836cc286_Asset%203-p-500.png 500w, https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea9a77998be45b2836cc286_Asset%203-p-800.png 800w, https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea9a77998be45b2836cc286_Asset%203-p-1080.png 1080w, https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea9a77998be45b2836cc286_Asset%203.png 1544w"
               sizes="100px" alt="" class="logo" /></a>
           <div class="block-social"><a href="#" class="link-social _w-inline-block w-inline-block"></a><a href="#"
               class="link-social _w-inline-block w-inline-block"></a><a href="#"
@@ -135,7 +128,7 @@
             class="link-footer">À propos</a><a href="#" class="link-footer">Contact</a>
         </div>
         <div class="column-footer">
-          <div class="info-footer">COnnexion</div><a href="#" class="link-footer">Se connecter</a><a href="#"
+          <div class="info-footer">Connexion</div><a href="#" class="link-footer">Se connecter</a><a href="#"
             class="link-footer">Créer un compte</a>
         </div>
         <div class="column-footer">

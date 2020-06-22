@@ -2,7 +2,7 @@
     <h2>Create your account</h2>
     <form class="inputs" #loginForm="ngForm" (ngSubmit)="signUp()">
       <input type="text" [(ngModel)]="email" name="email" placeholder="Email">
-      <input type="password" [(ngModel)]="password" name="password" placeholder="Password">
+      <input type="password" [(ngModel)]="password" name="password" placeholder="Create a password">
       <button type="submit" style="display: none"></button>
     </form>
     <p>Already have an account? <a routerLink="/login" routerLinkActive="active">Sign in</a></p>
