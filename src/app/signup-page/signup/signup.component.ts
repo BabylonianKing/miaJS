@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthenticationService } from '../../../shared/services/authentication.service';
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'signup',
@@ -14,13 +14,13 @@ export class SignupComponent implements OnInit {
   errorMessage: string;
 
   constructor(
-    public authenticationService: AuthenticationService,
+    public UserService: UserService,
   ) { }
 
   ngOnInit(): void {}
 
   signUp() {
-    this.authenticationService.SignUp(this.email, this.password).then(error => {
+    this.UserService.SignUp(this.email, this.password).then(error => {
       console.log(error);
       // this.errorMessage = error;    
     });

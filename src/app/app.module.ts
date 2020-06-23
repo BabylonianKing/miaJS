@@ -21,10 +21,10 @@ import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore'
 
 /* Auth service */
-import { AuthenticationService } from '../shared/services/authentication.service';
+import { UserService } from '../shared/services/user.service';
 
 /* DB CRUD service */
-import { FirebaseService } from '../shared/services/firebase.service';
+import { CrudService } from '../shared/services/crud.service';
 import { ConvoInfoComponent } from './convo-dashboard/convo-info/convo-info.component';
 
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -74,7 +74,7 @@ import { MatildaDashboardComponent } from './matilda-dashboard/matilda-dashboard
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  providers: [AuthenticationService, FirebaseService],
+  providers: [UserService, CrudService],
   bootstrap: [AppComponent]
 })
 

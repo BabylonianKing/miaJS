@@ -6,11 +6,11 @@ import {
   EventEmitter
 } from '@angular/core';
 import {
-  FirebaseService
-} from 'src/shared/services/firebase.service';
+  CrudService
+} from 'src/shared/services/crud.service';
 import {
-  AuthenticationService
-} from 'src/shared/services/authentication.service';
+  UserService
+} from 'src/shared/services/user.service';
 import {
   CookieService
 } from 'ngx-cookie-service';
@@ -46,8 +46,8 @@ export class BookmarksComponent implements OnInit {
   applicationURL;
   filteredJobs: any = null;
 
-  constructor(public firebaseService: FirebaseService,
-    private afAuth: AuthenticationService,
+  constructor(public CrudService: CrudService,
+    private afAuth: UserService,
     private cookie: CookieService,
     public db: AngularFirestore,
     public afStorage: AngularFireStorage) {}

@@ -6,11 +6,11 @@ import {
   EventEmitter
 } from '@angular/core';
 import {
-  FirebaseService
-} from 'src/shared/services/firebase.service';
+  CrudService
+} from 'src/shared/services/crud.service';
 import {
-  AuthenticationService
-} from 'src/shared/services/authentication.service';
+  UserService
+} from 'src/shared/services/user.service';
 import {
   CookieService
 } from 'ngx-cookie-service';
@@ -44,8 +44,8 @@ export class ConvosComponent implements OnInit {
   @Output() selectedUser = new EventEmitter();
 
   constructor(
-    public firebaseService: FirebaseService,
-    private afAuth: AuthenticationService,
+    public CrudService: CrudService,
+    private afAuth: UserService,
     private cookie: CookieService,
     public db: AngularFirestore,
     public afStorage: AngularFireStorage
@@ -150,7 +150,7 @@ export class ConvosComponent implements OnInit {
 
 
     //Should be removed later on
-    // this.firebaseService.getItems(userId)
+    // this.CrudService.getItems(userId)
     // .subscribe(result => {
     //   this.items = result;
     //   console.log(this.items)
@@ -162,7 +162,7 @@ export class ConvosComponent implements OnInit {
 
   searchByOrg() {
     let value = this.searchValue.toLowerCase();
-    this.firebaseService.searchOrganization(value)
+    this.CrudService.searchOrganization(value)
       .subscribe(result => {
         this.org_filtered_items = result;
         this.items = this.org_filtered_items;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthenticationService } from './authentication.service';
+import { UserService } from './user.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
@@ -9,7 +9,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class UserProfileService {
   
   constructor(
-    public afAuth: AuthenticationService,
+    public afAuth: UserService,
     public db: AngularFirestore
   ) { }
 

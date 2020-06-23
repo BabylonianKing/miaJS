@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/shared/services/authentication.service';
-import { FirebaseService } from 'src/shared/services/firebase.service';
+import { UserService } from 'src/shared/services/user.service';
+import { CrudService } from 'src/shared/services/crud.service';
 import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 
 @Component({
@@ -13,8 +13,8 @@ export class ProfilePageComponent implements OnInit {
   userInfos: Array<any>;
 
   constructor(
-    private afAuth: AuthenticationService,
-    public firebaseService: FirebaseService,
+    private afAuth: UserService,
+    public CrudService: CrudService,
     public sideNavService: MenuToggleService) { }
 
   
@@ -22,7 +22,7 @@ export class ProfilePageComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       const user = JSON.parse(localStorage.getItem('user'));
-      this.firebaseService.getUserInfos(user.uid) 
+      this.CrudService.getUserInfos(user.uid) 
       .subscribe(result => {
         console.log(result)
         this.userInfos = result;

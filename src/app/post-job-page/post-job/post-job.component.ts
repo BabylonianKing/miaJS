@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { FirebaseService } from 'src/shared/services/firebase.service';
+import { CrudService } from 'src/shared/services/crud.service';
 import {AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
@@ -13,7 +13,7 @@ export class PostJobComponent implements OnInit {
   tab: number = 0;
   event;
 
-  constructor(public firebaseService: FirebaseService,
+  constructor(public CrudService: CrudService,
     public afStorage: AngularFireStorage) { }
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class PostJobComponent implements OnInit {
   
 
   sendOrgForm(form: NgForm) {
-    this.firebaseService.registerOrg(form.value).then(data => {    if (this.event) {
+    this.CrudService.registerOrg(form.value).then(data => {    if (this.event) {
       let orgId = JSON.parse(localStorage.getItem('orgId'));
       this.afStorage.upload(`/orgImages/${orgId}`, this.event.target.files[0]);
   
@@ -52,7 +52,7 @@ export class PostJobComponent implements OnInit {
   }
 
   sendJobForm(form: NgForm) {
-    this.firebaseService.postJob(form.value);
+    this.CrudService.postJob(form.value);
     let x = document.getElementsByClassName("tab") as HTMLCollectionOf<HTMLElement>;
     x[this.tab].style.display = "none";
     this.tab ++;

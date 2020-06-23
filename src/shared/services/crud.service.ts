@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { AuthenticationService } from './authentication.service';
+import { UserService } from './user.service';
 import { AngularFireStorage} from "@angular/fire/storage";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Observable } from 'rxjs';
@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseService {
+export class CrudService {
 
   constructor(
     public db: AngularFirestore,
-    public authenticationService: AuthenticationService,
+    public UserService: UserService,
     public afStorage: AngularFireStorage,
     private afAuth: AngularFireAuth) { }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from 'src/shared/services/authentication.service';
+import { UserService } from 'src/shared/services/user.service';
 import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 
@@ -11,7 +11,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class ToolbarComponent implements OnInit {
 
   constructor(
-    public afAuth: AuthenticationService,
+    public afAuth: UserService,
     public sideNavService: MenuToggleService,
     public db: AngularFirestore) { }
 

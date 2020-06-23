@@ -18,7 +18,7 @@
       </div>
       <div class="profile-header-infos">
         <div class="super-infos">
-          <h2 [hidden]="profileService.editingName">{{(firebaseService.displayName) ? firebaseService.displayName: 'New User' }}</h2>
+          <h2 [hidden]="profileService.editingName">{{(CrudService.displayName) ? CrudService.displayName: 'New User' }}</h2>
 
           <form #newName="ngForm" (submit)="profileService.editName(newName.value)">
             <input [hidden]="!profileService.editingName" placeholder="New name" type="text" name="displayName" autocomplete="off" ngModel>

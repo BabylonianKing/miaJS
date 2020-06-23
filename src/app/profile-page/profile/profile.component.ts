@@ -5,11 +5,11 @@
     Input
   } from '@angular/core';
   import {
-    FirebaseService
-  } from 'src/shared/services/firebase.service';
+    CrudService
+  } from 'src/shared/services/crud.service';
   import {
-    AuthenticationService
-  } from 'src/shared/services/authentication.service';
+    UserService
+  } from 'src/shared/services/user.service';
   import {
     Router
   } from '@angular/router';
@@ -40,16 +40,16 @@ import { NONE_TYPE } from '@angular/compiler';
     resumeEvent;
 
     constructor(
-      public firebaseService: FirebaseService,
+      public CrudService: CrudService,
       public profileService: UserProfileService,
-      public afAuth: AuthenticationService,
+      public afAuth: UserService,
       public ngZone: NgZone,
       public router: Router,
       public afStorage: AngularFireStorage) {}
 
     ngOnInit(): void {
 
-      this.firebaseService.pathRefresh();
+      this.CrudService.pathRefresh();
 
       this.userId = JSON.parse(localStorage.getItem('user')).uid;
       
@@ -82,14 +82,14 @@ import { NONE_TYPE } from '@angular/compiler';
 
     // UpdateEmail(email) {
     //   console.log('changing email')
-    //   this.firebaseService.updateEmail(email);
+    //   this.CrudService.updateEmail(email);
     // }
 
     UpdateUser(value) {
       console.log(value);
       const u = this.afAuth.userData;
       const uid = u.uid;
-      // this.firebaseService.updateUser(uid, value)
+      // this.CrudService.updateUser(uid, value)
       // return this.afAuth.afAuth.currentUser
       // .then((u) => u.updateEmail(value))
       // .then(res => { this.router.navigate(['/profile']); })

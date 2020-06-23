@@ -7,7 +7,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Injectable({ providedIn: 'root' })
-export class AuthenticationService {
+export class UserService {
 
   userData: User; // Save logged in user data
 
