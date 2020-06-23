@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import {Router} from "@angular/router"
+import { Router } from "@angular/router"
 import { MiaComponent } from '../mia/mia.component';
-import {ConvoInfoComponent} from '../convo-info/convo-info.component'
+import { ConvoInfoComponent } from './convo-info/convo-info.component'
 import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 
 @Component({

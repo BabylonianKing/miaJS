@@ -10,9 +10,9 @@ import { ConvoDashboardComponent } from './convo-dashboard/convo-dashboard.compo
 import { MiaComponent } from './mia/mia.component';
 import { ChatMessageComponent } from './mia/chat-message/chat-message.component';
 import { ChatFormComponent } from './mia/chat-form/chat-form.component';
-import { ConvosComponent } from './convos/convos.component';
-import { ConvoCardComponent } from './convos/convo-card/convo-card.component';
-import { LoginComponent } from './login/login.component';
+import { ConvosComponent } from './convo-dashboard/convos/convos.component';
+import { ConvoCardComponent } from './convo-dashboard/convos/convo-card/convo-card.component';
+import { LoginComponent } from './login-page/login/login.component';
 
 /* Firebase services */
 import { AngularFireModule } from "@angular/fire";
@@ -25,22 +25,18 @@ import { AuthenticationService } from '../shared/services/authentication.service
 
 /* DB CRUD service */
 import { FirebaseService } from '../shared/services/firebase.service';
-import { ConvoInfoComponent } from './convo-info/convo-info.component';
+import { ConvoInfoComponent } from './convo-dashboard/convo-info/convo-info.component';
 
-// Cookier service
-import { CookieService } from 'ngx-cookie-service';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { SignupPageComponent } from './signup-page/signup-page.component';
-import { SignupComponent } from './signup/signup.component';
+import { SignupComponent } from './signup-page/signup/signup.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { ProfileComponent } from './profile-page/profile/profile.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { PostJobPageComponent } from './post-job-page/post-job-page.component';
 import { PostJobComponent } from './post-job-page/post-job/post-job.component';
-import { AboutComponent } from './about/about.component';
 import { BookmarksPageComponent } from './bookmarks-page/bookmarks-page.component';
 import { BookmarksComponent } from './bookmarks-page/bookmarks/bookmarks.component';
-import { ChatPageComponent } from './chat-page/chat-page.component';
 import { BookmarkCardComponent } from './bookmarks-page/bookmarks/bookmark-card/bookmark-card.component';
 import { MatildaDashboardComponent } from './matilda-dashboard/matilda-dashboard.component';
 
@@ -64,10 +60,8 @@ import { MatildaDashboardComponent } from './matilda-dashboard/matilda-dashboard
     ToolbarComponent,
     PostJobPageComponent,
     PostJobComponent,
-    AboutComponent,
     BookmarksPageComponent,
     BookmarksComponent,
-    ChatPageComponent,
     BookmarkCardComponent,
     MatildaDashboardComponent  ],
   imports: [
@@ -80,7 +74,7 @@ import { MatildaDashboardComponent } from './matilda-dashboard/matilda-dashboard
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
-  providers: [AuthenticationService, FirebaseService, CookieService],
+  providers: [AuthenticationService, FirebaseService],
   bootstrap: [AppComponent]
 })
 
