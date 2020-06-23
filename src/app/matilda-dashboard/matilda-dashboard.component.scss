@@ -1327,6 +1327,7 @@
      toolbar {
         position: relative;
         width: 20%;
+        min-width: 250px;
         max-width: 250px;
         padding: 30px;
         padding-right: 0;
@@ -1341,6 +1342,7 @@
    .chat-container {
      flex: 1;
      padding: 30px;
+     padding-left: 50px;
      display: flex;
    
      .chat-components-container {
