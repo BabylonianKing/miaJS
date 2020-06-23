@@ -9,7 +9,7 @@
 
     .icon {
         position: absolute;
-        left: 250px;
+        left: 265px;
         height: 16px;
         width: 16px;
         border-radius: 2px;
@@ -46,6 +46,7 @@
         margin-bottom: 10px;
 
         .notif {
+            font-family: $rubik;
             font-size: 12px;
             color: white;
             display: flex;

@@ -85,9 +85,6 @@
     &:hover {
         
         .bookmark {
-            display: flex;
-            align-items: center;
-            justify-content: center;
             border-radius: 100px;
             z-index: 999;
             width: 50px;
@@ -98,6 +95,12 @@
             right: -10px;
             top: -15px;
 
+            &.visible {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
             &:hover {
                 cursor: pointer;
                 transform: scale(1.1);
@@ -107,6 +110,11 @@
 
     .bookmark {
         display: none;
+
+        img {
+            height: 40%;
+            width: 40%;
+        }
     }
 
     .header {

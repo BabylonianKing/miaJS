@@ -84,7 +84,6 @@ export class BookmarksComponent implements OnInit {
 
   }
 
-
   searchByOrg() {
     const value = this.searchValue.toLowerCase();
     console.log(value);

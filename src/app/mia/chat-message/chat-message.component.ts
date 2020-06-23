@@ -40,8 +40,10 @@ userId = JSON.parse(localStorage.getItem('user')).uid;
   ngOnInit(): void {
   }
 
+  heartFilled: boolean = false;
+
   bookmarkJob() {
-    console.log("Job bookmarked")
+    this.heartFilled = true;
     let data = {
       learnMoreDescription: this.learnMoreDescription,
       applyNowUrl: this.applyNowUrl,
@@ -53,6 +55,7 @@ userId = JSON.parse(localStorage.getItem('user')).uid;
     let ref = this.db.collection("bookmarks").doc(this.userId).collection("bookmarks")
     ref.add(data);
   }
+
   learnMore() {
     this.learnMoreDescriptionEmitter.emit(this.learnMoreDescription)
     console.log(this.learnMoreDescription)

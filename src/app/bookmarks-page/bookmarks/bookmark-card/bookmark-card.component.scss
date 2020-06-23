@@ -8,6 +8,13 @@
   background-color: white;
   box-shadow: $box-shadow;
   border-radius: 15px;
+  transform: scale(1);
+  transition: all 0.1s ease-in-out;
+
+  &:hover {
+      transform: scale(1.05);
+      transition: all 0.1s ease-in-out;
+  }
 
   .header {
     display: flex;

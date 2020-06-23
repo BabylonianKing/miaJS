@@ -6,7 +6,8 @@
 
     <div class="cards-carousel">
     <div *ngIf="richCard" class="rich-card">
-        <div class="bookmark" (click)="bookmarkJob()">❤️</div>
+        <div class="bookmark" (click)="bookmarkJob()" [ngClass]="{ visible: heartFilled === false }"><img src="/assets/heart.svg"></div>
+        <div class="bookmark" [ngClass]="{ visible: heartFilled === true }"><img src="/assets/heart-full.svg"></div>
         <div class="header">
             <div class="header-left">
                 <!-- <img src="{{ jobImageURL }}"> -->
