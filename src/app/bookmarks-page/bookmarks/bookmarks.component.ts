@@ -1,25 +1,7 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter
-} from '@angular/core';
-import {
-  CrudService
-} from 'src/shared/services/crud.service';
-import {
-  UserService
-} from 'src/shared/services/user.service';
-import {
-  CookieService
-} from 'ngx-cookie-service';
-import {
-  AngularFirestore
-} from '@angular/fire/firestore';
-import {
-  AngularFireStorage
-} from '@angular/fire/storage';
+import { Component, OnInit } from '@angular/core';
+import { CrudService } from 'src/shared/services/crud.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 @Component({
   selector: 'bookmarks',
   templateUrl: './bookmarks.component.html',
@@ -47,8 +29,6 @@ export class BookmarksComponent implements OnInit {
   filteredJobs: any = null;
 
   constructor(public CrudService: CrudService,
-    private afAuth: UserService,
-    private cookie: CookieService,
     public db: AngularFirestore,
     public afStorage: AngularFireStorage) {}
 
@@ -60,24 +40,16 @@ export class BookmarksComponent implements OnInit {
       snapshot.forEach(doc => {
         this.items.push(doc.data())
         console.log(this.items)
-
-
-      
-
-
       })
 
     })
 
 
-
   //Loading bookmark changes on the database
   let query = this.db.collection("bookmarks").doc(this.userId).collection("bookmarks")
   query.valueChanges().subscribe(data => {
-    // this.messages = [];
-    // this.messages.push(data.values);
+
     this.items = data
-    // this.db.collection("conversation-cards").doc(this.userId).collection(this.currentTexterId).set(data[-1]
 
   })
 
