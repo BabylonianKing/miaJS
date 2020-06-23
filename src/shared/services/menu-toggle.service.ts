@@ -7,6 +7,10 @@ export class MenuToggleService {
 
   hideSideNav: boolean = false;
   hideConvoInfos: boolean = false;
+
+  // BUG & SUGGESTION FORM POPUP
+  showBugPopup: boolean = false;
+  showSuggestionPopup: boolean = false;
   
   constructor() { }
 

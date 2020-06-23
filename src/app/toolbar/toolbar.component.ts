@@ -13,7 +13,8 @@ export class ToolbarComponent implements OnInit {
   constructor(
     public afAuth: UserService,
     public sideNavService: MenuToggleService,
-    public db: AngularFirestore) { }
+    public db: AngularFirestore,
+    public menu: MenuToggleService) { }
 
     bookmarksCount;
     userId = JSON.parse(localStorage.getItem('user')).uid;

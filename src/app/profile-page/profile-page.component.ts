@@ -15,7 +15,7 @@ export class ProfilePageComponent implements OnInit {
   constructor(
     private afAuth: UserService,
     public CrudService: CrudService,
-    public sideNavService: MenuToggleService) { }
+    public menu: MenuToggleService) { }
 
   
   // Timeout?

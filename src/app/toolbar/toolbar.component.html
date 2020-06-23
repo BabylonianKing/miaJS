@@ -27,8 +27,8 @@
     <a class="signout" (click)="signOut()">Log Out</a>
   </div>
   <div class="invite-friends">
-    <button>Report a Bug</button>
-    <button>Suggestions</button>
+    <button (click)="menu.showBugPopup = !menu.showBugPopup">Report a Bug</button>
+    <button (click)="menu.showSuggestionPopup = !menu.showSuggestionPopup">Make a Suggestion</button>
   </div>
   
   
