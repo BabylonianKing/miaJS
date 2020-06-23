@@ -7,6 +7,12 @@
     justify-content: space-between;
     padding: 30px 0px;
 
+    img {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
     .icon {
         position: absolute;
         left: 262px;
@@ -122,15 +128,14 @@ a:last-child {
 .invite-friends {
     position: absolute;
     bottom: 30px;
-    left: 60px;
-    right: 60px;
+
 
     button {
         width: 100%;
         margin-bottom: 10px;
         padding: 10px 30px;
         background-color: $red-dark;
-        border-radius: 50px;
+        border-radius: 15px;
         border: none;
         color: white;
         font-size: 14px;

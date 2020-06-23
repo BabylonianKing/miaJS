@@ -1,3 +1,5 @@
+@import "./src/styles.scss";
+  
   .messages-footer-content {
     display: -webkit-box;
     display: -webkit-flex;
@@ -92,6 +94,7 @@
 
   button:hover {
     cursor: pointer;
+    background-color: $blue-dark;
   }
 
   .bold-text {

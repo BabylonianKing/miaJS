@@ -1,7 +1,6 @@
 <div class="messages-header">
-    <div class="messages-header-left"><img
-        src="{{ imageURL }}"
-        width="50" height="50" alt="" class="org-logo" />
+    <div class="messages-header-left">
+      <!-- <img src="" width="50" height="50" alt="" class="org-logo" /> -->
       <div class="messages-header-jd">
         <h3 class="messages-header-job-title">Matilda</h3>
         <h5 class="messages-header-details">Montreal, Canada</h5>
@@ -12,8 +11,8 @@
     </div>
   </div>
 
-<div class="chat-container">
-    <chat-message *ngFor="let msg of messages"
+<div class="chat-container" (scroll)="scrolled($event)" #scrollframe>
+    <chat-message *ngFor="let msg of messages" #item
                   type="text"
                   [message]="msg.text"
                   [timestamp]="msg.date.toDate().toDateString()"

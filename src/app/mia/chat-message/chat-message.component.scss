@@ -4,7 +4,6 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-
     margin-bottom: 10px;
 
     font-family: 'Rubik', sans-serif;
@@ -14,19 +13,19 @@
     }
 
     .message-bubble {
+        border-radius: 1.5em 1.5em 1.5em 0.3em;
         padding: 10px 20px;
         max-width: 60%;
         margin-bottom: 5px;
 
         background-color: #F2F0EE;
         color: #222229;
-        border-radius: 50px 50px 50px 10px;
         float: right;
 
         &.user {
             background-color: #FE7B67;
             color: white;
-            border-radius: 50px 50px 10px 50px;
+            border-radius: 1.5em 1.5em 0.3em 1.5em;
         }
 
         .message {
@@ -58,6 +57,10 @@
     max-width: 60%;
     overflow: auto;
     padding: 30px;
+
+    &:empty {
+        display: none;
+    }
 
 .rich-card {
     position: relative;

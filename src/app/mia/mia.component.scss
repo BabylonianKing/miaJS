@@ -1,3 +1,5 @@
+@import "./src/styles.scss";
+
 .messages-header {
     display: -webkit-box;
     display: -webkit-flex;
@@ -134,6 +136,7 @@
 }
 
 .chat-container {
+  scroll-behavior: smooth;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -144,4 +147,30 @@
 
 chat-form {
     width: 100%;
+}
+
+// SCROLLBAR STYLING
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  padding: 0 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  // background: $background-gray;
+  background-color: transparent;
+  width: 10;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $red-light;
+  border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $red-dark;
 }

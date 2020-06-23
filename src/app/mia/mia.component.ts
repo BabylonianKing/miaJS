@@ -1,6 +1,4 @@
-import { Component, OnInit,
-  ViewChild
-} from '@angular/core';
+import { AfterViewInit, Component, ViewChild, ViewChildren, ElementRef, QueryList, HostListener, OnInit } from '@angular/core';
 import {
   HttpClient
 } from '@angular/common/http';
@@ -27,7 +25,16 @@ const dialogflowURL = 'https://us-central1-mia-test-sgwxam.cloudfunctions.net/di
   templateUrl: './mia.component.html',
   styleUrls: ['./mia.component.scss']
 })
-export class MiaComponent implements OnInit {
+export class MiaComponent implements AfterViewInit {
+
+  // AUTOSCROLL 
+  @ViewChild('scrollframe', {static: false}) scrollFrame: ElementRef;
+  @ViewChildren('item') itemElements: QueryList<any>;
+
+  private itemContainer: any;
+  private scrollContainer: any;
+  private isNearBottom = true;
+
 
   messages = [];
   loading = false;
@@ -51,7 +58,12 @@ export class MiaComponent implements OnInit {
     public sideNavService: MenuToggleService
   ) {}
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    // AUTOSCROLL
+    this.scrollContainer = this.scrollFrame.nativeElement;
+    this.itemElements.changes.subscribe(_ => this.onItemElementsChanged());
+
+
     this.currentTexterId = "Matilda"
 
     
@@ -67,8 +79,6 @@ export class MiaComponent implements OnInit {
       }
 
     })
-
-
 
     //Quick-fix for MVP
     this.currentTexterId = "Matilda";
@@ -100,6 +110,33 @@ export class MiaComponent implements OnInit {
 
     // this.addBotMessage('Hey I\'m Matilda. Let\'s find your dream job together! Just say hi to get started.');
   }
+
+  // AUTOSCROLL
+  private onItemElementsChanged(): void {
+    if (this.isNearBottom) {
+      this.scrollToBottom();
+    }
+  }
+
+  private scrollToBottom(): void {
+    this.scrollContainer.scroll({
+      top: this.scrollContainer.scrollHeight,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  private isUserNearBottom(): boolean {
+    const threshold = 150;
+    const position = this.scrollContainer.scrollTop + this.scrollContainer.offsetHeight;
+    const height = this.scrollContainer.scrollHeight;
+    return position > height - threshold;
+  }
+
+  scrolled(event: any): void {
+    this.isNearBottom = this.isUserNearBottom();
+  }
+
 
   //Prototyping function, changing from Chat with Matilda to chatting with another human. Hard-coded Lucas.
   changeConversation() {
