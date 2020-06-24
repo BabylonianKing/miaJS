@@ -13,16 +13,14 @@ export class ProfilePageComponent implements OnInit {
   userInfos: Array<any>;
 
   constructor(
-    private afAuth: UserService,
-    public CrudService: CrudService,
+    public crudService: CrudService,
     public menu: MenuToggleService) { }
 
   
   // Timeout?
   ngOnInit(): void {
     setTimeout(() => {
-      const user = JSON.parse(localStorage.getItem('user'));
-      this.CrudService.getUserInfos(user.uid) 
+      this.crudService.getUserInfos() 
       .subscribe(result => {
         console.log(result)
         this.userInfos = result;

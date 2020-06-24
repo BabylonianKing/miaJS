@@ -21,7 +21,7 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit(): void {
 
-      //Loading bookmark changes on the database
+  //Loading bookmark changes on the database
   let query = this.db.collection("bookmarks").doc(this.userId).collection("bookmarks")
   query.valueChanges().subscribe(data => {
 

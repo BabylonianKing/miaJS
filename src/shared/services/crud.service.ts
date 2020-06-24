@@ -75,25 +75,12 @@ export class CrudService {
     })
   }
   
-  
-
-
-
-  getUserInfos(userKey) {
-    return this.db.collection('user-infos', ref => ref.where("uid", '==', userKey)).valueChanges();
+  getUserInfos() {
+    return this.db.collection('user-infos', ref => ref.where("uid", '==', this.uid)).valueChanges();
   }
 
-  getUser(userKey){
-    return this.db.collection('users').doc(userKey).snapshotChanges();
-  }
-
-  updateEmail(email) {
-    this.afAuth.currentUser
-    .then(u => u.updateEmail(email));
-  }
-
-  deleteUser(userKey){
-    return this.db.collection('items').doc(userKey).delete();
+  getUser(){
+    return this.db.collection('users').doc(this.uid).snapshotChanges();
   }
 
   getItems(userKey){

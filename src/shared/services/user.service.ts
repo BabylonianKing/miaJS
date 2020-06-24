@@ -23,10 +23,8 @@ export class UserService {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
-        //Not needed here: JSON.parse(localStorage.getItem('user'));
       } else {
         localStorage.setItem('user', null);
-        //Not needed here: JSON.parse(localStorage.getItem('user'));
       }
     })
   }
@@ -38,7 +36,6 @@ export class UserService {
         this.ngZone.run(() => {
           this.router.navigate(['/profile']);
         });
-        // this.SetUserData(result.user);
       }).catch((error) => {
         window.alert(error.message);
       })

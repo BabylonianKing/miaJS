@@ -80,11 +80,6 @@ import { NONE_TYPE } from '@angular/compiler';
 
     }
 
-    // UpdateEmail(email) {
-    //   console.log('changing email')
-    //   this.CrudService.updateEmail(email);
-    // }
-
     UpdateUser(value) {
       console.log(value);
       const u = this.afAuth.userData;
