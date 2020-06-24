@@ -8,7 +8,9 @@ import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 })
 export class MatildaDashboardComponent implements OnInit {
 
-  constructor(public sideNavService: MenuToggleService) { }
+  constructor(
+    public sideNavService: MenuToggleService,
+    public menu: MenuToggleService) { }
 
   ngOnInit(): void {
   }
