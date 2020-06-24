@@ -1,0 +1,169 @@
+@import "./src/styles.scss";
+
+.navbar-sticky {
+    position: sticky;
+    top: 0px;
+    z-index: 998;
+    background-color: #FFF;
+
+    .nav-container {
+        position: relative;
+        z-index: 99;
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1360px;
+            margin: auto;
+            padding: 0 24px;
+
+            .navbar {
+                display: flex;
+                padding: 16px 0;
+                align-items: center;
+                background-color: transparent;
+
+                .logo {
+                    position: relative;
+                    float: left;
+                }
+
+                .nav-menu-wrapper {
+                    position: relative;
+                    float: right;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex: 1;
+
+                    .nav-links {
+                        margin-left: 36px;
+                        display: flex;
+
+                        .nav-link {
+                            margin: 0;
+                            padding: 0 12px;
+                            white-space: nowrap;
+                        }
+                    }
+                }
+
+                .nav-menu-button-wrapper {
+                    display: flex;
+                    margin-left: 12px;
+                    align-items: center;
+
+                    .sign-in-button {
+                        display: flex;
+                    }
+
+                    .sign-up-button {
+                        position: relative;
+                        float: right;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.section1 {
+    display: flex;
+    overflow: hidden;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFF;
+
+    .bg-gradient {
+        height: 100%;
+        background-image: linear-gradient(180deg, #ffdecb 11%, #4d69fa 85%);
+        opacity: .06;
+    }
+
+    .nav-ghost {
+        height: 80px;
+        width: 100%;
+    }
+
+    .wrapper {
+        display: flex;
+        width: 90vw;
+        height: auto;
+        max-width: 1400px;
+        min-width: auto;
+        margin-top: 0;
+        padding-top: 0;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        .title-hero {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 0;
+
+            .heading {
+                font-size: 8.3em;
+                line-height: 0.9em;
+                font-weight: 500;
+                position: static;
+                margin-top: 20px;
+                margin-bottom: 40px;
+                color: #343caa;
+                text-align: center;
+                letter-spacing: -3px;
+                text-indent: 0;
+            }
+
+            .subheading {
+                font-size: 20px;
+                line-height: 28px;
+                text-indent: 0;
+                text-align: center;
+                color: #343caa;
+            }
+
+            .cta-button {
+                display: flex;
+                margin-top: 60px;
+                justify-content: center;
+                align-items: center;
+
+                a {
+                    font-size: 20px;
+                    color: #FFF;
+                    display: flex;
+                    height: 60px;
+                    padding: 6px 60px;
+                    justify-content: center;
+                    align-items: center;
+                    line-height: 20px;
+                    border-radius: 15px;
+                    transform: translateY(0px);
+                    background-color: $red-light;
+                    transition: all 0.2s ease-in-out;
+
+                    &:hover {
+                        transform: translateY(-5px);
+                        background-color: $red-dark;
+                        transition: all 0.2s ease-in-out;
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+
+        .illustration {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 90%;
+            }
+        }
+    }
+}

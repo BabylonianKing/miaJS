@@ -150,27 +150,6 @@ chat-form {
 }
 
 // SCROLLBAR STYLING
-
-/* width */
 ::-webkit-scrollbar {
-  width: 10px;
-  padding: 0 5px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  // background: $background-gray;
-  background-color: transparent;
-  width: 10;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: $red-light;
-  border-radius: 50px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: $red-dark;
+  display: none;
 }

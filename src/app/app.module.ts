@@ -39,6 +39,7 @@ import { BookmarksPageComponent } from './bookmarks-page/bookmarks-page.componen
 import { BookmarksComponent } from './bookmarks-page/bookmarks/bookmarks.component';
 import { BookmarkCardComponent } from './bookmarks-page/bookmarks/bookmark-card/bookmark-card.component';
 import { MatildaDashboardComponent } from './matilda-dashboard/matilda-dashboard.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { MatildaDashboardComponent } from './matilda-dashboard/matilda-dashboard
     BookmarksPageComponent,
     BookmarksComponent,
     BookmarkCardComponent,
-    MatildaDashboardComponent  ],
+    MatildaDashboardComponent,
+    HomepageComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

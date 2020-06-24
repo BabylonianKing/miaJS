@@ -13,10 +13,12 @@ import { PostJobPageComponent } from './post-job-page/post-job-page.component';
 import { BookmarksPageComponent } from './bookmarks-page/bookmarks-page.component';
 import { MatildaDashboardComponent } from './matilda-dashboard/matilda-dashboard.component';
 import { AuthenticationGuard } from 'src/shared/guard/authentication.guard';
+import { HomepageComponent } from './homepage/homepage.component';
 
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
+  { path: 'test', component: HomepageComponent},
   { path: 'dashboard', component: ConvoDashboardComponent, canActivate: [AuthenticationGuard] },
   { path: 'chat', component: MatildaDashboardComponent },  
   { path: 'login', component: LoginPageComponent },
