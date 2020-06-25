@@ -4,9 +4,9 @@
     position: sticky;
     top: 0px;
     z-index: 998;
-    background-color: #FFF;
 
     .nav-container {
+        width: 100%;
         position: relative;
         z-index: 99;
 
@@ -25,6 +25,7 @@
                 background-color: transparent;
 
                 .logo {
+                    width: 150px;
                     position: relative;
                     float: left;
                 }
@@ -56,11 +57,42 @@
 
                     .sign-in-button {
                         display: flex;
+                        margin-right: 30px;
+                        color: #FFF;
+
+                        &:hover {
+                            cursor: pointer;
+                            color: $background-gray;
+                        }
                     }
 
                     .sign-up-button {
                         position: relative;
                         float: right;
+                        display: flex;
+                        align-items: center;
+
+                        a {
+                            color: #FFF;
+                            display: flex;
+                            padding: 15px 30px;
+                            justify-content: center;
+                            align-items: center;
+                            line-height: 20px;
+                            border-radius: 15px;
+                            transform: scale(1);
+                            background-color: $red-light;
+                            transition: all 0.2s ease-in-out;
+
+                            &:hover {
+                                // transform: translateY(-5px);
+                                box-shadow: 0 0 20px rgba($color: #000000, $alpha: 0.1);
+                                transform: scale(1.02);
+                                background-color: $red-dark;
+                                transition: all 0.2s ease-in-out;
+                                cursor: pointer;
+                            }
+                        }
                     }
                 }
             }
@@ -80,11 +112,6 @@
         height: 100%;
         background-image: linear-gradient(180deg, #ffdecb 11%, #4d69fa 85%);
         opacity: .06;
-    }
-
-    .nav-ghost {
-        height: 80px;
-        width: 100%;
     }
 
     .wrapper {
@@ -141,12 +168,13 @@
                     align-items: center;
                     line-height: 20px;
                     border-radius: 15px;
-                    transform: translateY(0px);
+                    transform: scale(1);
                     background-color: $red-light;
                     transition: all 0.2s ease-in-out;
 
                     &:hover {
-                        transform: translateY(-5px);
+                        box-shadow: 0 0 20px rgba($color: #000000, $alpha: 0.1);
+                        transform: scale(1.02);
                         background-color: $red-dark;
                         transition: all 0.2s ease-in-out;
                         cursor: pointer;
@@ -164,6 +192,99 @@
             img {
                 width: 90%;
             }
+        }
+    }
+}
+
+.section2 {
+    margin-top: -80px;
+    overflow: hidden;
+    background-color: #f8f6f4;;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-columns: 1fr;
+    grid-template-rows: auto;
+    align-items: center;
+
+    .content {
+        justify-self: center;
+        align-self: center;
+        max-width: 550px;
+        margin-right: 24px;
+        margin-left: 24px;
+        padding-top: 48px;
+        padding-bottom: 48px;
+        direction: ltr;
+
+        .subheading {
+            text-transform: uppercase;
+            color: $blue-light;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: 500;
+        }
+
+        .heading {
+            color: $heading-gray;
+            margin-top: 0px;
+            margin-bottom: 24px;
+            font-family: 'Arvo', sans-serif;
+            font-size: 54px;
+            line-height: 1;
+            font-weight: bold;
+        }
+
+        .text-large {
+            color: $heading-gray;
+            font-size: 18px;
+            line-height: 28px;
+        }
+
+        .cta-button {
+            display: flex;
+            margin-top: 60px;
+            align-items: center;
+
+            a {
+                font-size: 18px;
+                color: #FFF;
+                display: flex;
+                padding: 20px 60px;
+                justify-content: center;
+                align-items: center;
+                line-height: 20px;
+                border-radius: 15px;
+                transform: scale(1);
+                background-color: $red-light;
+                transition: all 0.2s ease-in-out;
+
+                &:hover {
+                    box-shadow: 0 0 20px rgba($color: #000000, $alpha: 0.1);
+                    transform: scale(1.02);
+                    background-color: $blue-light;
+                    transition: all 0.2s ease-in-out;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .bg-pill {
+        // margin-top: 50px;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        background-color: $blue-light;
+        border-radius: 50em 0em 0em 50em;
+
+        img {
+            height: 90%;
+            position: absolute;
+            left: -20%;
+            bottom: 0%;
         }
     }
 }

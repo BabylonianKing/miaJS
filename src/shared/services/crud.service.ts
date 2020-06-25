@@ -80,7 +80,7 @@ export class CrudService {
   }
 
   getUser(){
-    return this.db.collection('users').doc(this.uid).snapshotChanges();
+    return this.db.collection('users').doc(this.uid).valueChanges();
   }
 
   getItems(userKey){

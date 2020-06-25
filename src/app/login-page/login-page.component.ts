@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CrudService } from 'src/shared/services/crud.service';
 
 @Component({
   selector: 'login-page',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(public crudService: CrudService) { }
 
   ngOnInit(): void {
+    this.crudService.pathRefresh();
   }
 
 }

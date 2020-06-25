@@ -9,6 +9,8 @@ import { UserService } from '../../../shared/services/user.service';
 })
 export class SignupComponent implements OnInit {
 
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   errorMessage: string;
