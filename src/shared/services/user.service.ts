@@ -34,7 +34,7 @@ export class UserService {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['/profile']);
+          this.router.navigate(['/chat']);
         });
       }).catch((error) => {
         window.alert(error.message);
@@ -46,7 +46,7 @@ export class UserService {
     return this.afAuth.currentUser
     .then(u => u.sendEmailVerification())
     .then(() => {
-      this.router.navigate(['profile']);
+      this.router.navigate(['/chat']);
     })
   }
   
@@ -77,7 +77,7 @@ export class UserService {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
     // Navigate to dashboard
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/chat']);
     return this.SetUserData(credential.user);
   }
 
@@ -94,7 +94,7 @@ export class UserService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['/login']);
+      this.router.navigate(['/']);
     })
   }
 

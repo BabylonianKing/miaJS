@@ -225,20 +225,6 @@
                 cursor: pointer;
             }
         }
-
-        .save-or-apply {
-            display: flex;
-
-            .save {
-                width: 20%;
-                border-radius: 10px 0 0 10px;
-            }
-
-            .apply {
-                width: 80%;
-                border-radius: 0 10px 10px 0;
-            }
-        }
     }
 }
 }

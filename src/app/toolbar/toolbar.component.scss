@@ -18,7 +18,7 @@
         left: 262px;
         height: 16px;
         width: 16px;
-        border-radius: 2px;
+        border-radius: 5px;
         padding: 5px;
 
         &:hover {
@@ -43,7 +43,7 @@
     padding: 30px;
     margin-bottom: 30px;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 15px;
 
     .link-row {
         width: 100%;
@@ -133,9 +133,9 @@ a:last-child {
     button {
         width: 100%;
         margin-bottom: 10px;
-        padding: 10px 24px;
+        padding: 15px 24px;
         background-color: $red-dark;
-        border-radius: 10px;
+        border-radius: 15px;
         border: none;
         color: white;
         font-size: 14px;
