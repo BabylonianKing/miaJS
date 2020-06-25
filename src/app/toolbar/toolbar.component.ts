@@ -17,11 +17,12 @@ export class ToolbarComponent implements OnInit {
     public menu: MenuToggleService) { }
 
     bookmarksCount;
-    userId = JSON.parse(localStorage.getItem('user')).uid;
+    userId;
 
   ngOnInit(): void {
 
   //Loading bookmark changes on the database
+  this.userId = JSON.parse(localStorage.getItem('user')).uid;
   let query = this.db.collection("bookmarks").doc(this.userId).collection("bookmarks")
   query.valueChanges().subscribe(data => {
 
