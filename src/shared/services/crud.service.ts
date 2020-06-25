@@ -30,10 +30,10 @@ export class CrudService {
     pathRefresh() {
       this.afAuth.authState.subscribe((user) => { // Need authState to load before all of this
         if (user) {
-          this.uid = user.uid
+          this.uid = JSON.parse(localStorage.getItem('user')).uid;
           this.userRef = this.db.doc(`users/${this.uid}`);
           this.userRefData = this.userRef.valueChanges()
-     
+
           this.userRefData.subscribe(data => {
             this.email = data.email;
             this.displayName = data.displayName;
@@ -41,7 +41,7 @@ export class CrudService {
         }
       });
     }
-  
+
     postJob(formValue) {
       return this.db.collection('jobs').add({
         jobTitle: formValue.job_title,
@@ -74,13 +74,15 @@ export class CrudService {
       console.log(`Error retrievin document Id, ${error}`)
     })
   }
-  
+
   getUserInfos() {
+    this.uid = JSON.parse(localStorage.getItem('user')).uid;
     return this.db.collection('user-infos', ref => ref.where("uid", '==', this.uid)).valueChanges();
   }
 
   getUser(){
-    return this.db.collection('users').doc(this.uid).valueChanges();
+    this.uid = JSON.parse(localStorage.getItem('user')).uid;
+    return this.db.collection('users').doc(this.uid).snapshotChanges();
   }
 
   getItems(userKey){
@@ -100,7 +102,7 @@ export class CrudService {
     // and kicks off the upload
     let uploadProgress = ref.put(event.target.files[0]).percentageChanges();
     console.log('image uploaded')
-    
+
   }
 
   searchOrganization(searchValue){
@@ -143,37 +145,37 @@ export class CrudService {
       let jobTitle = JSON.parse(localStorage.getItem('currentTexter')).jobTitle
       let organization = JSON.parse(localStorage.getItem('currentTexter')).organization
       let location = JSON.parse(localStorage.getItem('currentTexter')).location
-  
+
       let imageURL = null
-  
+
       this.afStorage.ref(`/orgImages/${JSON.parse(localStorage.getItem('currentTexter')).orgId}`).getDownloadURL().toPromise().then(data => {
         //If there isn't an image, use the webflow image
         imageURL = data
-  
+
         if (!imageURL) {
           imageURL = "https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164c953e8a56201c055c_icons8-target-50.png"
         }
-  
+
       })
-  
+
       let messages = [];
-  
+
       //Load conversation if you changed the card
       let conversationRef = this.db.collection("conversations").doc(this.uid).collection(currentTexterId).get().toPromise()
         .then(snapshot => {
           snapshot.forEach(doc => {
             messages.push(doc.data())
           })
-  
+
         })
-  
+
       //Loading message changes on the database
       let query = this.db.collection("conversations").doc(this.uid).collection(currentTexterId);
       query.valueChanges().subscribe(data => {
         messages = data
-  
+
       })
-  
+
     }
 
 
@@ -199,7 +201,7 @@ export class CrudService {
 
     //If it is a normal response, not a card response
     if (response.fulfillmentText != "") {
-      
+
       richCard = false
 
       data = {
