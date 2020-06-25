@@ -630,10 +630,10 @@
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    align-self: center;
     width: 100%;
+    padding: 70px 0;
     max-width: 1360px;
-    margin-top: 70px;
-    margin-bottom: 70px;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
