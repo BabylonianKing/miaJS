@@ -58,12 +58,17 @@
                     .sign-in-button {
                         display: flex;
                         margin-right: 30px;
-                        color: #FFF;
+                    
+                        a {
+                            color: white;
+                            font-weight: 700;
 
-                        &:hover {
-                            cursor: pointer;
-                            color: $background-gray;
+                            &:hover {
+                                cursor: pointer;
+                                color: $background-gray;
+                            }
                         }
+
                     }
 
                     .sign-up-button {
@@ -73,6 +78,7 @@
                         align-items: center;
 
                         a {
+                            font-weight: 700;
                             color: #FFF;
                             display: flex;
                             padding: 15px 30px;
@@ -153,6 +159,7 @@
             align-items: center;
 
             a {
+                font-weight: 700;
                 font-size: 18px;
                 color: #FFF;
                 display: flex;
@@ -625,7 +632,7 @@
     }
   }
   
-  .content {
+  .content-2 {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
