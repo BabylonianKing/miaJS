@@ -141,6 +141,7 @@ export class CrudService {
     //Prototyping function, changing from Chat with Matilda to chatting with another human.
     changeConversation() {
 
+      this.uid = JSON.parse(localStorage.getItem('user')).uid;
       let currentTexterId = JSON.parse(localStorage.getItem('currentTexter')).jobId
       let jobTitle = JSON.parse(localStorage.getItem('currentTexter')).jobTitle
       let organization = JSON.parse(localStorage.getItem('currentTexter')).organization
