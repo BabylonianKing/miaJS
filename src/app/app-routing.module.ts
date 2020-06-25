@@ -17,8 +17,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 
 
 const routes: Routes = [
-  { path: '', component: MainPageComponent },
-  { path: 'test', component: HomepageComponent},
+  // { path: '', component: MainPageComponent },
+  { path: '', component: HomepageComponent},
   { path: 'dashboard', component: ConvoDashboardComponent, canActivate: [AuthenticationGuard] },
   { path: 'chat', component: MatildaDashboardComponent },  
   { path: 'login', component: LoginPageComponent },
