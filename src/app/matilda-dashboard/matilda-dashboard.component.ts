@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
+import { CrudService } from 'src/shared/services/crud.service';
 
 @Component({
   selector: 'matilda-dashboard',
@@ -10,9 +11,11 @@ export class MatildaDashboardComponent implements OnInit {
 
   constructor(
     public sideNavService: MenuToggleService,
-    public menu: MenuToggleService) { }
+    public menu: MenuToggleService,
+    public crud: CrudService) { }
 
   ngOnInit(): void {
+    this.crud.pathRefresh();
   }
 
 }
