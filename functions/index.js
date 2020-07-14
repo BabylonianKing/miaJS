@@ -1,12 +1,4 @@
 const functions = require('firebase-functions');
-const algoliasearch = require('algoliasearch');
-const ALGOLIA_ID = functions.config().algolia.app_id;
-const ALGOLIA_ADMIN_KEY = functions.config().algolia.api_key;
-const ALGOLIA_SEARCH_KEY = functions.config().algolia.search_key;
-
-const ALGOLIA_INDEX_NAME = 'jobs';
-const client = algoliasearch(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
-
 
 
 const cors = require('cors')({
@@ -125,35 +117,6 @@ exports.updateUser = functions.firestore
 
   });
 
-//Deleting information
-// exports.deleteUser = functions.firestore
-//   .document('users/{userID}')
-//   .onDelete((snap, context) => {
-//     // Get an object representing the document prior to deletion
-//     // e.g. {'name': 'Marie', 'age': 66}
-//     const deletedValue = snap.data();
-
-//     // perform desired operations ...
-//   });
-
-
-
-
-//TODO: Function for updating conversation cards. Should remove this and find a more elegant way later on....
-// exports.updateConversationCard= functions.firestore
-// .document('conversations/{userId}')
-// .onUpdate((change, context) => {
-//   // Get an object representing the document
-//   // e.g. {'name': 'Marie', 'age': 66}
-//   const newValue = change.after.data();
-
-//   // ...or the previous value before this update
-//   //const previousValue = change.before.data();
-
-//   db.collection('user-infos').doc(context.params.userId).set(newValue, {merge: true})
-
-
-// });
 
 exports.createOrgId = functions.firestore
   .document("organizations/{orgId}")
@@ -180,18 +143,30 @@ exports.createJobId = functions.firestore
     }, {
       merge: true
     });
-
-    //Algolia Integration
-    const job = snap.data();
-    // Add an 'objectID' field which Algolia requires
-    job.objectID = context.params.jobId;
-
-    // Write to the algolia index
-    const index = client.initIndex(ALGOLIA_INDEX_NAME);
-    return index.saveObject(note);
   });
 
+  exports.scheduledExpiredJobCheck = functions.pubsub.schedule('5 11 * * *')
+  .timeZone('America/New_York') // Users can choose timezone - default is America/Los_Angeles
+  .onRun((context) => {
+    var beginningDate = Date.now() - 604800000;
+    var beginningDateObject = new Date(beginningDate);
 
+    const snapshot = db.collection("jobs").where('advertisedUntil', '<', beginningDateObject).get();
+    if (snapshot.empty) {
+      console.log('No matching documents.');
+      return;
+    }
+    snapshot.forEach(doc => {
+      const res = db.collection("jobs").doc(doc.id).delete();
+      console.log(res)
+    });
+
+  console.log('This will be run every day at 11:05 AM Eastern!');
+});
+
+
+
+//TODO: Check if this is really necessary
 exports.updateConversationCards = functions.firestore
   .document("jobs/{jobId}")
   .onWrite((change, context) => {
@@ -207,18 +182,6 @@ exports.updateConversationCards = functions.firestore
     }, {
       merge: true
     })
-
-
-    //Algolia Integration
-    // Add an 'objectID' field which Algolia requires
-    jobData.objectID = context.params.jobId;
-
-    // Write to the algolia index
-    const index = client.initIndex(ALGOLIA_INDEX_NAME);
-    return index.saveObject(jobData);
-
-
-
   });
 
 //TODO: Function for updating the cards, seeing the latest information.
