@@ -13,22 +13,13 @@
       </div>
     
     <div class="chat-container" (scroll)="scrolled($event)" #scrollframe>
-        <!-- <chat-message *ngFor="let msg of messages" #item
+        <chat-message *ngFor="let msg of messages" #item
                       type="text"
                       [message]="msg.text"
-                      [timestamp]="msg.date.toDate().toDateString()"
+                      [timestamp]="msg.date.toDateString()"
                       [reply]="msg.reply"
-                      [jobImageURL] = "msg.url"
-                      [jobTitle] = "msg.title"
-                      [jobSubtitle] = "msg.subtitle"
-                      [imageUrl] = "msg.imageUrl"
-                      [applyNowUrl] = "msg.applyNowUrl"
-                      [learnMoreDescription] = "msg.learnMoreDescription" 
-                      [richCard] = "msg.richCard"
-                      (learnMoreDescriptionEmitter)="addLearnMoreMessage($event)"
-                      >
-                      
-        </chat-message> -->
+                      > 
+        </chat-message>
     
         
         <chat-message *ngIf="loading"
@@ -50,7 +41,6 @@
 
     <div class="success-shadow" [ngClass]="{ visible: flowDone }">
         <div class="success-container">
-            <h1>You're doing great!</h1>
             <div class="success-checkmark">
                 <div class="check-icon">
                     <span class="icon-line line-tip"></span>
@@ -59,8 +49,11 @@
                     <div class="icon-fix"></div>
                 </div>
             </div>
-            <h3>Let's keep building your profile so we can find awesome opportunities together.</h3>
-            <button>Onwards!</button>
+            <h1>You're doing great!</h1>
+            <p>Let's keep building your profile so we can find awesome opportunities together.</p>
+            <div class="default-button" (click)="flowDone = !flowDone">
+                <a>Onwards</a>
+            </div>
         </div>
     </div>
 </div>

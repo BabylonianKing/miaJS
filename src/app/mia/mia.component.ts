@@ -92,7 +92,7 @@ export class MiaComponent implements AfterViewInit {
     this.crudService.handleUserMessage(event).subscribe(res => {
       this.addBotMessage(res);
       this.loading = false;
-    });;
+    });
 
 
 
