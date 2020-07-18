@@ -1,0 +1,66 @@
+<div class="root">
+    <div class="messages-header">
+        <div class="messages-header-left">
+          <!-- <img src="" width="50" height="50" alt="" class="org-logo" /> -->
+          <div class="messages-header-jd">
+            <h3 class="messages-header-job-title">Matilda</h3>
+            <h5 class="messages-header-details">Montreal, Canada</h5>
+          </div>
+        </div>
+        <div class="messages-header-right">
+          <div class="icon" (click)="sideNavService.toggleConvoInfos()"><img src="assets/more.svg"></div>
+        </div>
+      </div>
+    
+    <div class="chat-container" (scroll)="scrolled($event)" #scrollframe>
+        <!-- <chat-message *ngFor="let msg of messages" #item
+                      type="text"
+                      [message]="msg.text"
+                      [timestamp]="msg.date.toDate().toDateString()"
+                      [reply]="msg.reply"
+                      [jobImageURL] = "msg.url"
+                      [jobTitle] = "msg.title"
+                      [jobSubtitle] = "msg.subtitle"
+                      [imageUrl] = "msg.imageUrl"
+                      [applyNowUrl] = "msg.applyNowUrl"
+                      [learnMoreDescription] = "msg.learnMoreDescription" 
+                      [richCard] = "msg.richCard"
+                      (learnMoreDescriptionEmitter)="addLearnMoreMessage($event)"
+                      >
+                      
+        </chat-message> -->
+    
+        
+        <chat-message *ngIf="loading"
+            type="text"
+            message="...">
+        </chat-message>
+    </div>
+    
+    <div class="chat-footer">
+        <chat-form (send)="handleUserMessage($event)">
+    
+        </chat-form>
+        <div class="skip-container">
+            <a class="skip">Skip</a><i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </div>
+        <button (click)="animateTransition(); playAudio()">Test transition</button>
+        
+    </div>
+
+    <div class="success-shadow" [ngClass]="{ visible: flowDone }">
+        <div class="success-container">
+            <h1>You're doing great!</h1>
+            <div class="success-checkmark">
+                <div class="check-icon">
+                    <span class="icon-line line-tip"></span>
+                    <span class="icon-line line-long"></span>
+                    <div class="icon-circle"></div>
+                    <div class="icon-fix"></div>
+                </div>
+            </div>
+            <h3>Let's keep building your profile so we can find awesome opportunities together.</h3>
+            <button>Onwards!</button>
+        </div>
+    </div>
+</div>

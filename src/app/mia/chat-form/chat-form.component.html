@@ -1,6 +1,5 @@
   <form class="messages-footer-content" autocomplete="off" #chatForm="ngForm" (ngSubmit)="sendForm(chatForm)">
-    <input class="messages-input-field-placeholder" required name="message" placeholder="Say something..."
-      id="input_message" [ngModel]="message.text" />
-    <button type="submit" class="messages-send-button" [disabled]="!chatForm.valid"></button>
+    <input class="messages-input-field-placeholder" required name="message" placeholder="Say something..." id="input_message" [ngModel]="message.text" />
+    <button type="submit" class="messages-send-button" [disabled]="!chatForm.valid"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
   </form>
  

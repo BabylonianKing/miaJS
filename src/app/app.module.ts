@@ -5,7 +5,6 @@ import { FormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MainPageComponent } from './main-page/main-page.component';
 import { ConvoDashboardComponent } from './convo-dashboard/convo-dashboard.component';
 import { MiaComponent } from './mia/mia.component';
 import { ChatMessageComponent } from './mia/chat-message/chat-message.component';
@@ -40,11 +39,12 @@ import { BookmarksComponent } from './bookmarks-page/bookmarks/bookmarks.compone
 import { BookmarkCardComponent } from './bookmarks-page/bookmarks/bookmark-card/bookmark-card.component';
 import { MatildaDashboardComponent } from './matilda-dashboard/matilda-dashboard.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { OnboardingPageComponent } from './onboarding-page/onboarding-page.component';
+import { OnboardingChatComponent } from './onboarding-page/onboarding-chat/onboarding-chat.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainPageComponent,
     ConvoDashboardComponent,
     MiaComponent,
     ChatMessageComponent,
@@ -65,7 +65,9 @@ import { HomepageComponent } from './homepage/homepage.component';
     BookmarksComponent,
     BookmarkCardComponent,
     MatildaDashboardComponent,
-    HomepageComponent  ],
+    HomepageComponent,
+    OnboardingPageComponent,
+    OnboardingChatComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

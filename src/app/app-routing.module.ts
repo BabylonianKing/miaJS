@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MainPageComponent } from './main-page/main-page.component';
 import { ConvoDashboardComponent } from './convo-dashboard/convo-dashboard.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AngularFireModule } from '@angular/fire';
@@ -14,10 +13,10 @@ import { BookmarksPageComponent } from './bookmarks-page/bookmarks-page.componen
 import { MatildaDashboardComponent } from './matilda-dashboard/matilda-dashboard.component';
 import { AuthenticationGuard } from 'src/shared/guard/authentication.guard';
 import { HomepageComponent } from './homepage/homepage.component';
+import { OnboardingPageComponent } from './onboarding-page/onboarding-page.component';
 
 
 const routes: Routes = [
-  // { path: '', component: MainPageComponent },
   { path: '', component: HomepageComponent},
   { path: 'dashboard', component: ConvoDashboardComponent, canActivate: [AuthenticationGuard] },
   { path: 'chat', component: MatildaDashboardComponent },  
@@ -25,7 +24,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupPageComponent },
   { path: 'profile', component: ProfilePageComponent, canActivate: [AuthenticationGuard] },
   { path: 'post-job', component: PostJobPageComponent, canActivate: [AuthenticationGuard] },
-  { path: 'bookmarks', component: BookmarksPageComponent, canActivate: [AuthenticationGuard] }
+  { path: 'bookmarks', component: BookmarksPageComponent, canActivate: [AuthenticationGuard] },
+  { path: 'onboarding', component: OnboardingPageComponent, canActivate: [AuthenticationGuard]}
 ];
 
 @NgModule({
