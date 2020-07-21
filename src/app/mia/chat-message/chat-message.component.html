@@ -1,11 +1,44 @@
 <div class="message-container" [ngClass]=" {'user': reply} ">
-    <div class="message-bubble" [ngClass]=" {'user': reply} ">
-        <p class="message">{{ message ? message: "Here is a job I found for you," }}</p>
-    </div>
-    <p class="message-timestamp">{{ timestamp }}</p>
 
-    <div class="cards-carousel" *ngIf="richCard">
-      <job-card *ngFor="let item of cards" class="rich-card"
+  <div class="message-bubble" [ngClass]=" {'user': reply} ">
+    <p class="message">{{ message }}</p>
+  </div>
+  <p class="message-timestamp">{{ timestamp }}</p>
+
+  <div class="cards-carousel" *ngIf="richCard">
+    <div class="rich-card" *ngFor="let card of cards | slice:0:4;" >
+      <div class="bookmark" (click)="bookmarkJob()" [ngClass]="{ visible: heartFilled === false }"><img src="/assets/heart.svg"></div>
+      <div class="bookmark" [ngClass]="{ visible: heartFilled === true }"><img src="/assets/heart-full.svg"></div>
+      <div class="header">
+        <div class="header-left">
+          <img src="{{ (card.logo != undefined) ? card.logo.stringValue : null || 'https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164c953e8a56201c055c_icons8-target-50.png' }}">
+          <div class="job-infos">
+            <h3>{{ (card.title != undefined) ? card.title.stringValue : null }} </h3>
+            <h5>{{ (card.company != undefined) ? card.company.stringValue : null }}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="job-description">
+        <h6>Job Description</h6>
+        <p>{{ (card.description != undefined) ? card.description.stringValue : null }}</p>
+      </div>
+      <div class="more-infos">
+        <div class="salary">
+          <h6>Salary</h6>
+          <p>{{ (card.baseSalary != undefined) ? card.baseSalary.numberValue : null }}</p>
+        </div>
+        <div class="job-type">
+          <h6>Employment</h6>
+          <p>{{ (card.employmentType != undefined) ? card.employmentType.stringValue : "Unavailable" }}</p>
+        </div>
+      </div>
+      <div class="buttons">
+        <button (click)="learnMore()">Learn more</button>
+        <button (click)="apply()">Apply now</button>
+      </div>
+    </div>
+
+    <!-- <job-card *ngFor="let item of cards" class="rich-card"
       type="text"
       [title]="(item.title != undefined) ? item.title.stringValue : null"
       [company]="(item.company != undefined) ? item.company.stringValue : null"
@@ -17,5 +50,6 @@
       [baseSalary] = "(item.baseSalary != undefined) ? item.baseSalary.numberValue : null"
       [salaryType] = "(item.salaryType != undefined) ? item.salaryType.stringValue : null"
       [url] = "(item.url != undefined) ? item.url.stringValue : null"></job-card>
-    </div>
-</div>
+    </div> -->
+
+  </div>

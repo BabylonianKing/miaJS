@@ -52,7 +52,7 @@
 
 .cards-carousel {
     display: grid;
-    grid-template-columns: repeat(1, 300px);
+    grid-template-columns: repeat(4, 300px);
     column-gap: 20px;
     max-width: 60%;
     overflow: auto;
