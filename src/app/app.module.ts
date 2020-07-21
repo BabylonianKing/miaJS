@@ -42,7 +42,6 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { OnboardingPageComponent } from './onboarding-page/onboarding-page.component';
 import { OnboardingChatComponent } from './onboarding-page/onboarding-chat/onboarding-chat.component';
 import { OnboardingProgressComponent } from './onboarding-page/onboarding-progress/onboarding-progress.component';
-import { JobCardComponent } from './mia/chat-message/job-card/job-card.component';
 
 
 @NgModule({
@@ -71,8 +70,7 @@ import { JobCardComponent } from './mia/chat-message/job-card/job-card.component
     HomepageComponent,
     OnboardingPageComponent,
     OnboardingChatComponent,
-    OnboardingProgressComponent,
-  JobCardComponent  ],
+    OnboardingProgressComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -7,7 +7,7 @@
 
   <div class="cards-carousel" *ngIf="richCard">
     <div class="rich-card" *ngFor="let card of cards | slice:0:4;" >
-      <div class="bookmark" (click)="bookmarkJob()" [ngClass]="{ visible: heartFilled === false }"><img src="/assets/heart.svg"></div>
+      <div class="bookmark" (click)="bookmarkJob(card)" [ngClass]="{ visible: heartFilled === false }"><img src="/assets/heart.svg"></div>
       <div class="bookmark" [ngClass]="{ visible: heartFilled === true }"><img src="/assets/heart-full.svg"></div>
       <div class="header">
         <div class="header-left">
@@ -20,12 +20,12 @@
       </div>
       <div class="job-description">
         <h6>Job Description</h6>
-        <p>{{ (card.description != undefined) ? card.description.stringValue : null }}</p>
+        <p>{{ (card.description.structValue != undefined) ? formatDescription(card.description.structValue.fields) : "Unavailable" }}</p>
       </div>
       <div class="more-infos">
         <div class="salary">
           <h6>Salary</h6>
-          <p>{{ (card.baseSalary != undefined) ? card.baseSalary.numberValue : null }}</p>
+          <p>{{ (card.baseSalary.nullValue == undefined) ? formatBaseSalary(card.baseSalary, card.salaryType.stringValue) : "Unavailable" }}</p>
         </div>
         <div class="job-type">
           <h6>Employment</h6>
@@ -33,8 +33,8 @@
         </div>
       </div>
       <div class="buttons">
-        <button (click)="learnMore()">Learn more</button>
-        <button (click)="apply()">Apply now</button>
+        <button (click)="learnMore(card.description)">Learn more</button>
+        <button (click)="apply(card.url.stringValue)">Apply now</button>
       </div>
     </div>
 

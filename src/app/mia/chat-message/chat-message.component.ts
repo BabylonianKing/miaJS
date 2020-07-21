@@ -17,24 +17,13 @@ export class ChatMessageComponent implements OnInit {
 @Input() message: string;
 @Input() timestamp: string;
 
-
-@Input() learnMoreDescription: string;
-@Input() applyNowUrl: string;
 @Input() imageUrl: string;
 @Input() reply: boolean;
-@Input() jobImageURL: string;
 @Input() richCard: boolean;
 // @Input() jobTitle: string;
 // @Input() jobSubtitle: boolean;
 @Input() cards: string;
-@Input() company: string;
-@Input() title: string;
-@Input() description: string;
-@Input() baseSalary: any;
-@Input() salaryType: string;
-@Input() employmentType: string;
-@Input() logo: string;
-@Input() url: string;
+
 
 @Output() descriptionEmitter = new EventEmitter<string>();
 userId = JSON.parse(localStorage.getItem('user')).uid;
@@ -50,19 +39,21 @@ userId = JSON.parse(localStorage.getItem('user')).uid;
 
   heartFilled: boolean = false;
 
-  bookmarkJob() {
+
+  // TODO: Fix this
+  bookmarkJob(card) {
     this.heartFilled = true;
     let data = {
-      description: this.description,
-      url: this.url,
-      logo: this.logo,
-      // jobImageURL: this.jobImageURL,
-      title: this.title,
-      company: this.company,
-      employmentType: this.employmentType,
-      salary: this.baseSalary,
+      description: card.description,
+      url: card.url,
+      logo: card.logo,
+      location: card.location,
+      title: card.title,
+      company: card.company,
+      employmentType: card.employmentType,
+      baseSalary: card.baseSalary,
       //hourly, weekly, monthly, annually
-      salaryType: this.salaryType,
+      salaryType: card.salaryType,
 
 
     }
@@ -71,14 +62,31 @@ userId = JSON.parse(localStorage.getItem('user')).uid;
     ref.add(data);
   }
 
-  //TODO: Code this functionality
-  learnMore() {
-    this.descriptionEmitter.emit(this.description)
-    console.log(this.description)
+
+  formatBaseSalary(baseSalary, salaryType) {
+
+    try {
+      return baseSalary.numberValue.toFixed(2).toString() + "$ " + salaryType
+    } catch {
+      return baseSalary.stringValue
+    }
+
   }
 
-  apply() {
-    window.open(this.applyNowUrl, "_blank")
+
+  formatDescription(description) {
+    let previewDescription: any = Object.values(description)[0]
+    previewDescription = previewDescription.stringValue
+    return previewDescription
+  }
+
+  //TODO: Code this functionality
+  learnMore(description) {
+    this.descriptionEmitter.emit(description)
+  }
+
+  apply(url) {
+    window.open(url, "_blank")
 
   }
 

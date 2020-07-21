@@ -12,23 +12,36 @@ export class BookmarkCardComponent implements OnInit {
   @Input() company: string;
   @Input() timestamp: string;
   @Input() lastMessage: string;
-  @Input() imageURL: string;
   @Input() jobId: string;
   @Input() location: string;
-  @Input() salary: string;
+  @Input() baseSalary: string;
+  @Input() salaryType: string;
   @Input() description: string;
-  @Input() responsabilities: string;
   @Input() employmentType: string;
   @Input() requirements: string;
-  @Input() applicationURL: string;
+  @Input() url: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.baseSalary = this.formatBaseSalary(this.baseSalary, this.salaryType)
+
+
+  }
+
+  formatBaseSalary(baseSalary, salaryType) {
+    console.log(baseSalary)
+
+    try {
+      return baseSalary.numberValue.toFixed(2).toString() + "$ " + salaryType
+    } catch {
+      return baseSalary.stringValue
+    }
+
   }
 
   apply() {
-    window.open(this.applicationURL, "_blank")
+    window.open(this.url, "_blank")
   }
 
   learnMore() {

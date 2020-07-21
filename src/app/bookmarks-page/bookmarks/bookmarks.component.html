@@ -3,21 +3,18 @@
         <input class="search-bar" type="text" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" placeholder="Search by name..." (keyup)="searchByOrg()">
     </div>
     <div class="bookmarks">
-        <bookmark-card *ngFor="let item of filteredJobs || items"
+        <bookmark-card *ngFor="let item of filteredCards || cards"
         type="text"
-        [logo]=""
-        [title]="item.title"
-        [company]="item.company"
-        [timestamp]="item.timestamp"
-        [lastMessage]="item.lastMessage"
-        [jobId] = "item.jobId"
-        [description] = "item.description"
-        [requirements] = "item.requirements"
-        [employmentType] = "item.employmentType"
-        [imageURL] = "item.imageURL"
-        [location] = "item.location"
-        [salary] = "item.salary"
-        [applicationURL] = "item.url"
+        [title]="(item.title != undefined) ? item.title.stringValue : null"
+        [company]="(item.company != undefined) ? item.company.stringValue : null"
+        [jobId] = "(item.jobId != undefined) ? item.jobId.stringValue : null"
+        [logo] = "(item.logo != undefined) ? item.logo.stringValue : null"
+        [description] = "(item.description.structValue != undefined) ? item.description.structValue.fields : 'Unavailable'"
+        [employmentType] = "(item.employmentType != undefined) ? item.employmentType.stringValue : null"
+        [location] = "(item.location != undefined) ? item.location.stringValue : null"
+        [baseSalary] = "(item.baseSalary != undefined) ? item.baseSalary : null"
+        [salaryType] = "(item.salaryType != undefined) ? item.salaryType.stringValue : null"
+        [url] = "(item.url != undefined) ? item.url.stringValue : null"
 ></bookmark-card>
     </div>
 </div>

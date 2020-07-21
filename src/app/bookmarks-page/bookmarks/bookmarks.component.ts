@@ -8,9 +8,9 @@ import { CrudService } from 'src/shared/services/crud.service';
   styleUrls: ['./bookmarks.component.scss']
 })
 export class BookmarksComponent implements OnInit {
-  items: Array <any>;
+  cards: Array <any>;
   searchValue;
-  filteredJobs: any = null;
+  filteredCards: any = null;
 
   constructor(public crudService: CrudService) {}
 
@@ -18,7 +18,7 @@ export class BookmarksComponent implements OnInit {
 
     //Load user's bookmarks and listen for updates
     this.crudService.bookmarkListener().valueChanges().subscribe(data => {
-      this.items = data
+      this.cards = data
 
     })
 
@@ -28,7 +28,7 @@ export class BookmarksComponent implements OnInit {
   searchByOrg() {
     const value = this.searchValue.toLowerCase();
     console.log(value);
-    this.filteredJobs = this.items.filter(job => {
+    this.filteredCards = this.cards.filter(job => {
       return (
         job.title.toLowerCase().includes(value) ||
         job.company.toLowerCase().includes(value)
