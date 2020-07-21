@@ -12,7 +12,7 @@ import { CrudService } from 'src/shared/services/crud.service';
 })
 export class MiaComponent implements AfterViewInit {
 
-  // AUTOSCROLL 
+  // AUTOSCROLL
   @ViewChild('scrollframe', {static: false}) scrollFrame: ElementRef;
   @ViewChildren('item') itemElements: QueryList<any>;
 
@@ -71,11 +71,11 @@ export class MiaComponent implements AfterViewInit {
   }
 
   addUserMessage(text) {
-    this.crudService.addUserMessage(text)    
+    this.crudService.addUserMessage(text)
   }
 
   addBotMessage(response) {
-    this.richCard = this.crudService.addBotMessage(response)
+    this.crudService.addBotMessage(response)
   }
   ensureNotNull(variable) {
     while (variable == null) {

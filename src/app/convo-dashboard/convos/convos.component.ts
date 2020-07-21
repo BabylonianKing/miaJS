@@ -33,8 +33,8 @@ export class ConvosComponent implements OnInit {
   org_filtered_items: Array < any > ;
   userId = JSON.parse(localStorage.getItem('user')).uid;
   jobId;
-  jobTitle;
-  organization;
+  title;
+  company;
   location;
   lastMessage;
   imageURL: string;
@@ -68,7 +68,7 @@ export class ConvosComponent implements OnInit {
         }
 
         snapshot.forEach(doc => {
-            //Reset the image url to null  
+            //Reset the image url to null
             this.afStorage.ref(`/orgImages/${doc.data().orgId}`).getDownloadURL().toPromise().then(data => {
               let orgId = doc.data().orgId
 
@@ -80,13 +80,13 @@ export class ConvosComponent implements OnInit {
 
               let orgData;
               try {
-                this.db.collection("organizations").doc(orgId).get().toPromise().then(document => {
+                this.db.collection("companys").doc(orgId).get().toPromise().then(document => {
                   orgData = document.data()
                   console.log(document.data())
                 }).then(random => {
                   this.jobId = doc.id
-                  this.jobTitle = doc.data().jobTitle
-                  this.organization = orgData.name
+                  this.title = doc.data().title
+                  this.company = orgData.name
                   this.location = orgData.location
 
 
@@ -99,8 +99,8 @@ export class ConvosComponent implements OnInit {
                   databaseOfUsers.push({
                     //id will be the job id
                     jobId: this.jobId,
-                    jobTitle: this.jobTitle,
-                    organization: this.organization,
+                    title: this.title,
+                    company: this.company,
                     location: this.location,
                     imageURL: this.imageURL,
                     orgId: orgId
@@ -132,7 +132,7 @@ export class ConvosComponent implements OnInit {
 
       })
 
-    //To continue implementing, reading from conversation-cards, each person is a document, storing objects of people they talked to, including time element, most recent text, 
+    //To continue implementing, reading from conversation-cards, each person is a document, storing objects of people they talked to, including time element, most recent text,
     //const user2Id = JSON.parse(localStorage.getItem('currentTexter')).uid;
 
     // let cardRef = this.db.collection("conversations-cards").doc(userId)
@@ -162,7 +162,7 @@ export class ConvosComponent implements OnInit {
 
   searchByOrg() {
     let value = this.searchValue.toLowerCase();
-    this.CrudService.searchOrganization(value)
+    this.CrudService.searchCompany(value)
       .subscribe(result => {
         this.org_filtered_items = result;
         this.items = this.org_filtered_items;

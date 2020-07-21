@@ -8,8 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ConvoCardComponent implements OnInit {
 
   @Input() logo: string;
-  @Input() jobTitle: string;
-  @Input() organization: string;
+  @Input() title: string;
+  @Input() company: string;
   @Input() timestamp: string;
   @Input() lastMessage: string;
   @Input() imageURL: string;
@@ -23,4 +23,3 @@ export class ConvoCardComponent implements OnInit {
 
 
 }
-

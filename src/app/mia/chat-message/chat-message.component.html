@@ -4,38 +4,18 @@
     </div>
     <p class="message-timestamp">{{ timestamp }}</p>
 
-    <div class="cards-carousel">
-    <div *ngIf="richCard" class="rich-card">
-        <div class="bookmark" (click)="bookmarkJob()" [ngClass]="{ visible: heartFilled === false }"><img src="/assets/heart.svg"></div>
-        <div class="bookmark" [ngClass]="{ visible: heartFilled === true }"><img src="/assets/heart-full.svg"></div>
-        <div class="header">
-            <div class="header-left">
-                <!-- <img src="{{ jobImageURL }}"> -->
-                <div class="job-infos">
-                    <h3>{{ jobTitle }} </h3>
-                    <h5>{{ jobSubtitle }}</h5>
-                </div>
-            </div>
-        </div>
-        <div class="job-description">
-            <h6>Job Description</h6>
-            <p>{{ learnMoreDescription }}</p>
-        </div>
-        <div class="more-infos">
-            <div class="salary">
-                <h6>Salary</h6>
-                <p>Available on Demand</p>
-            </div>
-            <div class="job-type">
-                <h6>Job Type</h6>
-                <p>Full-time</p>
-            </div>
-        </div>
-        <div class="buttons">
-            <button (click)="learnMore()">Learn more</button>
-            <button (click)="apply()">Apply now</button>
-        </div>
-    </div>
-
+    <div class="cards-carousel" *ngIf="richCard">
+      <job-card *ngFor="let item of cards" class="rich-card"
+      type="text"
+      [title]="(item.title != undefined) ? item.title.stringValue : null"
+      [company]="(item.company != undefined) ? item.company.stringValue : null"
+      [jobId] = "(item.jobId != undefined) ? item.jobId.stringValue : null"
+      [logo] = "(item.logo != undefined) ? item.logo.stringValue : null"
+      [description] = "(item.description.structValue != undefined) ? item.description.structValue.fields : null"
+      [employmentType] = "(item.employmentType != undefined) ? item.employmentType.stringValue : null"
+      [location] = "(item.location != undefined) ? item.location.stringValue : null"
+      [baseSalary] = "(item.baseSalary != undefined) ? item.baseSalary.numberValue : null"
+      [salaryType] = "(item.salaryType != undefined) ? item.salaryType.stringValue : null"
+      [url] = "(item.url != undefined) ? item.url.stringValue : null"></job-card>
     </div>
 </div>

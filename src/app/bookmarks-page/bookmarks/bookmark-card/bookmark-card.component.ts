@@ -8,18 +8,17 @@ import { Component, OnInit, Input } from '@angular/core';
 export class BookmarkCardComponent implements OnInit {
 
   @Input() logo: string;
-  @Input() jobTitle: string;
-  @Input() organization: string;
+  @Input() title: string;
+  @Input() company: string;
   @Input() timestamp: string;
   @Input() lastMessage: string;
   @Input() imageURL: string;
   @Input() jobId: string;
   @Input() location: string;
-  @Input() lowSalary: string;
-  @Input() highSalary: string;
-  @Input() jobDescription: string;
+  @Input() salary: string;
+  @Input() description: string;
   @Input() responsabilities: string;
-  @Input() jobType: string;
+  @Input() employmentType: string;
   @Input() requirements: string;
   @Input() applicationURL: string;
 
@@ -33,7 +32,7 @@ export class BookmarkCardComponent implements OnInit {
   }
 
   learnMore() {
-    console.log(this.jobDescription)
+    console.log(this.description)
   }
 
 }

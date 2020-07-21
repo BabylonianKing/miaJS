@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { MenuToggleService } from 'src/shared/services/menu-toggle.service'; 
+import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 
 
 
@@ -11,9 +11,9 @@ import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 })
 export class ConvoInfoComponent implements OnInit {
 
-  jobTitle;
+  title;
   currentTexterId;
-  organization;
+  company;
   location;
   companyImageURL: string;
   orgId;
@@ -26,8 +26,8 @@ export class ConvoInfoComponent implements OnInit {
   ngOnInit(): void {
 
     this.currentTexterId = JSON.parse(localStorage.getItem('currentTexter')).jobId
-    this.jobTitle = JSON.parse(localStorage.getItem('currentTexter')).jobTitle
-    this.organization = JSON.parse(localStorage.getItem('currentTexter')).organization
+    this.title = JSON.parse(localStorage.getItem('currentTexter')).title
+    this.company = JSON.parse(localStorage.getItem('currentTexter')).company
     this.location = JSON.parse(localStorage.getItem('currentTexter')).location
     this.orgId = JSON.parse(localStorage.getItem('orgId'))
 
@@ -53,8 +53,8 @@ export class ConvoInfoComponent implements OnInit {
 
   changeConversation() {
     this.currentTexterId = JSON.parse(localStorage.getItem('currentTexter')).jobId
-    this.jobTitle = JSON.parse(localStorage.getItem('currentTexter')).jobTitle
-    this.organization = JSON.parse(localStorage.getItem('currentTexter')).organization
+    this.title = JSON.parse(localStorage.getItem('currentTexter')).title
+    this.company = JSON.parse(localStorage.getItem('currentTexter')).company
     this.location = JSON.parse(localStorage.getItem('currentTexter')).location
     this.orgId = JSON.parse(localStorage.getItem('currentTexter')).orgId
 

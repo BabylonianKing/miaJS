@@ -23,16 +23,14 @@
     <convo-card *ngFor="let item of items"
                 type="text"
                 [logo]=""
-                [jobTitle]="item.jobTitle"
-                [organization]="item.organization"
+                [title]="item.title"
+                [company]="item.company"
                 [timestamp]="item.timestamp"
                 [lastMessage]="item.lastMessage"
                 [isUnread]="item.isUnread"
                 [jobId] = "item.jobId"
                 [imageURL] = "item.imageURL"
-                
+
                 (click)="changeChat(item)"
                 [ngClass]="{ 'selected': item.isSelected }">
     </convo-card>
-  
-

@@ -13,23 +13,14 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 export class ChatMessageComponent implements OnInit {
 
-// Content 
+// Content
 @Input() message: string;
-@Input() timestamp: string;
-// Style (Bot vs. User Bubble)
-@Input() learnMoreDescription: string;
-@Input() applyNowUrl: string;
-@Input() imageUrl: string;
-@Input() reply: boolean;
-@Input() jobImageURL: string;
 @Input() richCard: boolean;
-@Input() jobTitle: string;
-@Input() jobSubtitle: boolean;
-
-@Output() learnMoreDescriptionEmitter = new EventEmitter<string>(); 
+@Input() timestamp: string;
+@Input() cards: string;
+@Input() reply: boolean;
+@Output() descriptionEmitter = new EventEmitter<string>();
 userId = JSON.parse(localStorage.getItem('user')).uid;
-
-
 
 
   constructor(private router: Router,
@@ -38,32 +29,6 @@ userId = JSON.parse(localStorage.getItem('user')).uid;
     ) { }
 
   ngOnInit(): void {
-  }
-
-  heartFilled: boolean = false;
-
-  bookmarkJob() {
-    this.heartFilled = true;
-    let data = {
-      learnMoreDescription: this.learnMoreDescription,
-      applyNowUrl: this.applyNowUrl,
-      imageUrl: this.imageUrl,
-      // jobImageURL: this.jobImageURL,
-      jobTitle: this.jobTitle,
-      jobSubtitle: this.jobSubtitle,    }
-
-    let ref = this.db.collection("bookmarks").doc(this.userId).collection("bookmarks")
-    ref.add(data);
-  }
-
-  learnMore() {
-    this.learnMoreDescriptionEmitter.emit(this.learnMoreDescription)
-    console.log(this.learnMoreDescription)
-  }
-
-  apply() {
-    window.open(this.applyNowUrl, "_blank")
-
   }
 
 }

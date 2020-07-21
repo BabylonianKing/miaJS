@@ -17,19 +17,14 @@
                   [message]="msg.text"
                   [timestamp]="msg.date.toDate().toDateString()"
                   [reply]="msg.reply"
-                  [jobImageURL] = "msg.url"
-                  [jobTitle] = "msg.title"
-                  [jobSubtitle] = "msg.subtitle"
-                  [imageUrl] = "msg.imageUrl"
-                  [applyNowUrl] = "msg.applyNowUrl"
-                  [learnMoreDescription] = "msg.learnMoreDescription" 
+                  [cards]= "msg.cards"
                   [richCard] = "msg.richCard"
-                  (learnMoreDescriptionEmitter)="addLearnMoreMessage($event)"
+                  (descriptionEmitter)="addLearnMoreMessage($event)"
                   >
-                  
+
     </chat-message>
 
-    
+
     <chat-message *ngIf="loading"
         type="text"
         message="...">

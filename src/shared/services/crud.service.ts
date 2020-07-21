@@ -44,14 +44,14 @@ export class CrudService {
 
     postJob(formValue) {
       return this.db.collection('jobs').add({
-        jobTitle: formValue.job_title,
+        title: formValue.job_title,
         titleToSearch: formValue.job_title.toLowerCase(),
-        jobType: formValue.job_type,
+        employmentType: formValue.job_type,
         location: formValue.job_location,
         salary: {low: formValue.job_salary_low, high: formValue.job_salary_high},
         requirements: formValue.job_requirements,
         responsibilities: formValue.job_responsibilities,
-        jobDescription: formValue.job_description,
+        description: formValue.job_description,
         orgId: JSON.parse(localStorage.getItem('orgId'))
       });
     }
@@ -59,7 +59,7 @@ export class CrudService {
 
   registerOrg(formValue) {
     console.log(formValue)
-    return this.db.collection('organizations').add({
+    return this.db.collection('companys').add({
       name: formValue.org_name,
       nameToSearch: formValue.org_name.toLowerCase(),
       logo: formValue.org_logo || "",
@@ -105,7 +105,7 @@ export class CrudService {
 
   }
 
-  searchOrganization(searchValue){
+  searchCompany(searchValue){
     return this.db.collection('items',ref => ref.where('nameToSearch', '>=', searchValue)
       .where('nameToSearch', '<=', searchValue + '\uf8ff'))
       .valueChanges()
@@ -143,8 +143,8 @@ export class CrudService {
 
       this.uid = JSON.parse(localStorage.getItem('user')).uid;
       let currentTexterId = JSON.parse(localStorage.getItem('currentTexter')).jobId
-      let jobTitle = JSON.parse(localStorage.getItem('currentTexter')).jobTitle
-      let organization = JSON.parse(localStorage.getItem('currentTexter')).organization
+      let title = JSON.parse(localStorage.getItem('currentTexter')).title
+      let company = JSON.parse(localStorage.getItem('currentTexter')).company
       let location = JSON.parse(localStorage.getItem('currentTexter')).location
 
       let imageURL = null
@@ -188,6 +188,7 @@ export class CrudService {
       text,
       sender: 'Human',
       reply: true,
+      richCard: false,
       date: new Date()
     }
 
@@ -196,12 +197,13 @@ export class CrudService {
   }
 
   addBotMessage(response) {
+    console.log("Bot response:", response)
     this.uid = JSON.parse(localStorage.getItem('user')).uid;
     let data;
-    let richCard: boolean;
+    let richCard: boolean = false;
 
     //If it is a normal response, not a card response
-    if (response.fulfillmentText != "") {
+    if (response.webhookPayload == null) {
 
       richCard = false
 
@@ -211,28 +213,51 @@ export class CrudService {
         date: new Date(),
         richCard: false
       }
+
+      let ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
+      ref.set(data);
+
     }
 
     //Card response
     else {
       richCard = true
-      data = {
-        sender: 'Bot',
-        date: new Date(),
-        richCard: true,
-        title: response.fulfillmentMessages[0].card.title,
-        subtitle: response.fulfillmentMessages[0].card.subtitle,
-        imageUrl: response.fulfillmentMessages[0].card.imageUri,
-        applyNowUrl: response.fulfillmentMessages[0].card.buttons[0].postback,
-        learnMoreDescription: response.fulfillmentMessages[0].card.buttons[1].postback }
-    }
+      // let arrayOfCards = [];
+      let richResponse = response.webhookPayload.fields.richResponse.listValue.values;
+      let arrayOfCards = []
+      richResponse.forEach((value, index, array) => {
+        let card = richResponse[index].structValue.fields;
+        //Firestore does not support array of objects for subcollections
+        let cardObject = {title: card.title,
+          company: (card.company != undefined) ? card.company:null,
+          logo: (card.logo != undefined) ? card.logo:null,
+          employmentType: (card.employmentType != undefined) ? card.employmentType:null,
+          baseSalary: (card.baseSalary != undefined) ? card.baseSalary:null,
+          //hourly, weekly, monthly, annually
+          salaryType: (card.salaryType != undefined) ? card.salaryType:null,
+          url: (card.url != undefined) ? card.url:null,
+          description: (card.description != undefined) ? card.description:null,
+        };
+        arrayOfCards.push(cardObject)
 
-    let ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
-    ref.set(data);
-    return richCard
+  })
+
+
+  data = {
+    sender: 'Bot',
+    date: new Date(),
+    richCard: true,
+    cards: arrayOfCards
+}
+
+let ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
+ref.set(data);
 
   }
 
+  return richCard
+  }
+  // TODO: Fix learn more to be a dynamic loading animation
   addLearnMoreMessage(text) {
     let data;
     data = {

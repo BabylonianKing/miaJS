@@ -30,8 +30,8 @@ export class BookmarksComponent implements OnInit {
     console.log(value);
     this.filteredJobs = this.items.filter(job => {
       return (
-        job.jobTitle.toLowerCase().includes(value) ||
-        job.organization.toLowerCase().includes(value)
+        job.title.toLowerCase().includes(value) ||
+        job.company.toLowerCase().includes(value)
       );
     });
   }
