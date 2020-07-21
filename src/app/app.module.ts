@@ -41,6 +41,7 @@ import { MatildaDashboardComponent } from './matilda-dashboard/matilda-dashboard
 import { HomepageComponent } from './homepage/homepage.component';
 import { OnboardingPageComponent } from './onboarding-page/onboarding-page.component';
 import { OnboardingChatComponent } from './onboarding-page/onboarding-chat/onboarding-chat.component';
+import { OnboardingProgressComponent } from './onboarding-page/onboarding-progress/onboarding-progress.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { OnboardingChatComponent } from './onboarding-page/onboarding-chat/onboa
     MatildaDashboardComponent,
     HomepageComponent,
     OnboardingPageComponent,
-    OnboardingChatComponent  ],
+    OnboardingChatComponent,
+    OnboardingProgressComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

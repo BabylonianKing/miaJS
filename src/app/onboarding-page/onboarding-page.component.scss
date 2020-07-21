@@ -111,14 +111,21 @@
     }
 
     .container {
+        padding: 0 50px;
         flex: 1;
         display: flex;
         align-items: center;
         justify-content: center;
 
+        onboarding-progress {
+            width: 30%;
+            display: flex;
+            height: 700px;
+        }
+
         onboarding-chat {
             display: flex;
-            width: 100%;
+            width: 70%;
             max-width: 1250px;
             height: 700px;
         }
