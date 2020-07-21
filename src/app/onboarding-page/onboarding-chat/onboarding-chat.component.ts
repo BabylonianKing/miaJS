@@ -11,7 +11,7 @@ import { OnboardingService } from 'src/shared/services/onboarding.service';
 })
 export class OnboardingChatComponent implements AfterViewInit {
 
-  // AUTOSCROLL 
+  // AUTOSCROLL
   @ViewChild('scrollframe', {static: false}) scrollFrame: ElementRef;
   @ViewChildren('item') itemElements: QueryList<any>;
 
@@ -31,13 +31,13 @@ export class OnboardingChatComponent implements AfterViewInit {
     public sideNavService: MenuToggleService,
     public crudService: CrudService,
     private http: HttpClient,
-    public onboarding: OnboardingService
+    public onboardingService: OnboardingService
   ) {}
 
   ngAfterViewInit() {
 
-    this.addTempBotMessage("Hello there, Lucas. It's nice meeting you!")
-    this.addTempBotMessage("My name is Matilda, and I’m here to help you find work opportunities that match you best! Before we get started, how about we get to know each other? Just say \"Let's create my profile\" to start. ")
+    this.messages = this.onboardingService.addTempBotMessage(this.messages, "Hello there, Lucas. It's nice meeting you!")
+    this.messages = this.onboardingService.addTempBotMessage(this.messages, "My name is Matilda, and I’m here to help you find work opportunities that match you best! Before we get started, how about we get to know each other? Just say \"Let's create my profile\" to start. ")
 
     // AUTOSCROLL
     this.scrollContainer = this.scrollFrame.nativeElement;
@@ -71,51 +71,49 @@ export class OnboardingChatComponent implements AfterViewInit {
     this.isNearBottom = this.isUserNearBottom();
   }
 
-  addTempUserMessage(text) {
-    this.messages.push({
-      text,
-      sender: 'Human',
-      reply: true,
-      date: new Date()
-    });
-  }
+    // TRANSITION
 
-  addTempBotMessage(text) {
-    this.messages.push({
-      text,
-      sender: 'Bot',
-      date: new Date(),
-      richCard: false
-    });
-  }
-  ensureNotNull(variable) {
-    while (variable == null) {
-      setTimeout(function () {}, 500);
+    flowDone: boolean = false;
+
+    animateTransition() {
+      this.flowDone = true;
     }
 
-    return variable
-  }
+    playAudio() {
+      let audio = new Audio();
+      audio.src = "/assets/sound.mp3";
+      audio.load();
+      audio.play();
+    }
 
-  // TRANSITION
+    nextFlow() {
+      this.flowDone = false;
+      this.messages = []
+      this.onboardingService.onboardingStep += 1;
 
-  flowDone: boolean = false;
+      if (this.onboardingService.onboardingStep == 1) {
+        this.messages = this.onboardingService.addTempBotMessage(this.messages, "My name is Matilda, and contact information plez")
 
-  animateTransition() {
-    this.flowDone = true;
-  }
 
-  playAudio() {
-    let audio = new Audio();
-    audio.src = "/assets/sound.mp3";
-    audio.load();
-    audio.play();
-  }
+      } else if (this.onboardingService.onboardingStep == 2) {
+        this.messages = this.onboardingService.addTempBotMessage(this.messages, "My name is Matilda, and education blabla plez")
 
-  nextFlow() {
-    this.flowDone = false;
-    this.messages = []
-    this.onboarding.onboardingStep += 1;
-  }
+
+      } else if (this.onboardingService.onboardingStep == 3) {
+        this.messages = this.onboardingService.addTempBotMessage(this.messages, "My name is Matilda, and interests plez ")
+
+      } else if (this.onboardingService.onboardingStep == 4) {
+        this.messages = this.onboardingService.addTempBotMessage(this.messages, "My name is Matilda, and notification preferences plez. ")
+
+
+      } else if (this.onboardingService.onboardingStep == 5) {
+        this.messages = this.onboardingService.addTempBotMessage(this.messages, "ur done m8 John fish checkmate")
+
+
+      }
+    }
+
+
 
 
   // Get event from ChatFormComponent
@@ -124,7 +122,7 @@ export class OnboardingChatComponent implements AfterViewInit {
     this.uid = JSON.parse(localStorage.getItem('user')).uid;
 
     const text = event.message;
-    this.addTempUserMessage(text);
+    this.messages = this.onboardingService.addTempUserMessage(this.messages, text);
 
     // Make the request
     return this.http.post < any > (
@@ -139,8 +137,26 @@ export class OnboardingChatComponent implements AfterViewInit {
         }
       )
       .subscribe(res => {
-        this.addTempBotMessage(res.fulfillmentText);
-        this.loading = false;
+        console.log(res)
+        this.messages = this.onboardingService.addTempBotMessage(this.messages, res.fulfillmentText);
+        if (this.onboardingService.checkOnboardingStep(res)) {
+          this.animateTransition();
+          this.playAudio();
+          this.loading = false
+
+        } else {
+          this.loading = false;
+
+        }
       });
   }
+
+
+
+
+
+
+
+
+
 }
