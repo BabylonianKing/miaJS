@@ -2,13 +2,13 @@
   <h2>Create Account</h2>
   <div>Start looking for your dream job today - stress free!</div>
   <div class="form">
-        <form class="inputs" #loginForm="ngForm" (ngSubmit)="signUp()">
+        <form class="inputs" #loginForm="ngForm" (ngSubmit)="user.SignUp()">
           <div class="split-row">
-            <input type="text" [(ngModel)]="firstName" name="firstName" placeholder="First Name">
-            <input type="text" [(ngModel)]="lastName" name="lastName" placeholder="Last Name">
+            <input type="text" maxlength="32" [(ngModel)]="user.createFirstName" name="firstName" placeholder="First Name">
+            <input type="text" maxlength="32" [(ngModel)]="user.createLastName" name="lastName" placeholder="Last Name">
           </div>
-          <input type="email" [(ngModel)]="email" name="email" placeholder="Email Address">
-          <input type="password" [(ngModel)]="password" name="password" placeholder="Create password">
+          <input type="email" [(ngModel)]="user.createEmail" name="email" placeholder="Email Address">
+          <input type="password" [(ngModel)]="user.createPassword" name="password" placeholder="Create password">
           <button type="submit">Create Account</button>
         </form>
         <div class="divider">
@@ -18,7 +18,7 @@
           <div class="divider-line"></div>
         </div>
 
-        <button class="third-party" (click)="UserService.googleSignin()">
+        <button class="third-party" (click)="user.googleSignin()">
           <div class="row">
             <img src="/assets/google.svg">
             <div class="text">Sign up with Google</div>

@@ -16,19 +16,19 @@ export class SignupComponent implements OnInit {
   errorMessage: string;
 
   constructor(
-    public UserService: UserService,
+    public user: UserService,
   ) { }
 
   ngOnInit(): void {}
 
-  signUp() {
-    this.UserService.SignUp(this.email, this.password).then(error => {
-      console.log(error);
-      // this.errorMessage = error;    
-    });
+  // signUp() {
+  //   this.UserService.SignUp(this.email, this.password).then(error => {
+  //     console.log(error);
+  //     // this.errorMessage = error;    
+  //   });
     
-    this.email = ''; 
-    this.password = '';
-  }
+  //   this.email = ''; 
+  //   this.password = '';
+  // }
 
 }

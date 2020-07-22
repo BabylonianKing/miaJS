@@ -1,11 +1,13 @@
-export interface User {
+export interface userFire {
     uid: string;
+    firstName?: string,
+    lastName?: string,
     displayName?: string;
-    status?: string;
-    language?: string;
     email: string;
+    gender?: string;
     phoneNumber: string;
     photoURL?: string;
     location?: string;
     emailVerified?: boolean;
+    googleAuth?: boolean;
 }

@@ -58,7 +58,7 @@
       </div>
       <div class="info-right">
         <div class="field">
-          <p [hidden]="profileService.editingPhone"> {{ formatNumber(phone) }}</p>
+          <p [hidden]="profileService.editingPhone"> {{ formatNumber(user.phoneNumber) }}</p>
 
 
           <form #newPhone="ngForm" (submit)="profileService.editPhone(newPhone.value)">

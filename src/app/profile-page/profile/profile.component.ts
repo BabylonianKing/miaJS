@@ -25,11 +25,6 @@ import { NONE_TYPE } from '@angular/compiler';
   })
   export class ProfileComponent implements OnInit {
 
-    @Input() status: string;
-    @Input() phone: string;
-    @Input() location: string;
-    @Input() language: string;
-
     valueHidden: boolean = false;
     inputHidden: boolean = true;
     coverDownloadURL: string;
@@ -48,8 +43,6 @@ import { NONE_TYPE } from '@angular/compiler';
       public afStorage: AngularFireStorage) {}
 
     ngOnInit(): void {
-
-      this.CrudService.pathRefresh();
 
       this.userId = JSON.parse(localStorage.getItem('user')).uid;
       

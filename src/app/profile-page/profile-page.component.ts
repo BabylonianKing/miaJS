@@ -10,7 +10,7 @@ import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 })
 export class ProfilePageComponent implements OnInit {
 
-  userInfos: Array<any>;
+  userInfos: any;
 
   constructor(
     public crudService: CrudService,

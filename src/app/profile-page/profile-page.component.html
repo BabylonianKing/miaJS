@@ -1,13 +1,6 @@
 <div class="root">
   <toolbar [ngClass]="{'hidden': menu.hideSideNav }"></toolbar>
-  <profile *ngFor="let info of userInfos"
-  type="text"
-  [status]="info.status"
-  [location]="info.location"
-  [phone]="info.phone"
-  [language]="info.language">
-</profile>
-
+  <profile *ngFor="let info of userInfos"></profile>
   <div class="shadow" [ngClass]="{ opened: menu.showBugPopup || menu.showSuggestionPopup }" (click)="menu.showBugPopup = false; menu.showSuggestionPopup = false">
     <div class="bug-report" [ngClass]="{ opened: menu.showBugPopup }">
       <div class="form">
