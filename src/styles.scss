@@ -46,6 +46,24 @@ button, img, input {
     outline: none;
 }
 
+.default-button-small {
+    border-radius: 10px;
+    color: #FFF;
+    border: none;
+    padding: 10px 15px;
+    transform: scale(1);
+    background-color: $red-light;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        box-shadow: 0 0 20px rgba($color: #000000, $alpha: 0.1);
+        transform: scale(1.02);
+        background-color: $blue-light;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+    }
+}
+
 .default-button {
     position: relative;
     float: right;
@@ -72,5 +90,31 @@ button, img, input {
             transition: all 0.2s ease-in-out;
             cursor: pointer;
         }
+    }
+}
+
+.default-link {
+    color: $red-light;
+
+    &:hover {
+        cursor: pointer;
+        color: $blue-light;
+    }
+}
+
+.icon {
+    height: 16px;
+    width: 16px;
+    border-radius: 5px;
+    padding: 5px;
+
+    &:hover {
+        background-color: #D3D1D1;
+        cursor: pointer;
+    }
+    
+    img {
+        max-height: 100%;
+        max-width: 100%;
     }
 }

@@ -3,7 +3,14 @@
         <input class="search-bar" type="text" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" placeholder="Search by name..." (keyup)="searchByOrg()">
     </div>
     <div class="bookmarks">
-      <p *ngIf="(cards.length == 0)">No bookmarks, ask Matilda to find jobs!</p>
+      <div class="empty" *ngIf="(cards.length == 0)">
+          <img src="/assets/15.png">
+          <h3>
+              There is nothing here...
+              <br>
+              <a class="default-link" href="/chat">Start chatting</a> with Matilda to find jobs to bookmark!
+          </h3>
+      </div>
         <bookmark-card *ngFor="let item of filteredCards || cards"
         type="text"
         [title]="(item.title != undefined) ? item.title.stringValue : null"

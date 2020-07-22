@@ -7,6 +7,7 @@ export class MenuToggleService {
 
   hideSideNav: boolean = false;
   hideConvoInfos: boolean = false;
+  showBookmarksActions: boolean=false;
 
   // BUG & SUGGESTION FORM POPUP
   showBugPopup: boolean = false;
@@ -20,6 +21,9 @@ export class MenuToggleService {
 
   toggleConvoInfos() {
     this.hideConvoInfos = !this.hideConvoInfos;
-    console.log("Hello")
+  }
+
+  toggleBookmarksActions() {
+    this.showBookmarksActions = !this.showBookmarksActions;
   }
 }

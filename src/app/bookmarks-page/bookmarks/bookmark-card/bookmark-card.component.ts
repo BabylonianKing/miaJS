@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CrudService } from 'src/shared/services/crud.service';
+import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 
 @Component({
   selector: 'bookmark-card',
@@ -22,7 +23,9 @@ export class BookmarkCardComponent implements OnInit {
   @Input() requirements: string;
   @Input() url: string;
 
-  constructor(public crudService: CrudService,
+  constructor(
+    public crudService: CrudService,
+    public sideNavService: MenuToggleService
 
     ) { }
 
