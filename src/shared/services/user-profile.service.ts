@@ -7,13 +7,20 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 
 export class UserProfileService {
-  
+
   constructor(
     public afAuth: UserService,
     public db: AngularFirestore
   ) { }
 
-  // EDIT USER 
+
+
+
+
+
+
+
+  // EDIT USER
   updateUser(uid, data){
     return this.db.collection('users').doc(uid).update(data);
   }
@@ -41,7 +48,7 @@ export class UserProfileService {
 
   editPhone(phone) {
     const uid = this.afAuth.userData.uid;
-    this.updateUser(uid, phone)
+    this.updateUser(uid, {phoneNumber: phone.phone})
     .then(() => this.editingPhone = false)
   }
 
@@ -54,6 +61,6 @@ export class UserProfileService {
     .then(() => this.editingPassword = false)
   }
 
-  
+
 
 }

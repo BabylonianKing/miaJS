@@ -1,10 +1,9 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { userFire } from 'src/shared/models/user.model';
 
-import { firestore, auth, User } from 'firebase/app';
+import { auth, User } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -38,13 +37,13 @@ export class UserService {
         window.alert(error.message);
       })
   }
-  
-  // Sign up with email/password
-  SignUp() {
-    return this.afAuth.createUserWithEmailAndPassword(this.createEmail, this.createPassword)
+
+  // Sign up with email/password and User first name and last name
+  SignUp(email, password, firstName, lastName) {
+    return this.afAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         this.SendVerificationEmail();
-        this.SetUserData(result.user);
+        this.SetUserData(result.user, firstName, lastName);
       }).catch((error) => {
         window.alert(error.message);
       })
@@ -57,18 +56,17 @@ export class UserService {
     this.router.navigate(['/chat']);
   }
 
-  createFirstName: string;
-  createLastName: string;
+
   createEmail: string;
   createPassword: string;
 
-  private SetUserData(user) {
+  private SetUserData(user, firstName=null, lastName=null) {
 
     const data = {
       uid: user.uid,
-      firstName: this.createFirstName || "Fuck",
-      lastName: this.createLastName || "You",
-      displayName: this.createFirstName + ' ' + this.createLastName || "Hello",
+      firstName: firstName,
+      lastName: lastName,
+      displayName: firstName ? (firstName + ' ' + lastName): user.displayName,
       email: user.email,
       photoURL: user.photoURL,
       emailVerified: user.emailVerified
@@ -95,7 +93,7 @@ export class UserService {
     })
   }
 
-  // Sign out 
+  // Sign out
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
@@ -103,4 +101,3 @@ export class UserService {
     })
   }
 }
-

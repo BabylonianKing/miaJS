@@ -1,4 +1,4 @@
-<div class="root" *ngIf="afAuth.userData as user">
+<div class="root" *ngIf="afAuth.userData">
   <div class="header">
     <div class="banner" style="background-image: url({{coverDownloadURL}});">
 
@@ -18,7 +18,7 @@
       </div>
       <div class="profile-header-infos">
         <div class="super-infos">
-          <h2 [hidden]="profileService.editingName">{{(CrudService.displayName) ? CrudService.displayName: 'New User' }}</h2>
+          <h2 [hidden]="profileService.editingName">{{(user.displayName != null) ? user.displayName: 'New User' }}</h2>
 
           <form #newName="ngForm" (submit)="profileService.editName(newName.value)">
             <input [hidden]="!profileService.editingName" placeholder="New name" type="text" name="displayName" autocomplete="off" ngModel>
@@ -71,48 +71,7 @@
         <a (click)="profileService.editingPhone = !profileService.editingPhone" [hidden]="!profileService.editingPhone">Save</a>
       </div>
     </div>
-    <!-- <div class="info">
-      <div class="info-left">
-        <h2>Subscription Type</h2>
-      </div>
-      <div class="info-right subscription-type">
-        <div class="field">
-          <p>Basic User</p>
-        </div>
-        <a>Upgrade</a>
-      </div>
-    </div> -->
-    <!-- <div class="info">
-      <div class="info-left">
-        <h2>Time Zone</h2>
-      </div>
-      <div class="info-right">
-        <div class="field">
-          <p>EST</p>
-        </div>
-        <a>Edit</a>
-      </div>
-    </div> -->
-    <!-- <div class="info">
-      <div class="info-left">
-        <h2>Language</h2>
-      </div>
-      <div class="info-right">
-        <div class="field">
-          <p [hidden]="valueHidden"> {{ language }}</p>
 
-
-          <form #newLanguage="ngForm" (ngSubmit)="UpdateUser(newLanguage.value)">
-            <input [hidden]="inputHidden" placeholder="New language" type="text" name="language" id="new_language"
-              autocomplete="off" ngModel>
-          </form>
-
-
-        </div>
-        <a (click)="EditInput()" [hidden]="valueHidden">Edit</a>
-        <a (click)="ConfirmInput()" [hidden]="inputHidden">Save</a>
-      </div>
-    </div> -->
     <div class="info">
       <div class="info-left">
         <h2>Password</h2>

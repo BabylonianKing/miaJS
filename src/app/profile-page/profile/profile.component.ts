@@ -17,6 +17,7 @@
 import { AngularFireStorage } from '@angular/fire/storage';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { NONE_TYPE } from '@angular/compiler';
+import { AngularFirestore } from '@angular/fire/firestore';
 
   @Component({
     selector: 'profile',
@@ -31,21 +32,30 @@ import { NONE_TYPE } from '@angular/compiler';
     profileDownloadURL: string;
     uploadProgress;
     showResumeUploaded = false;
+    user = this.afAuth.userData;
     userId: string = JSON.parse(localStorage.getItem('user')).uid;
     resumeEvent;
+    userRefData;
 
     constructor(
-      public CrudService: CrudService,
+      public crudService: CrudService,
       public profileService: UserProfileService,
       public afAuth: UserService,
       public ngZone: NgZone,
       public router: Router,
-      public afStorage: AngularFireStorage) {}
+      public afStorage: AngularFireStorage,
+      public db: AngularFirestore) {}
 
     ngOnInit(): void {
 
       this.userId = JSON.parse(localStorage.getItem('user')).uid;
-      
+
+      this.userRefData = this.db.doc(`users/${this.userId}`).valueChanges()
+
+      this.userRefData.subscribe(data => {
+        this.user = data
+      });
+
 
       this.afStorage.ref(`/coverImages/${this.userId}`).getDownloadURL().toPromise().then(data => this.coverDownloadURL = data)
 
@@ -54,54 +64,37 @@ import { NONE_TYPE } from '@angular/compiler';
         if (!this.profileDownloadURL) {
           this.profileDownloadURL = this.afAuth.userData.photoURL
         }
-      
+
       })
 
       this.afStorage.ref(`/resume/${this.userId}`).getDownloadURL().toPromise().then(data => {
-        console.log(data)
         if (data) {
           this.showResumeUploaded = true
-          console.log("Resume is in the database")
-        } else {
-          console.log("No resume in database")
         }
-      
+
       })
-      //I did not change photoURL in the database
-
 
 
     }
-
-    UpdateUser(value) {
-      console.log(value);
-      const u = this.afAuth.userData;
-      const uid = u.uid;
-      // this.CrudService.updateUser(uid, value)
-      // return this.afAuth.afAuth.currentUser
-      // .then((u) => u.updateEmail(value))
-      // .then(res => { this.router.navigate(['/profile']); })
-    }
-
 
 
     uploadBanner(event) {
       let userId = JSON.parse(localStorage.getItem('user')).uid;
       this.afStorage.upload(`/coverImages/${userId}`, event.target.files[0]);
-  
+
       let ref = this.afStorage.ref(userId);
       // the put method creates an AngularFireUploadTask
       // and kicks off the upload
       ref.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
     }
 
-    
+
 
     uploadResume(event) {
       let userId = JSON.parse(localStorage.getItem('user')).uid;
 
       this.afStorage.upload(`/resume/${userId}`, event.target.files[0]);
-  
+
       let reference = this.afStorage.ref(userId);
       // the put method creates an AngularFireUploadTask
       // and kicks off the upload
@@ -112,7 +105,7 @@ import { NONE_TYPE } from '@angular/compiler';
 
       let userId = JSON.parse(localStorage.getItem('user')).uid;
       this.afStorage.upload(`/profileImages/${userId}`, event.target.files[0]);
-  
+
       let ref = this.afStorage.ref(userId);
       // the put method creates an AngularFireUploadTask
       // and kicks off the upload
