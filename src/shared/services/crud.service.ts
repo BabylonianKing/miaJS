@@ -77,7 +77,7 @@ export class CrudService {
 
   getUserInfos() {
     this.uid = JSON.parse(localStorage.getItem('user')).uid;
-    return this.db.collection('user-infos', ref => ref.where("uid", '==', this.uid)).valueChanges();
+    return this.db.collection('users', ref => ref.where("uid", '==', this.uid)).valueChanges();
   }
 
   getUser(){
