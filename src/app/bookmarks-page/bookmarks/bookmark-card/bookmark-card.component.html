@@ -3,6 +3,7 @@
         <div class="header-left">
             <img src="{{ logo || 'https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164c953e8a56201c055c_icons8-target-50.png' }}">
             <div class="job-infos">
+              <button (click)="removeBookmark(jobId)">Remove bookmark</button>
                 <h3>{{ title }}</h3>
                 <h5>{{ company }} - {{ location }}</h5>
             </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from 'src/shared/services/user.service';
 import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -16,7 +16,9 @@ export class ToolbarComponent implements OnInit {
     public db: AngularFirestore,
     public menu: MenuToggleService) { }
 
-    bookmarksCount;
+    bookmarksCount: number;
+    oldBookmarksCount: number;
+    @Input() unseenBookmarksCount: number;
     userId;
 
   ngOnInit(): void {
@@ -29,6 +31,14 @@ export class ToolbarComponent implements OnInit {
     this.bookmarksCount = data.length
 
   })
+
+
+  let secondQuery = this.db.collection("user-infos").doc(this.userId).valueChanges().subscribe(result => {
+    console.log(result)
+  })
+
+
+
   }
 
   signOut() {

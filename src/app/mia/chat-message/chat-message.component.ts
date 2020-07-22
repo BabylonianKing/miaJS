@@ -22,7 +22,7 @@ export class ChatMessageComponent implements OnInit {
 @Input() richCard: boolean;
 // @Input() jobTitle: string;
 // @Input() jobSubtitle: boolean;
-@Input() cards: string;
+@Input() cards: any;
 
 
 @Output() descriptionEmitter = new EventEmitter<string>();
@@ -35,14 +35,19 @@ userId = JSON.parse(localStorage.getItem('user')).uid;
     ) { }
 
   ngOnInit(): void {
+    try {
+      this.cards.forEach(card => {
+      card.heartFilled = false
+    });}
+    catch {}
+
   }
 
-  heartFilled: boolean = false;
 
 
   // TODO: Fix this
   bookmarkJob(card) {
-    this.heartFilled = true;
+    card.heartFilled = true;
     let data = {
       description: card.description,
       url: card.url,
@@ -54,12 +59,14 @@ userId = JSON.parse(localStorage.getItem('user')).uid;
       baseSalary: card.baseSalary,
       //hourly, weekly, monthly, annually
       salaryType: card.salaryType,
+      score: card.score,
+      jobId: card.jobId
 
 
     }
 
-    let ref = this.db.collection("bookmarks").doc(this.userId).collection("bookmarks")
-    ref.add(data);
+    let ref = this.db.collection("bookmarks").doc(this.userId).collection("bookmarks").doc(card.jobId.stringValue)
+    ref.set(data);
   }
 
 

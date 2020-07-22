@@ -13,6 +13,7 @@ export class BookmarksPageComponent implements OnInit {
     public menu: MenuToggleService) { }
 
   ngOnInit(): void {
+
   }
 
 }

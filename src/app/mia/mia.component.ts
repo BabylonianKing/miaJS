@@ -33,10 +33,17 @@ export class MiaComponent implements AfterViewInit {
     this.scrollContainer = this.scrollFrame.nativeElement;
     this.itemElements.changes.subscribe(_ => this.onItemElementsChanged());
 
-
+  this.crudService.messageInit().get().toPromise().then(snapshot => {
+      if (snapshot.empty) {
+        this.addBotMessage({fulfillmentText: "My name is Matilda, and I’m here to help you find work opportunities that match you best! Just say \"Let's find a job\" to get started."});
+        return
+      }
+    })
     this.crudService.messageInit().valueChanges().subscribe(data => {
       this.messages = data
+
     })
+
   }
 
   // AUTOSCROLL
@@ -93,9 +100,10 @@ export class MiaComponent implements AfterViewInit {
       this.addBotMessage(res);
       this.loading = false;
     });
+  }
 
-
-
+  newJobSearch() {
+    this.crudService.newJobSearch()
   }
 
 

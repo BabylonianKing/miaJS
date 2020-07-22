@@ -27,7 +27,6 @@ export class BookmarksComponent implements OnInit {
   //Search functionality in the bookmark page
   searchByOrg() {
     const value = this.searchValue.toLowerCase();
-    console.log(value);
     this.filteredCards = this.cards.filter(job => {
       return (
         job.title.toLowerCase().includes(value) ||

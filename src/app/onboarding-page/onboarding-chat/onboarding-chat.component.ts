@@ -137,7 +137,6 @@ export class OnboardingChatComponent implements AfterViewInit {
         }
       )
       .subscribe(res => {
-        console.log(res)
         this.messages = this.onboardingService.addTempBotMessage(this.messages, res.fulfillmentText);
         if (this.onboardingService.checkOnboardingStep(res)) {
           this.animateTransition();

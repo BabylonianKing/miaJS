@@ -228,7 +228,9 @@ export class CrudService {
       richResponse.forEach((value, index, array) => {
         let card = richResponse[index].structValue.fields;
         //Firestore does not support array of objects for subcollections
-        let cardObject = {title: card.title,
+        let cardObject = {
+          title: card.title,
+          location: (card.location != undefined) ? card.location:null,
           company: (card.company != undefined) ? card.company:null,
           logo: (card.logo != undefined) ? card.logo:null,
           employmentType: (card.employmentType != undefined) ? card.employmentType:null,
@@ -237,6 +239,9 @@ export class CrudService {
           salaryType: (card.salaryType != undefined) ? card.salaryType:null,
           url: (card.url != undefined) ? card.url:null,
           description: (card.description != undefined) ? card.description:null,
+          score: (card.score != undefined) ? card.score:null,
+          jobId: card.jobId
+
         };
         arrayOfCards.push(cardObject)
 
@@ -250,13 +255,13 @@ export class CrudService {
     cards: arrayOfCards
 }
 
-let ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
-ref.set(data);
-
+  let ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
+  ref.set(data);
   }
-
   return richCard
   }
+
+
   // TODO: Fix learn more to be a dynamic loading animation
   addLearnMoreMessage(text) {
     let data;
@@ -292,17 +297,25 @@ ref.set(data);
         }
       )
   }
+  //There might be a more cost effective way of doing this
+  newJobSearch() {
+    this.uid = JSON.parse(localStorage.getItem('user')).uid;
+    this.db.collection("conversations").doc(this.uid).collection("Matilda").get().toPromise().then(snapshot => {
+      snapshot.forEach(doc => {
+        this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(doc.id).delete()
+      })
 
+    })
 
+  }
 
 
   // BOOKMARKS
 
-  //Deprecated, bookmarkListerner does the job of bookmarkInit()
-  bookmarkInit() {
+  removeBookmark(jobId) {
     this.uid = JSON.parse(localStorage.getItem('user')).uid;
         //Load bookmarks on init
-        return this.db.collection("bookmarks").doc(this.uid).collection("bookmarks").get().toPromise()
+    this.db.collection("bookmarks").doc(this.uid).collection("bookmarks").doc(jobId).delete()
 
   }
 

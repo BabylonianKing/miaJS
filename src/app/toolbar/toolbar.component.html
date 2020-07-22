@@ -10,7 +10,10 @@
       </div>
       <!-- <a routerLink="/chat" routerLinkActive="active">Conversations</a> -->
       <div class="link-row">
-        <a routerLink="/bookmarks" routerLinkActive="active">Bookmarks</a><div class="notif" *ngIf="bookmarksCount > 0">{{bookmarksCount}}</div>
+        <a routerLink="/bookmarks" routerLinkActive="active">Bookmarks</a>
+        <div class="notif" *ngIf="bookmarksCount > 0">{{ bookmarksCount }}</div>
+        <div class="notif" *ngIf="bookmarksCount > 0">{{ unseenBookmarksCount }}</div>
+
       </div>
       <!-- <a routerLink="/signup" routerLinkActive="active">Interviews</a> -->
     </div>
@@ -30,5 +33,3 @@
     <button (click)="menu.showBugPopup = !menu.showBugPopup">Report a Bug</button>
     <button (click)="menu.showSuggestionPopup = !menu.showSuggestionPopup">Make a Suggestion</button>
   </div>
-  
-  

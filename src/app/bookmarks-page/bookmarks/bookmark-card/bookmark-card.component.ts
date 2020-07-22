@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CrudService } from 'src/shared/services/crud.service';
 
 @Component({
   selector: 'bookmark-card',
@@ -21,7 +22,9 @@ export class BookmarkCardComponent implements OnInit {
   @Input() requirements: string;
   @Input() url: string;
 
-  constructor() { }
+  constructor(public crudService: CrudService,
+
+    ) { }
 
   ngOnInit(): void {
     this.baseSalary = this.formatBaseSalary(this.baseSalary, this.salaryType)
@@ -30,13 +33,17 @@ export class BookmarkCardComponent implements OnInit {
   }
 
   formatBaseSalary(baseSalary, salaryType) {
-    console.log(baseSalary)
 
     try {
       return baseSalary.numberValue.toFixed(2).toString() + "$ " + salaryType
     } catch {
       return baseSalary.stringValue
     }
+
+  }
+
+  removeBookmark(jobId) {
+    this.crudService.removeBookmark(jobId)
 
   }
 

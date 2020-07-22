@@ -1,5 +1,5 @@
 <div class="root">
-    <toolbar [ngClass]="{'hidden': sideNavService.hideSideNav }"></toolbar>
+    <toolbar [ngClass]="{'hidden': sideNavService.hideSideNav }" [unseenBookmarksCount]=ngOnInit()></toolbar>
     <bookmarks></bookmarks>
 
     <div class="shadow" [ngClass]="{ opened: menu.showBugPopup || menu.showSuggestionPopup }" (click)="menu.showBugPopup = false; menu.showSuggestionPopup = false">
