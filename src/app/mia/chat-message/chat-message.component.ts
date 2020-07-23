@@ -44,10 +44,10 @@ userId = JSON.parse(localStorage.getItem('user')).uid;
   }
 
 
-
   // TODO: Fix this
   bookmarkJob(card) {
     card.heartFilled = true;
+    
     let data = {
       description: card.description,
       url: card.url,
@@ -61,8 +61,6 @@ userId = JSON.parse(localStorage.getItem('user')).uid;
       salaryType: card.salaryType,
       score: card.score,
       jobId: card.jobId
-
-
     }
 
     let ref = this.db.collection("bookmarks").doc(this.userId).collection("bookmarks").doc(card.jobId.stringValue)

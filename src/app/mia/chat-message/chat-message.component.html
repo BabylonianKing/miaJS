@@ -18,6 +18,10 @@
           </div>
         </div>
       </div>
+      <div class="percentage-match">
+        <h6>Compatibility</h6>
+        <h2 [ngClass]="{ 'green': card.score.numberValue >= 80, 'yellow': card.score.numberValue < 80 && card.score.numberValue >= 60 }">{{ card.score.numberValue }}%</h2>
+      </div>
       <div class="job-description">
         <h6>Job Description</h6>
         <p>{{ (card.description.structValue != undefined) ? formatDescription(card.description.structValue.fields) : 'Click "Learn more" to see the description. ' }}</p>
@@ -28,9 +32,9 @@
           <p>{{ (card.baseSalary.nullValue == undefined) ? formatBaseSalary(card.baseSalary, card.salaryType.stringValue) : "Unavailable" }}</p>
         </div>
         <div class="job-type">
-          <h6>Employment</h6>
+          <h6>Job Type</h6>
           <p>{{ (card.employmentType != undefined) ? card.employmentType.stringValue : "Unavailable" }}</p>
-          <p>Percentage Match: {{ card.score.numberValue }}%</p>
+
 
         </div>
       </div>

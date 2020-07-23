@@ -52,7 +52,7 @@
 
 .cards-carousel {
     display: grid;
-    grid-template-columns: repeat(4, 300px);
+    grid-template-columns: repeat(4, 325px);
     column-gap: 20px;
     max-width: 60%;
     overflow: auto;
@@ -63,9 +63,10 @@
     }
 
 .rich-card {
+    color: $heading-gray;
     position: relative;
     font-family: $rubik;
-    width: 300px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -137,6 +138,14 @@
             }
 
             .job-infos {
+
+                h3 {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1; /* number of lines to show */
+                    -webkit-box-orient: vertical;
+                }
                 
                 h5 {
                     font-weight: 400;
@@ -147,11 +156,44 @@
         
     }
 
+    .percentage-match {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: start;
+        padding: 10px 20px;
+
+        h6 {
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: $red-dark;
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            color: #F44B4A;
+            border-radius: 10px;
+            padding: 5px;
+            background-color: rgba(#F44B4A, 0.2);
+            font-weight: 400;
+
+            &.green {
+                color: #009F93;
+                background-color: rgba(#009F93, 0.2);
+            }
+
+            &.yellow {
+                color: #E3C020;
+                background-color: rgba(#E3C020, 0.2);
+            }
+        }
+    }
+
     .job-description {
         display: flex;
         flex-direction: column;
         justify-content: start;
-        padding: 20px;
+        padding: 10px 20px;
         color: $paragraph-gray;
 
         h6 {
@@ -161,10 +203,11 @@
             margin-bottom: 5px;
         }
         p {
-            max-height: 200px;
             overflow: hidden;
-            white-space: nowrap;
             text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* number of lines to show */
+            -webkit-box-orient: vertical;
         }
     }
 
