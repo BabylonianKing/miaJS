@@ -247,19 +247,56 @@ export class CrudService {
 
   })
 
+    data = {
+      sender: 'Bot',
+      date: new Date(),
+      richCard: false,
+      text: "Here are the jobs I found for you."
+  }
 
-  data = {
-    sender: 'Bot',
-    date: new Date(),
-    richCard: true,
-    cards: arrayOfCards
-}
 
-  let ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
-  ref.set(data);
+    let ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
+    ref.set(data);
+
+    this.delay(2000).then(content => {
+      data = {
+        sender: 'Bot',
+        date: new Date(),
+        richCard: true,
+        cards: arrayOfCards
+    }
+
+      ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
+      ref.set(data);
+
+      this.delay(2000).then(content => {
+        data = {
+          sender: 'Bot',
+          date: new Date(),
+          richCard: false,
+          text: "If you are satisfied with the jobs, please leave us a feedback here."
+      }
+
+        ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
+        ref.set(data);
+
+      })
+
+    })
+
+
+
+
+
+
+
   }
   return richCard
   }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
 
 
   // TODO: Fix learn more to be a dynamic loading animation

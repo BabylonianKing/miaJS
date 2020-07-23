@@ -19,7 +19,7 @@
                   [reply]="msg.reply"
                   [cards]= "msg.cards"
                   [richCard] = "msg.richCard"
-                  (descriptionEmitter)="addLearnMoreMessage($event)"
+                  (descriptionEmitter)="crudService.addLearnMoreMessage($event)"
                   >
 
     </chat-message>
@@ -35,5 +35,5 @@
     <chat-form (send)="handleUserMessage($event)">
 
     </chat-form>
-    <button (click)="newJobSearch()">Start a new job search</button>
+    <button (click)="crudService.newJobSearch()">Start a new job search</button>
 </div>

@@ -35,7 +35,8 @@ export class MiaComponent implements AfterViewInit {
 
   this.crudService.messageInit().get().toPromise().then(snapshot => {
       if (snapshot.empty) {
-        this.addBotMessage({fulfillmentText: "My name is Matilda, and I’m here to help you find work opportunities that match you best! Just say \"Let's find a job\" to get started."});
+        //TODO: Fix Bug where this initial message doesn't show up
+        this.crudService.addBotMessage({fulfillmentText: "My name is Matilda, and I’m here to help you find work opportunities that match you best! Just say \"Let's find a job\" to get started."});
         return
       }
     })
@@ -72,18 +73,6 @@ export class MiaComponent implements AfterViewInit {
     this.isNearBottom = this.isUserNearBottom();
   }
 
-
-  addLearnMoreMessage(text) {
-    this.crudService.addLearnMoreMessage(text);
-  }
-
-  addUserMessage(text) {
-    this.crudService.addUserMessage(text)
-  }
-
-  addBotMessage(response) {
-    this.crudService.addBotMessage(response)
-  }
   ensureNotNull(variable) {
     while (variable == null) {
       setTimeout(function () {}, 500);
@@ -97,14 +86,12 @@ export class MiaComponent implements AfterViewInit {
   handleUserMessage(event) {
     this.loading = true
     this.crudService.handleUserMessage(event).subscribe(res => {
-      this.addBotMessage(res);
+      //Uploads bot message to Firestore database
+      this.crudService.addBotMessage(res);
       this.loading = false;
     });
   }
 
-  newJobSearch() {
-    this.crudService.newJobSearch()
-  }
 
 
 }
