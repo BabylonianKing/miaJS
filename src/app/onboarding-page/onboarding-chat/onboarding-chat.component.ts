@@ -86,6 +86,7 @@ export class OnboardingChatComponent implements AfterViewInit {
       audio.play();
     }
 
+    // Toggled with the click of a button
     nextFlow() {
       this.flowDone = false;
       this.messages = []
@@ -137,11 +138,13 @@ export class OnboardingChatComponent implements AfterViewInit {
         }
       )
       .subscribe(res => {
+        console.log(res)
         this.messages = this.onboardingService.addTempBotMessage(this.messages, res.fulfillmentText);
         if (this.onboardingService.checkOnboardingStep(res)) {
+          this.onboardingService.uploadData(res)
           this.animateTransition();
           this.playAudio();
-          this.loading = false
+          this.loading = false;
 
         } else {
           this.loading = false;

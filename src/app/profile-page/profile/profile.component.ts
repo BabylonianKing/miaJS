@@ -32,7 +32,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
     profileDownloadURL: string;
     uploadProgress;
     showResumeUploaded = false;
-    user = this.afAuth.userData;
+    user;
     userId: string = JSON.parse(localStorage.getItem('user')).uid;
     resumeEvent;
     userRefData;
@@ -155,5 +155,35 @@ import { AngularFirestore } from '@angular/fire/firestore';
       number = number.slice(0, 3) + '-' + number.slice(3);
 
       return (country + " (" + city + ") " + number).trim();
+    }
+
+
+
+    formatDate(unixDate) {
+      let date = unixDate.toDate()
+      let day = ("0" + date.getDate().toString()).slice(-2);
+      // Minutes part from the timestamp
+      let month = (date.getMonth() + 1);
+      month = ("0" + month.toString()).slice(-2)
+      // Seconds part from the timestamp
+      let  year = date.getFullYear();
+
+      // Will display time in 10:30:23 format
+      let formattedTime = day + '-' + month + '-' + year;
+
+      return formattedTime
+    }
+
+    formatSpokenLanguages(languages) {
+      let final = ""
+      languages.values.forEach(element => {
+        final += element.stringValue
+        final += ", "
+
+      })
+
+      final = final.slice(0, -2)
+
+      return final
     }
   }

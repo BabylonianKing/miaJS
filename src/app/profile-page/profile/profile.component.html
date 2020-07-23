@@ -103,5 +103,73 @@
         <label for="resume">Upload</label>
       </div>
     </div>
+    <div class="info">
+      <div class="info-left">
+        <h2>Gender</h2>
+      </div>
+      <div class="info-right">
+        <div class="field">
+          <p [hidden]="profileService.editingPassword">{{ user.gender }}</p>
+
+          <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
+            <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
+          </form>
+
+        </div>
+        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
+        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
+      </div>
+    </div>
+    <div class="info">
+      <div class="info-left">
+        <h2>Date of Birth</h2>
+      </div>
+      <div class="info-right">
+        <div class="field">
+          <p [hidden]="profileService.editingPassword">{{ formatDate(user.dateOfBirth) || null}}</p>
+
+          <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
+            <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
+          </form>
+
+        </div>
+        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
+        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
+      </div>
+    </div>
+    <div class="info">
+      <div class="info-left">
+        <h2>Default Language</h2>
+      </div>
+      <div class="info-right">
+        <div class="field">
+          <p [hidden]="profileService.editingPassword">{{ user.defaultLanguage || null}}</p>
+
+          <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
+            <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
+          </form>
+
+        </div>
+        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
+        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
+      </div>
+    </div>
+    <div class="info">
+      <div class="info-left">
+        <h2>Spoken Languages</h2>
+      </div>
+      <div class="info-right">
+        <div class="field">
+          <p [hidden]="profileService.editingPassword">{{ formatSpokenLanguages(user.spokenLanguages) || null}}</p>
+
+          <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
+            <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
+          </form>
+
+        </div>
+        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
+        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
+      </div>
+    </div>
   </div>
 </div>

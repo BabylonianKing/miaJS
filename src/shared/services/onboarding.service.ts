@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OnboardingService {
 
-  constructor() { }
+  constructor(private afs: AngularFirestore,
+    ) { }
+
+  uid = JSON.parse(localStorage.getItem('user')).uid;
 
   onboardingStep: number = 0;
 
@@ -48,8 +52,25 @@ export class OnboardingService {
     } else {
       return false
     }
+  }
+
+  uploadData(res) {
+    let params = res.outputContexts[0].parameters.fields
+
+    if (this.onboardingStep == 0) {
+      const data = {
+        dateOfBirth: new Date(params['date-of-birth'].stringValue),
+        gender: params.gender.stringValue,
+        defaultLanguage: params["default-language"].stringValue,
+        //This list value might have to be modified
+        spokenLanguages: params["spoken-languages"].listValue,
+
+      }
 
 
+      this.afs.doc(`users/${this.uid}`).set(data, {merge: true});
+
+    }
   }
 
 

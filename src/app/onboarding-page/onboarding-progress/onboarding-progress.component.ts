@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OnboardingService } from 'src/shared/services/onboarding.service';
+import { UserService } from 'src/shared/services/user.service';
 
 @Component({
   selector: 'onboarding-progress',
@@ -8,7 +9,8 @@ import { OnboardingService } from 'src/shared/services/onboarding.service';
 })
 export class OnboardingProgressComponent implements OnInit {
 
-  constructor(public onboarding: OnboardingService ) { }
+  constructor(public onboarding: OnboardingService,
+    public user: UserService ) { }
 
   ngOnInit(): void {
   }
