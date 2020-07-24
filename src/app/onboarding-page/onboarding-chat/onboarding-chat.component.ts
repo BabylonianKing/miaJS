@@ -3,6 +3,7 @@ import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 import { CrudService } from 'src/shared/services/crud.service';
 import { HttpClient } from '@angular/common/http';
 import { OnboardingService } from 'src/shared/services/onboarding.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'onboarding-chat',
@@ -18,6 +19,10 @@ export class OnboardingChatComponent implements AfterViewInit {
   private scrollContainer: any;
   private isNearBottom = true;
 
+  userId: string;
+  userRefData;
+  user;
+
   richCard: boolean;
   messages = [];
   loading = false;
@@ -31,12 +36,20 @@ export class OnboardingChatComponent implements AfterViewInit {
     public sideNavService: MenuToggleService,
     public crudService: CrudService,
     private http: HttpClient,
-    public onboardingService: OnboardingService
-  ) {}
+    public onboardingService: OnboardingService,
+    public db: AngularFirestore) {}
 
   ngAfterViewInit() {
 
-    this.messages = this.onboardingService.addTempBotMessage(this.messages, "Hello there, Lucas. It's nice meeting you!")
+    this.userId = JSON.parse(localStorage.getItem('user')).uid;
+
+    this.userRefData = this.db.doc(`users/${this.userId}`).valueChanges()
+
+    this.userRefData.subscribe(data => {
+      this.user = data
+    });
+
+    this.messages = this.onboardingService.addTempBotMessage(this.messages, "Hello there, FIRSTNAME. It's nice meeting you!")
     this.messages = this.onboardingService.addTempBotMessage(this.messages, "My name is Matilda, and I’m here to help you find work opportunities that match you best! Before we get started, how about we get to know each other? Just say \"Let's create my profile\" to start. ")
 
     // AUTOSCROLL

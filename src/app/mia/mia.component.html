@@ -7,7 +7,8 @@
       </div>
     </div>
     <div class="messages-header-right">
-      <div class="icon" (click)="sideNavService.toggleConvoInfos()"><img src="assets/more.svg"></div>
+      <button class="default-button-small" (click)="newJobSearch()">Start a new job search</button>
+      <!-- <div class="icon" (click)="sideNavService.toggleConvoInfos()"><img src="assets/more.svg"></div> -->
     </div>
   </div>
 
@@ -35,5 +36,4 @@
     <chat-form (send)="handleUserMessage($event)">
 
     </chat-form>
-    <button (click)="newJobSearch()">Start a new job search</button>
 </div>

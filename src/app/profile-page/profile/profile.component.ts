@@ -29,7 +29,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
     valueHidden: boolean = false;
     inputHidden: boolean = true;
     coverDownloadURL: string;
-    profileDownloadURL: string;
+    profileDownloadURL: string = "/assets/boy.png";
     uploadProgress;
     showResumeUploaded = false;
     user;

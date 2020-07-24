@@ -2,14 +2,14 @@
   <h2>Create Account</h2>
   <div>Start looking for your dream job today - stress free!</div>
   <div class="form">
-        <form class="inputs" #loginForm="ngForm" (ngSubmit)="user.SignUp(email, password, firstName, lastName)">
+        <form class="inputs" #loginForm="ngForm" (ngSubmit)="user.SignUp()">
           <div class="split-row">
-            <input type="text" maxlength="32"  name="firstName" placeholder="First Name">
-            <input type="text" maxlength="32" name="lastName" placeholder="Last Name">
+            <input type="text" maxlength="32" [(ngModel)]="user.createFirstName" name="firstName" placeholder="First Name">
+            <input type="text" maxlength="32" [(ngModel)]="user.createLastName" name="lastName" placeholder="Last Name">
           </div>
-          <input type="email" name="email" placeholder="Email Address">
-          <input type="password" name="password" placeholder="Create password">
-          <button type="submit" (click)="user.SignUp(email, password, firstName, lastName)">Create Account</button>
+          <input type="email" [(ngModel)]="user.createEmail" name="email" placeholder="Email Address">
+          <input type="password" [(ngModel)]="user.createPassword" name="password" placeholder="Create password">
+          <button type="submit">Create Account</button>
         </form>
         <div class="divider">
           <div class="divider-text">

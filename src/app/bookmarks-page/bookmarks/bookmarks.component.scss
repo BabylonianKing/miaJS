@@ -39,9 +39,8 @@
     flex-grow: 1;
     display: grid;
     overflow: auto;
-
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-auto-rows: repeat(auto-fit, minmax(400px, 400px));
+    grid-template-rows: repeat(auto-fit, minmax(400px, 400px));
     column-gap: 30px;
     row-gap: 30px;
 

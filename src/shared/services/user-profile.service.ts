@@ -61,6 +61,23 @@ export class UserProfileService {
     .then(() => this.editingPassword = false)
   }
 
+  // CHANGE GENDER
+  editingGender: boolean = false;
+
+  editGender(gender) {
+    const uid = this.afAuth.userData.uid;
+    this.updateUser(uid, gender)
+    .then(() => this.editingGender = false)
+  }
+
+  // CHANGE DOB
+  editingDOB: boolean = false;
+
+  editDOB(dob) {
+    const uid = this.afAuth.userData.uid;
+    this.updateUser(uid, dob)
+    .then(() => this.editingDOB = false)
+  }  
 
 
 }
