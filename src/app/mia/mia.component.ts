@@ -43,6 +43,14 @@ export class MiaComponent implements AfterViewInit {
     this.crudService.messageInit().valueChanges().subscribe(data => {
       this.messages = data
 
+      this.crudService.messageInit().get().toPromise().then(snapshot => {
+        if (snapshot.empty) {
+          //TODO: Fix Bug where this initial message doesn't show up
+          this.crudService.addBotMessage({fulfillmentText: "My name is Matilda, and I’m here to help you find work opportunities that match you best! Just say \"Let's find a job\" to get started."});
+          return
+        }
+      })
+
     })
 
   }
