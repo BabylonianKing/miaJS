@@ -20,7 +20,7 @@
                   [reply]="msg.reply"
                   [cards]= "msg.cards"
                   [richCard] = "msg.richCard"
-                  (descriptionEmitter)="addLearnMoreMessage($event)"
+                  (descriptionEmitter)="crudService.addLearnMoreMessage($event)"
                   >
 
     </chat-message>
