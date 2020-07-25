@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild, ViewChildren, ElementRef, QueryList, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, ViewChildren, ElementRef, QueryList, HostListener, OnInit, RendererStyleFlags2 } from '@angular/core';
 import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 import { CrudService } from 'src/shared/services/crud.service';
 import { HttpClient } from '@angular/common/http';
@@ -31,6 +31,10 @@ export class OnboardingChatComponent implements AfterViewInit {
   displayName: string;
   email: string;
   dialogflowURL = 'https://us-central1-mia-test-sgwxam.cloudfunctions.net/dialogflowGateway';
+  chips = ["what", "the", "John", "Fish"];
+
+  //We need this in case the person skips the chat onto the next tab
+  sessionId = Math.random().toString(36).substr(2, 9);
 
   constructor(
     public sideNavService: MenuToggleService,
@@ -40,6 +44,8 @@ export class OnboardingChatComponent implements AfterViewInit {
     public db: AngularFirestore) {}
 
   ngAfterViewInit() {
+    console.log(this.sessionId)
+
 
     this.userId = JSON.parse(localStorage.getItem('user')).uid;
 
@@ -47,10 +53,12 @@ export class OnboardingChatComponent implements AfterViewInit {
 
     this.userRefData.subscribe(data => {
       this.user = data
+      console.log(data)
+      this.messages = this.onboardingService.addTempBotMessage(this.messages, `Hello there, ${this.user.displayName}. It's nice meeting you!`)
+      this.messages = this.onboardingService.addTempBotMessage(this.messages, "My name is Matilda, and I’m here to help you find work opportunities that match you best! Before we get started, how about we get to know each other? Just say \"Let's create my profile\" to start. ")
+
     });
 
-    this.messages = this.onboardingService.addTempBotMessage(this.messages, "Hello there, FIRSTNAME. It's nice meeting you!")
-    this.messages = this.onboardingService.addTempBotMessage(this.messages, "My name is Matilda, and I’m here to help you find work opportunities that match you best! Before we get started, how about we get to know each other? Just say \"Let's create my profile\" to start. ")
 
     // AUTOSCROLL
     this.scrollContainer = this.scrollFrame.nativeElement;
@@ -101,23 +109,24 @@ export class OnboardingChatComponent implements AfterViewInit {
 
     // Toggled with the click of a button
     nextFlow() {
+      this.sessionId = Math.random().toString(36).substr(2, 9);
       this.flowDone = false;
       this.messages = []
       this.onboardingService.onboardingStep += 1;
 
       if (this.onboardingService.onboardingStep == 1) {
-        this.messages = this.onboardingService.addTempBotMessage(this.messages, "My name is Matilda, and contact information plez")
+        this.messages = this.onboardingService.addTempBotMessage(this.messages, "Great, now I will need your contact information. What is your phone number?")
 
 
       } else if (this.onboardingService.onboardingStep == 2) {
-        this.messages = this.onboardingService.addTempBotMessage(this.messages, "My name is Matilda, and education blabla plez")
+        this.messages = this.onboardingService.addTempBotMessage(this.messages, "Would you like to add your education history? You can simply add your degrees and diplomas. You will be able to add more details (dates, institutions, etc.) on your profile page.")
 
 
       } else if (this.onboardingService.onboardingStep == 3) {
-        this.messages = this.onboardingService.addTempBotMessage(this.messages, "My name is Matilda, and interests plez ")
+        this.messages = this.onboardingService.addTempBotMessage(this.messages, "Now, what kind of job are you looking for? Full-time or part-time?")
 
       } else if (this.onboardingService.onboardingStep == 4) {
-        this.messages = this.onboardingService.addTempBotMessage(this.messages, "My name is Matilda, and notification preferences plez. ")
+        this.messages = this.onboardingService.addTempBotMessage(this.messages, "What are your notification preferences?")
 
 
       } else if (this.onboardingService.onboardingStep == 5) {
@@ -125,6 +134,11 @@ export class OnboardingChatComponent implements AfterViewInit {
 
 
       }
+    }
+
+
+    addChipMessage(chipText) {
+      this.handleUserMessage({message: chipText})
     }
 
 
@@ -141,7 +155,7 @@ export class OnboardingChatComponent implements AfterViewInit {
     // Make the request
     return this.http.post < any > (
         this.dialogflowURL, {
-          sessionId: this.uid,
+          sessionId: this.sessionId,
           queryInput: {
             text: {
               text,
@@ -153,6 +167,10 @@ export class OnboardingChatComponent implements AfterViewInit {
       .subscribe(res => {
         console.log(res)
         this.messages = this.onboardingService.addTempBotMessage(this.messages, res.fulfillmentText);
+
+        if (res.fulfillmentText == "What are your notification preferences?") {
+
+        }
         if (this.onboardingService.checkOnboardingStep(res)) {
           this.onboardingService.uploadData(res)
           this.animateTransition();

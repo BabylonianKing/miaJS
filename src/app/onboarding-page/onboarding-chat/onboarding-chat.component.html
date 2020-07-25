@@ -12,7 +12,7 @@
           <div class="icon" (click)="sideNavService.toggleConvoInfos()"><img src="assets/more.svg"></div>
         </div>
       </div>
-    
+
     <div class="chat-container" (scroll)="scrolled($event)" #scrollframe>
         <chat-message *ngFor="let msg of messages" #item
                       type="text"
@@ -25,11 +25,15 @@
             type="text"
             message="...">
         </chat-message>
+
+        <chat-chip *ngFor="let chip of chips" (click)="addChipMessage(chip)"
+        [text]="chip">
+        </chat-chip>
     </div>
-    
+
     <div class="chat-footer">
         <chat-form (send)="handleUserMessage($event)"></chat-form>
-        <div class="skip-container">
+        <div class="skip-container" (click)="nextFlow()">
             <a class="skip">Skip</a><i class="fa fa-chevron-right" aria-hidden="true"></i>
         </div>
     </div>
@@ -51,5 +55,5 @@
             </div>
         </div>
     </div>
-    
+
 </div>

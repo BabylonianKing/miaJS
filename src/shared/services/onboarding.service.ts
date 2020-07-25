@@ -49,6 +49,14 @@ export class OnboardingService {
   checkOnboardingStep(res) {
     if (res.action === "Onboarding.Onboarding-yes") {
       return true
+    } else if (res.action === "Onboarding-02-ContactInformations.Onboarding-02-ContactInformations-yes") {
+      return true
+    } else if (res.action === "Onboarding-03-Education&EmploymentHistory.Onboarding-03-Education&EmploymentHistory-yes") {
+      return true
+    } else if (res.action === "Onboarding-04-ValuesInterestsObjectives.Onboarding-04-ValuesInterestsObjectives-yes") {
+      return true
+    } else if (res.action === "Onboarding-05-NotificationPreferences.Onboarding-05-NotificationPreferences-yes") {
+      return true
     } else {
       return false
     }
@@ -64,17 +72,47 @@ export class OnboardingService {
         defaultLanguage: params["default-language"].stringValue,
         //This list value might have to be modified
         spokenLanguages: params["spoken-languages"].listValue,
+      }
+
+
+      this.afs.doc(`users/${this.uid}`).set(data, {merge: true});
+
+    }
+
+    if (this.onboardingStep == 1) {
+      const data = {
         phoneNumber:  params["phone-number"].stringValue,
         address: params["location"].stringValue,
         links: params["social-links"].listValue,
+      }
+      this.afs.doc(`users/${this.uid}`).set(data, {merge: true});
+    }
+
+    if (this.onboardingStep == 2) {
+      const data = {
         educationHistory: params["education-history"].listValue,
         workHistory: params["work-history"].listValue,
-        values: params["values"].listValue,
-        interests: params["interests"].listValue,
-        objective: params["employmentType"].stringValue,
-        emailFrequency: params["frequency"].stringValue
       }
 
+      this.afs.doc(`users/${this.uid}`).set(data, {merge: true});
+
+    }
+    if (this.onboardingStep == 3) {
+      const data = {
+        values: params["values"].listValue,
+        interests: params["interests"].listValue,
+        objective: params["employmenttype"].stringValue,
+      }
+
+
+      this.afs.doc(`users/${this.uid}`).set(data, {merge: true});
+
+    }
+
+    if (this.onboardingStep == 4) {
+      const data = {
+        emailFrequency: params["email-frequency"].stringValue
+      }
 
       this.afs.doc(`users/${this.uid}`).set(data, {merge: true});
 

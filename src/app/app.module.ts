@@ -42,6 +42,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { OnboardingPageComponent } from './onboarding-page/onboarding-page.component';
 import { OnboardingChatComponent } from './onboarding-page/onboarding-chat/onboarding-chat.component';
 import { OnboardingProgressComponent } from './onboarding-page/onboarding-progress/onboarding-progress.component';
+import { ChatChipComponent } from './mia/chat-chip/chat-chip.component';
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import { OnboardingProgressComponent } from './onboarding-page/onboarding-progre
     HomepageComponent,
     OnboardingPageComponent,
     OnboardingChatComponent,
-    OnboardingProgressComponent ],
+    OnboardingProgressComponent,
+    ChatChipComponent ],
   imports: [
     BrowserModule,
     AppRoutingModule,

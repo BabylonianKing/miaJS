@@ -11,10 +11,11 @@
     h2 {
         margin-bottom: 20px;
     }
-    
+
     .done {
         margin-top: 20px;
         align-self: center;
+        cursor: pointer;
     }
 
     .onboarding-step-card {
@@ -25,6 +26,7 @@
         background-color: #FFF;
         color: $paragraph-gray;
         margin: 5px 0;
+        cursor: pointer;
 
         p {
             display: none;
