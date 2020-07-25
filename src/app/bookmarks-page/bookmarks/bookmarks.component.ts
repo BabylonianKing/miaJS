@@ -28,9 +28,10 @@ export class BookmarksComponent implements OnInit {
   searchByOrg() {
     const value = this.searchValue.toLowerCase();
     this.filteredCards = this.cards.filter(job => {
+      console.log(job)
       return (
-        job.title.toLowerCase().includes(value) ||
-        job.company.toLowerCase().includes(value)
+        job.title.stringValue.toLowerCase().includes(value) ||
+        job.company.stringValue.toLowerCase().includes(value)
       );
     });
   }

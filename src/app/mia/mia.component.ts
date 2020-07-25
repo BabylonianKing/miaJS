@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild, ViewChildren, ElementRef, QueryList, HostListener, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import {
   MenuToggleService
 } from 'src/shared/services/menu-toggle.service';

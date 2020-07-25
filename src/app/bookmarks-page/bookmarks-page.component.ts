@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
+import { CrudService } from 'src/shared/services/crud.service';
 
 @Component({
   selector: 'bookmarks-page',
@@ -10,9 +11,11 @@ export class BookmarksPageComponent implements OnInit {
 
   constructor(
     public sideNavService: MenuToggleService,
-    public menu: MenuToggleService) { }
+    public menu: MenuToggleService,
+    public crudService: CrudService) { }
 
   ngOnInit(): void {
+    this.crudService.newBookmarks = 0
 
   }
 

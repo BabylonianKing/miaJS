@@ -361,6 +361,35 @@ export class CrudService {
 
   // BOOKMARKS
 
+  newBookmarks: number = 0
+
+    // TODO: Fix this
+    bookmarkJob(card) {
+      this.uid = JSON.parse(localStorage.getItem('user')).uid;
+
+      card.heartFilled = true;
+
+      let data = {
+        description: card.description,
+        url: card.url,
+        logo: card.logo,
+        location: card.location,
+        title: card.title,
+        company: card.company,
+        employmentType: card.employmentType,
+        baseSalary: card.baseSalary,
+        //hourly, weekly, monthly, annually
+        salaryType: card.salaryType,
+        score: card.score,
+        jobId: card.jobId
+      }
+
+      let ref = this.db.collection("bookmarks").doc(this.uid).collection("bookmarks").doc(card.jobId.stringValue)
+      ref.set(data);
+      this.newBookmarks += 1
+    }
+
+
   removeBookmark(jobId) {
     this.uid = JSON.parse(localStorage.getItem('user')).uid;
         //Load bookmarks on init
