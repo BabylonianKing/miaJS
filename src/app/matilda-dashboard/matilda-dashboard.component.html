@@ -4,42 +4,43 @@
       <div class="chat-components-container">
         <mia></mia>
 
-        <div class="job-infos-window" *ngIf="crud.showJobInfos">
+        <div class="job-infos-window" *ngIf="crudService.showJobInfos">
           <div class="header">
              <div class="header-left">
                <!-- ADD LOGO OR DEFAULT -->
                <img class="logo">
                <div class="job-infos">
-                 <h2>Title: </h2>
-                 <h5>Company: </h5>
+                 <h2>Title: {{crudService.currentJobInfos.title}}</h2>
+                 <h5>Company: {{crudService.currentJobInfos.company}}</h5>
                </div>
              </div>
              <div class="header-right">
               <button class="default-button-small">Rate this job</button>
-              <div class="icon" (click)="crud.closeJobInfos()"><img src="assets/close.svg"></div>
+              <div class="icon" (click)="crudService.closeJobInfos()"><img src="assets/close.svg"></div>
              </div>
           </div>
           <div class="main">
             <div class="main-left">
               <div class="quick-infos">
-                <p>Location: </p>
-                <p>Type: </p>
-                <p>Hours: </p>
-                <p>Salary: </p>
-                <p>Posted on date: </p>
-                <p>Platform: </p>
+                <p>Location: {{crudService.currentJobInfos.location}}</p>
+                <p>Type: {{crudService.currentJobInfos.employmentType}}</p>
+                <p>Hours: {{crudService.currentJobInfos.workHours}}</p>
+                <p>Salary: {{crudService.currentJobInfos.baseSalary}}$ {{crudService.currentJobInfos.salaryType}}</p>
+                <p>Posted on date: {{crudService.formatDate(crudService.currentJobInfos.datePosted)}}</p>
+                <p>Advertised Until: {{crudService.formatDate(crudService.currentJobInfos.advertisedUntil)}}</p>
+                <p>Platform: {{crudService.currentJobInfos.url}}</p>
               </div>
               <div class="description">
-                <p>Description: </p>
+                <p>Description: {{crudService.currentJobInfos.description}}</p>
               </div>
             </div>
             <div class="main-right">
-              <p>Match: </p>
-              <p>Languages: </p>
-              <p>Education: </p>
-              <p>Work: </p>
-              <p>Employment Group: </p>
-              <p>Requirements: </p>
+              <p>Match: {{crudService.currentJobInfos.score}}%</p>
+              <p>Languages: {{crudService.currentJobInfos.language}}</p>
+              <p>Education: {{crudService.currentJobInfos.educationRequirements || "Not available"}}</p>
+              <p>Work: {{crudService.currentJobInfos.experienceRequirements}}</p>
+              <p>Employment Group: {{crudService.currentJobInfos.employmentGroup}}</p>
+              <p>Special Commitments: {{crudService.currentJobInfos.specialCommitments}}</p>
             </div>
           </div>
           <div class="footer">
@@ -64,4 +65,3 @@
       </div>
     </div>
   </div>
-  

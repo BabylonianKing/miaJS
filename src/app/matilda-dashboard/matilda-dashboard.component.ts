@@ -12,10 +12,10 @@ export class MatildaDashboardComponent implements OnInit {
   constructor(
     public sideNavService: MenuToggleService,
     public menu: MenuToggleService,
-    public crud: CrudService) { }
+    public crudService: CrudService) { }
 
   ngOnInit(): void {
-    this.crud.pathRefresh();
+    this.crudService.pathRefresh();
   }
 
 }

@@ -126,19 +126,6 @@ export class CrudService {
     });
   }
 
-  // JOB INFOS
-  showJobInfos: boolean = false;
-
-  toggleJobInfos(job) {
-    this.showJobInfos = true;
-    console.log(job.stringValue);
-  }
-
-  closeJobInfos() {
-    this.showJobInfos = false;
-  }
-
-
 
   // MESSAGING
 
@@ -404,4 +391,119 @@ export class CrudService {
       return this.db.collection("bookmarks").doc(this.uid).collection("bookmarks")
 
   }
+
+
+  // JOB INFOS
+  showJobInfos: boolean = false;
+  currentJobInfos: any;
+
+
+  toggleJobInfos(jobId, score) {
+    let data;
+
+    console.log(jobId);
+    let job = this.db.collection("jobs").doc(jobId).ref.get().then(function(doc){
+      if (doc.exists) {
+        data = doc.data()
+
+        // this.showJobInfos = true;
+
+      } else {
+        console.error("No matching documents found")
+      }
+    }).then(() => {
+      this.currentJobInfos = data
+      this.currentJobInfos.score = score
+      console.log(this.currentJobInfos)
+      this.showJobInfos = true
+    }
+    )
+  }
+
+  closeJobInfos() {
+    this.showJobInfos = false;
+  }
+
+
+
+
+
+
+  //GENERAL FORMATTING
+  formatNumber(tel) {
+    if (!tel) {
+      return '';
+    }
+
+    var value = tel.toString().trim().replace(/^\+/, '');
+
+    if (value.match(/[^0-9]/)) {
+      return "Please enter a valid phone number";
+    }
+
+    var country, city, number;
+
+    switch (value.length) {
+      case 10: // +1PPP####### -> C (PPP) ###-####
+        country = 1;
+        city = value.slice(0, 3);
+        number = value.slice(3);
+        break;
+
+      case 11: // +CPPP####### -> CCC (PP) ###-####
+        country = value[0];
+        city = value.slice(1, 4);
+        number = value.slice(4);
+        break;
+
+      case 12: // +CCCPP####### -> CCC (PP) ###-####
+        country = value.slice(0, 3);
+        city = value.slice(3, 5);
+        number = value.slice(5);
+        break;
+
+      default:
+        return tel;
+    }
+
+    if (country == 1) {
+      country = "";
+    }
+
+    number = number.slice(0, 3) + '-' + number.slice(3);
+
+    return (country + " (" + city + ") " + number).trim();
+  }
+
+
+
+  formatDate(unixDate) {
+    let date = unixDate.toDate()
+    let day = ("0" + date.getDate().toString()).slice(-2);
+    // Minutes part from the timestamp
+    let month = (date.getMonth() + 1);
+    month = ("0" + month.toString()).slice(-2)
+    // Seconds part from the timestamp
+    let  year = date.getFullYear();
+
+    // Will display time in 10:30:23 format
+    let formattedTime = day + '-' + month + '-' + year;
+
+    return formattedTime
+  }
+
+  formatSpokenLanguages(languages) {
+    let final = ""
+    languages.values.forEach(element => {
+      final += element.stringValue
+      final += ", "
+
+    })
+
+    final = final.slice(0, -2)
+
+    return final
+  }
+
+
 }

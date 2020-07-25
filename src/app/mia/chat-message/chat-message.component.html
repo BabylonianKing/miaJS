@@ -6,7 +6,7 @@
   <p class="message-timestamp" [ngStyle]="{display: (richCard ? 'none': 'block')}">{{ timestamp }}</p>
 
   <div class="cards-carousel" *ngIf="richCard">
-    <div class="rich-card" *ngFor="let card of cards | slice:0:4;" (click)="crudService.toggleJobInfos(card.jobId)">
+    <div class="rich-card" *ngFor="let card of cards | slice:0:4;">
       <div class="bookmark" (click)="crudService.bookmarkJob(card)" [ngClass]="{visible: card.heartFilled === false }"><img src="/assets/heart.svg"></div>
       <div class="bookmark" [ngClass]="{ visible: card.heartFilled === true }"><img src="/assets/heart-full.svg"></div>
       <div class="header">
@@ -37,7 +37,7 @@
         </div>
       </div>
       <div class="buttons">
-        <button (click)="learnMore(card.description)">Learn more</button>
+        <button (click)="crudService.toggleJobInfos(card.jobId.stringValue, card.score.numberValue)">Learn more</button>
         <button (click)="apply(card.url.stringValue)">Apply now</button>
       </div>
     </div>
