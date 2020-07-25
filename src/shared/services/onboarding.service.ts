@@ -60,11 +60,19 @@ export class OnboardingService {
     if (this.onboardingStep == 0) {
       const data = {
         dateOfBirth: new Date(params['date-of-birth'].stringValue),
-        gender: params.gender.stringValue,
+        gender: params["gender"].stringValue,
         defaultLanguage: params["default-language"].stringValue,
         //This list value might have to be modified
         spokenLanguages: params["spoken-languages"].listValue,
-
+        phoneNumber:  params["phone-number"].stringValue,
+        address: params["location"].stringValue,
+        links: params["social-links"].listValue,
+        educationHistory: params["education-history"].listValue,
+        workHistory: params["work-history"].listValue,
+        values: params["values"].listValue,
+        interests: params["interests"].listValue,
+        objective: params["employmentType"].stringValue,
+        emailFrequency: params["frequency"].stringValue
       }
 
 
