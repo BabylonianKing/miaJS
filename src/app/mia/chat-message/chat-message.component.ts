@@ -3,6 +3,8 @@ import { Chat } from 'src/shared/models/chat.model';
 import { Router} from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
+import { CrudService } from 'src/shared/services/crud.service';
 
 
 @Component({
@@ -29,9 +31,12 @@ export class ChatMessageComponent implements OnInit {
 userId = JSON.parse(localStorage.getItem('user')).uid;
 
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     public afStorage: AngularFireStorage,
     public db: AngularFirestore,
+    public menu: MenuToggleService,
+    public crud: CrudService
     ) { }
 
   ngOnInit(): void {

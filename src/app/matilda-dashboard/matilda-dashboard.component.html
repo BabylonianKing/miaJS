@@ -3,6 +3,49 @@
     <div class="chat-container">
       <div class="chat-components-container">
         <mia></mia>
+
+        <div class="job-infos-window" *ngIf="crud.showJobInfos">
+          <div class="header">
+             <div class="header-left">
+               <!-- ADD LOGO OR DEFAULT -->
+               <img class="logo">
+               <div class="job-infos">
+                 <h2>Title: </h2>
+                 <h5>Company: </h5>
+               </div>
+             </div>
+             <div class="header-right">
+              <button class="default-button-small">Rate this job</button>
+              <div class="icon" (click)="crud.closeJobInfos()"><img src="assets/close.svg"></div>
+             </div>
+          </div>
+          <div class="main">
+            <div class="main-left">
+              <div class="quick-infos">
+                <p>Location: </p>
+                <p>Type: </p>
+                <p>Hours: </p>
+                <p>Salary: </p>
+                <p>Posted on date: </p>
+                <p>Platform: </p>
+              </div>
+              <div class="description">
+                <p>Description: </p>
+              </div>
+            </div>
+            <div class="main-right">
+              <p>Match: </p>
+              <p>Languages: </p>
+              <p>Education: </p>
+              <p>Work: </p>
+              <p>Employment Group: </p>
+              <p>Requirements: </p>
+            </div>
+          </div>
+          <div class="footer">
+
+          </div>
+        </div>
       </div>
     </div>
 

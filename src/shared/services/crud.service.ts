@@ -126,6 +126,18 @@ export class CrudService {
     });
   }
 
+  // JOB INFOS
+  showJobInfos: boolean = false;
+
+  toggleJobInfos(job) {
+    this.showJobInfos = true;
+    console.log(job.stringValue);
+  }
+
+  closeJobInfos() {
+    this.showJobInfos = false;
+  }
+
 
 
   // MESSAGING

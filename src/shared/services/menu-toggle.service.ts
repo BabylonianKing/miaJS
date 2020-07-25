@@ -26,4 +26,5 @@ export class MenuToggleService {
   toggleBookmarksActions() {
     this.showBookmarksActions = !this.showBookmarksActions;
   }
+
 }

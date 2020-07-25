@@ -1,12 +1,12 @@
 <div class="message-container" [ngClass]=" {'user': reply} ">
 
-  <div class="message-bubble" [ngClass]=" {'user': reply} ">
+  <div class="message-bubble" [ngClass]=" {'user': reply} " [ngStyle]="{display: (richCard ? 'none': 'block')}">
     <p class="message">{{ message }}</p>
   </div>
-  <p class="message-timestamp">{{ timestamp }}</p>
+  <p class="message-timestamp" [ngStyle]="{display: (richCard ? 'none': 'block')}">{{ timestamp }}</p>
 
   <div class="cards-carousel" *ngIf="richCard">
-    <div class="rich-card" *ngFor="let card of cards | slice:0:4;" >
+    <div class="rich-card" *ngFor="let card of cards | slice:0:4;" (click)="crud.toggleJobInfos(card.jobId)">
       <div class="bookmark" (click)="bookmarkJob(card)" [ngClass]="{visible: card.heartFilled === false }"><img src="/assets/heart.svg"></div>
       <div class="bookmark" [ngClass]="{ visible: card.heartFilled === true }"><img src="/assets/heart-full.svg"></div>
       <div class="header">
@@ -34,8 +34,6 @@
         <div class="job-type">
           <h6>Job Type</h6>
           <p>{{ (card.employmentType != undefined) ? card.employmentType.stringValue : "Unavailable" }}</p>
-
-
         </div>
       </div>
       <div class="buttons">
@@ -44,18 +42,7 @@
       </div>
     </div>
 
-    <!-- <job-card *ngFor="let item of cards" class="rich-card"
-      type="text"
-      [title]="(item.title != undefined) ? item.title.stringValue : null"
-      [company]="(item.company != undefined) ? item.company.stringValue : null"
-      [jobId] = "(item.jobId != undefined) ? item.jobId.stringValue : null"
-      [logo] = "(item.logo != undefined) ? item.logo.stringValue : null"
-      [description] = "(item.description.structValue != undefined) ? item.description.structValue.fields : null"
-      [employmentType] = "(item.employmentType != undefined) ? item.employmentType.stringValue : null"
-      [location] = "(item.location != undefined) ? item.location.stringValue : null"
-      [baseSalary] = "(item.baseSalary != undefined) ? item.baseSalary.numberValue : null"
-      [salaryType] = "(item.salaryType != undefined) ? item.salaryType.stringValue : null"
-      [url] = "(item.url != undefined) ? item.url.stringValue : null"></job-card>
-    </div> -->
+    <div class="job-window">
 
+    </div>
   </div>
