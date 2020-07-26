@@ -32,6 +32,7 @@ export class OnboardingChatComponent implements AfterViewInit {
   email: string;
   dialogflowURL = 'https://us-central1-mia-test-sgwxam.cloudfunctions.net/dialogflowGateway';
   chips = ["what", "the", "John", "Fish"];
+  showChips: boolean = false;
 
   //We need this in case the person skips the chat onto the next tab
   sessionId = Math.random().toString(36).substr(2, 9);
@@ -124,9 +125,12 @@ export class OnboardingChatComponent implements AfterViewInit {
 
       } else if (this.onboardingService.onboardingStep == 3) {
         this.messages = this.onboardingService.addTempBotMessage(this.messages, "Now, what kind of job are you looking for? Full-time or part-time?")
-
+        this.chips = ["Full-time", "Part-time"]
+        this.showChips = true
       } else if (this.onboardingService.onboardingStep == 4) {
         this.messages = this.onboardingService.addTempBotMessage(this.messages, "What are your notification preferences?")
+        this.chips = ["Daily", "Weekly", "Monthly"]
+        this.showChips = true
 
 
       } else if (this.onboardingService.onboardingStep == 5) {
@@ -169,7 +173,11 @@ export class OnboardingChatComponent implements AfterViewInit {
         this.messages = this.onboardingService.addTempBotMessage(this.messages, res.fulfillmentText);
 
         if (res.fulfillmentText == "What are your notification preferences?") {
+          this.chips = ["Daily", "Weekly", "Monthly"]
+          this.showChips = true
 
+        } else {
+          this.showChips = false
         }
         if (this.onboardingService.checkOnboardingStep(res)) {
           this.onboardingService.uploadData(res)
