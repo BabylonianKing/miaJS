@@ -1,0 +1,16 @@
+@import "./src/styles.scss";
+
+button {
+    border-radius: 50px;
+    background-color: transparent;
+    color: $red-light;
+    border: 1px solid $red-light;
+    padding: 5px 10px;
+    margin-right: 10px;
+
+    &:hover {
+        background-color: $red-light;
+        color: #FFF;
+        cursor: pointer;
+    }
+}
