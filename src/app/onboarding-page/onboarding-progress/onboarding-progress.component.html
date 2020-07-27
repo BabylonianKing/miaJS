@@ -1,5 +1,5 @@
 <div class="root">
-    <h2>Welcome aboard, {{ user.firstName }}!</h2>
+    <h2>Welcome aboard, {{ user.firstName || user.displayName || "friend"}}!</h2>
     <div class="onboarding-step-card" [ngClass]="{ active: onboarding.onboardingStep === 0 }">
         <h3>Greetings & Personal Information</h3>
         <p>Get to know Matilda, and set your basic profile informations so you don't have to add them later!</p>

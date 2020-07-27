@@ -35,7 +35,7 @@ $border: 2px solid $border-gray;
 }
 
 body {
-    margin: 0;  
+    margin: 0;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -70,7 +70,7 @@ button, img, input {
     display: flex;
     align-items: center;
 
-    a {
+    a, label {
         font-weight: 700;
         color: #FFF;
         display: flex;
@@ -112,7 +112,7 @@ button, img, input {
         background-color: #D3D1D1;
         cursor: pointer;
     }
-    
+
     img {
         max-height: 100%;
         max-width: 100%;

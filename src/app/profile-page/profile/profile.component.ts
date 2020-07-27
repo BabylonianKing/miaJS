@@ -92,10 +92,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
     uploadResume(event) {
       let userId = JSON.parse(localStorage.getItem('user')).uid;
-
-      this.afStorage.upload(`/resume/${userId}`, event.target.files[0]);
-
-      let reference = this.afStorage.ref(userId);
+      let reference = this.afStorage.ref(`/resume/${userId}`);
       // the put method creates an AngularFireUploadTask
       // and kicks off the upload
       reference.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());

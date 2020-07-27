@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { OnboardingService } from 'src/shared/services/onboarding.service';
-import { UserService } from 'src/shared/services/user.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({

@@ -4,6 +4,11 @@ import { CrudService } from 'src/shared/services/crud.service';
 import { HttpClient } from '@angular/common/http';
 import { OnboardingService } from 'src/shared/services/onboarding.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { map, finalize } from 'rxjs/operators';
+
 
 @Component({
   selector: 'onboarding-chat',
@@ -23,6 +28,7 @@ export class OnboardingChatComponent implements AfterViewInit {
   userRefData;
   user;
 
+
   richCard: boolean;
   messages = [];
   loading = false;
@@ -37,12 +43,24 @@ export class OnboardingChatComponent implements AfterViewInit {
   //We need this in case the person skips the chat onto the next tab
   sessionId = Math.random().toString(36).substr(2, 9);
 
+  //Not sure if I want to keep dragged over
+  draggedOver: boolean = false
+  showUpload: boolean = true
+  task;
+  uploadState: Observable<string>;
+  uploadProgress: Observable<number>;
+  fileName: string;
+  downloadURL: Observable<string>;;
+
+
   constructor(
+    private router: Router,
     public sideNavService: MenuToggleService,
     public crudService: CrudService,
     private http: HttpClient,
     public onboardingService: OnboardingService,
-    public db: AngularFirestore) {}
+    public db: AngularFirestore,
+    public afStorage: AngularFireStorage) {}
 
   ngAfterViewInit() {
     console.log(this.sessionId)
@@ -54,11 +72,12 @@ export class OnboardingChatComponent implements AfterViewInit {
 
     this.userRefData.subscribe(data => {
       this.user = data
-      console.log(data)
-      this.messages = this.onboardingService.addTempBotMessage(this.messages, `Hello there, ${this.user.firstName}. It's nice meeting you!`)
+      this.messages = this.onboardingService.addTempBotMessage(this.messages, `Hello there, ${this.user.firstName || this.user.displayName || "friend"}. It's nice meeting you!`)
       this.messages = this.onboardingService.addTempBotMessage(this.messages, "My name is Matilda, and I’m here to help you find work opportunities that match you best! Before we get started, how about we get to know each other? Just say \"Let's create my profile\" to start. ")
-
+      this.userRefData.unsubscribe()
     });
+
+
 
 
     // AUTOSCROLL
@@ -134,15 +153,23 @@ export class OnboardingChatComponent implements AfterViewInit {
 
 
       } else if (this.onboardingService.onboardingStep == 5) {
-        this.messages = this.onboardingService.addTempBotMessage(this.messages, "ur done m8 John fish checkmate")
-
-
+        this.router.navigateByUrl("profile")
       }
     }
 
 
     addChipMessage(chipText) {
       this.handleUserMessage({message: chipText})
+    }
+
+    sendImageToMatilda() {
+      this.handleUserMessage({message: this.downloadURL})
+      this.showUpload = false
+
+    }
+
+    untoggleUpload() {
+      this.showUpload = false
     }
 
 
@@ -170,7 +197,9 @@ export class OnboardingChatComponent implements AfterViewInit {
       )
       .subscribe(res => {
         console.log(res)
-        this.messages = this.onboardingService.addTempBotMessage(this.messages, res.fulfillmentText);
+        if (res.fulfillmentText != "") {
+          this.messages = this.onboardingService.addTempBotMessage(this.messages, res.fulfillmentText);
+        }
 
         if (res.fulfillmentText == "What are your notification preferences?") {
           this.chips = ["Daily", "Weekly", "Monthly"]
@@ -193,6 +222,73 @@ export class OnboardingChatComponent implements AfterViewInit {
   }
 
 
+
+  // Drag and drop files
+  allowDrop(event) {
+    console.log("drop allowed")
+
+    event.preventDefault();
+    event.stopPropagation();
+    this.draggedOver = true
+  }
+
+  removeDrop(event) {
+    console.log("drop removed")
+    event.preventDefault();
+    event.stopPropagation();
+    this.draggedOver = false
+  }
+
+
+  upload(event) {
+    console.log("upload")
+
+    this.uid = JSON.parse(localStorage.getItem('user')).uid;
+
+    event.preventDefault();
+    event.stopPropagation();
+    var data = event.target.files[0];
+    this.fileName = data.name
+    let reference = this.afStorage.ref(`/resume/${this.uid}`);
+    this.task = reference.put(data)
+    console.log(this.task.percentageChanges())
+
+    //Upload State implementation not working well, https://medium.com/codingthesmartway-com-blog/firebase-cloud-storage-with-angular-394566fd529
+    this.uploadState = this.task.snapshotChanges()
+
+
+    this.uploadProgress = this.task.percentageChanges()
+    this.task.snapshotChanges().pipe(
+      finalize(() => this.downloadURL = reference.getDownloadURL() )
+   )
+  .subscribe()
+
+  }
+
+
+  drop(event) {
+    console.log("drop")
+
+    this.uid = JSON.parse(localStorage.getItem('user')).uid;
+
+    event.preventDefault();
+    event.stopPropagation();
+    var data = event.dataTransfer.files[0];
+    this.fileName = data.name
+    let reference = this.afStorage.ref(`/resume/${this.uid}`);
+    this.task = reference.put(data)
+    console.log(this.task.percentageChanges())
+
+    //Upload State implementation not working well, https://medium.com/codingthesmartway-com-blog/firebase-cloud-storage-with-angular-394566fd529
+    this.uploadState = this.task.snapshotChanges()
+
+
+    this.uploadProgress = this.task.percentageChanges()
+    this.task.snapshotChanges().pipe(
+      finalize(() => this.downloadURL = reference.getDownloadURL() )
+   )
+  .subscribe()
+}
 
 
 
