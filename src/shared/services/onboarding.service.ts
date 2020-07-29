@@ -83,7 +83,7 @@ export class OnboardingService {
     if (this.onboardingStep == 1) {
       const data = {
         phoneNumber:  params["phone-number"].stringValue,
-        address: params["location"].stringValue,
+        location: params["location"].stringValue,
         links: params["social-links"].listValue,
       }
       this.afs.doc(`users/${this.uid}`).set(data, {merge: true});

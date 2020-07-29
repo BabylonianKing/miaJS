@@ -88,7 +88,7 @@ export class UserService {
       return (user !== null) ? true : false;
     }
 
-      // Send email verfificaiton when new user sign up
+      // Send email verification when new user sign up
   SendVerificationEmail() {
     return this.afAuth.currentUser
     .then(u => u.sendEmailVerification())
