@@ -47,7 +47,7 @@ export class OnboardingChatComponent implements AfterViewInit {
 
   //Not sure if I want to keep dragged over
   draggedOver: boolean = false
-  showUpload: boolean = true
+  showUpload: boolean = false
   task;
   uploadState: Observable<string>;
   uploadProgress: Observable<number>;
@@ -144,9 +144,8 @@ export class OnboardingChatComponent implements AfterViewInit {
 
 
       } else if (this.onboardingService.onboardingStep == 3) {
-        this.messages = this.onboardingService.addTempBotMessage(this.messages, "Now, what kind of job are you looking for? Full-time or part-time?")
-        this.chips = ["Full-time", "Part-time"]
-        this.showChips = true
+        this.messages = this.onboardingService.addTempBotMessage(this.messages, "What values are dear to you?")
+
       } else if (this.onboardingService.onboardingStep == 4) {
         this.messages = this.onboardingService.addTempBotMessage(this.messages, "What are your notification preferences?")
         this.chips = ["Daily", "Weekly", "Monthly"]
@@ -162,11 +161,15 @@ export class OnboardingChatComponent implements AfterViewInit {
     addChipMessage(chipText) {
       this.showChips = false
       this.handleUserMessage({message: chipText})
+
+      if (chipText == "Yes please!") {
+        this.showUpload = true
+      }
     }
 
     sendImageToMatilda() {
-      this.downloadURL.subscribe(url => this.handleUserMessage({message: url})
-      )
+      //Not necessary at the moment
+      // this.downloadURL.subscribe(url => this.handleUserMessage({message: url}))
       this.showUpload = false
 
     }
@@ -219,7 +222,19 @@ export class OnboardingChatComponent implements AfterViewInit {
         } else if (res.fulfillmentText == "How often should we send you those emails?") {
           this.chips = ["Daily", "Weekly", "Monthly"]
           this.showChips = true
+
+        } else if (res.fulfillmentText == "Would you like to upload a profile picture?") {
+          this.chips = ["Yes please!", "No, thanks"]
+          this.showChips = true
+        } else if (res.fulfillmentText == "I'll send you recommendations based on jobs you've searched and bookmarked. Would you like to get those?") {
+          this.chips = ["Yes", "No"]
+          this.showChips = true
         }
+
+
+
+
+
 
 
 
@@ -268,7 +283,7 @@ export class OnboardingChatComponent implements AfterViewInit {
     event.stopPropagation();
     var data = event.target.files[0];
     this.fileName = data.name
-    let reference = this.afStorage.ref(`/resume/${this.uid}`);
+    let reference = this.afStorage.ref(`/profileImages/${this.uid}`);
     this.task = reference.put(data)
     console.log(this.task.percentageChanges())
 
@@ -294,7 +309,7 @@ export class OnboardingChatComponent implements AfterViewInit {
     event.stopPropagation();
     var data = event.dataTransfer.files[0];
     this.fileName = data.name
-    let reference = this.afStorage.ref(`/resume/${this.uid}`);
+    let reference = this.afStorage.ref(`/profileImages/${this.uid}`);
     this.task = reference.put(data)
     console.log(this.task.percentageChanges())
 

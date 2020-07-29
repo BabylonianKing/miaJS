@@ -57,7 +57,7 @@ export class OnboardingService {
       return true
     }
     else if (res.action === "Onboarding-05-NotificationPreferences.Onboarding-05-NotificationPreferences-yes" && res.allRequiredParamsPresent == true) {
-      return true
+      // return true
     }
     else {
       return false
@@ -71,7 +71,6 @@ export class OnboardingService {
       const data = {
         dateOfBirth: new Date(params['date-of-birth'].stringValue),
         gender: params["gender"].stringValue,
-        defaultLanguage: params["default-language"].stringValue,
         //This list value might have to be modified
         spokenLanguages: params["spoken-languages"].listValue,
       }
@@ -102,8 +101,7 @@ export class OnboardingService {
     if (this.onboardingStep == 3) {
       const data = {
         values: params["values"].listValue,
-        interests: params["interests"].listValue,
-        objective: params["employmenttype"].stringValue,
+        interests: params["interests"].listValue
       }
 
 
