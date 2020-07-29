@@ -227,8 +227,13 @@ export class OnboardingChatComponent implements AfterViewInit {
         } else if (res.fulfillmentText == "Would you like to upload a profile picture?") {
           this.chips = ["Yes please!", "No, thanks"]
           this.showChips = true
+
         } else if (res.fulfillmentText == "I'll send you recommendations based on jobs you've searched and bookmarked. Would you like to get those?") {
           this.chips = ["Yes", "No"]
+          this.showChips = true
+
+        } else if (res.fulfillmentText.endsWith("Can you confirm this is correct?")) {
+          this.chips = ["Yes, this is correct!", "No, I would like to make some changes."]
           this.showChips = true
         }
 

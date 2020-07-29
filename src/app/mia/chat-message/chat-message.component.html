@@ -1,9 +1,9 @@
 <div class="message-container" [ngClass]=" {'user': reply} ">
 
-  <div class="message-bubble" [ngClass]=" {'user': reply} " [ngStyle]="{display: (richCard ? 'none': 'block')}">
+  <div *ngIf="!messageImage" class="message-bubble" [ngClass]=" {'user': reply} " [ngStyle]="{display: (richCard ? 'none': 'block')}">
     <p class="message">{{ message }}</p>
-    <img *ngIf="messageImage" src="{{ message }}">
   </div>
+  <img class="image-bubble" *ngIf="messageImage" src="{{ message }}">
   <p class="message-timestamp" [ngStyle]="{display: (richCard ? 'none': 'block')}">{{ timestamp }}</p>
 
   <div class="cards-carousel" *ngIf="richCard">
@@ -15,7 +15,7 @@
           <img src="{{ (card.logo.stringValue != undefined) ? card.logo.stringValue : null || 'https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164c953e8a56201c055c_icons8-target-50.png' }}">
           <div class="job-infos">
             <h3>{{ (card.title != undefined) ? card.title.stringValue : null }} </h3>
-            <h5>{{ (card.company != undefined) ? card.company.stringValue : null }}</h5>
+            <h5>{{ (card.company != undefined) ? card.company.stringValue : null }} - {{ (card.location != undefined) ? card.location.stringValue : null }}</h5>
           </div>
         </div>
       </div>

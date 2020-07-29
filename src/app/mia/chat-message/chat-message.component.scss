@@ -12,6 +12,13 @@
         align-items: flex-end;
     }
 
+    .image-bubble {
+        border-radius: 1.5em 1.5em 0.3em 1.5em;
+        max-width: 200px;
+        margin-bottom: 5px;
+        float: right;
+    }
+
     .message-bubble {
         border-radius: 1.5em 1.5em 1.5em 0.3em;
         padding: 10px 20px;

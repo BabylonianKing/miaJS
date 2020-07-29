@@ -10,8 +10,8 @@
                <!-- ADD LOGO OR DEFAULT -->
                <img class="logo">
                <div class="job-infos">
-                 <h2>Title: {{crudService.currentJobInfos.title}}</h2>
-                 <h5>Company: {{crudService.currentJobInfos.company}}</h5>
+                 <h2>{{crudService.currentJobInfos.title}}</h2>
+                 <h3>{{crudService.currentJobInfos.company}} - {{crudService.currentJobInfos.location}}</h3>
                </div>
              </div>
              <div class="header-right">
@@ -22,13 +22,12 @@
           <div class="main">
             <div class="main-left">
               <div class="quick-infos">
-                <p>Location: {{crudService.currentJobInfos.location}}</p>
                 <p>Type: {{crudService.currentJobInfos.employmentType}}</p>
                 <p>Hours: {{crudService.currentJobInfos.workHours}}</p>
                 <p>Salary: {{crudService.currentJobInfos.baseSalary}}$ {{crudService.currentJobInfos.salaryType}}</p>
                 <p>Posted on date: {{crudService.formatDate(crudService.currentJobInfos.datePosted)}}</p>
                 <p>Advertised Until: {{crudService.formatDate(crudService.currentJobInfos.advertisedUntil)}}</p>
-                <p>Platform: {{crudService.currentJobInfos.url}}</p>
+                <p>Platform: <a href="{{crudService.currentJobInfos.url}}" target="_blank">{{crudService.currentJobInfos.url}}</a></p>
               </div>
               <div class="description">
                 <p>Description: {{crudService.currentJobInfos.description}}</p>
