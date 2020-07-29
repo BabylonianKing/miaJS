@@ -2,6 +2,7 @@
 
   <div class="message-bubble" [ngClass]=" {'user': reply} " [ngStyle]="{display: (richCard ? 'none': 'block')}">
     <p class="message">{{ message }}</p>
+    <img *ngIf="messageImage" src="{{ message }}">
   </div>
   <p class="message-timestamp" [ngStyle]="{display: (richCard ? 'none': 'block')}">{{ timestamp }}</p>
 

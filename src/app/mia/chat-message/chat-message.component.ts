@@ -26,6 +26,8 @@ export class ChatMessageComponent implements OnInit {
 // @Input() jobSubtitle: boolean;
 @Input() cards: any;
 
+messageImage;
+
 
 @Output() descriptionEmitter = new EventEmitter<string>();
 userId = JSON.parse(localStorage.getItem('user')).uid;
@@ -46,7 +48,13 @@ userId = JSON.parse(localStorage.getItem('user')).uid;
     });}
     catch {}
 
+    if (this.message.startsWith("http")) {
+      this.messageImage = true
+    }
+
+
   }
+
 
 
 

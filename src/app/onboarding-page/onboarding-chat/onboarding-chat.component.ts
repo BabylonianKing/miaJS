@@ -170,8 +170,7 @@ export class OnboardingChatComponent implements AfterViewInit {
     }
 
     sendImageToMatilda() {
-      //Not necessary at the moment
-      // this.downloadURL.subscribe(url => this.handleUserMessage({message: url}))
+      this.downloadURL.subscribe(url => this.handleUserMessage({message: url}))
       this.showUpload = false
 
     }
