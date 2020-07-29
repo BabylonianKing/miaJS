@@ -1,10 +1,9 @@
-import { AfterViewInit, Component, ViewChild, ViewChildren, ElementRef, QueryList, HostListener, OnInit, RendererStyleFlags2 } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, ViewChildren, ElementRef, QueryList, HostListener, OnInit, RendererStyleFlags2, Output, EventEmitter } from '@angular/core';
 import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 import { CrudService } from 'src/shared/services/crud.service';
 import { HttpClient } from '@angular/common/http';
 import { OnboardingService } from 'src/shared/services/onboarding.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { map, finalize } from 'rxjs/operators';
@@ -20,6 +19,9 @@ export class OnboardingChatComponent implements AfterViewInit {
   // AUTOSCROLL
   @ViewChild('scrollframe', {static: false}) scrollFrame: ElementRef;
   @ViewChildren('item') itemElements: QueryList<any>;
+
+
+  @Output() loadingProfile = new EventEmitter<boolean>();
 
   private scrollContainer: any;
   private isNearBottom = true;
@@ -50,11 +52,10 @@ export class OnboardingChatComponent implements AfterViewInit {
   uploadState: Observable<string>;
   uploadProgress: Observable<number>;
   fileName: string;
-  downloadURL: Observable<string>;;
+  downloadURL: Observable<string>;
 
 
   constructor(
-    private router: Router,
     public sideNavService: MenuToggleService,
     public crudService: CrudService,
     private http: HttpClient,
@@ -153,17 +154,19 @@ export class OnboardingChatComponent implements AfterViewInit {
 
 
       } else if (this.onboardingService.onboardingStep == 5) {
-        this.router.navigateByUrl("profile")
+        this.loadingProfile.emit(true)
       }
     }
 
 
     addChipMessage(chipText) {
+      this.showChips = false
       this.handleUserMessage({message: chipText})
     }
 
     sendImageToMatilda() {
-      this.handleUserMessage({message: this.downloadURL})
+      this.downloadURL.subscribe(url => this.handleUserMessage({message: url})
+      )
       this.showUpload = false
 
     }
@@ -205,7 +208,23 @@ export class OnboardingChatComponent implements AfterViewInit {
           this.chips = ["Daily", "Weekly", "Monthly"]
           this.showChips = true
 
-        } else {
+        } else if (res.fulfillmentText == "What gender do you identify as?") {
+          this.chips = ["Male", "Female", "Other", "Prefer Not to Say"]
+          this.showChips = true
+
+        } else if (res.fulfillmentText == "What are your notification preferences?") {
+          this.chips = ["Daily", "Weekly", "Monthly"]
+          this.showChips = true
+
+        } else if (res.fulfillmentText == "How often should we send you those emails?") {
+          this.chips = ["Daily", "Weekly", "Monthly"]
+          this.showChips = true
+        }
+
+
+
+
+        else {
           this.showChips = false
         }
         if (this.onboardingService.checkOnboardingStep(res)) {

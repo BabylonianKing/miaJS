@@ -55,9 +55,11 @@ export class OnboardingService {
       return true
     } else if (res.action === "Onboarding-04-ValuesInterestsObjectives.Onboarding-04-ValuesInterestsObjectives-yes") {
       return true
-    } else if (res.action === "Onboarding-05-NotificationPreferences.Onboarding-05-NotificationPreferences-yes") {
+    }
+    else if (res.action === "Onboarding-05-NotificationPreferences.Onboarding-05-NotificationPreferences-yes" && res.allRequiredParamsPresent == true) {
       return true
-    } else {
+    }
+    else {
       return false
     }
   }
