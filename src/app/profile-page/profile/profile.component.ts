@@ -74,9 +74,12 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
       })
 
+      this.section = 0;
 
     }
 
+    // PROFILE NAV
+    section = 0;
 
     uploadBanner(event) {
       let userId = JSON.parse(localStorage.getItem('user')).uid;

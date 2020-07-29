@@ -27,153 +27,164 @@
           <a (click)="profileService.editingName = !profileService.editingName" [hidden]="profileService.editingName">Edit</a>
           <a (click)="profileService.editingName = !profileService.editingName" [hidden]="!profileService.editingName">Save</a>
       </div>
-        <!-- <div class="sub-infos">
-          <p>{{ (status) ? status: 'Recently met Matilda'}}</p>
-          <p>{{ (location) ? location: 'Somewhere, Somewhere' }}</p>
-        </div> -->
+        <div class="sub-infos">
+          <!-- <p>{{ (status) ? status: 'Recently met Matilda'}}</p> -->
+          <p>{{ (user.location) ? user.location: 'Somewhere, Somewhere' }}</p>
+        </div>
       </div>
     </div>
   </div>
+
+
   <div class="infos">
-    <div class="info">
-      <div class="info-left">
-        <h2>Email</h2>
-      </div>
-      <div class="info-right">
-        <div class="field">
-          <p [hidden]="profileService.editingEmail"> {{ user.email }}</p>
 
-          <form #newEmail="ngForm" (submit)="profileService.editEmail(newEmail.value.email)">
-            <input [hidden]="!profileService.editingEmail" placeholder="New email" type="email" name="email" autocomplete="off" ngModel>
-          </form>
-
-        </div>
-        <a (click)="profileService.editingEmail = !profileService.editingEmail" [hidden]="profileService.editingEmail">Edit</a>
-        <a (click)="profileService.editingEmail = !profileService.editingEmail" [hidden]="!profileService.editingEmail">Save</a>
-      </div>
-    </div>
-    <div class="info">
-      <div class="info-left">
-        <h2>Phone Number</h2>
-      </div>
-      <div class="info-right">
-        <div class="field">
-          <p [hidden]="profileService.editingPhone"> {{ crudService.formatNumber(user.phoneNumber) }}</p>
-
-
-          <form #newPhone="ngForm" (submit)="profileService.editPhone(newPhone.value)">
-            <input [hidden]="!profileService.editingPhone" placeholder="New phone number" type="tel" name="phone" autocomplete="off" ngModel>
-          </form>
-
-
-        </div>
-        <a (click)="profileService.editingPhone = !profileService.editingPhone" [hidden]="profileService.editingPhone">Edit</a>
-        <a (click)="profileService.editingPhone = !profileService.editingPhone" [hidden]="!profileService.editingPhone">Save</a>
-      </div>
+    <!-- NAVIGATION -->
+    <div class="profile-nav">
+      <a (click)="section = 0" [ngClass]="{ 'active': section === 0 }">General</a>
+      <a (click)="section = 1" [ngClass]="{ 'active': section === 1 }">Career</a>
+      <a (click)="section = 2" [ngClass]="{ 'active': section === 2 }">Account</a>
     </div>
 
-    <div class="info">
-      <div class="info-left">
-        <h2>Password</h2>
-      </div>
-      <div class="info-right">
-        <div class="field">
-          <p [hidden]="profileService.editingPassword">**********</p>
+    <!-- GENERAL -->
+    <div class="profile-section" *ngIf="section === 0">
 
-          <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
-            <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
-          </form>
-
+      <!-- PHONE -->
+      <div class="info">
+        <div class="info-left">
+          <h2>Phone Number</h2>
         </div>
-        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
-        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
+        <div class="info-right">
+          <div class="field">
+            <p [hidden]="profileService.editingPhone"> {{ crudService.formatNumber(user.phoneNumber) }}</p>
+  
+  
+            <form #newPhone="ngForm" (submit)="profileService.editPhone(newPhone.value)">
+              <input [hidden]="!profileService.editingPhone" placeholder="New phone number" type="tel" name="phone" autocomplete="off" ngModel>
+            </form>
+  
+  
+          </div>
+          <a (click)="profileService.editingPhone = !profileService.editingPhone" [hidden]="profileService.editingPhone">Edit</a>
+          <a (click)="profileService.editingPhone = !profileService.editingPhone" [hidden]="!profileService.editingPhone">Save</a>
+        </div>
       </div>
+
+      <!-- DATE OF BIRTH -->
+      <div class="info">
+        <div class="info-left">
+          <h2>Date of Birth</h2>
+        </div>
+        <div class="info-right">
+          <div class="field">
+            <p [hidden]="profileService.editingDOB">{{ crudService.formatDate(user.dateOfBirth) || null }}</p>
+
+            <form #newDOB="ngForm" (submit)="profileService.editDOB(newDOB.value)">
+              <input [hidden]="!profileService.editingDOB" placeholder="New date of birth" type="date" name="dob" autocomplete="off" ngModel>
+            </form>
+
+          </div>
+          <a (click)="profileService.editingDOB = !profileService.editingDOB" [hidden]="profileService.editingDOB">Edit</a>
+          <a (click)="profileService.editingDOB = !profileService.editingDOB" [hidden]="!profileService.editingDOB">Save</a>
+        </div>
+      </div>
+
+      <!-- GENDER -->
+      <div class="info">
+        <div class="info-left">
+          <h2>Gender</h2>
+        </div>
+        <div class="info-right">
+          <div class="field">
+            <p [hidden]="profileService.editingGender">{{ user.gender }}</p>
+
+            <form #newGender="ngForm" (change)="profileService.editGender(newGender.value)">
+              <select [hidden]="!profileService.editingGender" placeholder="New gender" name="gender" ngModel>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </form>
+
+          </div>
+          <a (click)="profileService.editingGender = !profileService.editingGender" [hidden]="profileService.editingGender">Edit</a>
+          <a (click)="profileService.editingGender = !profileService.editingGender" [hidden]="!profileService.editingGender">Save</a>
+        </div>
+      </div>
+
+      <!-- LINKS -->
+      <div class="info">
+        <div class="info-left">
+          <h2>Social Links</h2>
+        </div>
+        <div class="info-right">
+          <div class="field">
+            <p [hidden]="profileService.editingGender">{{ user.gender }}</p>
+
+            <form #newGender="ngForm" (change)="profileService.editGender(newGender.value)">
+              <select [hidden]="!profileService.editingGender" placeholder="New gender" name="gender" ngModel>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </form>
+
+          </div>
+          <a (click)="profileService.editingGender = !profileService.editingGender" [hidden]="profileService.editingGender">Edit</a>
+          <a (click)="profileService.editingGender = !profileService.editingGender" [hidden]="!profileService.editingGender">Save</a>
+        </div>
+      </div>
+
     </div>
-    <div class="info">
-      <div class="info-left">
-        <h2>Resume</h2>
-      </div>
-      <div class="info-right">
-        <div class="field">
-          <!-- <input type="file" id="org_logo" accept=".png, .jpg" (change)="uploadImage($event)" [ngModel]> -->
-          <!-- You have to change the (change) event -->
-          <input id="resume" type="file" accept=".pdf, .png, .jpg" [ngModel] (change)="uploadResume($event)" *ngIf= "!showResumeUploaded">
-          <div *ngIf="showResumeUploaded">Resume Uploaded</div>
-        </div>
-        <label for="resume">Upload</label>
-      </div>
+
+    <!-- CAREER -->
+    <div class="profile-section" *ngIf="section === 1">
+      <p>Career!</p>
     </div>
-    <div class="info">
-      <div class="info-left">
-        <h2>Gender</h2>
-      </div>
-      <div class="info-right">
-        <div class="field">
-          <p [hidden]="profileService.editingGender">{{ user.gender }}</p>
 
-          <form #newGender="ngForm" (change)="profileService.editGender(newGender.value)">
-            <select [hidden]="!profileService.editingGender" placeholder="New gender" name="gender" ngModel>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
-          </form>
-
+    <div class="profile-section" *ngIf="section === 2">
+      
+      <!-- EMAIL -->
+      <div class="info">
+        <div class="info-left">
+          <h2>Email</h2>
         </div>
-        <a (click)="profileService.editingGender = !profileService.editingGender" [hidden]="profileService.editingGender">Edit</a>
-        <a (click)="profileService.editingGender = !profileService.editingGender" [hidden]="!profileService.editingGender">Save</a>
+        <div class="info-right">
+          <div class="field">
+            <p [hidden]="profileService.editingEmail"> {{ user.email }}</p>
+  
+            <form #newEmail="ngForm" (submit)="profileService.editEmail(newEmail.value.email)">
+              <input [hidden]="!profileService.editingEmail" placeholder="New email" type="email" name="email" autocomplete="off" ngModel>
+            </form>
+  
+          </div>
+          <a (click)="profileService.editingEmail = !profileService.editingEmail" [hidden]="profileService.editingEmail">Edit</a>
+          <a (click)="profileService.editingEmail = !profileService.editingEmail" [hidden]="!profileService.editingEmail">Save</a>
+        </div>
       </div>
+
+      <!-- PASSWORD -->
+      <div class="info">
+        <div class="info-left">
+          <h2>Password</h2>
+        </div>
+        <div class="info-right">
+          <div class="field">
+            <p [hidden]="profileService.editingPassword">**********</p>
+  
+            <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
+              <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
+            </form>
+  
+          </div>
+          <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
+          <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
+        </div>
+      </div>
+
     </div>
-    <div class="info">
-      <div class="info-left">
-        <h2>Date of Birth</h2>
-      </div>
-      <div class="info-right">
-        <div class="field">
-          <p [hidden]="profileService.editingDOB">{{ crudService.formatDate(user.dateOfBirth) || null }}</p>
 
-          <form #newDOB="ngForm" (submit)="profileService.editDOB(newDOB.value)">
-            <input [hidden]="!profileService.editingDOB" placeholder="New date of birth" type="date" name="dob" autocomplete="off" ngModel>
-          </form>
 
-        </div>
-        <a (click)="profileService.editingDOB = !profileService.editingDOB" [hidden]="profileService.editingDOB">Edit</a>
-        <a (click)="profileService.editingDOB = !profileService.editingDOB" [hidden]="!profileService.editingDOB">Save</a>
-      </div>
-    </div>
-    <!-- <div class="info">
-      <div class="info-left">
-        <h2>Default Language</h2>
-      </div>
-      <div class="info-right">
-        <div class="field">
-          <p [hidden]="profileService.editingPassword">{{ user.defaultLanguage || null }}</p>
-
-          <form #newPassword="ngForm" (change)="profileService.editPassword(newPassword.value.password)">
-            <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
-          </form>
-
-        </div>
-        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
-        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
-      </div>
-    </div> -->
-    <div class="info">
-      <div class="info-left">
-        <h2>Spoken Languages</h2>
-      </div>
-      <div class="info-right">
-        <div class="field">
-          <p [hidden]="profileService.editingPassword">{{ crudService.formatSpokenLanguages(user.spokenLanguages) || null}}</p>
-
-          <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
-            <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
-          </form>
-
-        </div>
-        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
-        <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
-      </div>
-    </div>
   </div>
+
+
 </div>

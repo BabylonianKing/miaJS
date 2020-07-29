@@ -194,74 +194,106 @@
 
 .infos {
   width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
   margin-top: 120px;
 
-  .info {
-
+  .profile-nav {
+    height: 30%;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0;
-    margin-left: 30px;
-    margin-right: 100px;
-    border-bottom: $border-thin;
-    font-family: $rubik;
+    flex-direction: column;
+    width: 10%;
+    background-color: #F8F8F8;
+    border-radius: 15px;
+    padding: 30px;
 
-    .info-left {
+    a {
+      color: $heading-gray;
+      margin-bottom: 10px;
 
-      min-width: 250px;
-      margin-right: 100px;
-
-      h2 {
-        font-weight: 300;
-        font-size: 22px;
-        color: $paragraph-gray;
-      }
+      &:hover {
+        color: $red-dark;
+        cursor: pointer;
     }
 
-    .info-right {
+      &.active {
+        color: $red-dark;
+      }
+    }
+  }
+
+  .profile-section {
+    padding-left: 30px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .info {
+
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-grow: 1;
-      font-size: 16px;
-
-      &.subscription-type {
-        justify-content: start;
-      }
-
-      .field {
-        margin-right: 10px;
-        color: $heading-gray;
-      }
-
-      input {
-        font-size: 16px;
-        font-family: $rubik;
-        border: none;
-        color: $red-dark;
-
-        &:focus {
-          outline: none;
+      padding: 20px 0;
+      margin-left: 30px;
+      margin-right: 100px;
+      border-bottom: $border-thin;
+      font-family: $rubik;
+  
+      .info-left {
+  
+        min-width: 250px;
+        margin-right: 100px;
+  
+        h2 {
+          font-weight: 300;
+          font-size: 22px;
+          color: $paragraph-gray;
         }
       }
-
-      a, label {
-        text-decoration: none;
-        user-select: none;
-        color: $red-dark;
-
-        &:hover {
-          color: $blue-dark;
-          cursor: pointer;
+  
+      .info-right {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-grow: 1;
+        font-size: 16px;
+  
+        &.subscription-type {
+          justify-content: start;
+        }
+  
+        .field {
+          margin-right: 10px;
+          color: $heading-gray;
+        }
+  
+        input {
+          font-size: 16px;
+          font-family: $rubik;
+          border: none;
+          color: $red-dark;
+  
+          &:focus {
+            outline: none;
+          }
+        }
+  
+        a, label {
+          text-decoration: none;
+          user-select: none;
+          color: $red-dark;
+  
+          &:hover {
+            color: $blue-dark;
+            cursor: pointer;
+          }
         }
       }
     }
+  
+    .info:last-child {
+      border: none;
+    }
   }
 
-  .info:last-child {
-    border: none;
-  }
 }

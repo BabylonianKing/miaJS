@@ -24,7 +24,7 @@ export class OnboardingPageComponent implements OnInit {
   loadAnimation(event: boolean) {
     if (event) {
       this.showPage = false
-      this.crudService.delay(3000).then(() => {
+      this.crudService.delay(7000).then(() => {
         this.router.navigateByUrl("profile")
       }
       )
