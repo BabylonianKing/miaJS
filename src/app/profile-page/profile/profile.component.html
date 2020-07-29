@@ -56,13 +56,13 @@
         <div class="info-right">
           <div class="field">
             <p [hidden]="profileService.editingPhone"> {{ crudService.formatNumber(user.phoneNumber) }}</p>
-  
-  
+
+
             <form #newPhone="ngForm" (submit)="profileService.editPhone(newPhone.value)">
               <input [hidden]="!profileService.editingPhone" placeholder="New phone number" type="tel" name="phone" autocomplete="off" ngModel>
             </form>
-  
-  
+
+
           </div>
           <a (click)="profileService.editingPhone = !profileService.editingPhone" [hidden]="profileService.editingPhone">Edit</a>
           <a (click)="profileService.editingPhone = !profileService.editingPhone" [hidden]="!profileService.editingPhone">Save</a>
@@ -142,11 +142,11 @@
         <div class="info-right">
           <div class="field">
             <p [hidden]="profileService.editingPassword">{{ crudService.formatSpokenLanguages(user.interests) || null}}</p>
-  
+
             <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
               <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
             </form>
-  
+
           </div>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
@@ -162,11 +162,11 @@
         <div class="info-right">
           <div class="field">
             <p [hidden]="profileService.editingPassword">{{ crudService.formatSpokenLanguages(user.values) || null}}</p>
-  
+
             <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
               <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
             </form>
-  
+
           </div>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
@@ -186,11 +186,11 @@
         <div class="info-right">
           <div class="field">
             <p [hidden]="profileService.editingPassword">{{ crudService.formatSpokenLanguages(user.spokenLanguages) || null}}</p>
-  
+
             <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
               <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
             </form>
-  
+
           </div>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
@@ -205,11 +205,11 @@
         <div class="info-right">
           <div class="field">
             <p [hidden]="profileService.editingPassword">{{ crudService.formatSpokenLanguages(user.spokenLanguages) || null}}</p>
-  
+
             <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
               <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
             </form>
-  
+
           </div>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
@@ -224,11 +224,11 @@
         <div class="info-right">
           <div class="field">
             <p [hidden]="profileService.editingPassword">{{ crudService.formatSpokenLanguages(user.spokenLanguages) || null}}</p>
-  
+
             <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
               <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
             </form>
-  
+
           </div>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
@@ -243,11 +243,11 @@
         <div class="info-right">
           <div class="field">
             <p [hidden]="profileService.editingPassword">{{ crudService.formatSpokenLanguages(user.spokenLanguages) || null}}</p>
-  
+
             <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
               <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
             </form>
-  
+
           </div>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
@@ -262,11 +262,11 @@
         <div class="info-right">
           <div class="field">
             <p [hidden]="profileService.editingPassword">{{ crudService.formatSpokenLanguages(user.spokenLanguages) || null}}</p>
-  
+
             <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
               <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
             </form>
-  
+
           </div>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
@@ -276,7 +276,7 @@
 
     <!-- ACCOUNT -->
     <div class="profile-section" *ngIf="section === 2">
-      
+
       <!-- EMAIL -->
       <div class="info">
         <div class="info-left">
@@ -289,11 +289,11 @@
             <img *ngIf="user.emailVerified" src="/assets/close.svg">
             <!-- EMAIL NOT VERIFIED => TO FILTERED INBOX -->
             <a href="https://mail.google.com/mail/u/0/#search/from%3Amatilda+in%3Aanywhere" target="_blank" class="verify-email" *ngIf="!user.emailVerified">Please verify your email!</a>
-  
+
             <form #newEmail="ngForm" (submit)="profileService.editEmail(newEmail.value.email)">
               <input [hidden]="!profileService.editingEmail" placeholder="New email" type="email" name="email" autocomplete="off" ngModel>
             </form>
-  
+
           </div>
           <a (click)="profileService.editingEmail = !profileService.editingEmail" [hidden]="profileService.editingEmail">Edit</a>
           <a (click)="profileService.editingEmail = !profileService.editingEmail" [hidden]="!profileService.editingEmail">Save</a>
@@ -308,11 +308,11 @@
         <div class="info-right">
           <div class="field">
             <p [hidden]="profileService.editingPassword">**********</p>
-  
+
             <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
               <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
             </form>
-  
+
           </div>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>
@@ -327,11 +327,11 @@
         <div class="info-right">
           <div class="field">
             <p [hidden]="profileService.editingPassword">Weekly</p>
-  
+
             <form #newPassword="ngForm" (submit)="profileService.editPassword(newPassword.value.password)">
               <input [hidden]="!profileService.editingPassword" placeholder="New password" type="password" name="password" autocomplete="off" ngModel>
             </form>
-  
+
           </div>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="profileService.editingPassword">Edit</a>
           <a (click)="profileService.editingPassword = !profileService.editingPassword" [hidden]="!profileService.editingPassword">Save</a>

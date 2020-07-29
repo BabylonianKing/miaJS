@@ -11,23 +11,23 @@ import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 export class ProfilePageComponent implements OnInit {
 
   userInfos: any;
+  loading: boolean = true;
 
   constructor(
     public crudService: CrudService,
     public menu: MenuToggleService) { }
 
-  
+
   // Timeout?
   ngOnInit(): void {
-    setTimeout(() => {
-      this.crudService.getUserInfos() 
-      .subscribe(result => {
-        console.log(result)
-        this.userInfos = result;
-      })
 
-      
-    }, 1000)
+
+      this.crudService.delay(600).then(() => {this.loading=false})
+
+    // setTimeout(() => {
+
+
+    // }, 1000)
 
   }
 
