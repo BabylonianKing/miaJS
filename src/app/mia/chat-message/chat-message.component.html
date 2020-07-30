@@ -1,7 +1,7 @@
 <div class="message-container" [ngClass]=" {'user': reply} ">
 
   <div *ngIf="!messageImage" class="message-bubble" [ngClass]=" {'user': reply} " [ngStyle]="{display: (richCard ? 'none': 'block')}">
-    <p class="message">{{ message }}</p>
+    <p class="message" [innerHTML]="message"></p>
   </div>
   <img class="image-bubble" *ngIf="messageImage" src="{{ message }}">
   <p class="message-timestamp" [ngStyle]="{display: (richCard ? 'none': 'block')}">{{ timestamp }}</p>

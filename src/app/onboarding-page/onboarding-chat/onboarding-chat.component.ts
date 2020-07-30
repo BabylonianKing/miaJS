@@ -74,7 +74,7 @@ export class OnboardingChatComponent implements AfterViewInit {
     this.userRefData.subscribe(data => {
       this.user = data
       this.messages = this.onboardingService.addTempBotMessage(this.messages, `Hello there, ${this.user.firstName || this.user.displayName || "friend"}. It's nice meeting you!`)
-      this.messages = this.onboardingService.addTempBotMessage(this.messages, "My name is Matilda, and I’m here to help you find work opportunities that match you best! Before we get started, how about we get to know each other? Just say \"Let's create my profile\" to start. ")
+      this.messages = this.onboardingService.addTempBotMessage(this.messages, `My name is Matilda, and I’m here to help you find work opportunities that match you best! Before we get started, how about we get to know each other? Just say \"Let's create my profile\" to start. `)
       this.chips = ["Let's create my profile!"]
       this.showChips = true
       this.userRefData.unsubscribe()
