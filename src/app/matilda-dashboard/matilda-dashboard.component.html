@@ -8,7 +8,7 @@
           <div class="header">
              <div class="header-left">
                <!-- ADD LOGO OR DEFAULT -->
-               <img class="logo">
+               <img class="logo" >
                <div class="job-infos">
                  <h2>{{crudService.currentJobInfos.title}}</h2>
                  <h3>{{crudService.currentJobInfos.company}} - {{crudService.currentJobInfos.location}}</h3>
@@ -22,24 +22,75 @@
           <div class="main">
             <div class="main-left">
               <div class="quick-infos">
-                <p>Type: {{crudService.currentJobInfos.employmentType}}</p>
-                <p>Hours: {{crudService.currentJobInfos.workHours}}</p>
-                <p>Salary: {{crudService.currentJobInfos.baseSalary}}$ {{crudService.currentJobInfos.salaryType}}</p>
-                <p>Posted on date: {{crudService.formatDate(crudService.currentJobInfos.datePosted)}}</p>
-                <p>Advertised Until: {{crudService.formatDate(crudService.currentJobInfos.advertisedUntil)}}</p>
-                <p>Platform: <a href="{{crudService.currentJobInfos.url}}" target="_blank">{{crudService.currentJobInfos.url}}</a></p>
+                <div class="split">
+                  <div class="info">
+                    <h6>Job Type</h6>
+                    <p>{{crudService.currentJobInfos.employmentType}}</p>
+                  </div>
+                  <div class="info">
+                    <h6>Salary</h6>
+                    <p>{{crudService.currentJobInfos.baseSalary}}$ {{crudService.currentJobInfos.salaryType}}</p>
+                  </div>
+                </div>
+                <div class="split">
+                  <div class="info">
+                    <h6>Hours</h6>
+                    <p>{{crudService.currentJobInfos.workHours}}</p>
+                  </div>
+                  <div class="info">
+                    <h6>Language(s)</h6>
+                    <p>{{crudService.currentJobInfos.language || "Not available"}}</p>
+                  </div>
+                </div>
+                <div class="split">
+                  <div class="info">
+                    <h6>Experience requirements</h6>
+                    <p>{{crudService.currentJobInfos.experienceRequirements || "Not available"}}</p>
+                  </div>
+                  <div class="info">
+                    <h6>Education requirements</h6>
+                    <p>{{crudService.currentJobInfos.educationRequirements || "Not available"}}</p>
+                  </div>
+                </div>
+                <div class="split">
+                  <div class="info">
+                    <h6>Employment group</h6>
+                    <p>{{crudService.currentJobInfos.employmentGroup || "Not available"}}</p>
+                  </div>
+                  <div class="info">
+                    <h6>Special commitments</h6>
+                    <p>{{crudService.currentJobInfos.specialCommitments || "Not available"}}</p>
+                  </div>
+                </div>
+                <div class="split">
+                  <div class="info">
+                    <h6>Posted on</h6>
+                    <p>{{crudService.formatDate(crudService.currentJobInfos.datePosted)}}</p>
+                  </div>
+                  <div class="info">
+                    <h6>Advertised Until</h6>
+                    <p>{{crudService.formatDate(crudService.currentJobInfos.advertisedUntil)}}</p>
+                  </div>
+                </div>
+                <div class="split">
+                  <div class="info">
+                    <h6>Platform</h6>
+                    <p><a href="" target="_blank">{{crudService.currentJobInfos.url}}</a></p>
+                  </div>
+                </div>
               </div>
               <div class="description">
-                <p>Description: {{crudService.currentJobInfos.description}}</p>
+                <div class="info">
+                  <h6>Description</h6>
+                  <p>{{crudService.currentJobInfos.description || "Not available"}}</p>
+                </div>
               </div>
             </div>
             <div class="main-right">
-              <p>Match: {{crudService.currentJobInfos.score}}%</p>
-              <p>Languages: {{crudService.currentJobInfos.language}}</p>
-              <p>Education: {{crudService.currentJobInfos.educationRequirements || "Not available"}}</p>
-              <p>Work: {{crudService.currentJobInfos.experienceRequirements}}</p>
-              <p>Employment Group: {{crudService.currentJobInfos.employmentGroup}}</p>
-              <p>Special Commitments: {{crudService.currentJobInfos.specialCommitments}}</p>
+              <div class="percentage-match">
+                <h6>Compatibility</h6>
+                <h2 [ngClass]="{ 'green': crudService.currentJobInfos.score >= 80, 'yellow': crudService.currentJobInfos.score < 80 && crudService.currentJobInfos.score >= 60 }">{{ crudService.currentJobInfos.score }}%</h2>
+              </div>
             </div>
           </div>
           <div class="footer">
