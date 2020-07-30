@@ -239,13 +239,40 @@ export class CrudService {
           url: (card.url != undefined) ? card.url:null,
           description: (card.description != undefined) ? card.description:null,
           score: (card.score != undefined) ? card.score:null,
-          jobId: card.jobId
+          jobId: (card.jobId != undefined) ? card.jobId:null,
 
         };
         arrayOfCards.push(cardObject)
 
   })
 
+  let ref;
+  console.log(richResponse)
+  //If match results in no jobs found
+  if (richResponse.length == 0) {
+    data = {
+      sender: 'Bot',
+      date: new Date(),
+      richCard: false,
+      text: "Sorry, we didn't find any jobs for you :("
+  }
+  ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
+  ref.set(data);
+
+  this.delay(2000).then(content => {
+    data = {
+      sender: 'Bot',
+      date: new Date(),
+      richCard: false,
+      text: "Would you like to try again?"
+  }
+
+  ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
+  ref.set(data);
+
+  })
+
+  } else {
     data = {
       sender: 'Bot',
       date: new Date(),
@@ -254,39 +281,37 @@ export class CrudService {
   }
 
 
-    let ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
+
+  ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
+  ref.set(data);
+
+  this.delay(2000).then(content => {
+    data = {
+      sender: 'Bot',
+      date: new Date(),
+      richCard: true,
+      cards: arrayOfCards
+  }
+
+    ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
     ref.set(data);
 
     this.delay(2000).then(content => {
       data = {
         sender: 'Bot',
         date: new Date(),
-        richCard: true,
-        cards: arrayOfCards
+        richCard: false,
+        text: "If you are happy/disappointed with the jobs, please leave us a feedback so we can improve!"
     }
 
       ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
       ref.set(data);
 
-      this.delay(2000).then(content => {
-        data = {
-          sender: 'Bot',
-          date: new Date(),
-          richCard: false,
-          text: "If you are satisfied with the jobs, please leave us a feedback here."
-      }
-
-        ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());
-        ref.set(data);
-
-      })
-
     })
 
+  })
 
-
-
-
+  }
 
 
   }
@@ -503,6 +528,25 @@ export class CrudService {
     final = final.slice(0, -2)
 
     return final
+  }
+
+  formatDescription(description) {
+    console.log(description)
+    //If description is from job bank
+    if (typeof(description) != "string") {
+      for (const property in description) {
+        console.log(`${property}: ${description[property]}`);
+      }
+    }
+
+    //This code doesn't work
+    // else if (description == null) {
+    //   let finalDescription = "Rlly Unavailable"
+    //   return finalDescription
+    // }
+    else {
+      return description
+    }
   }
 
 

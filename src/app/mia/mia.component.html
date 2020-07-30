@@ -30,6 +30,12 @@
         type="text"
         message="...">
     </chat-message>
+
+    <div *ngIf="showChips">
+      <chat-chip *ngFor="let chip of chips" (click)="addChipMessage(chip)"
+      [text]="chip">
+      </chat-chip>
+    </div>
 </div>
 
 <div class="chat-footer">

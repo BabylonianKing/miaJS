@@ -53,6 +53,7 @@ export class UserService {
   // Sign in with Google
   async googleSignin() {
     const credential = await this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
+    console.log(credential)
     this.SetUserData(credential.user)
     this.router.navigate(['/chat']);
   }
@@ -64,15 +65,15 @@ export class UserService {
 
   private SetUserData(user) {
 
-    console.log("Hello")
+    console.log(user)
 
     const data = {
       uid: user.uid,
-      firstName: this.createFirstName,
-      lastName: this.createLastName,
-      displayName: this.createFirstName + ' ' + this.createLastName,
+      firstName: this.createFirstName || null,
+      lastName: this.createLastName || null,
+      displayName: user.displayName || this.createFirstName + ' ' + this.createLastName,
       email: user.email,
-      photoURL: user.photoURL,
+      photoURL: user.photoURL || null,
       emailVerified: user.emailVerified
     }
 

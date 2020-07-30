@@ -23,6 +23,9 @@ export class MiaComponent implements AfterViewInit {
   messages = [];
   loading = false;
 
+  showChips: boolean = false;
+  chips = [];
+
   constructor(
     public sideNavService: MenuToggleService,
     public crudService: CrudService
@@ -35,7 +38,6 @@ export class MiaComponent implements AfterViewInit {
 
   this.crudService.messageInit().get().toPromise().then(snapshot => {
       if (snapshot.empty) {
-        //TODO: Fix Bug where this initial message doesn't show up
         this.crudService.addBotMessage({fulfillmentText: "My name is Matilda, and I’m here to help you find work opportunities that match you best! Just say \"Let's find a job\" to get started."});
         return
       }
@@ -43,6 +45,13 @@ export class MiaComponent implements AfterViewInit {
     this.crudService.messageInit().valueChanges().subscribe(data => {
       this.messages = data
 
+      if (this.messages[this.messages.length-1].text == "Would you like to try again?") {
+        this.chips = ["Yes, let's find a new job", "No thanks"]
+        this.showChips = true
+
+      }
+
+      //Necessary for initally message to show up
       this.crudService.messageInit().get().toPromise().then(snapshot => {
         if (snapshot.empty) {
           //TODO: Fix Bug where this initial message doesn't show up
@@ -89,6 +98,12 @@ export class MiaComponent implements AfterViewInit {
     return variable
   }
 
+  addChipMessage(chipText) {
+    this.showChips = false
+    this.handleUserMessage({message: chipText})
+
+  }
+
 
   // Get event from ChatFormComponent
   handleUserMessage(event) {
@@ -96,6 +111,7 @@ export class MiaComponent implements AfterViewInit {
     this.crudService.handleUserMessage(event).subscribe(res => {
       //Uploads bot message to Firestore database
       this.crudService.addBotMessage(res);
+
       this.loading = false;
     });
   }

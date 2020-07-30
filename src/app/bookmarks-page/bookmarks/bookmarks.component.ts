@@ -31,7 +31,9 @@ export class BookmarksComponent implements OnInit {
       console.log(job)
       return (
         job.title.stringValue.toLowerCase().includes(value) ||
-        job.company.stringValue.toLowerCase().includes(value)
+        job.company.stringValue.toLowerCase().includes(value) ||
+        job.location.stringValue.toLowerCase().includes(value) ||
+        job.employmentType.stringValue.toLowerCase().includes(value)
       );
     });
   }

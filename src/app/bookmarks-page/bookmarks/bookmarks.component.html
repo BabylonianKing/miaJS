@@ -18,7 +18,7 @@
         [jobId] = "(item.jobId != undefined) ? item.jobId.stringValue : null"
         [logo] = "(item.logo != undefined) ? item.logo.stringValue : null"
         [description] = "(item.description.structValue != undefined) ? item.description.structValue.fields : 'Unavailable'"
-        [employmentType] = "(item.employmentType != undefined) ? item.employmentType.stringValue : null"
+        [employmentType] = "(item.employmentType.stringValue != undefined) ? item.employmentType.stringValue : 'Unavailable'"
         [location] = "(item.location != undefined) ? item.location.stringValue : null"
         [baseSalary] = "(item.baseSalary != undefined) ? item.baseSalary : null"
         [salaryType] = "(item.salaryType != undefined) ? item.salaryType.stringValue : null"
