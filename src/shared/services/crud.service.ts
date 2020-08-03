@@ -366,7 +366,10 @@ export class CrudService {
         this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(doc.id).delete()
       })
 
+      location.reload()
+
     })
+
 
   }
 
@@ -448,6 +451,35 @@ export class CrudService {
   closeJobInfos() {
     this.showJobInfos = false;
   }
+
+
+
+
+
+//Onboarding
+
+finalizeOnboarding() {
+  this.uid = JSON.parse(localStorage.getItem('user')).uid;
+  let ref = this.db.collection("users").doc(this.uid)
+      ref.set({onboarded: true}, {merge: true});
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

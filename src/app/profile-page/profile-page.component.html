@@ -1,7 +1,7 @@
 <div class="root">
   <toolbar [ngClass]="{'hidden': menu.hideSideNav }"></toolbar>
-  <!-- <div class="loader" *ngIf="loading"></div> -->
-  <profile [ngStyle]="{display: (loading ? 'none': 'block')}"></profile>
+  <div class="loader" *ngIf="loading"></div>
+  <profile [ngStyle]="{display: (loading ? 'none': 'block')}" (loaded)="loading=false"></profile>
   <div class="shadow" [ngClass]="{ opened: menu.showBugPopup || menu.showSuggestionPopup }" (click)="menu.showBugPopup = false; menu.showSuggestionPopup = false">
     <div class="bug-report" [ngClass]="{ opened: menu.showBugPopup }">
       <div class="form">

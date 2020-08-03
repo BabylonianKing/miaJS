@@ -14,18 +14,19 @@ import { MatildaDashboardComponent } from './matilda-dashboard/matilda-dashboard
 import { AuthenticationGuard } from 'src/shared/guard/authentication.guard';
 import { HomepageComponent } from './homepage/homepage.component';
 import { OnboardingPageComponent } from './onboarding-page/onboarding-page.component';
+import { OnboardingGuard } from 'src/shared/guard/onboarding.guard';
 
 
 const routes: Routes = [
   { path: '', component: HomepageComponent},
   { path: 'dashboard', component: ConvoDashboardComponent, canActivate: [AuthenticationGuard] },
-  { path: 'chat', component: MatildaDashboardComponent },  
+  { path: 'chat', component: MatildaDashboardComponent, canActivate: [AuthenticationGuard] },
   { path: 'login', component: LoginPageComponent },
   { path: 'signup', component: SignupPageComponent },
   { path: 'profile', component: ProfilePageComponent, canActivate: [AuthenticationGuard] },
   { path: 'post-job', component: PostJobPageComponent, canActivate: [AuthenticationGuard] },
   { path: 'bookmarks', component: BookmarksPageComponent, canActivate: [AuthenticationGuard] },
-  { path: 'onboarding', component: OnboardingPageComponent, canActivate: [AuthenticationGuard]}
+  { path: 'onboarding', component: OnboardingPageComponent, canActivate: [OnboardingGuard]}
 ];
 
 @NgModule({

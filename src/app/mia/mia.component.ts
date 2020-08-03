@@ -39,7 +39,6 @@ export class MiaComponent implements AfterViewInit {
   this.crudService.messageInit().get().toPromise().then(snapshot => {
       if (snapshot.empty) {
         this.crudService.addBotMessage({fulfillmentText: "My name is Matilda, and I’m here to help you find work opportunities that match you best! Just say \"Let's find a job\" to get started."});
-        return
       }
     })
     this.crudService.messageInit().valueChanges().subscribe(data => {
@@ -51,12 +50,19 @@ export class MiaComponent implements AfterViewInit {
 
       }
 
+      else if (this.messages[this.messages.length-1].text == "My name is Matilda, and I’m here to help you find work opportunities that match you best! Just say \"Let's find a job\" to get started.") {
+        console.log("chips are real")
+        this.chips = ["Let's find a new job", "I want a job!"]
+        this.showChips = true
+
+      }
+
       //Necessary for initally message to show up
       this.crudService.messageInit().get().toPromise().then(snapshot => {
         if (snapshot.empty) {
           //TODO: Fix Bug where this initial message doesn't show up
           this.crudService.addBotMessage({fulfillmentText: "My name is Matilda, and I’m here to help you find work opportunities that match you best! Just say \"Let's find a job\" to get started."});
-          return
+
         }
       })
 

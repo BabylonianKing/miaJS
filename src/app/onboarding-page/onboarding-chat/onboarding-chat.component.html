@@ -18,7 +18,7 @@
     <div class="upload-shadow" [ngClass]="{ visible: showUpload }" (drop)="drop($event)" (dragover)="allowDrop($event)" (dragleave)="removeDrop($event)">
       <div class="upload-container">
         <button class='default-button-small' (click)=untoggleUpload()>X</button>
-        <input type="file" #fileDropRef id="fileDropRef" (change)="upload($event)" />
+        <input type="file" #fileDropRef id="fileDropRef" (change)="upload($event, fileType)" />
         <img src="{{ (downloadURL | async) || 'assets/dnd/ic-upload-file.svg'}}" alt="">
         <div *ngIf="uploadProgress | async;">
           <div>{{ uploadProgress | async}}%</div>
@@ -29,7 +29,7 @@
         <div class="default-button">
           <label for="fileDropRef">Browse for file</label>
         </div>
-        <div class="default-button" (click)=sendImageToMatilda()>
+        <div class="default-button" (click)=sendFileToMatilda(fileType)>
           <a>Send</a>
         </div>
 
@@ -76,8 +76,9 @@
 
     <div class="chat-footer" (scroll)="scrolled($event)" #scrollframe>
         <chat-form (send)="handleUserMessage($event)"></chat-form>
-        <div class="skip-container" (click)="nextFlow()">
-            <a class="skip">Skip</a><i class="fa fa-chevron-right" aria-hidden="true"></i>
+        <div class="skip-container" (click)="nextFlow()"> <!-- *ngIf="allowSkip" -->
+
+            <a class="skip" >Skip</a><i class="fa fa-chevron-right" aria-hidden="true"></i>
         </div>
     </div>
 

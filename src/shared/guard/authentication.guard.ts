@@ -21,10 +21,10 @@ export class AuthenticationGuard implements CanActivate {
 
     this.afAuth.authState.subscribe( user => {
       if (!user){
-        this.router.navigate(['login'])
+        this.router.navigate(['/login'])
         return false;
       }}
-    ) 
+    )
 
     return true;
   }

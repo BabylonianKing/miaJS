@@ -46,6 +46,8 @@ export class OnboardingChatComponent implements AfterViewInit {
   sessionId = Math.random().toString(36).substr(2, 9);
 
   //Not sure if I want to keep dragged over
+  fileType;
+  allowSkip: boolean = false
   draggedOver: boolean = false
   showUpload: boolean = false
   task;
@@ -138,6 +140,7 @@ export class OnboardingChatComponent implements AfterViewInit {
       this.onboardingService.onboardingStep += 1;
 
       if (this.onboardingService.onboardingStep == 1) {
+        this.allowSkip = true
         this.messages = this.onboardingService.addTempBotMessage(this.messages, "Great, now I will need your contact information. What is your phone number?")
 
 
@@ -162,15 +165,27 @@ export class OnboardingChatComponent implements AfterViewInit {
 
     addChipMessage(chipText) {
       this.showChips = false
-      this.handleUserMessage({message: chipText})
 
       if (chipText == "Yes please!") {
         this.showUpload = true
+        this.fileType = "profileImage"
+      } else if (chipText == "Yes!"){
+        this.showUpload = true
+        this.fileType = "resume"
+      } else {
+        this.handleUserMessage({message: chipText})
       }
+
     }
 
-    sendImageToMatilda() {
-      this.downloadURL.subscribe(url => this.handleUserMessage({message: url}))
+
+
+    sendFileToMatilda(fileType) {
+      if (fileType =="profileImage") {
+        this.downloadURL.subscribe(url => this.handleUserMessage({message: url}))
+      } else if (fileType == "resume") {
+        this.handleUserMessage({message: "https://www.kindpng.com/picc/m/20-200350_cv-png-resume-logo-png-transparent-png.png"})
+      }
       this.showUpload = false
 
     }
@@ -235,7 +250,11 @@ export class OnboardingChatComponent implements AfterViewInit {
         } else if (res.fulfillmentText.endsWith("Can you confirm this is correct?")) {
           this.chips = ["Yes, this is correct!", "No, I would like to make some changes."]
           this.showChips = true
+        } else if (res.fulfillmentText.endsWith("Would you like to upload your resume for potential employers?")) {
+          this.chips = ["Yes!", "No thanks"]
+          this.showChips = true
         }
+
 
 
 
@@ -280,8 +299,7 @@ export class OnboardingChatComponent implements AfterViewInit {
   }
 
 
-  upload(event) {
-    console.log("upload")
+  upload(event, fileType) {
 
     this.uid = JSON.parse(localStorage.getItem('user')).uid;
 
@@ -289,7 +307,14 @@ export class OnboardingChatComponent implements AfterViewInit {
     event.stopPropagation();
     var data = event.target.files[0];
     this.fileName = data.name
-    let reference = this.afStorage.ref(`/profileImages/${this.uid}`);
+    let reference;
+    if (fileType == "profileImage") {
+      reference = this.afStorage.ref(`/profileImages/${this.uid}`);
+
+    } else if (fileType == "resume") {
+      reference = this.afStorage.ref(`/resumes/${this.uid}`);
+    }
+
     this.task = reference.put(data)
     console.log(this.task.percentageChanges())
 

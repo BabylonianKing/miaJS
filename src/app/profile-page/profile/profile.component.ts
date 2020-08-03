@@ -1,19 +1,8 @@
-  import {
-    Component,
-    OnInit,
-    NgZone,
-    Input
-  } from '@angular/core';
-  import {
-    CrudService
-  } from 'src/shared/services/crud.service';
-  import {
-    UserService
-  } from 'src/shared/services/user.service';
-  import {
-    Router
-  } from '@angular/router';
-  import { NgForm } from '@angular/forms';
+  import { Component, OnInit, NgZone, Input, Output, HostListener, EventEmitter, ElementRef, ViewChild }from '@angular/core';
+  import { CrudService } from 'src/shared/services/crud.service';
+  import { UserService } from 'src/shared/services/user.service';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { NONE_TYPE } from '@angular/compiler';
@@ -29,13 +18,18 @@ import { AngularFirestore } from '@angular/fire/firestore';
     valueHidden: boolean = false;
     inputHidden: boolean = true;
     coverDownloadURL: string;
-    profileDownloadURL: string = "/assets/boy.png";
+    profileDownloadURL: string;
     uploadProgress;
     showResumeUploaded = false;
     user;
     userId: string = JSON.parse(localStorage.getItem('user')).uid;
     resumeEvent;
     userRefData;
+
+
+    @Output() loaded = new EventEmitter();
+    @ViewChild('banner') banner: ElementRef;
+
 
     constructor(
       public crudService: CrudService,
@@ -47,6 +41,12 @@ import { AngularFirestore } from '@angular/fire/firestore';
       public db: AngularFirestore) {}
 
     ngOnInit(): void {
+
+
+
+
+
+
 
       this.userId = JSON.parse(localStorage.getItem('user')).uid;
 
@@ -65,9 +65,13 @@ import { AngularFirestore } from '@angular/fire/firestore';
           this.profileDownloadURL = this.afAuth.userData.photoURL
         }
 
+        if (!this.profileDownloadURL) {
+          this.profileDownloadURL = "/assets/boy.png";
+        }
+
       })
 
-      this.afStorage.ref(`/resume/${this.userId}`).getDownloadURL().toPromise().then(data => {
+      this.afStorage.ref(`/resumes/${this.userId}`).getDownloadURL().toPromise().then(data => {
         if (data) {
           this.showResumeUploaded = true
         }
@@ -76,10 +80,19 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
       this.section = 0;
 
+
     }
+
+    ngAfterViewInit() {
+      this.loaded.emit()
+
+
+  }
+
 
     // PROFILE NAV
     section = 0;
+
 
     uploadBanner(event) {
       let userId = JSON.parse(localStorage.getItem('user')).uid;
@@ -95,7 +108,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
     uploadResume(event) {
       let userId = JSON.parse(localStorage.getItem('user')).uid;
-      let reference = this.afStorage.ref(`/resume/${userId}`);
+      let reference = this.afStorage.ref(`/resumes/${userId}`);
       // the put method creates an AngularFireUploadTask
       // and kicks off the upload
       reference.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());

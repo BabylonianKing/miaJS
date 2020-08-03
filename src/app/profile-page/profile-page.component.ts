@@ -21,14 +21,11 @@ export class ProfilePageComponent implements OnInit {
   // Timeout?
   ngOnInit(): void {
 
+  }
 
-      this.crudService.delay(600).then(() => {this.loading=false})
-
-    // setTimeout(() => {
-
-
-    // }, 1000)
-
+  updateLoading(event) {
+    console.log("loading updated")
+    this.loading = false
   }
 
 }

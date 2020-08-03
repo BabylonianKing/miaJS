@@ -45,10 +45,21 @@ export class UserService {
       .then((result) => {
         this.SendVerificationEmail();
         this.SetUserData(result.user);
+
       }).catch((error) => {
         window.alert(error.message);
+      }).then(() => {
+        this.router.navigate(['/onboarding']);
       })
   }
+
+    // Sign up with Google
+    async googleSignup() {
+      const credential = await this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
+      console.log(credential)
+      this.SetUserData(credential.user)
+      this.router.navigate(['/onboarding']);
+    }
 
   // Sign in with Google
   async googleSignin() {
