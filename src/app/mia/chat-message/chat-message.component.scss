@@ -1,6 +1,7 @@
 @import "./src/styles.scss";
 
 .message-container {
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -59,26 +60,55 @@
 
 .cards-carousel {
     display: grid;
-    grid-template-columns: repeat(4, 325px);
-    column-gap: 20px;
-    max-width: 60%;
-    overflow: auto;
-    padding: 30px;
+    grid-template-columns: 325px 325px 325px;
+    column-gap: 10px;
+    row-gap: 30px;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    padding: 40px 30px;
 
     &:empty {
         display: none;
     }
 
+    &::-webkit-scrollbar {
+        display: none;
+      }
+
+    .see-more {
+        width: 300px;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 15px;
+        border: 1px dashed $border-gray;
+    }
+
 .rich-card {
+    min-width: 300px;
+    max-width: 300px;
+    max-height: 400px;
+    min-height: 400px;
     color: $heading-gray;
     position: relative;
-    font-family: $rubik;
-    width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     background-color: white;
     box-shadow: $box-shadow;
     border-radius: 15px;
+    transform: scale(1);
+    transition: all 0.1s ease-in-out;
+
+    // &::after {
+    //     content: "";
+    //     display: block;
+    //     position: absolute;
+    //     right: -2rem;
+    //     width: 2rem;
+    //     height: 1px;
+    // }
 
     .bookmark-icon {
         height: 40px;
@@ -95,6 +125,8 @@
 
     &:hover {
         cursor: pointer;
+        transform: scale(1.03);
+        transition: all 0.1s ease-in-out;
         
         .bookmark {
             border-radius: 100px;
@@ -132,7 +164,8 @@
     .header {
         display: flex;
         justify-content: space-between;
-        padding: 20px;
+        padding: 10px 20px;
+        padding-top: 20px;
 
         .header-left {
             display: flex;
@@ -223,7 +256,7 @@
         display: flex;
 
         .salary {
-            padding: 20px;
+            padding: 10px 20px;
             width: 50%;
 
             h6 {
@@ -235,7 +268,7 @@
         }
 
         .job-type {
-            padding: 20px;
+            padding: 10px 20px;
             width: 50%;
 
             h6 {
@@ -248,7 +281,7 @@
     }
 
     .buttons {
-        flex-grow: 1;
+        // flex-grow: 1;
         display: flex;
         flex-direction: column;
         padding: 20px;
