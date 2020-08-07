@@ -120,6 +120,10 @@ button, img, input {
     &:hover {
         cursor: pointer;
         color: $blue-light;
+
+        label {
+            cursor: pointer;
+        }
     }
 }
 

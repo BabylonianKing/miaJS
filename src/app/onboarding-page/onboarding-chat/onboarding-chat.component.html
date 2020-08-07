@@ -17,20 +17,20 @@
 
     <div class="upload-shadow" [ngClass]="{ visible: showUpload }" (drop)="drop($event)" (dragover)="allowDrop($event)" (dragleave)="removeDrop($event)">
       <div class="upload-container">
-        <button class='default-button-small' (click)=untoggleUpload()>X</button>
-        <input type="file" #fileDropRef id="fileDropRef" (change)="upload($event, fileType)" />
-        <img src="{{ (downloadURL | async) || 'assets/dnd/ic-upload-file.svg'}}" alt="">
-        <div *ngIf="uploadProgress | async;">
-          <div>{{ uploadProgress | async}}%</div>
-          <div> File name: {{ fileName }}</div>
+        <div class="icon" (click)="untoggleUpload()"><img src="assets/close.svg"></div>
+        <div>
+          <input type="file" #fileDropRef id="fileDropRef" (change)="upload($event, fileType)" />
+          <img class="profile-pic" src="{{ (downloadURL | async) || ''}}" alt="">
+          <div *ngIf="uploadProgress | async;">
+            <p class="file">{{ fileName }}</p>
+          </div>
+          <h4>Drag and drop here</h4>
+          <div class="default-link">
+            <label for="fileDropRef">Browse for file</label>
+          </div>
         </div>
-        <h3>Drag and drop file here</h3>
-        <h3>or</h3>
-        <div class="default-button">
-          <label for="fileDropRef">Browse for file</label>
-        </div>
-        <div class="default-button" (click)=sendFileToMatilda(fileType)>
-          <a>Send</a>
+        <div class="default-button-small" (click)=sendFileToMatilda(fileType)>
+          <a>Upload to profile</a>
         </div>
 
 
@@ -78,7 +78,7 @@
         <chat-form (send)="handleUserMessage($event)"></chat-form>
         <div class="skip-container" (click)="nextFlow()"> <!-- *ngIf="allowSkip" -->
 
-            <a class="skip" >Skip</a><i class="fa fa-chevron-right" aria-hidden="true"></i>
+            <a class="skip" >Skip</a>
         </div>
     </div>
 

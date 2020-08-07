@@ -20,10 +20,11 @@
     align-items: center;
     cursor: pointer;
 
-    .skip {
-        margin-right: 5px;
+    &:hover {
+        .skip {
+            color: $blue-light;
+        }
     }
-
 }
 
 .messages-header {
@@ -116,22 +117,6 @@
     line-height: 30px;
   }
 
-  .icon {
-    height: 16px;
-    width: 16px;
-    border-radius: 2px;
-    padding: 5px;
-
-    &:hover {
-        background-color: #D3D1D1;
-        cursor: pointer;
-    }
-
-    img {
-        max-height: 100%;
-        max-width: 100%;
-    }
-}
 
   .messages-header-jd {
     display: -webkit-box;
@@ -197,7 +182,7 @@
 
 chat-form {
     flex: 1;
-    margin-right: 30px;
+    margin-right: 20px;
 }
 
 // SCROLLBAR STYLING
@@ -243,16 +228,23 @@ chat-form {
   padding: 30px;
   text-align: center;
 
-  img {
-    max-width: 100px;
-    max-height: 100px;
-
+  .icon {
+      align-self: flex-end;
   }
 
-  p {
-      max-width: 80%;
-      margin-bottom: 20px;
+  .profile-pic {
+      max-width: 100px;
+      max-height: 100px;
+      border-radius: 1.15em;
+      margin-bottom: 2px;
   }
+
+  .file {
+      color: $paragraph-gray;
+      font-size: 12px;
+      margin-bottom: 10px;
+  }
+
   input {
     opacity: 0;
     position: absolute;
@@ -261,13 +253,6 @@ chat-form {
     // height: 100%;
     top: 0;
     left: 0;
-  }
-
-
-  h3 {
-    font-size: 20px;
-    font-weight: 600;
-    color: #38424c;
   }
 }
 

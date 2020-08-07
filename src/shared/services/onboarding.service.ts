@@ -51,11 +51,13 @@ export class OnboardingService {
       return true
     } else if (res.action === "Onboarding-02-ContactInformations.Onboarding-02-ContactInformations-yes") {
       return true
-    } else if (res.action === "Onboarding-03-Education&EmploymentHistory.Onboarding-03-Education&EmploymentHistory-yes") {
-      return true
-    } else if (res.action === "Onboarding-04-ValuesInterestsObjectives.Onboarding-04-ValuesInterestsObjectives-yes") {
-      return true
-    }
+    } 
+    
+    // else if (res.action === "Onboarding-03-Education&EmploymentHistory.Onboarding-03-Education&EmploymentHistory-yes") {
+    //   return true
+    // } else if (res.action === "Onboarding-04-ValuesInterestsObjectives.Onboarding-04-ValuesInterestsObjectives-yes") {
+    //   return true
+    // }
     else if (res.action === "Onboarding-05-NotificationPreferences.Onboarding-05-NotificationPreferences-yes" && res.allRequiredParamsPresent == true) {
       // return true
     }
@@ -91,32 +93,31 @@ export class OnboardingService {
 
     if (this.onboardingStep == 2) {
       const data = {
-        educationHistory: params["education-history"].listValue,
-        workHistory: params["work-history"].listValue,
-      }
-
-      this.afs.doc(`users/${this.uid}`).set(data, {merge: true});
-
-    }
-    if (this.onboardingStep == 3) {
-      const data = {
-        values: params["values"].listValue,
-        interests: params["interests"].listValue
-      }
-
-
-      this.afs.doc(`users/${this.uid}`).set(data, {merge: true});
-
-    }
-
-    if (this.onboardingStep == 4) {
-      const data = {
         emailFrequency: params["email-frequency"].stringValue
       }
 
       this.afs.doc(`users/${this.uid}`).set(data, {merge: true});
 
     }
+  //   if (this.onboardingStep == 3) {
+  //     const data = {
+  //       values: params["values"].listValue,
+  //       interests: params["interests"].listValue
+  //     }
+
+
+  //     this.afs.doc(`users/${this.uid}`).set(data, {merge: true});
+
+  //   }
+
+  //   if (this.onboardingStep == 4) {
+  //     const data = {
+  //       emailFrequency: params["email-frequency"].stringValue
+  //     }
+
+  //     this.afs.doc(`users/${this.uid}`).set(data, {merge: true});
+
+  //   }
   }
 
 

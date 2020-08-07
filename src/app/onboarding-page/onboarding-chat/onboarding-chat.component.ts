@@ -144,20 +144,24 @@ export class OnboardingChatComponent implements AfterViewInit {
         this.messages = this.onboardingService.addTempBotMessage(this.messages, "Great, now I will need your contact information. What is your phone number?")
 
 
-      } else if (this.onboardingService.onboardingStep == 2) {
-        this.messages = this.onboardingService.addTempBotMessage(this.messages, "Would you like to add your education history? You can simply add your degrees and diplomas. You will be able to add more details (dates, institutions, etc.) on your profile page.")
+      } 
+      
+      // else if (this.onboardingService.onboardingStep == 2) {
+      //   this.messages = this.onboardingService.addTempBotMessage(this.messages, "Would you like to add your education history? You can simply add your degrees and diplomas. You will be able to add more details (dates, institutions, etc.) on your profile page.")
 
 
-      } else if (this.onboardingService.onboardingStep == 3) {
-        this.messages = this.onboardingService.addTempBotMessage(this.messages, "What values are dear to you?")
+      // } else if (this.onboardingService.onboardingStep == 3) {
+      //   this.messages = this.onboardingService.addTempBotMessage(this.messages, "What values are dear to you?")
 
-      } else if (this.onboardingService.onboardingStep == 4) {
+      // } 
+      
+      else if (this.onboardingService.onboardingStep == 2) {
         this.messages = this.onboardingService.addTempBotMessage(this.messages, "What are your notification preferences?")
         this.chips = ["Daily", "Weekly", "Monthly"]
         this.showChips = true
 
 
-      } else if (this.onboardingService.onboardingStep == 5) {
+      } else if (this.onboardingService.onboardingStep == 3) {
         this.loadingProfile.emit(true)
       }
     }
