@@ -9,7 +9,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class OnboardingProgressComponent implements OnInit {
 
-  userId: string = JSON.parse(localStorage.getItem('user')).uid;
+  userId;
   userRefData;
   user;
 
@@ -20,12 +20,17 @@ export class OnboardingProgressComponent implements OnInit {
   ngOnInit(): void {
 
     this.userId = JSON.parse(localStorage.getItem('user')).uid;
+    console.log(this.userId)
 
-      this.userRefData = this.db.doc(`users/${this.userId}`).valueChanges()
+      this.userRefData = this.db.doc(`users/${this.userId}`).get().toPromise().then(document => {
+        this.user = document.data()
+        console.log(this.user)
 
-      this.userRefData.subscribe(data => {
-        this.user = data
-      });
+      })
+
+      // this.userRefData.subscribe(data => {
+      //   this.user = data
+      // });
 
   }
 

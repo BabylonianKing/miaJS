@@ -90,6 +90,27 @@ import { AngularFirestore } from '@angular/fire/firestore';
   }
 
 
+  resetEdits() {
+    this.profileService.editingName = false
+    this.profileService.editingDOB = false
+    this.profileService.editingEducation = false
+    this.profileService.editingEmail = false
+    this.profileService.editingEmailFrequency = false
+    this.profileService.editingExperience = false
+    this.profileService.editingGender = false
+    this.profileService.editingHonors = false
+    this.profileService.editingInterests = false
+    this.profileService.editingLanguages = false
+    this.profileService.editingName = false
+    this.profileService.editingPassword = false
+    this.profileService.editingPhone = false
+    this.profileService.editingSkills = false
+    this.profileService.editingSocialLinks = false
+    this.profileService.editingValues = false
+
+  }
+
+
     // PROFILE NAV
     section = 0;
 

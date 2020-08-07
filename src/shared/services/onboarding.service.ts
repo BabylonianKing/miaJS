@@ -9,7 +9,15 @@ export class OnboardingService {
   constructor(private afs: AngularFirestore,
     ) { }
 
-  uid = JSON.parse(localStorage.getItem('user')).uid;
+    uid;
+
+
+  ngAfterViewInit() {
+    this.uid = JSON.parse(localStorage.getItem('user')).uid;
+
+
+  }
+
 
   onboardingStep: number = 0;
 
@@ -51,15 +59,17 @@ export class OnboardingService {
       return true
     } else if (res.action === "Onboarding-02-ContactInformations.Onboarding-02-ContactInformations-yes") {
       return true
-    } 
-    
+    }
+
     // else if (res.action === "Onboarding-03-Education&EmploymentHistory.Onboarding-03-Education&EmploymentHistory-yes") {
     //   return true
     // } else if (res.action === "Onboarding-04-ValuesInterestsObjectives.Onboarding-04-ValuesInterestsObjectives-yes") {
     //   return true
     // }
-    else if (res.action === "Onboarding-05-NotificationPreferences.Onboarding-05-NotificationPreferences-yes" && res.allRequiredParamsPresent == true) {
-      // return true
+    else if (res.action == "Onboarding-05-NotificationPreferences.Onboarding-05-NotificationPreferences-yes" && res.allRequiredParamsPresent == true) {
+      return true
+    } else if (res.action == "Onboarding-05-NotificationPreferences.Onboarding-05-NotificationPreferences-no" && res.allRequiredParamsPresent == true) {
+      return true
     }
     else {
       return false
@@ -74,7 +84,7 @@ export class OnboardingService {
         dateOfBirth: new Date(params['date-of-birth'].stringValue),
         gender: params["gender"].stringValue,
         //This list value might have to be modified
-        spokenLanguages: params["spoken-languages"].listValue,
+        spokenLanguages: params["spoken-languages"].listValue.values,
       }
 
 
@@ -86,14 +96,14 @@ export class OnboardingService {
       const data = {
         phoneNumber:  params["phone-number"].stringValue,
         location: params["location"].stringValue,
-        links: params["social-links"].listValue,
+        links: params["social-links"].listValue.values,
       }
       this.afs.doc(`users/${this.uid}`).set(data, {merge: true});
     }
 
     if (this.onboardingStep == 2) {
       const data = {
-        emailFrequency: params["email-frequency"].stringValue
+        emailFrequency: params["frequency"].stringValue
       }
 
       this.afs.doc(`users/${this.uid}`).set(data, {merge: true});

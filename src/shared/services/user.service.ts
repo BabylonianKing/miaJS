@@ -27,6 +27,11 @@ export class UserService {
     })
   }
 
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}
+
+
   // Sign in with email/password
   SignIn(email, password) {
     return this.afAuth.signInWithEmailAndPassword(email, password)
@@ -49,7 +54,8 @@ export class UserService {
       }).catch((error) => {
         window.alert(error.message);
       }).then(() => {
-        this.router.navigate(['/onboarding']);
+        this.delay(1000).then(() => {this.router.navigate(['/onboarding'])})
+
       })
   }
 
@@ -58,7 +64,7 @@ export class UserService {
       const credential = await this.afAuth.signInWithPopup(new auth.GoogleAuthProvider());
       console.log(credential)
       this.SetUserData(credential.user)
-      this.router.navigate(['/onboarding']);
+      this.delay(1000).then(() => {this.router.navigate(['/onboarding']) })
     }
 
   // Sign in with Google

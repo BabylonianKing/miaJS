@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfilePageComponent, canActivate: [AuthenticationGuard] },
   { path: 'post-job', component: PostJobPageComponent, canActivate: [AuthenticationGuard] },
   { path: 'bookmarks', component: BookmarksPageComponent, canActivate: [AuthenticationGuard] },
-  { path: 'onboarding', component: OnboardingPageComponent}
+  { path: 'onboarding', component: OnboardingPageComponent, canActivate: [OnboardingGuard]}
 ];
 
 @NgModule({

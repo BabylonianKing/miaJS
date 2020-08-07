@@ -65,22 +65,28 @@ export class OnboardingChatComponent implements AfterViewInit {
     public db: AngularFirestore,
     public afStorage: AngularFireStorage) {}
 
+
   ngAfterViewInit() {
     console.log(this.sessionId)
 
-
     this.userId = JSON.parse(localStorage.getItem('user')).uid;
 
-    this.userRefData = this.db.doc(`users/${this.userId}`).valueChanges()
-
-    this.userRefData.subscribe(data => {
-      this.user = data
+    this.userRefData = this.db.doc(`users/${this.userId}`).get().toPromise().then(document => {
+      this.user = document.data()
       this.messages = this.onboardingService.addTempBotMessage(this.messages, `Hello there, ${this.user.firstName || this.user.displayName || "friend"}. It's nice meeting you!`)
       this.messages = this.onboardingService.addTempBotMessage(this.messages, `My name is Matilda, and I’m here to help you find work opportunities that match you best! Before we get started, how about we get to know each other? Just say \"Let's create my profile\" to start. `)
       this.chips = ["Let's create my profile!"]
       this.showChips = true
-      this.userRefData.unsubscribe()
-    });
+    })
+
+    // this.userRefData.subscribe(data => {
+    //   this.user = data
+    //   this.messages = this.onboardingService.addTempBotMessage(this.messages, `Hello there, ${this.user.firstName || this.user.displayName || "friend"}. It's nice meeting you!`)
+    //   this.messages = this.onboardingService.addTempBotMessage(this.messages, `My name is Matilda, and I’m here to help you find work opportunities that match you best! Before we get started, how about we get to know each other? Just say \"Let's create my profile\" to start. `)
+    //   this.chips = ["Let's create my profile!"]
+    //   this.showChips = true
+    //   this.userRefData.unsubscribe()
+    // });
 
 
 
@@ -144,8 +150,8 @@ export class OnboardingChatComponent implements AfterViewInit {
         this.messages = this.onboardingService.addTempBotMessage(this.messages, "Great, now I will need your contact information. What is your phone number?")
 
 
-      } 
-      
+      }
+
       // else if (this.onboardingService.onboardingStep == 2) {
       //   this.messages = this.onboardingService.addTempBotMessage(this.messages, "Would you like to add your education history? You can simply add your degrees and diplomas. You will be able to add more details (dates, institutions, etc.) on your profile page.")
 
@@ -153,8 +159,8 @@ export class OnboardingChatComponent implements AfterViewInit {
       // } else if (this.onboardingService.onboardingStep == 3) {
       //   this.messages = this.onboardingService.addTempBotMessage(this.messages, "What values are dear to you?")
 
-      // } 
-      
+      // }
+
       else if (this.onboardingService.onboardingStep == 2) {
         this.messages = this.onboardingService.addTempBotMessage(this.messages, "What are your notification preferences?")
         this.chips = ["Daily", "Weekly", "Monthly"]

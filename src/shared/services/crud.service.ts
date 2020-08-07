@@ -535,29 +535,42 @@ finalizeOnboarding() {
 
 
   formatDate(unixDate) {
-    let date = unixDate.toDate()
-    let day = ("0" + date.getDate().toString()).slice(-2);
-    // Minutes part from the timestamp
-    let month = (date.getMonth() + 1);
-    month = ("0" + month.toString()).slice(-2)
-    // Seconds part from the timestamp
-    let  year = date.getFullYear();
+    let formattedTime;
+    try {
+      let date = unixDate.toDate()
+      let day = ("0" + date.getDate().toString()).slice(-2);
+      // Minutes part from the timestamp
+      let month = (date.getMonth() + 1);
+      month = ("0" + month.toString()).slice(-2)
+      // Seconds part from the timestamp
+      let  year = date.getFullYear();
 
-    // Will display time in 10:30:23 format
-    let formattedTime = day + '-' + month + '-' + year;
+      // Will display time in 10:30:23 format
+     formattedTime = day + '-' + month + '-' + year;
+    }
+    catch {
+      formattedTime = "unavailable"
+    }
+
 
     return formattedTime
   }
 
   formatSpokenLanguages(languages) {
     let final = ""
-    languages.values.forEach(element => {
-      final += element.stringValue
-      final += ", "
+    try {
+      languages.values.forEach(element => {
+        final += element.stringValue
+        final += ", "
 
-    })
+      })
 
-    final = final.slice(0, -2)
+      final = final.slice(0, -2)
+    }
+    catch {
+      final = "Error"
+    }
+
 
     return final
   }
