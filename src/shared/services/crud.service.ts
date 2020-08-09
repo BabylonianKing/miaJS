@@ -365,10 +365,7 @@ export class CrudService {
       snapshot.forEach(doc => {
         this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(doc.id).delete()
       })
-
-      location.reload()
-
-    })
+    }).then(() => { location.reload()})
 
 
   }
@@ -546,10 +543,10 @@ finalizeOnboarding() {
       let  year = date.getFullYear();
 
       // Will display time in 10:30:23 format
-     formattedTime = day + '-' + month + '-' + year;
+     formattedTime = year + '-' + month + '-' + day;
     }
     catch {
-      formattedTime = "unavailable"
+      formattedTime = unixDate
     }
 
 
@@ -559,7 +556,7 @@ finalizeOnboarding() {
   formatSpokenLanguages(languages) {
     let final = ""
     try {
-      languages.values.forEach(element => {
+      languages.forEach(element => {
         final += element.stringValue
         final += ", "
 

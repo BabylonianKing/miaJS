@@ -77,6 +77,7 @@ export class OnboardingService {
   }
 
   uploadData(res) {
+    this.uid = JSON.parse(localStorage.getItem('user')).uid;
     let params = res.outputContexts[0].parameters.fields
 
     if (this.onboardingStep == 0) {

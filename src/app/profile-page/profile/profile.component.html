@@ -78,13 +78,13 @@
           <div class="field">
             <p [hidden]="profileService.editingDOB">{{ crudService.formatDate(user.dateOfBirth) || null }}</p>
 
-            <form #newDOB="ngForm" (submit)="profileService.editDOB(newDOB.value)">
+            <form #newDOB="ngForm" (submit)="profileService.editDOB(newDOB.value.dob)">
               <input [hidden]="!profileService.editingDOB" placeholder="New date of birth" type="date" name="dob" autocomplete="off" ngModel>
             </form>
 
           </div>
           <a (click)="resetEdits(); profileService.editingDOB = !profileService.editingDOB" [hidden]="profileService.editingDOB">Edit</a>
-          <a (click)="profileService.editDOB(newDOB.value)" [hidden]="!profileService.editingDOB">Save</a>
+          <a (click)="profileService.editDOB(newDOB.value.dob)" [hidden]="!profileService.editingDOB">Save</a>
         </div>
       </div>
 
@@ -120,7 +120,7 @@
         </div>
         <div class="info-right">
           <div class="field">
-            <p [hidden]="profileService.editingSocialLinks">{{ user.socialLinks }}</p>
+            <p [hidden]="profileService.editingSocialLinks">{{ user.links[0].stringValue }}</p>
 
             <form #newSocialLinks="ngForm" (submit)="profileService.editSocialLinks(newSocialLinks.value.socialLinks)">
               <input [hidden]="!profileService.editingSocialLinks" placeholder="Social Links" name="socialLinks" autocomplete="off" ngModel>
@@ -128,7 +128,7 @@
 
 
           </div>
-          <a (click)="resetEdits(); profileService.editingSocialLinks = !profileService.editingSocialLinks" [hidden]="profileService.editingSocialLinks">Edit</a>
+          <!-- <a (click)="resetEdits(); profileService.editingSocialLinks = !profileService.editingSocialLinks" [hidden]="profileService.editingSocialLinks">Edit</a> -->
           <a (click)="profileService.editSocialLinks(newSocialLinks.value.socialLinks)" [hidden]="!profileService.editingSocialLinks">Save</a>
         </div>
       </div>
@@ -191,7 +191,7 @@
             </form>
 
           </div>
-          <a (click)="resetEdits(); profileService.editingLanguages = !profileService.editingLanguages" [hidden]="profileService.editingLanguages">Edit</a>
+          <!-- <a (click)="resetEdits(); profileService.editingLanguages = !profileService.editingLanguages" [hidden]="profileService.editingLanguages">Edit</a> -->
           <a (click)="profileService.editLanguages(newLanguages.value.languages)" [hidden]="!profileService.editingLanguages">Save</a>
         </div>
       </div>

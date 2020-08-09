@@ -16,22 +16,26 @@ export class OnboardingGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-      let userId = JSON.parse(localStorage.getItem('user')).uid;
+      try {
+        let userId = JSON.parse(localStorage.getItem('user')).uid;
 
-      this.db.collection("users").doc(userId).get().toPromise().then(document => {
-        try {
-          if (document.data().onboarded) {
-            this.router.navigate(['/profile'])
-            return false
-          } else {
-            return true
-          }
+        this.db.collection("users").doc(userId).get().toPromise().then(document => {
+            if (document.data().onboarded) {
+              this.router.navigate(['/profile'])
+              return false
+            } else {
+              return true
+            }
 
-        } catch {
-          return true
-        }
-      })
-      return false;
+        })
+
+      } catch { //Error caused because uid is undefined
+        this.router.navigate(['/login'])
+        return false
+      }
+
+      return true
+
 
   }
 

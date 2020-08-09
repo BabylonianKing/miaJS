@@ -40,7 +40,7 @@ export class UserProfileService {
   editEmail(email) {
     console.log(email)
     this.afAuth.afAuth.currentUser
-    .then((u) => u.updateEmail(email))
+    .then((u) => u.updateEmail(email)).catch(error => {window.alert(error.message)})
     .then(() => this.editingEmail = false)
   }
 
@@ -75,8 +75,11 @@ export class UserProfileService {
   editingDOB: boolean = false;
 
   editDOB(dob) {
+    console.log(dob)
     const uid = this.afAuth.userData.uid;
-    this.updateUser(uid, {dateOfBirth: dob})
+    let formattedDOB = new Date(dob.slice(0,4), dob.slice(5,7), dob.slice(8,10))
+    formattedDOB.setMonth(formattedDOB.getMonth() - 1)
+    this.updateUser(uid, {dateOfBirth: formattedDOB})
     .then(() => this.editingDOB = false)
   }
 
@@ -107,7 +110,7 @@ export class UserProfileService {
 
     editLanguages(languages) {
       const uid = this.afAuth.userData.uid;
-      this.updateUser(uid, {spokenLanguages: languages})
+      this.updateUser(uid, {spokenLanguages: [languages]})
       .then(() => this.editingLanguages = false)
     }
 
@@ -116,7 +119,7 @@ export class UserProfileService {
 
     editSocialLinks(socialLinks) {
       const uid = this.afAuth.userData.uid;
-      this.updateUser(uid, {socialLinks: socialLinks})
+      this.updateUser(uid, {links: [socialLinks]})
       .then(() => this.editingSocialLinks = false)
     }
 
