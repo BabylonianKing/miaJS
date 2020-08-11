@@ -363,9 +363,10 @@ export class CrudService {
     this.uid = JSON.parse(localStorage.getItem('user')).uid;
     this.db.collection("conversations").doc(this.uid).collection("Matilda").get().toPromise().then(snapshot => {
       snapshot.forEach(doc => {
+        console.log(doc.id)
         this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(doc.id).delete()
       })
-    }).then(() => { location.reload()})
+    }).then(() => { this.delay(2000).then(() => {location.reload()})})
 
 
   }
