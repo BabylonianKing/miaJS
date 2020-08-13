@@ -366,7 +366,7 @@ export class CrudService {
         console.log(doc.id)
         this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(doc.id).delete()
       })
-    }).then(() => { this.delay(2000).then(() => {location.reload()})})
+    })
 
 
   }
@@ -485,6 +485,16 @@ finalizeOnboarding() {
 
 
   //GENERAL FORMATTING
+
+  formatLinks(links) {
+    try {
+      let link = links[0].stringValue
+      return link
+    } catch {
+      return null
+
+      }
+  }
   formatNumber(tel) {
     if (!tel) {
       return '';
@@ -566,7 +576,7 @@ finalizeOnboarding() {
       final = final.slice(0, -2)
     }
     catch {
-      final = "Error"
+      final = null
     }
 
 

@@ -24,6 +24,7 @@ export class OnboardingGuard implements CanActivate {
               this.router.navigate(['/profile'])
               return false
             } else {
+              this.router.navigate(['/onboarding'])
               return true
             }
 

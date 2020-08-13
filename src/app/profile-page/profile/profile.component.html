@@ -120,7 +120,7 @@
         </div>
         <div class="info-right">
           <div class="field">
-            <p [hidden]="profileService.editingSocialLinks">{{ user.links[0].stringValue }}</p>
+            <p [hidden]="profileService.editingSocialLinks">{{ crudService.formatLinks(user.links) }}</p>
 
             <form #newSocialLinks="ngForm" (submit)="profileService.editSocialLinks(newSocialLinks.value.socialLinks)">
               <input [hidden]="!profileService.editingSocialLinks" placeholder="Social Links" name="socialLinks" autocomplete="off" ngModel>

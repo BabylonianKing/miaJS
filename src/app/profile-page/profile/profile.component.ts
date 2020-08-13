@@ -1,4 +1,4 @@
-  import { Component, OnInit, NgZone, Input, Output, HostListener, EventEmitter, ElementRef, ViewChild }from '@angular/core';
+  import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild }from '@angular/core';
   import { CrudService } from 'src/shared/services/crud.service';
   import { UserService } from 'src/shared/services/user.service';
 import { Router } from '@angular/router';
@@ -24,7 +24,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
     user;
     userId: string = JSON.parse(localStorage.getItem('user')).uid;
     resumeEvent;
-    userRefData;
 
 
     @Output() loaded = new EventEmitter();
@@ -35,24 +34,15 @@ import { AngularFirestore } from '@angular/fire/firestore';
       public crudService: CrudService,
       public profileService: UserProfileService,
       public afAuth: UserService,
-      public ngZone: NgZone,
       public router: Router,
       public afStorage: AngularFireStorage,
       public db: AngularFirestore) {}
 
     ngOnInit(): void {
 
-
-
-
-
-
-
       this.userId = JSON.parse(localStorage.getItem('user')).uid;
 
-      this.userRefData = this.db.doc(`users/${this.userId}`).valueChanges()
-
-      this.userRefData.subscribe(data => {
+      this.db.doc(`users/${this.userId}`).valueChanges().subscribe(data => {
         this.user = data
       });
 

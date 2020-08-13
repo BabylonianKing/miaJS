@@ -79,9 +79,10 @@ import { ChatChipComponent } from './mia/chat-chip/chat-chip.component';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    AngularFireAuthModule,
     AngularFirestoreModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule
+
   ],
   providers: [UserService, CrudService],
   bootstrap: [AppComponent]
