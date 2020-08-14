@@ -16,11 +16,16 @@ export class BookmarksComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //Load user's bookmarks and listen for updates
+    this.crudService.delay(500).then(() => {
+          //Load user's bookmarks and listen for updates
     this.crudService.bookmarkListener().valueChanges().subscribe(data => {
       this.cards = data
 
     })
+
+    })
+
+
 
   }
 

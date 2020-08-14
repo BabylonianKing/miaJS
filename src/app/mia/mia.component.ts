@@ -35,44 +35,50 @@ export class MiaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.crudService.delay(500).then(()=> {
 
-  this.crudService.messageInit().get().toPromise().then(snapshot => {
-    if (snapshot.empty) {
-      this.crudService.addBotMessage({fulfillmentText: "My name is Matilda, and I’m here to help you find work opportunities that match you best! Just say \"Let's find a job\" to get started."});
-    }
-  })
-  this.crudService.messageInit().valueChanges().subscribe(data => {
-    this.messages = data
+      this.crudService.messageInit().get().toPromise().then(snapshot => {
+        if (snapshot.empty) {
+          this.crudService.addBotMessage({fulfillmentText: "My name is Matilda, and I’m here to help you find work opportunities that match you best! Just say \"Let's find a job\" to get started."});
+        }
+      })
+      this.crudService.messageInit().valueChanges().subscribe(data => {
+        this.messages = data
 
-    try {
+        try {
 
-    if (this.messages[this.messages.length-1].text == "Would you like to try again?") {
-      this.chips = ["Yes, let's find a new job", "No thanks"]
-      this.showChips = true
+        if (this.messages[this.messages.length-1].text == "Would you like to try again?") {
+          this.chips = ["Yes, let's find a new job", "No thanks"]
+          this.showChips = true
 
-    }
+        }
 
-    else if (this.messages[this.messages.length-1].text == "My name is Matilda, and I’m here to help you find work opportunities that match you best! Just say \"Let's find a job\" to get started.") {
-      this.chips = ["Let's find a new job", "I want a job!"]
-      this.showChips = true
+        else if (this.messages[this.messages.length-1].text == "My name is Matilda, and I’m here to help you find work opportunities that match you best! Just say \"Let's find a job\" to get started.") {
+          this.chips = ["Let's find a new job", "I want a job!"]
+          this.showChips = true
 
-    }
+        }
 
-    } catch {
+        } catch {
 
-    }
+        }
 
 
-    //Necessary for initally message to show up
-    this.crudService.messageInit().get().toPromise().then(snapshot => {
-      if (snapshot.empty) {
-        //TODO: Fix Bug where this initial message doesn't show up
-        this.crudService.addBotMessage({fulfillmentText: "My name is Matilda, and I’m here to help you find work opportunities that match you best! Just say \"Let's find a job\" to get started."});
+        //Necessary for initally message to show up
+        this.crudService.messageInit().get().toPromise().then(snapshot => {
+          if (snapshot.empty) {
+            //TODO: Fix Bug where this initial message doesn't show up
+            this.crudService.addBotMessage({fulfillmentText: "My name is Matilda, and I’m here to help you find work opportunities that match you best! Just say \"Let's find a job\" to get started."});
 
-      }
+          }
+        })
+
+      })
+
+
     })
 
-  })
+
 
   }
 

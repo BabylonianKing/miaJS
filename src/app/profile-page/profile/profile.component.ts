@@ -39,12 +39,20 @@ import { AngularFirestore } from '@angular/fire/firestore';
       public db: AngularFirestore) {}
 
     ngOnInit(): void {
+      this.crudService.pathRefresh()
 
-      this.userId = JSON.parse(localStorage.getItem('user')).uid;
+      this.crudService.delay(500).then(()=> {
 
-      this.db.doc(`users/${this.userId}`).valueChanges().subscribe(data => {
-        this.user = data
-      });
+        this.userId = JSON.parse(localStorage.getItem('user')).uid;
+
+        this.db.doc(`users/${this.userId}`).valueChanges().subscribe(data => {
+          this.user = data
+          this.loaded.emit()
+
+        });
+
+      })
+
 
 
       this.afStorage.ref(`/coverImages/${this.userId}`).getDownloadURL().toPromise().then(data => this.coverDownloadURL = data)
@@ -72,13 +80,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 
     }
-
-    ngAfterViewInit() {
-      this.loaded.emit()
-
-
-  }
-
 
   resetEdits() {
     this.profileService.editingName = false
