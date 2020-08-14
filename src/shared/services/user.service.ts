@@ -50,12 +50,9 @@ export class UserService {
       .then((result) => {
         this.SendVerificationEmail();
         this.SetUserData(result.user);
-
+        this.delay(1000).then(() => {this.router.navigate(['/onboarding'])})
       }).catch((error) => {
         window.alert(error.message);
-      }).then(() => {
-        this.delay(1000).then(() => {this.router.navigate(['/onboarding'])})
-
       })
   }
 

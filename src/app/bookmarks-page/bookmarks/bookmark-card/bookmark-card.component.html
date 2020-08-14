@@ -1,4 +1,4 @@
-<div class="bookmark-card">
+<div class="bookmark-card" (click)="crudService.toggleJobInfos(card.jobId.stringValue, card.score.numberValue)">
     <div class="header">
         <div class="header-left">
             <img src="{{ logo || 'https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164c953e8a56201c055c_icons8-target-50.png' }}">
@@ -13,6 +13,10 @@
             <button class="default-button-small" (click)="removeBookmark(jobId)">Remove bookmark</button>
         </div>
     </div>
+    <div class="percentage-match">
+        <h6>Compatibility</h6>
+        <!-- <h2 [ngClass]="{ 'green': match >= 80, 'yellow': match < 80 && match >= 60 }">{{ match }}%</h2> -->
+      </div>
     <div class="job-description">
         <h6>Job Description</h6>
         <p>{{ description }}</p>
@@ -28,7 +32,6 @@
         </div>
     </div>
     <div class="buttons">
-        <button (click)="learnMore()">Learn more</button>
         <button (click)="apply()">Apply now</button>
     </div>
 </div>
