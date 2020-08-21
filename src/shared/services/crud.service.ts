@@ -436,11 +436,13 @@ export class CrudService {
 
       } else {
         console.error("No matching documents found")
+        data = {}
+
       }
     }).then(() => {
+      console.log(data)
       this.currentJobInfos = data
       this.currentJobInfos.score = score
-      console.log(this.currentJobInfos)
       this.showJobInfos = true
     }
     )

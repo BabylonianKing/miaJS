@@ -10,7 +10,7 @@
                <!-- ADD LOGO OR DEFAULT -->
                <img class="logo" >
                <div class="job-infos">
-                 <h2>{{crudService.currentJobInfos.title}}</h2>
+                 <h2>{{crudService.currentJobInfos.title ? crudService.currentJobInfos.title:"The job posting you’re looking for has expired or has been deactivated by the company"}}</h2>
                  <h3>{{crudService.currentJobInfos.company}} - {{crudService.currentJobInfos.location}}</h3>
                </div>
              </div>

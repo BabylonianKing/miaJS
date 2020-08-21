@@ -7,7 +7,7 @@
   <p class="message-timestamp" [ngStyle]="{display: (richCard ? 'none': 'block')}">{{ timestamp }}</p>
 
   <div class="cards-carousel" *ngIf="richCard">
-    <div class="rich-card" (click)="crudService.toggleJobInfos(card.jobId.stringValue, card.score.numberValue)" *ngFor="let card of cards | slice:0:5;">
+    <div class="rich-card" (click)="crudService.toggleJobInfos(card.jobId.stringValue, card.score.numberValue)" *ngFor="let card of cards | slice:0:totalCardCount;">
       <div class="bookmark" (click)="crudService.bookmarkJob(card)" [ngClass]="{visible: card.heartFilled === false }"><img src="/assets/heart.svg"></div>
       <div class="bookmark" [ngClass]="{ visible: card.heartFilled === true }"><img src="/assets/heart-full.svg"></div>
       <div class="header">
@@ -15,7 +15,7 @@
           <img src="{{ (card.logo.stringValue != undefined) ? card.logo.stringValue : null || 'https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164c953e8a56201c055c_icons8-target-50.png' }}">
           <div class="job-infos">
             <h3>{{ (card.title != undefined) ? card.title.stringValue : null }} </h3>
-            <h5>{{ (card.company != undefined) ? card.company.stringValue : null }} - {{ (card.location != undefined) ? card.location.stringValue : null }}</h5>
+            <h5>{{ card.company.stringValue == undefined ? "null":card.company.stringValue }} - {{ card.location != undefined ? card.location.stringValue : null }}</h5>
           </div>
         </div>
       </div>
@@ -42,8 +42,8 @@
         <button (click)="apply(card.url.stringValue)">Apply now</button>
       </div>
     </div>
-    <div class="see-more">
-      <button class="default-button-small">See more jobs</button>
+    <div class="see-more" *ngIf="totalCardCount < cards.length">
+      <button class="default-button-small" (click)="showMoreJobs()">See more jobs</button>
     </div>
 
     <div class="job-window">

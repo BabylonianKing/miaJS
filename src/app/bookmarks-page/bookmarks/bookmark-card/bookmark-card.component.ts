@@ -22,6 +22,8 @@ export class BookmarkCardComponent implements OnInit {
   @Input() employmentType: string;
   @Input() requirements: string;
   @Input() url: string;
+  @Input() score: number;
+
 
   constructor(
     public crudService: CrudService,

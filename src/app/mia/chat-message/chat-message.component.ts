@@ -27,6 +27,7 @@ export class ChatMessageComponent implements OnInit {
 @Input() cards: any;
 
 messageImage;
+totalCardCount = 5;
 
 
 @Output() descriptionEmitter = new EventEmitter<string>();
@@ -45,12 +46,14 @@ userId = JSON.parse(localStorage.getItem('user')).uid;
     try {
       this.cards.forEach(card => {
       card.heartFilled = false
-    });}
-    catch {}
+    })
 
     if (this.message.startsWith("http")) {
       this.messageImage = true
     }
+
+  } catch {}
+
 
 
   }
@@ -86,5 +89,11 @@ userId = JSON.parse(localStorage.getItem('user')).uid;
     window.open(url, "_blank")
 
   }
+
+  showMoreJobs() {
+    this.totalCardCount += 5
+
+  }
+
 
 }

@@ -1,4 +1,4 @@
-<div class="bookmark-card" (click)="crudService.toggleJobInfos(card.jobId.stringValue, card.score.numberValue)">
+<div class="bookmark-card" (click)="crudService.toggleJobInfos(jobId, score)">
     <div class="header">
         <div class="header-left">
             <img src="{{ logo || 'https://uploads-ssl.webflow.com/5ea1997894e4390e5fbe12b2/5ea3164c953e8a56201c055c_icons8-target-50.png' }}">
@@ -15,7 +15,7 @@
     </div>
     <div class="percentage-match">
         <h6>Compatibility</h6>
-        <!-- <h2 [ngClass]="{ 'green': match >= 80, 'yellow': match < 80 && match >= 60 }">{{ match }}%</h2> -->
+        <h2 [ngClass]="{ 'green': score >= 80, 'yellow': score < 80 && score >= 60 }">{{ score }}%</h2>
       </div>
     <div class="job-description">
         <h6>Job Description</h6>

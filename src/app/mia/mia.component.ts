@@ -57,6 +57,10 @@ export class MiaComponent implements OnInit {
           this.chips = ["Let's find a new job", "I want a job!"]
           this.showChips = true
 
+        } else if (this.messages[this.messages.length-1].text == "Are you looking for a full-time or part-time job?") {
+          this.chips = ["Full-time", "Part-time"]
+          this.showChips = true
+
         }
 
         } catch {

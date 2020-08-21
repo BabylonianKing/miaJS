@@ -32,6 +32,7 @@
     }
   }
 
+
   .bookmarks {
     box-sizing: border-box;
     padding: 30px 30px;
@@ -61,6 +62,43 @@
 
       h3 {
         font-weight: 400;
+      }
+    }
+  }
+
+  .job-infos-window {
+    box-sizing: border-box;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #FFF;
+    border-radius: 15px;
+    padding: 30px;
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 30px;
+
+      .header-left {
+        display: flex;
+        flex: 1;
+        align-items: center;
+
+        h3 {
+          font-weight: 400;
+        }
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
       }
     }
   }
