@@ -1,4 +1,4 @@
-<div class="root">
+<div class="root" style="position: relative;">
   <toolbar [ngClass]="{'hidden': menu.hideSideNav }"></toolbar>
   <div class="loader" *ngIf="loading"></div>
   <profile [ngStyle]="{display: (loading ? 'none': 'block')}" (loaded)="loading=false"></profile>

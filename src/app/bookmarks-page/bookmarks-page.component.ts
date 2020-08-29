@@ -15,8 +15,8 @@ export class BookmarksPageComponent implements OnInit {
     public crudService: CrudService) { }
 
   ngOnInit(): void {
-    this.crudService.newBookmarks = 0
-
+    this.crudService.newBookmarks = 0;
+    this.menu.activeItem = 2;
   }
 
 }

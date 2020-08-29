@@ -1,6 +1,6 @@
 <div class="root">
     <div class="header">
-        <input class="search-bar" type="text" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" placeholder="Search by name..." (keyup)="searchByOrg()">
+        <input class="search-bar" type="text" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" placeholder="Search by name..." (keyup)="searchByOrg()" (click)="analytics.logEvent('searched_bookmarks')">
     </div>
     <div class="bookmarks">
       <div class="empty" *ngIf="(cards.length == 0)">
@@ -8,7 +8,7 @@
           <h3>
               There is nothing here...
               <br>
-              <a class="default-link" href="/chat">Start chatting</a> with Matilda to find jobs to bookmark!
+              <a (click)="analytics.logEvent('navigated_to_chat_from_empty_bookmarks')" class="default-link" href="/chat">Start chatting</a> with Matilda to find jobs to bookmark!
           </h3>
       </div>
         <bookmark-card *ngFor="let item of filteredCards || cards"
@@ -38,7 +38,7 @@
              </div>
            </div>
            <div class="header-right">
-            <button class="default-button-small">Rate this job</button>
+            <!-- <button class="default-button-small">Rate this job</button> -->
             <div class="icon" (click)="crudService.closeJobInfos()"><img src="assets/close.svg"></div>
            </div>
         </div>

@@ -5,11 +5,11 @@
   <div class="shortcuts">
     <div class="personal">
       <h3>Find work</h3>
-      <div class="link-row">
+      <div class="link-row" [ngClass]="{'active': menu.activeItem === 1}">
         <a routerLink="/chat" routerLinkActive="active">Ask Matilda</a>
       </div>
       <!-- <a routerLink="/chat" routerLinkActive="active">Conversations</a> -->
-      <div class="link-row">
+      <div class="link-row" [ngClass]="{'active': menu.activeItem === 2}">
         <a routerLink="/bookmarks" routerLinkActive="active">Bookmarks</a>
         <div class="notif" *ngIf="crudService.newBookmarks > 0">{{ crudService.newBookmarks }}</div>
       </div>
@@ -17,7 +17,9 @@
     </div>
     <div class="admin">
       <h3>Personal</h3>
-      <a routerLink="/profile" routerLinkActive="active">Profile</a>
+      <div class="link-row" [ngClass]="{'active': menu.activeItem === 3}">
+        <a routerLink="/profile" routerLinkActive="active">Profile</a>
+      </div>
       <!-- <a routerLink="/signup" routerLinkActive="active">Billing</a> -->
     </div>
   </div>
@@ -28,6 +30,6 @@
     <a class="signout" (click)="signOut()">Log Out</a>
   </div>
   <div class="invite-friends">
-    <button (click)="menu.showBugPopup = !menu.showBugPopup">Report a Bug</button>
-    <button (click)="menu.showSuggestionPopup = !menu.showSuggestionPopup">Make a Suggestion</button>
+    <button (click)="menu.showBugPopup = !menu.showBugPopup; analytics.logEvent('opened_bug_popup')">Report a Bug</button>
+    <button (click)="menu.showSuggestionPopup = !menu.showSuggestionPopup; analytics.logEvent('opened_suggestion_popup')">Make a Suggestion</button>
   </div>

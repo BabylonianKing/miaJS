@@ -301,7 +301,7 @@ export class CrudService {
         sender: 'Bot',
         date: new Date(),
         richCard: false,
-        text: "If you are happy/disappointed with the jobs, please leave us a feedback so we can improve!"
+        text: "Hopefully you find an interesting opportunity! If not, we can always look for something else."
     }
 
       ref = this.db.collection("conversations").doc(this.uid).collection("Matilda").doc(data.date.toString());

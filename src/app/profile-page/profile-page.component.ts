@@ -20,7 +20,7 @@ export class ProfilePageComponent implements OnInit {
 
   // Timeout?
   ngOnInit(): void {
-
+    this.menu.activeItem = 3;
   }
 
   updateLoading(event) {

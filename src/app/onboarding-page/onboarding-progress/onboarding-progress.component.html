@@ -1,11 +1,11 @@
 <div class="root">
     <h2>Welcome aboard, {{ user.firstName || user.displayName || "friend"}}!</h2>
     <div class="onboarding-step-card" [ngClass]="{ active: onboarding.onboardingStep === 0 }">
-        <h3>Greetings & Personal Information</h3>
+        <h3>1. Greetings & Personal Information</h3>
         <p>Get to know Matilda, and set your basic profile informations so you don't have to add them later!</p>
     </div>
     <div class="onboarding-step-card" [ngClass]="{ active: onboarding.onboardingStep === 1 }">
-        <h3>Contact Information</h3>
+        <h3>2. Contact Information</h3>
         <p>Add your contact information and location so Matilda can match you with local jobs fast.</p>
     </div>
     <!-- <div class="onboarding-step-card" [ngClass]="{ active: onboarding.onboardingStep === 2 }">
@@ -17,7 +17,7 @@
         <p>Help Matilda find jobs that match your interests and values.</p>
     </div> -->
     <div class="onboarding-step-card" [ngClass]="{ active: onboarding.onboardingStep === 2 }">
-        <h3>Notification Preferences</h3>
+        <h3>3. Notification Preferences</h3>
         <p>Set your notification preferences for Matilda's job search report.</p>
     </div>
     <h3 class="done">Done!</h3>

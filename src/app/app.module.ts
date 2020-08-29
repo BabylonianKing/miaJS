@@ -15,6 +15,7 @@ import { LoginComponent } from './login-page/login/login.component';
 
 /* Firebase services */
 import { AngularFireModule } from "@angular/fire";
+import { AngularFireAnalyticsModule, DEBUG_MODE, UserTrackingService, ScreenTrackingService } from "@angular/fire/analytics";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore'
@@ -43,6 +44,7 @@ import { OnboardingPageComponent } from './onboarding-page/onboarding-page.compo
 import { OnboardingChatComponent } from './onboarding-page/onboarding-chat/onboarding-chat.component';
 import { OnboardingProgressComponent } from './onboarding-page/onboarding-progress/onboarding-progress.component';
 import { ChatChipComponent } from './mia/chat-chip/chat-chip.component';
+import { from } from 'rxjs';
 
 
 @NgModule({
@@ -81,10 +83,14 @@ import { ChatChipComponent } from './mia/chat-chip/chat-chip.component';
     FormsModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
-
+    AngularFireAuthModule,
+    AngularFireAnalyticsModule
   ],
-  providers: [UserService, CrudService],
+  providers: [
+    UserService,
+    CrudService,
+    { provide: DEBUG_MODE, useValue: true},
+    UserTrackingService],
   bootstrap: [AppComponent]
 })
 

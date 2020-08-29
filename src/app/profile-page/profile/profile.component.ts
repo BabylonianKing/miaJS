@@ -7,6 +7,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { UserProfileService } from 'src/shared/services/user-profile.service';
 import { NONE_TYPE } from '@angular/compiler';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 
   @Component({
     selector: 'profile',
@@ -36,7 +37,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
       public afAuth: UserService,
       public router: Router,
       public afStorage: AngularFireStorage,
-      public db: AngularFirestore) {}
+      public db: AngularFirestore,
+      public analytics: AngularFireAnalytics) {}
 
     ngOnInit(): void {
       this.crudService.pathRefresh()
@@ -113,7 +115,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
       let ref = this.afStorage.ref(userId);
       // the put method creates an AngularFireUploadTask
       // and kicks off the upload
-      ref.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
+      ref.put(event.target.files[0]).percentageChanges().toPromise()
+      .then(() => this.analytics.logEvent("uploaded_banner"))
+      .then(data => window.location.reload());
     }
 
 
@@ -123,7 +127,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
       let reference = this.afStorage.ref(`/resumes/${userId}`);
       // the put method creates an AngularFireUploadTask
       // and kicks off the upload
-      reference.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
+      reference.put(event.target.files[0]).percentageChanges().toPromise()
+      .then(() => this.analytics.logEvent("uploaded_resume"))
+      .then(data => window.location.reload());
     }
 
     uploadProfile(event) {
@@ -134,7 +140,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
       let ref = this.afStorage.ref(userId);
       // the put method creates an AngularFireUploadTask
       // and kicks off the upload
-      ref.put(event.target.files[0]).percentageChanges().toPromise().then(data => window.location.reload());
+      ref.put(event.target.files[0]).percentageChanges().toPromise()
+      .then(() => this.analytics.logEvent("uploaded_avatar"))
+      .then(data => window.location.reload());
     }
 
 

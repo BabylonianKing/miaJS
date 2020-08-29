@@ -54,11 +54,15 @@ export class MiaComponent implements OnInit {
         }
 
         else if (this.messages[this.messages.length-1].text == "My name is Matilda, and I’m here to help you find work opportunities that match you best! Just say \"Let's find a job\" to get started.") {
-          this.chips = ["Let's find a new job", "I want a job!"]
+          this.chips = ["Let's find a new job!"]
           this.showChips = true
 
         } else if (this.messages[this.messages.length-1].text == "Are you looking for a full-time or part-time job?") {
           this.chips = ["Full-time", "Part-time"]
+          this.showChips = true
+
+        } else if (this.messages[this.messages.length-1].text == "Hopefully you find an interesting opportunity! If not, we can always look for something else.") {
+          this.chips = ["Let's find a new job!"]
           this.showChips = true
 
         }

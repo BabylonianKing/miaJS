@@ -5,6 +5,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 import { CrudService } from 'src/shared/services/crud.service';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 
 @Component({
@@ -39,7 +40,8 @@ userId = JSON.parse(localStorage.getItem('user')).uid;
     public afStorage: AngularFireStorage,
     public db: AngularFirestore,
     public menu: MenuToggleService,
-    public crudService: CrudService
+    public crudService: CrudService,
+    public analytics: AngularFireAnalytics
     ) { }
 
   ngOnInit(): void {
@@ -48,8 +50,8 @@ userId = JSON.parse(localStorage.getItem('user')).uid;
       card.heartFilled = false
     })
 
-    if (this.message.startsWith("http")) {
-      this.messageImage = true
+    if (this.message.startsWith("https")) {
+      this.messageImage = true;
     }
 
   } catch {}

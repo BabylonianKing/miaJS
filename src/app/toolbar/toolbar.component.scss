@@ -51,6 +51,13 @@
         align-items: center;
         margin-bottom: 10px;
 
+        &.active {
+
+            a {
+                color: $red-dark;
+            }
+        }
+
         .notif {
             font-family: $rubik;
             font-size: 12px;

@@ -3,6 +3,7 @@ import { UserService } from 'src/shared/services/user.service';
 import { MenuToggleService } from 'src/shared/services/menu-toggle.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { CrudService } from 'src/shared/services/crud.service';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 @Component({
   selector: 'toolbar',
@@ -16,7 +17,8 @@ export class ToolbarComponent implements OnInit {
     public sideNavService: MenuToggleService,
     public db: AngularFirestore,
     public menu: MenuToggleService,
-    public crudService: CrudService) { }
+    public crudService: CrudService,
+    public analytics: AngularFireAnalytics) { }
 
 
     userId;

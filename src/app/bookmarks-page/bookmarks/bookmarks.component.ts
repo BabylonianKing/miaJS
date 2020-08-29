@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CrudService } from 'src/shared/services/crud.service';
+import { AngularFireAnalytics } from '@angular/fire/analytics';
 
 
 @Component({
@@ -12,7 +13,9 @@ export class BookmarksComponent implements OnInit {
   searchValue;
   filteredCards: any = null;
 
-  constructor(public crudService: CrudService) {}
+  constructor(
+    public crudService: CrudService,
+    public analytics: AngularFireAnalytics) {}
 
   ngOnInit(): void {
 

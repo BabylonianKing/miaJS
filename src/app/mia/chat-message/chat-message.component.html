@@ -7,8 +7,8 @@
   <p class="message-timestamp" [ngStyle]="{display: (richCard ? 'none': 'block')}">{{ timestamp }}</p>
 
   <div class="cards-carousel" *ngIf="richCard">
-    <div class="rich-card" (click)="crudService.toggleJobInfos(card.jobId.stringValue, card.score.numberValue)" *ngFor="let card of cards | slice:0:totalCardCount;">
-      <div class="bookmark" (click)="crudService.bookmarkJob(card)" [ngClass]="{visible: card.heartFilled === false }"><img src="/assets/heart.svg"></div>
+    <div class="rich-card" (click)="crudService.toggleJobInfos(card.jobId.stringValue, card.score.numberValue); analytics.logEvent('opened_job_infos')" *ngFor="let card of cards | slice:0:totalCardCount;">
+      <div class="bookmark" (click)="crudService.bookmarkJob(card); analytics.logEvent('bookmarked_job_card')" [ngClass]="{visible: card.heartFilled === false }"><img src="/assets/heart.svg"></div>
       <div class="bookmark" [ngClass]="{ visible: card.heartFilled === true }"><img src="/assets/heart-full.svg"></div>
       <div class="header">
         <div class="header-left">
@@ -39,11 +39,11 @@
       </div>
       <div class="buttons">
         <!-- <button >Learn more</button> -->
-        <button (click)="apply(card.url.stringValue)">Apply now</button>
+        <button (click)="apply(card.url.stringValue); analytics.logEvent('clicked_apply_now')">Apply now</button>
       </div>
     </div>
     <div class="see-more" *ngIf="totalCardCount < cards.length">
-      <button class="default-button-small" (click)="showMoreJobs()">See more jobs</button>
+      <button class="default-button-small" (click)="showMoreJobs(); analytics.logEvent('loaded_more_jobs')">See more jobs</button>
     </div>
 
     <div class="job-window">

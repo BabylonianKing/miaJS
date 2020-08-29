@@ -10,6 +10,7 @@
   background-color: white;
   border-radius: 15px;
   box-shadow: $box-shadow;
+  overflow-y: scroll;
 
   .header {
     position: relative;
@@ -228,7 +229,6 @@
     flex-direction: column;
 
     .info {
-
       display: flex;
       align-items: center;
       justify-content: space-between;
