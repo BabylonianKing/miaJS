@@ -141,6 +141,7 @@ export class MiaComponent implements OnInit {
   // Get event from ChatFormComponent
   handleUserMessage(event) {
     this.loading = true
+    this.showChips = false;
     this.crudService.handleUserMessage(event).subscribe(res => {
       //Uploads bot message to Firestore database
       this.crudService.addBotMessage(res);

@@ -27,13 +27,15 @@
         margin-bottom: 5px;
 
         background-color: #F2F0EE;
-        color: #222229;
         float: right;
 
         &.user {
             background-color: #FE7B67;
-            color: white;
             border-radius: 1.5em 1.5em 0.3em 1.5em;
+
+            p {
+                color: white;
+            }
         }
 
         .message {
