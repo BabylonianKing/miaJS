@@ -32,11 +32,23 @@
         <div class="default-button-small" (click)=sendFileToMatilda(fileType)>
           <a>Upload to profile</a>
         </div>
-
-
-
       </div>
   </div>
+
+
+
+
+
+  <div class="upload-shadow" [ngClass]="{ visible: showSocialLinks }">
+    <form (ngSubmit)="sendSocialLinks(socialLink.value)">
+    <h4>Social Link</h4>
+      <input type="text" placeholder="https://www.linkedin.com/in/john-fish/" #socialLink/>
+      <div class="default-button-small" (click)=sendSocialLinks(socialLink.value)>
+        <a>Send</a>
+      </div>
+    </form>
+
+    </div>
 
     <!-- <div class="upload-container" [ngStyle]="{display: (draggedOver ? 'block': 'none')}">
       <div>{{ uploadProgress | async}}% File name: {{ fileName }}</div>

@@ -29,6 +29,7 @@ export class OnboardingChatComponent implements AfterViewInit {
   userId: string;
   userRefData;
   user;
+  socialLink;
 
 
   richCard: boolean;
@@ -50,11 +51,15 @@ export class OnboardingChatComponent implements AfterViewInit {
   allowSkip: boolean = false
   draggedOver: boolean = false
   showUpload: boolean = false
+
   task;
   uploadState: Observable<string>;
   uploadProgress: Observable<number>;
   fileName: string;
   downloadURL: Observable<string>;
+
+  showSocialLinks: boolean = false
+
 
 
   constructor(
@@ -182,7 +187,12 @@ export class OnboardingChatComponent implements AfterViewInit {
       } else if (chipText == "Yes!"){
         this.showUpload = true
         this.fileType = "resume"
-      } else {
+      } else if (chipText == "Yes, I would like to add my social links"){
+        this.showSocialLinks = true
+        this.fileType = "resume"
+      }
+
+      else {
         this.handleUserMessage({message: chipText})
       }
 
@@ -205,11 +215,18 @@ export class OnboardingChatComponent implements AfterViewInit {
     }
 
 
+    sendSocialLinks(socialLinks) {
+      this.handleUserMessage({message: socialLinks})
+      this.showSocialLinks = false
+    }
+
+
 
 
   // Get event from ChatFormComponent
   handleUserMessage(event) {
     this.loading = true;
+    this.showChips = false;
     this.uid = JSON.parse(localStorage.getItem('user')).uid;
 
     const text = event.message;
@@ -263,6 +280,10 @@ export class OnboardingChatComponent implements AfterViewInit {
         } else if (res.fulfillmentText.endsWith("Would you like to upload your resume for potential employers?")) {
           this.chips = ["Yes!", "No thanks"]
           this.showChips = true
+        } else if (res.fulfillmentText == "Would you like to add social links to your account?") {
+          this.chips = ["Yes, I would like to add my social links", "No, thank you"]
+          this.showChips = true
+
         }
 
 
