@@ -50,11 +50,11 @@ userId = JSON.parse(localStorage.getItem('user')).uid;
       card.heartFilled = false
     })
 
-    if (this.message.startsWith("https")) {
-      this.messageImage = true;
-    }
-
   } catch {}
+
+  if (this.message.startsWith("https")) {
+    this.messageImage = true;
+  }
 
 
 
