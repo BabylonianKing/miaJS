@@ -15,7 +15,7 @@
                         <a routerLink="/login" routerLinkActive="active">Sign in</a>
                     </div>
                     <div class="sign-up-button">
-                        <a routerLink="/signup" routerLinkActive="active">Create an account</a>
+                        <a (click)="analytics.logEvent('clicked_create_an_account')" routerLink="/signup" routerLinkActive="active">Create an account</a>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
             Say hi, it's that simple!
         </div>
         <div class="cta-button">
-            <a routerLink="/signup" routerLinkActive="active">Create an account</a>
+            <a (click)="analytics.logEvent('clicked_create_an_account')" routerLink="/signup" routerLinkActive="active">Create an account</a>
         </div>
     </div>
     <div class="bg-pill">

@@ -87,10 +87,20 @@
               </div>
             </div>
             <div class="main-right">
-              <div class="percentage-match">
-                <h6>Compatibility</h6>
-                <h2 [ngClass]="{ 'green': crudService.currentJobInfos.score >= 80, 'yellow': crudService.currentJobInfos.score < 80 && crudService.currentJobInfos.score >= 60 }">{{ crudService.currentJobInfos.score }}%</h2>
+              <div class="matilda-infos">
+                <div class="percentage-match">
+                  <h6>Compatibility</h6>
+                  <h2 [ngClass]="{ 'green': crudService.currentJobInfos.score >= 80, 'yellow': crudService.currentJobInfos.score < 80 && crudService.currentJobInfos.score >= 60 }">{{ crudService.currentJobInfos.score }}%</h2>
+                </div>
               </div>
+              <!-- <div class="actions">
+                <div class="default-button">
+                    <a href="{{crudService.currentJobInfos.url}}" target="_blank">Apply now</a>
+                </div>
+                <div class="default-button secondary">
+                    <a>Share this job</a>
+                </div>
+              </div> -->
             </div>
           </div>
           <div class="footer">

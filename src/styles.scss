@@ -31,6 +31,7 @@ $border: 2px solid $border-gray;
 
 * {
     font-family: 'DM Sans', sans-serif;
+    color: $heading-gray;
     text-decoration: none;
 }
 
@@ -88,6 +89,11 @@ button, img, input {
     background-color: $red-light;
     transition: all 0.2s ease-in-out;
 
+    &.secondary {
+        background-color: #f8f6f4;
+        color: $heading-gray;
+    }
+
     &:hover {
         box-shadow: 0 0 20px rgba($color: #000000, $alpha: 0.1);
         transform: scale(1.02);
@@ -99,7 +105,7 @@ button, img, input {
 
 .default-button {
     position: relative;
-    float: right;
+    // float: right;
     display: flex;
     align-items: center;
 
@@ -124,6 +130,31 @@ button, img, input {
             cursor: pointer;
         }
     }
+
+    &.secondary {
+        a, label {
+            font-weight: 700;
+            color: $heading-gray;
+            display: flex;
+            padding: 15px 60px;
+            justify-content: center;
+            align-items: center;
+            line-height: 20px;
+            border-radius: 15px;
+            transform: scale(1);
+            background-color: $background-gray;
+            transition: all 0.2s ease-in-out;
+    
+            &:hover {
+                box-shadow: 0 0 20px rgba($color: #000000, $alpha: 0.1);
+                transform: scale(1.02);
+                background-color: $blue-light;
+                color: #FFF;
+                transition: all 0.2s ease-in-out;
+                cursor: pointer;
+            }
+        }
+    }
 }
 
 .default-link {
@@ -144,10 +175,13 @@ button, img, input {
     width: 16px;
     border-radius: 5px;
     padding: 5px;
+    background-color: transparent;
+    transition: background-color .2s ease;
 
     &:hover {
         background-color: #D3D1D1;
         cursor: pointer;
+        transition: background-color .2s ease;
     }
 
     img {
