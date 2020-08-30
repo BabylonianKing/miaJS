@@ -182,14 +182,19 @@ export class OnboardingChatComponent implements AfterViewInit {
       this.showChips = false
 
       if (chipText == "Yes please!") {
+        this.downloadURL = null
+        this.fileName = null
         this.showUpload = true
         this.fileType = "profileImage"
+        this.downloadURL = null
       } else if (chipText == "Yes!"){
+        this.downloadURL = null
+        this.fileName = null
         this.showUpload = true
         this.fileType = "resume"
+
       } else if (chipText == "Yes, I would like to add my social links"){
         this.showSocialLinks = true
-        this.fileType = "resume"
       }
 
       else {
